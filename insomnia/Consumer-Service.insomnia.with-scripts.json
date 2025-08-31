@@ -1,0 +1,3349 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-08-30T19:31:39.762068Z",
+  "__export_source": "Postman->Insomnia",
+  "resources": [
+    {
+      "_id": "wrk_2a5c76716d65410981591470",
+      "_type": "workspace",
+      "name": "Consumer-Service",
+      "description": "consumer-service"
+    },
+    {
+      "_id": "fld_d94979c09d304910a663e983",
+      "_type": "request_group",
+      "parentId": "wrk_2a5c76716d65410981591470",
+      "name": "Setup"
+    },
+    {
+      "_id": "req_179906dc53d04415905b9e82",
+      "_type": "request",
+      "parentId": "fld_d94979c09d304910a663e983",
+      "name": "Kick-One Setup",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "insomnia.environment.set('consumer-service_host', \"https://consumer-service-sibin.apps.stl.pcfstage00.mastercard.int\")\n\ninsomnia.environment.set('consumer-service_programId', \"SRC\")\ninsomnia.environment.set('consumer-service_correlationId', require('uuid').v4());",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_ddc1d4beb551487a93bd7511",
+      "_type": "request",
+      "parentId": "fld_d94979c09d304910a663e983",
+      "name": "Stage Setup",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "insomnia.environment.set('consumer-service_host', \"https://blue-src-stage-af-test-harness.apps.stl.pcfstage00.mastercard.int\")\n\ninsomnia.environment.set('consumer-service_programId', \"SRC\")\ninsomnia.environment.set('consumer-service_correlationId', require('uuid').v4());",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_fcfafd54e08a4f9d8485dc5c",
+      "_type": "request",
+      "parentId": "fld_d94979c09d304910a663e983",
+      "name": "ITF Setup",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "insomnia.environment.set('consumer-service_host', \"https://blue-src-itf-af-test-harness.apps.stl.pcfstage00.mastercard.int\")\n\ninsomnia.environment.set('consumer-service_programId', \"SRC\")\ninsomnia.environment.set('consumer-service_correlationId', require('uuid').v4());",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_89d7dd208b04424589475873",
+      "_type": "request",
+      "parentId": "fld_d94979c09d304910a663e983",
+      "name": "MTF KSC Setup",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "insomnia.environment.set('consumer-service_host', \"https://blue-src-mtf-af-test-harness.apps.ksc.pcfprod00.mastercard.int\")\n\ninsomnia.environment.set('consumer-service_programId', \"SRC\")\ninsomnia.environment.set('consumer-service_correlationId', require('uuid').v4());",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_26ed406778cd4dcba1865310",
+      "_type": "request",
+      "parentId": "fld_d94979c09d304910a663e983",
+      "name": "MTF STL Setup",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "service-method",
+          "value": "GET"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/actuator/health"
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('consumer-service_host', \"https://blue-pre-prod-af-test-harness.apps.stl.pcfprod00.mastercard.int\")\n\ninsomnia.environment.set('consumer-service_programId', \"SRC\")\ninsomnia.environment.set('consumer-service_correlationId', require('uuid').v4());\ninsomnia.environment.set('consumer-service_correlation_id', require('uuid').v4());\ninsomnia.environment.set('consumer-service_synapseTargetTag', \"34F4A04B\")",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_4df0b883b1c8486e828af19e",
+      "_type": "request",
+      "parentId": "fld_d94979c09d304910a663e983",
+      "name": "MTF DEL Setup",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "insomnia.environment.set('consumer-service_host', \"https://blue-src-mtf-af-test-harness.apps.del.trd-prod-pas.mastercard.int\")\n\ninsomnia.environment.set('consumer-service_programId', \"SRC\")\ninsomnia.environment.set('consumer-service_correlationId', require('uuid').v4());",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_67afb425ddee43a7af0f3ee2",
+      "_type": "request",
+      "parentId": "fld_d94979c09d304910a663e983",
+      "name": "MTF PNQ Setup",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "insomnia.environment.set('consumer-service_host', \"https://blue-src-mtf-af-test-harness.apps.pnq.trd-prod-pas.mastercard.int\")\n\ninsomnia.environment.set('consumer-service_programId', \"SRC\")\ninsomnia.environment.set('consumer-service_correlationId', require('uuid').v4());",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_13d4396ecac148558462fa8a",
+      "_type": "request_group",
+      "parentId": "wrk_2a5c76716d65410981591470",
+      "name": "Kick-One"
+    },
+    {
+      "_id": "fld_68c939406cfe41ae9c8313e5",
+      "_type": "request_group",
+      "parentId": "fld_13d4396ecac148558462fa8a",
+      "name": "Consumer operations"
+    },
+    {
+      "_id": "req_4fe14a626e6847a8a67e81c5",
+      "_type": "request",
+      "parentId": "fld_68c939406cfe41ae9c8313e5",
+      "name": "Create consumer (non-SRC program)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/consumers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"enrollment_provider_id\": \"testEnrollmentProviderId\",\n  \"identity_types\": [\n      \"EXTERNAL_ID\"\n  ],\n  \"external_account_id\": \"{{ consumer-service_externalAccountId }}\",\n  \"biometrics\": \"biometrics\",\n  \"cookie_consent_version\": \"1.0\",\n  \"tnc_version\": \"1.0\",\n  \"privacy_policy_version\": \"1.0\",\n  \"marketing_optin\": false,\n  \"residency_country_code\": \"US\",\n  \"preferred_language\": \"EN\",\n  \"first_name\": \"testFirstName\",\n  \"last_name\": \"testLastName\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('consumer-service_email', require('uuid').v4() + \"@mailinator.com\");\ninsomnia.environment.set('consumer-service_mobile', Math.floor(Math.random() * 1000000) + 1000000000);\ninsomnia.environment.set('consumer-service_externalAccountId', require('uuid').v4());",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_consumerId', insomnia.response.json().consumer_id);"
+    },
+    {
+      "_id": "req_efd255e8714347f69dddc8c6",
+      "_type": "request",
+      "parentId": "fld_68c939406cfe41ae9c8313e5",
+      "name": "Create consumer (non-SRC program) Email Type",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/consumers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"enrollment_provider_id\": \"{{ consumer-service_$randomUUID }}\",\n  \"identity_types\": [\n      \"EMAIL\"\n  ],\n  \"email\": \"{{ consumer-service_email }}\",\n  \"mobile\": \"{{ consumer-service_mobile }}\",\n  \"biometrics\": \"biometrics\",\n  \"cookie_consent_version\": \"1.0\",\n  \"tnc_version\": \"1.0\",\n  \"privacy_policy_version\": \"1.0\",\n  \"marketing_optin\": false,\n  \"residency_country_code\": \"US\",\n  \"preferred_language\": \"EN\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"wallet_id\": \"SRCCLOUDDSP\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "// Function to generate a random string of a given length\nfunction generateRandomString(length) {\n    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';\n    let result = '';\n    for (let i = 0; i < length; i++) {\n        result += characters.charAt(Math.floor(Math.random() * characters.length));\n    }\n    return result;\n}\n\n// Function to generate a random email\nfunction generateRandomEmail() {\n    const randomString = Math.random().toString(36).substring(2, 10); // Random 8-character string\n    return `${randomString}@mailinator.com`;\n}\n\n// Function to generate a valid cellphone number\nfunction generateValidPhoneNumber() {\n    const areaCodes = [636,586]; // Sample valid US area codes\n    const randomAreaCode = areaCodes[Math.floor(Math.random() * areaCodes.length)];\n    const randomSevenDigits = Math.floor(1000000 + Math.random() * 9000000); // 7 random digits\n    return `${randomAreaCode}${randomSevenDigits}`;\n}\n\n// Generate random email and phone number\nconst randomEmail = generateRandomEmail();\nconst randomPhoneNumber = generateValidPhoneNumber();\nconst randomFirstName = generateRandomString(8); // Random string of 8 characters\nconst randomLastName = generateRandomString(10); // Random string of 10 characters\n\n// Log the generated values for debugging\nconsole.log(\"Generated Random Email:\", randomEmail);\nconsole.log(\"Generated Random Phone Number:\", randomPhoneNumber);\nconsole.log(\"Generated Random First Name:\", randomFirstName);\nconsole.log(\"Generated Random Last Name:\", randomLastName);\n\nvar uuid = require('uuid');\nvar correlationId = uuid.v4(); \n\n//insomnia.environment.set('consumer-service_email', require('uuid').v4() + \"@mailinator.com\");\n//insomnia.environment.set('consumer-service_mobile', Math.floor(Math.random() * 1000000) + 1000000000);\n\nconsole.log(\"pfl-correlation-id = \" + correlationId);\npostman.setEnvironmentVariable(\"correlationId\", correlationId);\ninsomnia.environment.set('consumer-service_correlationId', correlationId);\ninsomnia.environment.set('consumer-service_email', randomEmail);\ninsomnia.environment.set('consumer-service_mobile', randomPhoneNumber);\ninsomnia.environment.set('consumer-service_firstName', randomFirstName);\ninsomnia.environment.set('consumer-service_lastName', randomLastName);\ninsomnia.environment.set('consumer-service_programId', \"AGENT_PAY#GUARD_AGENT_PAY-TEST_AGENT_PAY_CLOUD_TOKENS#01\");\ninsomnia.environment.set('consumer-service_externalAccountId', require('uuid').v4());",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_consumerId', insomnia.response.json().consumer_id);"
+    },
+    {
+      "_id": "req_84ac893174714da0a72ffc32",
+      "_type": "request",
+      "parentId": "fld_68c939406cfe41ae9c8313e5",
+      "name": "Create consumer (SRC program)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/consumers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"mobile\": \"{{ consumer-service_mobile }}\",\n  \"biometrics\": \"biometrics\",\n  \"cookie_consent_version\": \"1.0\",\n  \"tnc_version\": \"1.0\",\n  \"privacy_policy_version\": \"1.0\",\n  \"marketing_optin\": false,\n  \"residency_country_code\": \"US\",\n  \"mobile_country_code\": \"1\",\n  \"preferred_language\": \"EN\",\n  \"first_name\": \"testFirstName\",\n  \"last_name\": \"testLastName\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('consumer-service_email', require('uuid').v4() + \"@mailinator.com\");\ninsomnia.environment.set('consumer-service_mobile', Math.floor(Math.random() * 1000000) + 1000000000);",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_consumerId', insomnia.response.json().consumer_id);"
+    },
+    {
+      "_id": "req_24f276b3ac0149d7a9946aa9",
+      "_type": "request",
+      "parentId": "fld_68c939406cfe41ae9c8313e5",
+      "name": "Find consumer",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/consumers/{{ consumer-service_consumerId }}",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_d3f2f3a337894aa28251ccd9",
+      "_type": "request",
+      "parentId": "fld_68c939406cfe41ae9c8313e5",
+      "name": "Find consumer Copy",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/consumers/{{ consumer-service_consumerId }}?masked=false",
+      "body": {},
+      "parameters": [
+        {
+          "name": "masked",
+          "value": "false"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_5b2dc8ab8b9346849395bb23",
+      "_type": "request",
+      "parentId": "fld_68c939406cfe41ae9c8313e5",
+      "name": "Find consumer unmasked",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/consumers/{{ consumer-service_consumerId }}?masked=false",
+      "body": {},
+      "parameters": [
+        {
+          "name": "masked",
+          "value": "false"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_b3b30897053d4747b3acdeb8",
+      "_type": "request",
+      "parentId": "fld_68c939406cfe41ae9c8313e5",
+      "name": "Update consumer",
+      "method": "PUT",
+      "url": "{{ consumer-service_host }}/api/consumers/{{ consumer-service_consumerId }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"mobile\": {{ consumer-service_mobile }},\n  \"biometrics\": \"biometrics_updated\",\n  \"cookie_consent_version\": \"2.0\",\n  \"tnc_version\": \"2.0\",\n  \"privacy_policy_version\": \"2.0\",\n  \"residency_country_code\": \"ES\",\n  \"mobile_country_code\": \"1\",\n  \"preferred_language\": \"ES\",\n  \"marketing_optin\": true,\n  \"first_name\": \"testFirstName_updated\",\n  \"last_name\": \"testLastName_updated\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_e544b7bdf4c84c69a48f47e7",
+      "_type": "request",
+      "parentId": "fld_68c939406cfe41ae9c8313e5",
+      "name": "Update consumer status to ACTIVE",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/consumers/{{ consumer-service_consumerId }}/updateStatus?status=ACTIVE",
+      "body": {},
+      "parameters": [
+        {
+          "name": "status",
+          "value": "ACTIVE"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(204);\n});"
+    },
+    {
+      "_id": "req_c000ad3d085042e991ab3f0b",
+      "_type": "request",
+      "parentId": "fld_68c939406cfe41ae9c8313e5",
+      "name": "Search consumer by email/mobile (query criteria)",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/consumers/search?criteria=email=\"{{ consumer-service_email }}\"  OR mobileWithCountryCode=\"1{{ consumer-service_mobile }}\"",
+      "body": {},
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "email=\"{{ consumer-service_email }}\"  OR mobileWithCountryCode=\"1{{ consumer-service_mobile }}\""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "criteria",
+          "value": "email=\"{{ consumer-service_email }}\"  OR mobileWithCountryCode=\"1{{ consumer-service_mobile }}\""
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_34d1eeb49af245c49ff68f0f",
+      "_type": "request",
+      "parentId": "fld_68c939406cfe41ae9c8313e5",
+      "name": "Search consumer by email/mobile (header criteria)",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/consumers/search",
+      "body": {},
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "email=\"{{ consumer-service_email }}\"  OR mobileWithCountryCode=\"1{{ consumer-service_mobile }}\""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "criteria",
+          "value": "email=\"{{ consumer-service_email }}\"  OR mobileWithCountryCode=\"1{{ consumer-service_mobile }}\""
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_7197807e30f3463985d1e7ca",
+      "_type": "request",
+      "parentId": "fld_68c939406cfe41ae9c8313e5",
+      "name": "Record external verification",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/verifications/record",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"auth_session_id\": \"testAuthSessionId\",\n  \"consumer_id\": \"{{ consumer-service_consumerId }}\",\n  \"channel\": \"EMAIL\",\n  \"status\": \"SUCCESS\",\n  \"session_failed_attempts\": 0,\n  \"total_failed_attempts\": 0,\n  \"auth_time\": \"1687814283\"\n} "
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('consumer-service_email', require('uuid').v4() + \"@mailinator.com\");\ninsomnia.environment.set('consumer-service_mobile', Math.floor(Math.random() * 1000000) + 1000000000);",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_23389d3f255f459b8e8ec53f",
+      "_type": "request",
+      "parentId": "fld_68c939406cfe41ae9c8313e5",
+      "name": "Consent history search",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/consumers/consentHistory/search",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"consumer_ids\": [\n      \"{{ consumer-service_consumerId }}\"\n  ]\n} "
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_a210c22203dd42b9b2a79f23",
+      "_type": "request",
+      "parentId": "fld_68c939406cfe41ae9c8313e5",
+      "name": "Delete consumer",
+      "method": "DELETE",
+      "url": "{{ consumer-service_host }}/api/consumers/{{ consumer-service_consumerId }}",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "fld_3a0873b8fc69463f8723b141",
+      "_type": "request_group",
+      "parentId": "fld_13d4396ecac148558462fa8a",
+      "name": "Verification (email)"
+    },
+    {
+      "_id": "req_39f33003d042469887fb47c9",
+      "_type": "request",
+      "parentId": "fld_3a0873b8fc69463f8723b141",
+      "name": "Create consumer",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/consumers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"mobile\": \"{{ consumer-service_mobile }}\",\n  \"biometrics\": \"biometrics\",\n  \"cookie_consent_version\": \"1.0\",\n  \"tnc_version\": \"1.0\",\n  \"privacy_policy_version\": \"1.0\",\n  \"marketing_optin\": false,\n  \"residency_country_code\": \"US\",\n  \"mobile_country_code\": \"1\",\n  \"preferred_language\": \"EN\",\n  \"first_name\": \"testFirstName\",\n  \"last_name\": \"testLastName\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('consumer-service_email', require('uuid').v4() + \"@mailinator.com\");\ninsomnia.environment.set('consumer-service_mobile', Math.floor(Math.random() * 1000000) + 1000000000);",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_consumerId', insomnia.response.json().consumer_id);"
+    },
+    {
+      "_id": "req_c3e14cc1d6984e3bbfaaffdc",
+      "_type": "request",
+      "parentId": "fld_3a0873b8fc69463f8723b141",
+      "name": "Verify identity (email)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/verifications",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"channel\": \"EMAIL\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_5c3fb25953a74029b438f0fb",
+      "_type": "request",
+      "parentId": "fld_3a0873b8fc69463f8723b141",
+      "name": "Verify identity (email) Copy",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/verifications",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"4f4df2f0-bedf-4b98-b8f4-699a498cbbee@mailinator.com\",\n  \"channel\": \"EMAIL\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_de43ea3687854f45bdc8ec20",
+      "_type": "request",
+      "parentId": "fld_3a0873b8fc69463f8723b141",
+      "name": "Verify OTP (email)",
+      "method": "PUT",
+      "url": "{{ consumer-service_host }}/api/verifications/{{ consumer-service_verificationId }}/validate",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"otp\": \"123456\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_495d11d0bda94ad89c8ef22f",
+      "_type": "request",
+      "parentId": "fld_3a0873b8fc69463f8723b141",
+      "name": "Get Verification Record",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/verifications/{{ consumer-service_verificationId }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_eb368b8c6a064de5ba950f2f",
+      "_type": "request",
+      "parentId": "fld_3a0873b8fc69463f8723b141",
+      "name": "Delete Verification Record",
+      "method": "DELETE",
+      "url": "{{ consumer-service_host }}/api/verifications/{{ consumer-service_verificationId }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "fld_b436fefc47624bc7b442d360",
+      "_type": "request_group",
+      "parentId": "fld_13d4396ecac148558462fa8a",
+      "name": "Verification (SMS)"
+    },
+    {
+      "_id": "req_56630e4281fc445ab33a15e7",
+      "_type": "request",
+      "parentId": "fld_b436fefc47624bc7b442d360",
+      "name": "Create consumer",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/consumers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"mobile\": \"{{ consumer-service_mobile }}\",\n  \"biometrics\": \"biometrics\",\n  \"cookie_consent_version\": \"1.0\",\n  \"tnc_version\": \"1.0\",\n  \"privacy_policy_version\": \"1.0\",\n  \"marketing_optin\": false,\n  \"residency_country_code\": \"US\",\n  \"mobile_country_code\": \"1\",\n  \"preferred_language\": \"EN\",\n  \"first_name\": \"testFirstName\",\n  \"last_name\": \"testLastName\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('consumer-service_email', require('uuid').v4() + \"@mailinator.com\");\ninsomnia.environment.set('consumer-service_mobile', Math.floor(Math.random() * 1000000) + 1000000000);",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_consumerId', insomnia.response.json().consumer_id);"
+    },
+    {
+      "_id": "req_35730e39acf24e08972bfb72",
+      "_type": "request",
+      "parentId": "fld_b436fefc47624bc7b442d360",
+      "name": "Verify identity (SMS)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/verifications",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"channel\": \"SMS\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_99b59c2990fd45da951ea9dd",
+      "_type": "request",
+      "parentId": "fld_b436fefc47624bc7b442d360",
+      "name": "Verify OTP (SMS)",
+      "method": "PUT",
+      "url": "{{ consumer-service_host }}/api/verifications/{{ consumer-service_verificationId }}/validate",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"otp\": \"654321\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_4921611226f24bb6a81c4bbe",
+      "_type": "request",
+      "parentId": "fld_b436fefc47624bc7b442d360",
+      "name": "Get Verification Record",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/verifications/{{ consumer-service_verificationId }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_45e4e8d8572b4fb788c46ead",
+      "_type": "request",
+      "parentId": "fld_b436fefc47624bc7b442d360",
+      "name": "Delete Verification Record",
+      "method": "DELETE",
+      "url": "{{ consumer-service_host }}/api/verifications/{{ consumer-service_verificationId }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "fld_8210a56bd9524b9485abac35",
+      "_type": "request_group",
+      "parentId": "fld_13d4396ecac148558462fa8a",
+      "name": "Verification (SMS with different mobile)"
+    },
+    {
+      "_id": "req_2552c42e7f4746658bd3f776",
+      "_type": "request",
+      "parentId": "fld_8210a56bd9524b9485abac35",
+      "name": "Create consumer",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/consumers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"mobile\": \"{{ consumer-service_mobile }}\",\n  \"biometrics\": \"biometrics\",\n  \"cookie_consent_version\": \"1.0\",\n  \"tnc_version\": \"1.0\",\n  \"privacy_policy_version\": \"1.0\",\n  \"marketing_optin\": false,\n  \"residency_country_code\": \"US\",\n  \"mobile_country_code\": \"1\",\n  \"preferred_language\": \"EN\",\n  \"first_name\": \"testFirstName\",\n  \"last_name\": \"testLastName\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('consumer-service_email', require('uuid').v4() + \"@mailinator.com\");\ninsomnia.environment.set('consumer-service_mobile', Math.floor(Math.random() * 1000000) + 1000000000);",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_consumerId', insomnia.response.json().consumer_id);"
+    },
+    {
+      "_id": "req_cd54459c082f4fcc8637bfc2",
+      "_type": "request",
+      "parentId": "fld_8210a56bd9524b9485abac35",
+      "name": "Verify identity (SMS)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/verifications",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"channel\" : \"SMS\",\n  \"channel_value\":{\n      \"channel\":\"SMS\",\n      \"phone\" : {\n      \t\"mobileNumber\" : \"1234567890\",\n      \t\"countryCode\" : \"+1\"\n      }\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_80c60b6dc71142f7b0e9c76c",
+      "_type": "request",
+      "parentId": "fld_8210a56bd9524b9485abac35",
+      "name": "Verify OTP (SMS)",
+      "method": "PUT",
+      "url": "{{ consumer-service_host }}/api/verifications/{{ consumer-service_verificationId }}/validate",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"otp\": \"654321\",\n  \"channel_value\": { \n  \t\"channel\": \"SMS\", \n  \t\"phone\": { \n  \t\t\"mobileNumber\": \"1234567890\", \n  \t\t\"countryCode\": \"1\" \n  \t} \n  }   \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_1adb2467251a43e89110b4b9",
+      "_type": "request",
+      "parentId": "fld_8210a56bd9524b9485abac35",
+      "name": "Get Verification Record",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/verifications/{{ consumer-service_verificationId }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_d6f11f1323fa472c88d1fd0a",
+      "_type": "request",
+      "parentId": "fld_8210a56bd9524b9485abac35",
+      "name": "Delete Verification Record",
+      "method": "DELETE",
+      "url": "{{ consumer-service_host }}/api/verifications/{{ consumer-service_verificationId }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "fld_8f984c439013473584a8e749",
+      "_type": "request_group",
+      "parentId": "fld_13d4396ecac148558462fa8a",
+      "name": "Negative Verification, consumer temporarily locked"
+    },
+    {
+      "_id": "req_d3a9a29ccf5c412f9c1af05b",
+      "_type": "request",
+      "parentId": "fld_8f984c439013473584a8e749",
+      "name": "Create consumer",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/consumers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"mobile\": \"{{ consumer-service_mobile }}\",\n  \"biometrics\": \"biometrics\",\n  \"cookie_consent_version\": \"1.0\",\n  \"tnc_version\": \"1.0\",\n  \"privacy_policy_version\": \"1.0\",\n  \"marketing_optin\": false,\n  \"residency_country_code\": \"US\",\n  \"mobile_country_code\": \"1\",\n  \"preferred_language\": \"EN\",\n  \"first_name\": \"testFirstName\",\n  \"last_name\": \"testLastName\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('consumer-service_email', require('uuid').v4() + \"@mailinator.com\");\ninsomnia.environment.set('consumer-service_mobile', Math.floor(Math.random() * 1000000) + 1000000000);",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_consumerId', insomnia.response.json().consumer_id);"
+    },
+    {
+      "_id": "req_9a6425e3d0dd48c2821a5a17",
+      "_type": "request",
+      "parentId": "fld_8f984c439013473584a8e749",
+      "name": "Verify identity (email)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/verifications",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"channel\": \"EMAIL\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_e1252ea104ca4d6c82748809",
+      "_type": "request",
+      "parentId": "fld_8f984c439013473584a8e749",
+      "name": "(Negative) Verify OTP - wrong OTP",
+      "method": "PUT",
+      "url": "{{ consumer-service_host }}/api/verifications/{{ consumer-service_verificationId }}/validate",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"otp\": \"999999\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(400);\n});"
+    },
+    {
+      "_id": "req_a04f90ea99574df68a94ba8c",
+      "_type": "request",
+      "parentId": "fld_8f984c439013473584a8e749",
+      "name": "(Negative) Verify OTP - wrong OTP",
+      "method": "PUT",
+      "url": "{{ consumer-service_host }}/api/verifications/{{ consumer-service_verificationId }}/validate",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"otp\": \"999999\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(400);\n});"
+    },
+    {
+      "_id": "req_92b8034537f14b82bdb0d93b",
+      "_type": "request",
+      "parentId": "fld_8f984c439013473584a8e749",
+      "name": "(Negative) Verify OTP - wrong OTP, consumer temporarily locked",
+      "method": "PUT",
+      "url": "{{ consumer-service_host }}/api/verifications/{{ consumer-service_verificationId }}/validate",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"otp\": \"999999\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(403);\n});"
+    },
+    {
+      "_id": "req_bac5f18c76bf4aa186a3745a",
+      "_type": "request",
+      "parentId": "fld_8f984c439013473584a8e749",
+      "name": "Find consumer",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/consumers/{{ consumer-service_consumerId }}",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_6fce8fe4225244e3904a04f1",
+      "_type": "request",
+      "parentId": "fld_8f984c439013473584a8e749",
+      "name": "Get Verification Record",
+      "method": "GET",
+      "url": "{{ consumer-service_host }}/api/verifications/{{ consumer-service_verificationId }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_17c150322f724c218894779d",
+      "_type": "request",
+      "parentId": "fld_8f984c439013473584a8e749",
+      "name": "Delete Verification Record",
+      "method": "DELETE",
+      "url": "{{ consumer-service_host }}/api/verifications/{{ consumer-service_verificationId }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": ""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "fld_ca8cf18b60c14147875bc011",
+      "_type": "request_group",
+      "parentId": "wrk_2a5c76716d65410981591470",
+      "name": "Stage/ITF/MTF (KSC/STL/DEL/PNQ)"
+    },
+    {
+      "_id": "fld_76e46d37e1fc4b91bbdb77ff",
+      "_type": "request_group",
+      "parentId": "fld_ca8cf18b60c14147875bc011",
+      "name": "Consumer operations"
+    },
+    {
+      "_id": "req_129c137f5e2d4fc4a535f556",
+      "_type": "request",
+      "parentId": "fld_76e46d37e1fc4b91bbdb77ff",
+      "name": "Create consumer (non-SRC program)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"enrollment_provider_id\": \"testEnrollmentProviderId\",\n  \"identity_types\": [\n      \"EXTERNAL_ID\"\n  ],\n  \"external_account_id\": \"{{ consumer-service_externalAccountId }}\",\n  \"biometrics\": \"biometrics\",\n  \"cookie_consent_version\": \"1.0\",\n  \"tnc_version\": \"1.0\",\n  \"privacy_policy_version\": \"1.0\",\n  \"marketing_optin\": false,\n  \"residency_country_code\": \"US\",\n  \"preferred_language\": \"EN\",\n  \"first_name\": \"testFirstName\",\n  \"last_name\": \"testLastName\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers "
+        },
+        {
+          "name": "service-method",
+          "value": "POST"
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_$randomUUID }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('consumer-service_email', require('uuid').v4() + \"@mailinator.com\");\ninsomnia.environment.set('consumer-service_mobile', Math.floor(Math.random() * 1000000) + 1000000000);\ninsomnia.environment.set('consumer-service_externalAccountId', require('uuid').v4());",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_consumerId', insomnia.response.json().consumer_id);"
+    },
+    {
+      "_id": "req_bbeed10b0ecd40948d44dcbe",
+      "_type": "request",
+      "parentId": "fld_76e46d37e1fc4b91bbdb77ff",
+      "name": "Create consumer (SRC program)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"mobile\": \"{{ consumer-service_mobile }}\",\n  \"biometrics\": \"biometrics\",\n  \"cookie_consent_version\": \"C1.0\",\n  \"tnc_version\": \"T1.0\",\n  \"privacy_policy_version\": \"P1.0\",\n  \"marketing_optin\": false,\n  \"residency_country_code\": \"US\",\n  \"mobile_country_code\": \"1\",\n  \"preferred_language\": \"EN\",\n  \"first_name\": \"testFirstName\",\n  \"last_name\": \"testLastName\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers "
+        },
+        {
+          "name": "service-method",
+          "value": "POST"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_$randomUUID }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "ITF"
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('consumer-service_email', require('uuid').v4() + \"@mailinator.com\");\ninsomnia.environment.set('consumer-service_mobile', Math.floor(Math.random() * 1000000) + 1000000000);",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_consumerId', insomnia.response.json().consumer_id);"
+    },
+    {
+      "_id": "req_a9a81fcbf51d495db94e5be2",
+      "_type": "request",
+      "parentId": "fld_76e46d37e1fc4b91bbdb77ff",
+      "name": "Find consumer",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers/{{ consumer-service_consumerId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "GET"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "ITF"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_ba4f2cd972b9477992dbb864",
+      "_type": "request",
+      "parentId": "fld_76e46d37e1fc4b91bbdb77ff",
+      "name": "Find consumer unmasked",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework?masked=false",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "masked",
+          "value": "false"
+        }
+      ],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers/{{ consumer-service_consumerId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "GET"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers/ed45b303-a94a-4ac5-b532-4f13ef931c7f"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_846947ef029a4845afc05e03",
+      "_type": "request",
+      "parentId": "fld_76e46d37e1fc4b91bbdb77ff",
+      "name": "MTF Mani Find consumer unmasked",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework?masked=false",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "masked",
+          "value": "false"
+        }
+      ],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers/{{ consumer-service_consumerId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "GET"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers/ed45b303-a94a-4ac5-b532-4f13ef931c7f"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_360f291761d144929918e76b",
+      "_type": "request",
+      "parentId": "fld_76e46d37e1fc4b91bbdb77ff",
+      "name": "Update consumer",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"mobile\": {{ consumer-service_mobile }},\n  \"biometrics\": \"biometrics_updated\",\n  \"cookie_consent_version\": \"2.0\",\n  \"tnc_version\": \"2.0\",\n  \"privacy_policy_version\": \"2.0\",\n  \"residency_country_code\": \"ES\",\n  \"mobile_country_code\": \"1\",\n  \"preferred_language\": \"ES\",\n  \"marketing_optin\": true,\n  \"first_name\": \"testFirstName_updated\",\n  \"last_name\": \"testLastName_updated\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers/{{ consumer-service_consumerId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "PUT"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_da35390265764070aa54eec5",
+      "_type": "request",
+      "parentId": "fld_76e46d37e1fc4b91bbdb77ff",
+      "name": "Update consumer status to ACTIVE",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework?status=ACTIVE",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"mobile\": {{ consumer-service_mobile }},\n  \"biometrics\": \"biometrics_updated\",\n  \"cookie_consent_version\": \"2.0\",\n  \"tnc_version\": \"2.0\",\n  \"privacy_policy_version\": \"2.0\",\n  \"residency_country_code\": \"ES\",\n  \"mobile_country_code\": \"1\",\n  \"preferred_language\": \"ES\",\n  \"marketing_optin\": true,\n  \"first_name\": \"testFirstName_updated\",\n  \"last_name\": \"testLastName_updated\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [
+        {
+          "name": "status",
+          "value": "ACTIVE"
+        }
+      ],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers/{{ consumer-service_consumerId }}/updateStatus"
+        },
+        {
+          "name": "service-method",
+          "value": "POST"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(204);\n});"
+    },
+    {
+      "_id": "req_b94437b1d681400985dd1b11",
+      "_type": "request",
+      "parentId": "fld_76e46d37e1fc4b91bbdb77ff",
+      "name": "Search consumer by email/mobile (query criteria)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "email=\"{{ consumer-service_email }}\"  OR mobileWithCountryCode=\"1{{ consumer-service_mobile }}\""
+        }
+      ],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers/search"
+        },
+        {
+          "name": "service-method",
+          "value": "GET"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        },
+        {
+          "name": "criteria",
+          "value": "email=\"{{ consumer-service_email }}\"  OR mobileWithCountryCode=\"1{{ consumer-service_mobile }}\""
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_1ef6d2ab7e18450eb3b0f38f",
+      "_type": "request",
+      "parentId": "fld_76e46d37e1fc4b91bbdb77ff",
+      "name": "MTF Mani Search consumer by email/mobile (query criteria)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework?criteria=email=\"exploreawsservices@gmail.com\"  OR mobileWithCountryCode=\"15863837508\"",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "email=\"{{ consumer-service_email }}\"  OR mobileWithCountryCode=\"1{{ consumer-service_mobile }}\""
+        },
+        {
+          "name": "criteria",
+          "value": "email=\"exploreawsservices@gmail.com\"  OR mobileWithCountryCode=\"15863837508\""
+        }
+      ],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers/search"
+        },
+        {
+          "name": "service-method",
+          "value": "GET"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        },
+        {
+          "name": "criteria",
+          "value": "email=\"{{ consumer-service_email }}\"  OR mobileWithCountryCode=\"1{{ consumer-service_mobile }}\""
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_42d777a831be42729b753fdf",
+      "_type": "request",
+      "parentId": "fld_76e46d37e1fc4b91bbdb77ff",
+      "name": "Search consumer by email/mobile (header criteria)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "email=\"{{ consumer-service_email }}\"  OR mobileWithCountryCode=\"1{{ consumer-service_mobile }}\""
+        }
+      ],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers/search"
+        },
+        {
+          "name": "service-method",
+          "value": "GET"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        },
+        {
+          "name": "criteria",
+          "value": "email=\"{{ consumer-service_email }}\"  OR mobileWithCountryCode=\"1{{ consumer-service_mobile }}\""
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_f99a9ea488b74e9fb6d3dcc3",
+      "_type": "request",
+      "parentId": "fld_76e46d37e1fc4b91bbdb77ff",
+      "name": "MTF Mani Search consumer by email/mobile (header criteria)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "email=\"{{ consumer-service_email }}\"  OR mobileWithCountryCode=\"1{{ consumer-service_mobile }}\""
+        }
+      ],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers/search"
+        },
+        {
+          "name": "service-method",
+          "value": "GET"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        },
+        {
+          "name": "criteria",
+          "value": "email=\"{{ consumer-service_email }}\"  OR mobileWithCountryCode=\"1{{ consumer-service_mobile }}\""
+        },
+        {
+          "name": "criteria",
+          "value": "email=\"exploreawsservices@gmail.com\"  OR mobileWithCountryCode=\"15863837508\""
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_2e4e7c0d4d0a489180864ca0",
+      "_type": "request",
+      "parentId": "fld_76e46d37e1fc4b91bbdb77ff",
+      "name": "Record external verification",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"auth_session_id\": \"testAuthSessionId\",\n  \"consumer_id\": \"{{ consumer-service_consumerId }}\",\n  \"channel\": \"EMAIL\",\n  \"status\": \"SUCCESS\",\n  \"session_failed_attempts\": 0,\n  \"total_failed_attempts\": 0,\n  \"auth_time\": \"1687814283\"\n} "
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/record"
+        },
+        {
+          "name": "service-method",
+          "value": "POST"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});"
+    },
+    {
+      "_id": "req_046a594fd8824538a3befeda",
+      "_type": "request",
+      "parentId": "fld_76e46d37e1fc4b91bbdb77ff",
+      "name": "Consent history search",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"consumer_ids\": [\n      \"{{ consumer-service_consumerId }}\"\n  ]\n} "
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers/consentHistory/search"
+        },
+        {
+          "name": "service-method",
+          "value": "POST"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_1cf77a9fc1f44091b428418a",
+      "_type": "request",
+      "parentId": "fld_76e46d37e1fc4b91bbdb77ff",
+      "name": "Delete consumer",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers/{{ consumer-service_consumerId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "DELETE"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "fld_80f182e8d32d43bfbfb09251",
+      "_type": "request_group",
+      "parentId": "fld_ca8cf18b60c14147875bc011",
+      "name": "Verification (email)"
+    },
+    {
+      "_id": "req_d8ec013127854bd9a29715ee",
+      "_type": "request",
+      "parentId": "fld_80f182e8d32d43bfbfb09251",
+      "name": "Create consumer",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"mobile\": \"{{ consumer-service_mobile }}\",\n  \"biometrics\": \"biometrics\",\n  \"cookie_consent_version\": \"C1.0\",\n  \"tnc_version\": \"T1.0\",\n  \"privacy_policy_version\": \"P1.0\",\n  \"marketing_optin\": false,\n  \"residency_country_code\": \"US\",\n  \"mobile_country_code\": \"1\",\n  \"preferred_language\": \"EN\",\n  \"first_name\": \"testFirstName\",\n  \"last_name\": \"testLastName\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers "
+        },
+        {
+          "name": "service-method",
+          "value": "POST"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('consumer-service_email', require('uuid').v4() + \"@mailinator.com\");\ninsomnia.environment.set('consumer-service_mobile', Math.floor(Math.random() * 1000000) + 1000000000);",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_consumerId', insomnia.response.json().consumer_id);"
+    },
+    {
+      "_id": "req_d2edd15b1ed94c81b03ce7bf",
+      "_type": "request",
+      "parentId": "fld_80f182e8d32d43bfbfb09251",
+      "name": "Verify identity (email)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"channel\": \"EMAIL\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications "
+        },
+        {
+          "name": "service-method",
+          "value": "POST"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_$randomUUID }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "ITF"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_43e11385a018486f859481c3",
+      "_type": "request",
+      "parentId": "fld_80f182e8d32d43bfbfb09251",
+      "name": "Verify OTP (email)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"otp\": \"123456\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}/validate"
+        },
+        {
+          "name": "service-method",
+          "value": "PUT"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_f04d25d30bd3499cb1387d93",
+      "_type": "request",
+      "parentId": "fld_80f182e8d32d43bfbfb09251",
+      "name": "Get Verification Record",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "GET"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});\n\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_24bf4d59c8e247379daf17e5",
+      "_type": "request",
+      "parentId": "fld_80f182e8d32d43bfbfb09251",
+      "name": "Delete Verification Record",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "DELETE"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "fld_d3c2f12b984a42b0b19819b7",
+      "_type": "request_group",
+      "parentId": "fld_ca8cf18b60c14147875bc011",
+      "name": "Verification (SMS)"
+    },
+    {
+      "_id": "req_cccba5d1a6904b749656b944",
+      "_type": "request",
+      "parentId": "fld_d3c2f12b984a42b0b19819b7",
+      "name": "Create consumer",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"mobile\": \"{{ consumer-service_mobile }}\",\n  \"biometrics\": \"biometrics\",\n  \"cookie_consent_version\": \"C1.0\",\n  \"tnc_version\": \"T1.0\",\n  \"privacy_policy_version\": \"P1.0\",\n  \"marketing_optin\": false,\n  \"residency_country_code\": \"US\",\n  \"mobile_country_code\": \"1\",\n  \"preferred_language\": \"EN\",\n  \"first_name\": \"testFirstName\",\n  \"last_name\": \"testLastName\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers "
+        },
+        {
+          "name": "service-method",
+          "value": "POST"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('consumer-service_email', require('uuid').v4() + \"@mailinator.com\");\ninsomnia.environment.set('consumer-service_mobile', Math.floor(Math.random() * 1000000) + 1000000000);",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_consumerId', insomnia.response.json().consumer_id);"
+    },
+    {
+      "_id": "req_2c2b3cede8e04df0b8f85e4a",
+      "_type": "request",
+      "parentId": "fld_d3c2f12b984a42b0b19819b7",
+      "name": "Verify identity (SMS)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"channel\": \"SMS\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications "
+        },
+        {
+          "name": "service-method",
+          "value": "POST"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_db051a82ebd243758a5815fd",
+      "_type": "request",
+      "parentId": "fld_d3c2f12b984a42b0b19819b7",
+      "name": "MTF Mani Verify identity (SMS)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"exploreawsservices@gmail.com\",\n  \"channel\": \"SMS\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications "
+        },
+        {
+          "name": "service-method",
+          "value": "POST"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "mani-mtf-verify-sms-test-1"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_0e81dfb9d3104a4080b53957",
+      "_type": "request",
+      "parentId": "fld_d3c2f12b984a42b0b19819b7",
+      "name": "Verify OTP (SMS)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"otp\": \"654321\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}/validate"
+        },
+        {
+          "name": "service-method",
+          "value": "PUT"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_00885b80473649e791a37824",
+      "_type": "request",
+      "parentId": "fld_d3c2f12b984a42b0b19819b7",
+      "name": "MTF Mani Verify OTP (SMS)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"otp\": \"970684\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}/validate"
+        },
+        {
+          "name": "service-method",
+          "value": "PUT"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_60abe258fac44d7dac2e1fbf",
+      "_type": "request",
+      "parentId": "fld_d3c2f12b984a42b0b19819b7",
+      "name": "Get Verification Record",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "GET"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});\n\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_764112c05af4497ab1df6fb6",
+      "_type": "request",
+      "parentId": "fld_d3c2f12b984a42b0b19819b7",
+      "name": "Delete Verification Record",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "DELETE"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "fld_2fa9e3c39dbd41128b251d45",
+      "_type": "request_group",
+      "parentId": "fld_ca8cf18b60c14147875bc011",
+      "name": "Verification (SMS with different mobile)"
+    },
+    {
+      "_id": "req_8bc8865080aa4004b9195d92",
+      "_type": "request",
+      "parentId": "fld_2fa9e3c39dbd41128b251d45",
+      "name": "Create consumer",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"mobile\": \"{{ consumer-service_mobile }}\",\n  \"biometrics\": \"biometrics\",\n  \"cookie_consent_version\": \"C1.0\",\n  \"tnc_version\": \"T1.0\",\n  \"privacy_policy_version\": \"P1.0\",\n  \"marketing_optin\": false,\n  \"residency_country_code\": \"US\",\n  \"mobile_country_code\": \"1\",\n  \"preferred_language\": \"EN\",\n  \"first_name\": \"testFirstName\",\n  \"last_name\": \"testLastName\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers "
+        },
+        {
+          "name": "service-method",
+          "value": "POST"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('consumer-service_email', require('uuid').v4() + \"@mailinator.com\");\ninsomnia.environment.set('consumer-service_mobile', Math.floor(Math.random() * 1000000) + 1000000000);",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_consumerId', insomnia.response.json().consumer_id);"
+    },
+    {
+      "_id": "req_61b6947cac3f439989f7c3c5",
+      "_type": "request",
+      "parentId": "fld_2fa9e3c39dbd41128b251d45",
+      "name": "Verify identity (SMS)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"channel\" : \"SMS\",\n  \"channel_value\":{\n      \"channel\":\"SMS\",\n      \"phone\" : {\n      \t\"mobileNumber\" : \"1234567890\",\n      \t\"countryCode\" : \"+1\"\n      }\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications "
+        },
+        {
+          "name": "service-method",
+          "value": "POST"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_22609d9fa4334d62a5edd54f",
+      "_type": "request",
+      "parentId": "fld_2fa9e3c39dbd41128b251d45",
+      "name": "Verify OTP (SMS)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"otp\": \"654321\",\n  \"channel_value\": { \n  \t\"channel\": \"SMS\", \n  \t\"phone\": { \n  \t\t\"mobileNumber\": \"1234567890\", \n  \t\t\"countryCode\": \"1\" \n  \t} \n  }   \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}/validate"
+        },
+        {
+          "name": "service-method",
+          "value": "PUT"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_81042b9af575470197a68853",
+      "_type": "request",
+      "parentId": "fld_2fa9e3c39dbd41128b251d45",
+      "name": "Get Verification Record",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "GET"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});\n\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_a645f69abedc4980985de047",
+      "_type": "request",
+      "parentId": "fld_2fa9e3c39dbd41128b251d45",
+      "name": "Delete Verification Record",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "DELETE"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_9d60ca775bc949719922ccf2",
+      "_type": "request",
+      "parentId": "fld_2fa9e3c39dbd41128b251d45",
+      "name": "Delete Verification Record Copy",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "DELETE"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "fld_2d3e009a1ff04e94a38b6f04",
+      "_type": "request_group",
+      "parentId": "fld_ca8cf18b60c14147875bc011",
+      "name": "Negative Verification, consumer temporarily locked"
+    },
+    {
+      "_id": "req_5c9687522ccb460f8823c609",
+      "_type": "request",
+      "parentId": "fld_2d3e009a1ff04e94a38b6f04",
+      "name": "Create consumer",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"mobile\": \"{{ consumer-service_mobile }}\",\n  \"biometrics\": \"biometrics\",\n  \"cookie_consent_version\": \"C1.0\",\n  \"tnc_version\": \"T1.0\",\n  \"privacy_policy_version\": \"P1.0\",\n  \"marketing_optin\": false,\n  \"residency_country_code\": \"US\",\n  \"mobile_country_code\": \"1\",\n  \"preferred_language\": \"EN\",\n  \"first_name\": \"testFirstName\",\n  \"last_name\": \"testLastName\",\n  \"wallet_id\": \"testWalletId\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers "
+        },
+        {
+          "name": "service-method",
+          "value": "POST"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('consumer-service_email', require('uuid').v4() + \"@mailinator.com\");\ninsomnia.environment.set('consumer-service_mobile', Math.floor(Math.random() * 1000000) + 1000000000);",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_consumerId', insomnia.response.json().consumer_id);"
+    },
+    {
+      "_id": "req_718cff2d8dda425d8641c7c0",
+      "_type": "request",
+      "parentId": "fld_2d3e009a1ff04e94a38b6f04",
+      "name": "Verify identity (email)",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ consumer-service_email }}\",\n  \"channel\": \"EMAIL\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications "
+        },
+        {
+          "name": "service-method",
+          "value": "POST"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(201);\n});\n\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_d749550543e846bc9b4e4790",
+      "_type": "request",
+      "parentId": "fld_2d3e009a1ff04e94a38b6f04",
+      "name": "(Negative) Verify OTP - wrong OTP",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"otp\": \"999999\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}/validate"
+        },
+        {
+          "name": "service-method",
+          "value": "PUT"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(400);\n});"
+    },
+    {
+      "_id": "req_89d070d0f97f43e9bc89352e",
+      "_type": "request",
+      "parentId": "fld_2d3e009a1ff04e94a38b6f04",
+      "name": "(Negative) Verify OTP - wrong OTP",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"otp\": \"999999\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}/validate"
+        },
+        {
+          "name": "service-method",
+          "value": "PUT"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(400);\n});"
+    },
+    {
+      "_id": "req_f9a2819cfa01479b9d75e348",
+      "_type": "request",
+      "parentId": "fld_2d3e009a1ff04e94a38b6f04",
+      "name": "(Negative) Verify OTP - wrong OTP, consumer temporarily locked",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"otp\": \"999999\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}/validate"
+        },
+        {
+          "name": "service-method",
+          "value": "PUT"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(403);\n});"
+    },
+    {
+      "_id": "req_bac426bc936c45deb0384d72",
+      "_type": "request",
+      "parentId": "fld_2d3e009a1ff04e94a38b6f04",
+      "name": "Find consumer",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers/{{ consumer-service_consumerId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "GET"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlationId }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "req_0a58119d57a444a19c74213c",
+      "_type": "request",
+      "parentId": "fld_2d3e009a1ff04e94a38b6f04",
+      "name": "Get Verification Record",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "GET"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});\n\ninsomnia.environment.set('consumer-service_verificationId', insomnia.response.json().id);"
+    },
+    {
+      "_id": "req_0ce95f31a58f4c149c42fe69",
+      "_type": "request",
+      "parentId": "fld_2d3e009a1ff04e94a38b6f04",
+      "name": "Delete Verification Record",
+      "method": "POST",
+      "url": "{{ consumer-service_host }}/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform"
+        },
+        {
+          "name": "service-name",
+          "value": "consumer-services"
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/verifications/{{ consumer-service_verificationId }}"
+        },
+        {
+          "name": "service-method",
+          "value": "DELETE"
+        },
+        {
+          "name": "program-id",
+          "value": "{{ consumer-service_programId }}"
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ consumer-service_correlation_id }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ consumer-service_synapseTargetTag }}"
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "insomnia.test(\"response is ok\", function () {\n    pm.response.to.have.status(200);\n});"
+    },
+    {
+      "_id": "fld_483571c5928a491d83c663ab",
+      "_type": "request_group",
+      "parentId": "wrk_2a5c76716d65410981591470",
+      "name": "Setup (Init Variables)"
+    },
+    {
+      "_id": "req_38fac16a75e448dc8a0c4b4e",
+      "_type": "request",
+      "parentId": "fld_483571c5928a491d83c663ab",
+      "name": "00 - Initialize consumer-service_* variables",
+      "method": "GET",
+      "url": "https://example.invalid/health",
+      "headers": [],
+      "parameters": [],
+      "body": {
+        "text": ""
+      },
+      "preRequestScript": "// Run this request once to create/init variables in the Base Environment.\nconst keys = [\n  \"consumer-service_host\",\n  \"consumer-service_programId\",\n  \"consumer-service_correlationId\",\n  \"consumer-service_email\",\n  \"consumer-service_mobile\",\n  \"consumer-service_consumerId\",\n  \"consumer-service_verificationId\",\n  \"consumer-service_correlation_id\",\n  \"consumer-service_externalAccountId\",\n  \"consumer-service_firstName\",\n  \"consumer-service_lastName\",\n  \"consumer-service_synapseTargetTag\",\n  \"consumer-service_$randomUUID\"\n];\nfor (const k of keys) {\n  if (insomnia.environment.get(k) === undefined) {\n    insomnia.environment.set(k, '');\n  }\n}\n// After running, open Manage Environments and fill in values.",
+      "afterResponseScript": ""
+    }
+  ]
+}
