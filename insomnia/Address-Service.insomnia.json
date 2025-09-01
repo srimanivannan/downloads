@@ -2,13 +2,13 @@
   "_type": "export",
   "__export_format": 4,
   "__export_date": "2025-09-01T14:33:37.977590Z",
-  "__export_source": "Postman->Insomnia (ChatGPT)",
+  "__export_source": "Postman->Insomnia",
   "resources": [
     {
       "_id": "wrk_771ecf6ac4da42028a8060c3",
       "_type": "workspace",
-      "name": "Address-Service (Converted)",
-      "description": "Auto-converted from Postman by ChatGPT"
+      "name": "Address-Service",
+      "description": "address-service API tests"
     },
     {
       "_id": "fld_21c179833084434cb15ac733",
@@ -34,7 +34,7 @@
       "parentId": "fld_10d2c733a95d461b9c37a7fd",
       "name": "setup tests - Local",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/api/actuator/info",
+      "url": "{{ _['address-service_url'] }}/api/actuator/info",
       "body": {},
       "parameters": [],
       "headers": [
@@ -45,16 +45,16 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
-      "preRequestScript": "insomnia.environment.set('address-service_address-service-url', \"http://localhost:8031\");\ninsomnia.environment.set('address-service_address-service-api-addresses-endpoint', \"api/addresses\");\n\ninsomnia.environment.set('address-service_input-correlation-id', \"12345\");\ninsomnia.environment.set('address-service_input-program-id', \"5678\");\ninsomnia.environment.set('address-service_input-fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-parent-id', \"007\");\ninsomnia.environment.set('address-service_input-parent-type', \"Card\");\ninsomnia.environment.set('address-service_input-line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_input-line2', \"Floor 10\");\ninsomnia.environment.set('address-service_input-cityTown', \"New York\");\ninsomnia.environment.set('address-service_input-subdivision', \"NY\");\ninsomnia.environment.set('address-service_input-postalCode', \"10003\");\ninsomnia.environment.set('address-service_input-countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
+      "preRequestScript": "insomnia.environment.set('address-service_url', \"http://localhost:8031\");\ninsomnia.environment.set('address-service_addresses-endpoint', \"api/addresses\");\n\ninsomnia.environment.set('address-service_correlation-id', \"12345\");\ninsomnia.environment.set('address-service_program-id', \"5678\");\ninsomnia.environment.set('address-service_fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_parent-id', \"007\");\ninsomnia.environment.set('address-service_parent-type', \"Card\");\ninsomnia.environment.set('address-service_line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_line2', \"Floor 10\");\ninsomnia.environment.set('address-service_cityTown', \"New York\");\ninsomnia.environment.set('address-service_subdivision', \"NY\");\ninsomnia.environment.set('address-service_postalCode', \"10003\");\ninsomnia.environment.set('address-service_countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
       "afterResponseScript": ""
     },
     {
@@ -63,7 +63,7 @@
       "parentId": "fld_10d2c733a95d461b9c37a7fd",
       "name": "setup tests - Kick-One",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/api/actuator/info",
+      "url": "{{ _['address-service_url'] }}/api/actuator/info",
       "body": {},
       "parameters": [],
       "headers": [
@@ -74,16 +74,16 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
-      "preRequestScript": "insomnia.environment.set('address-service_address-service-url', \"https://address-service-ms.apps.stl.pcfstage00.mastercard.int\");\ninsomnia.environment.set('address-service_address-service-api-addresses-endpoint', \"api/addresses\");\n\ninsomnia.environment.set('address-service_input-correlation-id', \"12345\");\ninsomnia.environment.set('address-service_input-program-id', \"5678\");\ninsomnia.environment.set('address-service_input-fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-parent-id', \"007\");\ninsomnia.environment.set('address-service_input-parent-type', \"Card\");\ninsomnia.environment.set('address-service_input-line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_input-line2', \"Floor 10\");\ninsomnia.environment.set('address-service_input-cityTown', \"New York\");\ninsomnia.environment.set('address-service_input-subdivision', \"NY\");\ninsomnia.environment.set('address-service_input-postalCode', \"10003\");\ninsomnia.environment.set('address-service_input-countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
+      "preRequestScript": "insomnia.environment.set('address-service_url', \"https://address-service-ms.apps.stl.pcfstage00.mastercard.int\");\ninsomnia.environment.set('address-service_addresses-endpoint', \"api/addresses\");\n\ninsomnia.environment.set('address-service_correlation-id', \"12345\");\ninsomnia.environment.set('address-service_program-id', \"5678\");\ninsomnia.environment.set('address-service_fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_parent-id', \"007\");\ninsomnia.environment.set('address-service_parent-type', \"Card\");\ninsomnia.environment.set('address-service_line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_line2', \"Floor 10\");\ninsomnia.environment.set('address-service_cityTown', \"New York\");\ninsomnia.environment.set('address-service_subdivision', \"NY\");\ninsomnia.environment.set('address-service_postalCode', \"10003\");\ninsomnia.environment.set('address-service_countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
       "afterResponseScript": ""
     },
     {
@@ -98,10 +98,10 @@
       "parentId": "fld_01cfbc5c0a9f447a914ec203",
       "name": "Positive - Create Address masked request true",
       "method": "POST",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}?masked=true",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}?masked=true",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_input-parent-id'] }}\",\n    \"type\": \"{{ _['address-service_input-parent-type'] }}\"\n  },\n  \"fullName\": \"{{ _['address-service_input-fullname'] }}\",\n  \"line1\": \"{{ _['address-service_input-line1'] }}\",\n  \"line2\": \"{{ _['address-service_input-line2'] }}\",\n  \"cityTown\": \"{{ _['address-service_input-cityTown'] }}\",\n  \"subdivision\": \"{{ _['address-service_input-subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_input-postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_input-countryCode'] }}\"\n}\n"
+        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_parent-id'] }}\",\n    \"type\": \"{{ _['address-service_parent-type'] }}\"\n  },\n  \"fullName\": \"{{ _['address-service_fullname'] }}\",\n  \"line1\": \"{{ _['address-service_line1'] }}\",\n  \"line2\": \"{{ _['address-service_line2'] }}\",\n  \"cityTown\": \"{{ _['address-service_cityTown'] }}\",\n  \"subdivision\": \"{{ _['address-service_subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_countryCode'] }}\"\n}\n"
       },
       "parameters": [
         {
@@ -117,17 +117,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
-      "preRequestScript": "insomnia.environment.set('address-service_input-correlation-id', \"12345\");\ninsomnia.environment.set('address-service_input-program-id', \"5678\");\ninsomnia.environment.set('address-service_input-fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-parent-id', \"007\");\ninsomnia.environment.set('address-service_input-parent-type', \"Card\");\ninsomnia.environment.set('address-service_input-line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_input-line2', \"Floor 10\");\ninsomnia.environment.set('address-service_input-cityTown', \"New York\");\ninsomnia.environment.set('address-service_input-subdivision', \"NY\");\ninsomnia.environment.set('address-service_input-postalCode', \"10003\");\ninsomnia.environment.set('address-service_input-countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
-      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_input-program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_input-program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_input-fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_input-line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_input-line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_input-cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_input-subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_input-postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_input-countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_input-parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_input-correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
+      "preRequestScript": "insomnia.environment.set('address-service_correlation-id', \"12345\");\ninsomnia.environment.set('address-service_program-id', \"5678\");\ninsomnia.environment.set('address-service_fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_parent-id', \"007\");\ninsomnia.environment.set('address-service_parent-type', \"Card\");\ninsomnia.environment.set('address-service_line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_line2', \"Floor 10\");\ninsomnia.environment.set('address-service_cityTown', \"New York\");\ninsomnia.environment.set('address-service_subdivision', \"NY\");\ninsomnia.environment.set('address-service_postalCode', \"10003\");\ninsomnia.environment.set('address-service_countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
+      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
     },
     {
       "_id": "req_8f5d24398e62427391d0c957",
@@ -135,10 +135,10 @@
       "parentId": "fld_01cfbc5c0a9f447a914ec203",
       "name": "Positive - Create Address masked request false",
       "method": "POST",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}?masked=false",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}?masked=false",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_input-parent-id'] }}\",\n    \"type\": \"{{ _['address-service_input-parent-type'] }}\"\n  },\n  \"fullName\": \"{{ _['address-service_input-fullname'] }}\",\n  \"line1\": \"{{ _['address-service_input-line1'] }}\",\n  \"line2\": \"{{ _['address-service_input-line2'] }}\",\n  \"cityTown\": \"{{ _['address-service_input-cityTown'] }}\",\n  \"subdivision\": \"{{ _['address-service_input-subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_input-postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_input-countryCode'] }}\"\n}\n"
+        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_parent-id'] }}\",\n    \"type\": \"{{ _['address-service_parent-type'] }}\"\n  },\n  \"fullName\": \"{{ _['address-service_fullname'] }}\",\n  \"line1\": \"{{ _['address-service_line1'] }}\",\n  \"line2\": \"{{ _['address-service_line2'] }}\",\n  \"cityTown\": \"{{ _['address-service_cityTown'] }}\",\n  \"subdivision\": \"{{ _['address-service_subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_countryCode'] }}\"\n}\n"
       },
       "parameters": [
         {
@@ -154,17 +154,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
       "preRequestScript": "",
-      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_input-program-id');\n\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_input-program-id'));\n    insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_input-fullname'));\n    insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_input-line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_input-line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_input-cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_input-subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_input-postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_input-countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_input-parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_input-correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
+      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_program-id');\n\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_program-id'));\n    insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_fullname'));\n    insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
     },
     {
       "_id": "req_9cb72de2ec7c442c8b37e8e7",
@@ -172,10 +172,10 @@
       "parentId": "fld_01cfbc5c0a9f447a914ec203",
       "name": "Positive - Create Address",
       "method": "POST",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_input-parent-id'] }}\",\n    \"type\": \"{{ _['address-service_input-parent-type'] }}\"\n  },\n  \"fullName\": \"{{ _['address-service_input-fullname'] }}\",\n  \"line1\": \"{{ _['address-service_input-line1'] }}\",\n  \"line2\": \"{{ _['address-service_input-line2'] }}\",\n  \"cityTown\": \"{{ _['address-service_input-cityTown'] }}\",\n  \"subdivision\": \"{{ _['address-service_input-subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_input-postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_input-countryCode'] }}\"\n}\n"
+        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_parent-id'] }}\",\n    \"type\": \"{{ _['address-service_parent-type'] }}\"\n  },\n  \"fullName\": \"{{ _['address-service_fullname'] }}\",\n  \"line1\": \"{{ _['address-service_line1'] }}\",\n  \"line2\": \"{{ _['address-service_line2'] }}\",\n  \"cityTown\": \"{{ _['address-service_cityTown'] }}\",\n  \"subdivision\": \"{{ _['address-service_subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_countryCode'] }}\"\n}\n"
       },
       "parameters": [],
       "headers": [
@@ -186,17 +186,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
-      "preRequestScript": "insomnia.environment.set('address-service_input-correlation-id', \"12345\");\ninsomnia.environment.set('address-service_input-program-id', \"5678\");\ninsomnia.environment.set('address-service_input-fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-parent-id', \"007\");\ninsomnia.environment.set('address-service_input-parent-type', \"Card\");\ninsomnia.environment.set('address-service_input-line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_input-line2', \"Floor 10\");\ninsomnia.environment.set('address-service_input-cityTown', \"New York\");\ninsomnia.environment.set('address-service_input-subdivision', \"NY\");\ninsomnia.environment.set('address-service_input-postalCode', \"10003\");\ninsomnia.environment.set('address-service_input-countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
-      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_input-program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_input-program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_input-fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_input-line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_input-line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_input-cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_input-subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_input-postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_input-countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_input-parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_input-correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
+      "preRequestScript": "insomnia.environment.set('address-service_correlation-id', \"12345\");\ninsomnia.environment.set('address-service_program-id', \"5678\");\ninsomnia.environment.set('address-service_fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_parent-id', \"007\");\ninsomnia.environment.set('address-service_parent-type', \"Card\");\ninsomnia.environment.set('address-service_line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_line2', \"Floor 10\");\ninsomnia.environment.set('address-service_cityTown', \"New York\");\ninsomnia.environment.set('address-service_subdivision', \"NY\");\ninsomnia.environment.set('address-service_postalCode', \"10003\");\ninsomnia.environment.set('address-service_countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
+      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
     },
     {
       "_id": "req_18d12cf205c74ad999109efc",
@@ -204,10 +204,10 @@
       "parentId": "fld_01cfbc5c0a9f447a914ec203",
       "name": "Positive - Create Address with source",
       "method": "POST",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_input-parent-id'] }}\",\n    \"type\": \"{{ _['address-service_input-parent-type'] }}\"\n  },\n  \"source\": \"ISSUER\",\n  \"fullName\": \"{{ _['address-service_input-fullname'] }}\",\n  \"line1\": \"{{ _['address-service_input-line1'] }}\",\n  \"line2\": \"{{ _['address-service_input-line2'] }}\",\n  \"cityTown\": \"{{ _['address-service_input-cityTown'] }}\",\n  \"subdivision\": \"{{ _['address-service_input-subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_input-postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_input-countryCode'] }}\"\n}\n"
+        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_parent-id'] }}\",\n    \"type\": \"{{ _['address-service_parent-type'] }}\"\n  },\n  \"source\": \"ISSUER\",\n  \"fullName\": \"{{ _['address-service_fullname'] }}\",\n  \"line1\": \"{{ _['address-service_line1'] }}\",\n  \"line2\": \"{{ _['address-service_line2'] }}\",\n  \"cityTown\": \"{{ _['address-service_cityTown'] }}\",\n  \"subdivision\": \"{{ _['address-service_subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_countryCode'] }}\"\n}\n"
       },
       "parameters": [],
       "headers": [
@@ -218,17 +218,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
-      "preRequestScript": "insomnia.environment.set('address-service_input-correlation-id', \"12345\");\ninsomnia.environment.set('address-service_input-program-id', \"5678\");\ninsomnia.environment.set('address-service_input-fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-parent-id', \"007\");\ninsomnia.environment.set('address-service_input-parent-type', \"Card\");\ninsomnia.environment.set('address-service_input-line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_input-line2', \"Floor 10\");\ninsomnia.environment.set('address-service_input-cityTown', \"New York\");\ninsomnia.environment.set('address-service_input-subdivision', \"NY\");\ninsomnia.environment.set('address-service_input-postalCode', \"10003\");\ninsomnia.environment.set('address-service_input-countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
-      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_input-program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_input-program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_input-fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_input-line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_input-line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_input-cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_input-subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_input-postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_input-countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_input-parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_input-correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
+      "preRequestScript": "insomnia.environment.set('address-service_correlation-id', \"12345\");\ninsomnia.environment.set('address-service_program-id', \"5678\");\ninsomnia.environment.set('address-service_fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_parent-id', \"007\");\ninsomnia.environment.set('address-service_parent-type', \"Card\");\ninsomnia.environment.set('address-service_line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_line2', \"Floor 10\");\ninsomnia.environment.set('address-service_cityTown', \"New York\");\ninsomnia.environment.set('address-service_subdivision', \"NY\");\ninsomnia.environment.set('address-service_postalCode', \"10003\");\ninsomnia.environment.set('address-service_countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
+      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
     },
     {
       "_id": "req_f369e6c79c5b4b38a2d8a8dc",
@@ -236,10 +236,10 @@
       "parentId": "fld_01cfbc5c0a9f447a914ec203",
       "name": "Positive - Create Address without optional field fullName",
       "method": "POST",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_input-parent-id'] }}\",\n    \"type\": \"{{ _['address-service_input-parent-type'] }}\"\n  },\n  \"line1\": \"{{ _['address-service_input-line1'] }}\",\n  \"line2\": \"{{ _['address-service_input-line2'] }}\",\n  \"cityTown\": \"{{ _['address-service_input-cityTown'] }}\",\n  \"subdivision\": \"{{ _['address-service_input-subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_input-postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_input-countryCode'] }}\"\n}\n"
+        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_parent-id'] }}\",\n    \"type\": \"{{ _['address-service_parent-type'] }}\"\n  },\n  \"line1\": \"{{ _['address-service_line1'] }}\",\n  \"line2\": \"{{ _['address-service_line2'] }}\",\n  \"cityTown\": \"{{ _['address-service_cityTown'] }}\",\n  \"subdivision\": \"{{ _['address-service_subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_countryCode'] }}\"\n}\n"
       },
       "parameters": [],
       "headers": [
@@ -250,17 +250,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
-      "preRequestScript": "insomnia.environment.set('address-service_input-correlation-id', \"12345\");\ninsomnia.environment.set('address-service_input-program-id', \"5678\");\ninsomnia.environment.set('address-service_input-fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-parent-id', \"007\");\ninsomnia.environment.set('address-service_input-parent-type', \"Card\");\ninsomnia.environment.set('address-service_input-line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_input-line2', \"Floor 10\");\ninsomnia.environment.set('address-service_input-cityTown', \"New York\");\ninsomnia.environment.set('address-service_input-subdivision', \"NY\");\ninsomnia.environment.set('address-service_input-postalCode', \"10003\");\ninsomnia.environment.set('address-service_input-countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
-      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_input-program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_input-program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_input-fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_input-line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_input-line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_input-cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_input-subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_input-postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_input-countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_input-parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_input-correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
+      "preRequestScript": "insomnia.environment.set('address-service_correlation-id', \"12345\");\ninsomnia.environment.set('address-service_program-id', \"5678\");\ninsomnia.environment.set('address-service_fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_parent-id', \"007\");\ninsomnia.environment.set('address-service_parent-type', \"Card\");\ninsomnia.environment.set('address-service_line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_line2', \"Floor 10\");\ninsomnia.environment.set('address-service_cityTown', \"New York\");\ninsomnia.environment.set('address-service_subdivision', \"NY\");\ninsomnia.environment.set('address-service_postalCode', \"10003\");\ninsomnia.environment.set('address-service_countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
+      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
     },
     {
       "_id": "req_8076f5c993fd4f78997d9041",
@@ -268,10 +268,10 @@
       "parentId": "fld_01cfbc5c0a9f447a914ec203",
       "name": "Positive - Create Address without optional line1",
       "method": "POST",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_input-parent-id'] }}\",\n    \"type\": \"{{ _['address-service_input-parent-type'] }}\"\n  },\n  \"fullName\": \"{{ _['address-service_input-fullname'] }}\",\n  \"line2\": \"{{ _['address-service_input-line2'] }}\",\n  \"cityTown\": \"{{ _['address-service_input-cityTown'] }}\",\n  \"subdivision\": \"{{ _['address-service_input-subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_input-postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_input-countryCode'] }}\"\n}\n"
+        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_parent-id'] }}\",\n    \"type\": \"{{ _['address-service_parent-type'] }}\"\n  },\n  \"fullName\": \"{{ _['address-service_fullname'] }}\",\n  \"line2\": \"{{ _['address-service_line2'] }}\",\n  \"cityTown\": \"{{ _['address-service_cityTown'] }}\",\n  \"subdivision\": \"{{ _['address-service_subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_countryCode'] }}\"\n}\n"
       },
       "parameters": [],
       "headers": [
@@ -282,17 +282,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
-      "preRequestScript": "insomnia.environment.set('address-service_input-correlation-id', \"12345\");\ninsomnia.environment.set('address-service_input-program-id', \"5678\");\ninsomnia.environment.set('address-service_input-fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-parent-id', \"007\");\ninsomnia.environment.set('address-service_input-parent-type', \"Card\");\ninsomnia.environment.set('address-service_input-line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_input-line2', \"Floor 10\");\ninsomnia.environment.set('address-service_input-cityTown', \"New York\");\ninsomnia.environment.set('address-service_input-subdivision', \"NY\");\ninsomnia.environment.set('address-service_input-postalCode', \"10003\");\ninsomnia.environment.set('address-service_input-countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
-      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_input-program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_input-program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_input-fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_input-line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_input-line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_input-cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_input-subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_input-postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_input-countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_input-parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_input-correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
+      "preRequestScript": "insomnia.environment.set('address-service_correlation-id', \"12345\");\ninsomnia.environment.set('address-service_program-id', \"5678\");\ninsomnia.environment.set('address-service_fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_parent-id', \"007\");\ninsomnia.environment.set('address-service_parent-type', \"Card\");\ninsomnia.environment.set('address-service_line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_line2', \"Floor 10\");\ninsomnia.environment.set('address-service_cityTown', \"New York\");\ninsomnia.environment.set('address-service_subdivision', \"NY\");\ninsomnia.environment.set('address-service_postalCode', \"10003\");\ninsomnia.environment.set('address-service_countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
+      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
     },
     {
       "_id": "req_96ce20fd0cf14987a1810240",
@@ -300,10 +300,10 @@
       "parentId": "fld_01cfbc5c0a9f447a914ec203",
       "name": "Positive - Create Address without optional field line2",
       "method": "POST",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_input-parent-id'] }}\",\n    \"type\": \"{{ _['address-service_input-parent-type'] }}\"\n  },\n  \"fullName\": \"{{ _['address-service_input-fullname'] }}\",\n  \"line1\": \"{{ _['address-service_input-line1'] }}\",\n  \"cityTown\": \"{{ _['address-service_input-cityTown'] }}\",\n  \"subdivision\": \"{{ _['address-service_input-subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_input-postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_input-countryCode'] }}\"\n}\n"
+        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_parent-id'] }}\",\n    \"type\": \"{{ _['address-service_parent-type'] }}\"\n  },\n  \"fullName\": \"{{ _['address-service_fullname'] }}\",\n  \"line1\": \"{{ _['address-service_line1'] }}\",\n  \"cityTown\": \"{{ _['address-service_cityTown'] }}\",\n  \"subdivision\": \"{{ _['address-service_subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_countryCode'] }}\"\n}\n"
       },
       "parameters": [],
       "headers": [
@@ -314,17 +314,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
-      "preRequestScript": "insomnia.environment.set('address-service_input-correlation-id', \"12345\");\ninsomnia.environment.set('address-service_input-program-id', \"5678\");\ninsomnia.environment.set('address-service_input-fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-parent-id', \"007\");\ninsomnia.environment.set('address-service_input-parent-type', \"Card\");\ninsomnia.environment.set('address-service_input-line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_input-line2', \"Floor 10\");\ninsomnia.environment.set('address-service_input-cityTown', \"New York\");\ninsomnia.environment.set('address-service_input-subdivision', \"NY\");\ninsomnia.environment.set('address-service_input-postalCode', \"10003\");\ninsomnia.environment.set('address-service_input-countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
-      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_input-program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_input-program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_input-fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_input-line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_input-line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_input-cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_input-subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_input-postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_input-countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_input-parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_input-correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
+      "preRequestScript": "insomnia.environment.set('address-service_correlation-id', \"12345\");\ninsomnia.environment.set('address-service_program-id', \"5678\");\ninsomnia.environment.set('address-service_fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_parent-id', \"007\");\ninsomnia.environment.set('address-service_parent-type', \"Card\");\ninsomnia.environment.set('address-service_line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_line2', \"Floor 10\");\ninsomnia.environment.set('address-service_cityTown', \"New York\");\ninsomnia.environment.set('address-service_subdivision', \"NY\");\ninsomnia.environment.set('address-service_postalCode', \"10003\");\ninsomnia.environment.set('address-service_countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
+      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
     },
     {
       "_id": "req_998d0ba3c1504363bc658ddc",
@@ -332,10 +332,10 @@
       "parentId": "fld_01cfbc5c0a9f447a914ec203",
       "name": "Positive - Create Address without optional field cityTown",
       "method": "POST",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_input-parent-id'] }}\",\n    \"type\": \"{{ _['address-service_input-parent-type'] }}\"\n  },\n  \"fullName\": \"{{ _['address-service_input-fullname'] }}\",\n  \"line1\": \"{{ _['address-service_input-line1'] }}\",\n  \"line2\": \"{{ _['address-service_input-line2'] }}\",\n  \"subdivision\": \"{{ _['address-service_input-subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_input-postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_input-countryCode'] }}\"\n}\n"
+        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_parent-id'] }}\",\n    \"type\": \"{{ _['address-service_parent-type'] }}\"\n  },\n  \"fullName\": \"{{ _['address-service_fullname'] }}\",\n  \"line1\": \"{{ _['address-service_line1'] }}\",\n  \"line2\": \"{{ _['address-service_line2'] }}\",\n  \"subdivision\": \"{{ _['address-service_subdivision'] }}\",\n  \"postalCode\": \"{{ _['address-service_postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_countryCode'] }}\"\n}\n"
       },
       "parameters": [],
       "headers": [
@@ -346,17 +346,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
-      "preRequestScript": "insomnia.environment.set('address-service_input-correlation-id', \"12345\");\ninsomnia.environment.set('address-service_input-program-id', \"5678\");\ninsomnia.environment.set('address-service_input-fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-parent-id', \"007\");\ninsomnia.environment.set('address-service_input-parent-type', \"Card\");\ninsomnia.environment.set('address-service_input-line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_input-line2', \"Floor 10\");\ninsomnia.environment.set('address-service_input-cityTown', \"New York\");\ninsomnia.environment.set('address-service_input-subdivision', \"NY\");\ninsomnia.environment.set('address-service_input-postalCode', \"10003\");\ninsomnia.environment.set('address-service_input-countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
-      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_input-program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_input-program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_input-fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_input-line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_input-line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_input-cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_input-subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_input-postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_input-countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_input-parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_input-correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
+      "preRequestScript": "insomnia.environment.set('address-service_correlation-id', \"12345\");\ninsomnia.environment.set('address-service_program-id', \"5678\");\ninsomnia.environment.set('address-service_fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_parent-id', \"007\");\ninsomnia.environment.set('address-service_parent-type', \"Card\");\ninsomnia.environment.set('address-service_line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_line2', \"Floor 10\");\ninsomnia.environment.set('address-service_cityTown', \"New York\");\ninsomnia.environment.set('address-service_subdivision', \"NY\");\ninsomnia.environment.set('address-service_postalCode', \"10003\");\ninsomnia.environment.set('address-service_countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
+      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
     },
     {
       "_id": "req_76fc29ea095242e0a7d9e783",
@@ -364,10 +364,10 @@
       "parentId": "fld_01cfbc5c0a9f447a914ec203",
       "name": "Positive - Create Address without optional field subdivision",
       "method": "POST",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_input-parent-id'] }}\",\n    \"type\": \"{{ _['address-service_input-parent-type'] }}\"\n  },\n  \"fullName\": \"{{ _['address-service_input-fullname'] }}\",\n  \"line1\": \"{{ _['address-service_input-line1'] }}\",\n  \"line2\": \"{{ _['address-service_input-line2'] }}\",\n  \"cityTown\": \"{{ _['address-service_input-cityTown'] }}\",\n  \"postalCode\": \"{{ _['address-service_input-postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_input-countryCode'] }}\"\n}\n"
+        "text": "{\n  \"parent\": {\n    \"id\": \"{{ _['address-service_parent-id'] }}\",\n    \"type\": \"{{ _['address-service_parent-type'] }}\"\n  },\n  \"fullName\": \"{{ _['address-service_fullname'] }}\",\n  \"line1\": \"{{ _['address-service_line1'] }}\",\n  \"line2\": \"{{ _['address-service_line2'] }}\",\n  \"cityTown\": \"{{ _['address-service_cityTown'] }}\",\n  \"postalCode\": \"{{ _['address-service_postalCode'] }}\",\n  \"countryCode\": \"{{ _['address-service_countryCode'] }}\"\n}\n"
       },
       "parameters": [],
       "headers": [
@@ -378,17 +378,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
-      "preRequestScript": "insomnia.environment.set('address-service_input-correlation-id', \"12345\");\ninsomnia.environment.set('address-service_input-program-id', \"5678\");\ninsomnia.environment.set('address-service_input-fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_input-parent-id', \"007\");\ninsomnia.environment.set('address-service_input-parent-type', \"Card\");\ninsomnia.environment.set('address-service_input-line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_input-line2', \"Floor 10\");\ninsomnia.environment.set('address-service_input-cityTown', \"New York\");\ninsomnia.environment.set('address-service_input-subdivision', \"NY\");\ninsomnia.environment.set('address-service_input-postalCode', \"10003\");\ninsomnia.environment.set('address-service_input-countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
-      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_input-program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_input-program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_input-fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_input-line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_input-line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_input-cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_input-subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_input-postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_input-countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_input-parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_input-correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
+      "preRequestScript": "insomnia.environment.set('address-service_correlation-id', \"12345\");\ninsomnia.environment.set('address-service_program-id', \"5678\");\ninsomnia.environment.set('address-service_fullname', \"MoosTer Card\");\ninsomnia.environment.set('address-service_fullname-masked', \"MoosTer Card\");\ninsomnia.environment.set('address-service_parent-id', \"007\");\ninsomnia.environment.set('address-service_parent-type', \"Card\");\ninsomnia.environment.set('address-service_line1', \"114 Fifth Avenue\");\ninsomnia.environment.set('address-service_line2', \"Floor 10\");\ninsomnia.environment.set('address-service_cityTown', \"New York\");\ninsomnia.environment.set('address-service_subdivision', \"NY\");\ninsomnia.environment.set('address-service_postalCode', \"10003\");\ninsomnia.environment.set('address-service_countryCode', \"US\");\ninsomnia.environment.set('address-service_current-timestamp', (new Date()).toISOString());",
+      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 201\", function () {\n    pm.response.to.have.status(201);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_program-id'));\n    //insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_fullname'));\n    //insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
     },
     {
       "_id": "req_8b49b11f068f4916b78a0ef5",
@@ -396,7 +396,7 @@
       "parentId": "fld_01cfbc5c0a9f447a914ec203",
       "name": "Negative - Create Address masked request missing content type header",
       "method": "POST",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}?masked=true",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}?masked=true",
       "body": {
         "mimeType": "application/json",
         "text": "{\n  \"parent\": {\n    \"id\": \"007\",\n    \"type\": \"Card\"\n  },\n  \"fullName\": \"Mooster Card\",\n  \"line1\": \"114 Fifth Avenue\",\n  \"line2\": \"Flr 10\",\n  \"cityTown\": \"New York\",\n  \"subdivision\": \"NY\",\n  \"postalCode\": \"10003\",\n  \"countryCode\": \"US\"\n}"
@@ -415,12 +415,12 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
@@ -439,7 +439,7 @@
       "parentId": "fld_55926dc851a246a68512c16a",
       "name": "Positive - Get Address masked request true",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}?masked=true",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}?masked=true",
       "body": {},
       "parameters": [
         {
@@ -455,17 +455,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
       "preRequestScript": "",
-      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_input-program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_input-program-id'));\n    // insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_input-fullname'));\n    // insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_input-line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_input-line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_input-cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_input-subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_input-postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_input-countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_input-parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_input-correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
+      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_program-id'));\n    // insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_fullname'));\n    // insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
     },
     {
       "_id": "req_f855178a6e53410eb8611586",
@@ -473,7 +473,7 @@
       "parentId": "fld_55926dc851a246a68512c16a",
       "name": "Positive - Get Address masked request false",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}?masked=false",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}?masked=false",
       "body": {},
       "parameters": [
         {
@@ -489,17 +489,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
       "preRequestScript": "",
-      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_input-program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_input-program-id'));\n    insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_input-fullname'));\n    insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_input-line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_input-line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_input-cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_input-subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_input-postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_input-countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_input-parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_input-correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
+      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\ntests[\"Program ID must be same as input.\"] = data.programId === insomnia.environment.get('address-service_program-id');\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_program-id'));\n    insomnia.expect(response.fullName).to.eql(insomnia.environment.get('address-service_fullname'));\n    insomnia.expect(response.line1).to.eql(insomnia.environment.get('address-service_line1'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_parent-type'));\n\n});\n\ninsomnia.test(\"Content-Type is present\", function () {\n    insomnia.expect((insomnia.response.headers['correlation-id'] || insomnia.response.header('correlation-id'))).to.eql(insomnia.environment.get('address-service_correlation-id'));\n});\n\ninsomnia.environment.set('address-service_address_id_created', data.id);"
     },
     {
       "_id": "req_3dc5d8998b3c4091b2d54d47",
@@ -507,12 +507,12 @@
       "parentId": "fld_55926dc851a246a68512c16a",
       "name": "Postive - Get Address by Parent Id",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}:searchByParentId?parentId={{ _['address-service_input-parent-id'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}:searchByParentId?parentId={{ _['address-service_parent-id'] }}",
       "body": {},
       "parameters": [
         {
           "name": "parentId",
-          "value": "{{ _['address-service_input-parent-id'] }}"
+          "value": "{{ _['address-service_parent-id'] }}"
         }
       ],
       "headers": [
@@ -523,17 +523,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
       "preRequestScript": "",
-      "afterResponseScript": "var response = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\ninsomnia.test(\"Parent Id should be present and match in all results.\", function () {\n    response.forEach(function (obj) {\n        insomnia.expect(obj.parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    });\n});"
+      "afterResponseScript": "var response = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\ninsomnia.test(\"Parent Id should be present and match in all results.\", function () {\n    response.forEach(function (obj) {\n        insomnia.expect(obj.parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    });\n});"
     },
     {
       "_id": "req_fd051ea3ebed47e5a1737d79",
@@ -541,7 +541,7 @@
       "parentId": "fld_55926dc851a246a68512c16a",
       "name": "Negative - Get Address by Invalid Id",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}/{{ _['address-service_invalid_address_id_created'] }}?masked=true",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}/{{ _['address-service_invalid_address_id_created'] }}?masked=true",
       "body": {},
       "parameters": [
         {
@@ -557,12 +557,12 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
@@ -575,12 +575,12 @@
       "parentId": "fld_55926dc851a246a68512c16a",
       "name": "Negative - Get Address by Parent Id when parent-id doesn't have any addresses",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}:searchByParentId?parentId={{ _['address-service_input-invalid-parent-id'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}:searchByParentId?parentId={{ _['address-service_invalid-parent-id'] }}",
       "body": {},
       "parameters": [
         {
           "name": "parentId",
-          "value": "{{ _['address-service_input-invalid-parent-id'] }}"
+          "value": "{{ _['address-service_invalid-parent-id'] }}"
         }
       ],
       "headers": [
@@ -591,12 +591,12 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
@@ -609,12 +609,12 @@
       "parentId": "fld_55926dc851a246a68512c16a",
       "name": "Negative - Get Address by Parent Id Missing program-id",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}:searchByParentId?parentId={{ _['address-service_input-invalid-parent-id'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}:searchByParentId?parentId={{ _['address-service_invalid-parent-id'] }}",
       "body": {},
       "parameters": [
         {
           "name": "parentId",
-          "value": "{{ _['address-service_input-invalid-parent-id'] }}"
+          "value": "{{ _['address-service_invalid-parent-id'] }}"
         }
       ],
       "headers": [
@@ -625,7 +625,7 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         }
       ],
@@ -638,12 +638,12 @@
       "parentId": "fld_55926dc851a246a68512c16a",
       "name": "Negative - Get Address by Parent Id Missing correlation-id",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}:searchByParentId?parentId={{ _['address-service_input-invalid-parent-id'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}:searchByParentId?parentId={{ _['address-service_invalid-parent-id'] }}",
       "body": {},
       "parameters": [
         {
           "name": "parentId",
-          "value": "{{ _['address-service_input-invalid-parent-id'] }}"
+          "value": "{{ _['address-service_invalid-parent-id'] }}"
         }
       ],
       "headers": [
@@ -654,7 +654,7 @@
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
@@ -667,12 +667,12 @@
       "parentId": "fld_55926dc851a246a68512c16a",
       "name": "Postive - Get Address by search criteria",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}:searchByParentId?parentId={{ _['address-service_input-parent-id'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}:searchByParentId?parentId={{ _['address-service_parent-id'] }}",
       "body": {},
       "parameters": [
         {
           "name": "parentId",
-          "value": "{{ _['address-service_input-parent-id'] }}"
+          "value": "{{ _['address-service_parent-id'] }}"
         }
       ],
       "headers": [
@@ -683,17 +683,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
       "preRequestScript": "",
-      "afterResponseScript": "var response = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\ninsomnia.test(\"Parent Id should be present and match in all results.\", function () {\n    response.forEach(function (obj) {\n        insomnia.expect(obj.parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    });\n});"
+      "afterResponseScript": "var response = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\ninsomnia.test(\"Parent Id should be present and match in all results.\", function () {\n    response.forEach(function (obj) {\n        insomnia.expect(obj.parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    });\n});"
     },
     {
       "_id": "req_9611134223b6479abfa433a3",
@@ -701,7 +701,7 @@
       "parentId": "fld_55926dc851a246a68512c16a",
       "name": "Positive - address Search by criteria -- parentType",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/api/addresses/search?criteria=parentType = \"type123\"&offset=0&limit=100&view=RAW",
+      "url": "{{ _['address-service_url'] }}/api/addresses/search?criteria=parentType = \"type123\"&offset=0&limit=100&view=RAW",
       "body": {
         "mimeType": "application/json",
         "text": "{\n    \"parent\": {\n        \"id\": \"SRC1234\",\n        \"type\": \"type\"\n    },\n    \"fullName\": \"John Doe\",\n    \"line1\": \"11 king street\",\n    \"line2\": \"test\",\n    \"line3\": \"test\",\n    \"cityTown\": \"New York\",\n    \"subdivision\": \"NY\",\n    \"postalCode\": \"11111\",\n    \"countryCode\": \"US\",\n    \"createTime\": \"2019-01-07T17:57:26.426Z\",\n    \"lastUsedTime\": \"2019-01-07T17:57:26.426Z\"\n}"
@@ -750,7 +750,7 @@
       "parentId": "fld_55926dc851a246a68512c16a",
       "name": "Positive - address Search by criteria -- parentTyp and parentId AND OR",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/api/addresses/search?criteria=(parentType = \"type1234\" OR parentType = \"type999\" ) OR  parentId = \"parentID\"&limit=0",
+      "url": "{{ _['address-service_url'] }}/api/addresses/search?criteria=(parentType = \"type1234\" OR parentType = \"type999\" ) OR  parentId = \"parentID\"&limit=0",
       "body": {
         "mimeType": "application/json",
         "text": "{\n    \"parent\": {\n        \"id\": \"SRC1234\",\n        \"type\": \"type\"\n    },\n    \"fullName\": \"John Doe\",\n    \"line1\": \"11 king street\",\n    \"line2\": \"test\",\n    \"line3\": \"test\",\n    \"cityTown\": \"New York\",\n    \"subdivision\": \"NY\",\n    \"postalCode\": \"11111\",\n    \"countryCode\": \"US\",\n    \"createTime\": \"2019-01-07T17:57:26.426Z\",\n    \"lastUsedTime\": \"2019-01-07T17:57:26.426Z\"\n}"
@@ -805,7 +805,7 @@
       "parentId": "fld_45c85491041147d69ec28b8d",
       "name": "Positive - Patch last used time",
       "method": "PATCH",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}",
       "body": {
         "mimeType": "application/json",
         "text": "{\n  \"lastUsedTime\": \"{{ _['address-service_current-timestamp'] }}\"\n}"
@@ -819,12 +819,12 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
@@ -837,21 +837,21 @@
       "parentId": "fld_45c85491041147d69ec28b8d",
       "name": "Negative - Patch last used time when content type header is invalid",
       "method": "PATCH",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"lastUsedTime\": \"{{ _['address-service_input-last-used-time'] }}\"\n}"
+        "text": "{\n  \"lastUsedTime\": \"{{ _['address-service_last-used-time'] }}\"\n}"
       },
       "parameters": [],
       "headers": [
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         },
         {
@@ -860,7 +860,7 @@
           "disabled": false
         }
       ],
-      "preRequestScript": "insomnia.environment.set('address-service_input-last-used-time', \"2017-04-23T18:25:43.511Z\");",
+      "preRequestScript": "insomnia.environment.set('address-service_last-used-time', \"2017-04-23T18:25:43.511Z\");",
       "afterResponseScript": "var response = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 400.\", function () {\n    pm.response.to.have.status(400);\n});\n\ninsomnia.test(\"Error Exception is thrown in response with details.\", function () {\n    insomnia.expect(response.status).to.eql(400);\n    insomnia.expect(response.reason).to.eql(\"INVALID_ARGUMENT\");\n    insomnia.expect(response.message).to.eql(\"One or more fields in the request are either missing or does not have correct value.\");\n    insomnia.expect(response.details[0].reason).to.eql(\"CORRUPT_DATA\");\n    insomnia.expect(response.details[0].message).to.eql(\"Only application/json;charset=UTF-8 is supported\");\n    insomnia.expect(response.details[0].sourceType).to.eql(\"HEADER\");\n    insomnia.expect(response.details[0].source).to.eql(\"Content-Type\");\n});"
     },
     {
@@ -869,21 +869,21 @@
       "parentId": "fld_45c85491041147d69ec28b8d",
       "name": "Negative - Patch last used time when date is in future",
       "method": "PATCH",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"lastUsedTime\": \"{{ _['address-service_input-last-used-time'] }}\"\n}"
+        "text": "{\n  \"lastUsedTime\": \"{{ _['address-service_last-used-time'] }}\"\n}"
       },
       "parameters": [],
       "headers": [
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         },
         {
@@ -892,7 +892,7 @@
           "disabled": false
         }
       ],
-      "preRequestScript": "insomnia.environment.set('address-service_input-last-used-time', \"2030-04-23T18:25:43.511Z\");",
+      "preRequestScript": "insomnia.environment.set('address-service_last-used-time', \"2030-04-23T18:25:43.511Z\");",
       "afterResponseScript": "var response = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 400.\", function () {\n    pm.response.to.have.status(400);\n});\n\ninsomnia.test(\"Error Exception is thrown in response with details.\", function () {\n    insomnia.expect(response.status).to.eql(400);\n    insomnia.expect(response.reason).to.eql(\"INVALID_ARGUMENT\");\n    insomnia.expect(response.message).to.eql(\"Last used time is a future time\");\n    insomnia.expect(response.details[0].reason).to.eql(\"INVALID_VALUE\");\n    insomnia.expect(response.details[0].message).to.eql(\"Last used time is a future time\");\n    insomnia.expect(response.details[0].sourceType).to.eql(\"BODY\");\n    insomnia.expect(response.details[0].source).to.eql(\"lastUsedTime\");\n});"
     },
     {
@@ -901,21 +901,21 @@
       "parentId": "fld_45c85491041147d69ec28b8d",
       "name": "Negative - Patch last used time invalid date format",
       "method": "PATCH",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"lastUsedTime\": \"{{ _['address-service_input-last-used-time'] }}\"\n}"
+        "text": "{\n  \"lastUsedTime\": \"{{ _['address-service_last-used-time'] }}\"\n}"
       },
       "parameters": [],
       "headers": [
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         },
         {
@@ -924,7 +924,7 @@
           "disabled": false
         }
       ],
-      "preRequestScript": "insomnia.environment.set('address-service_input-last-used-time', \"2018-04-23T18\");",
+      "preRequestScript": "insomnia.environment.set('address-service_last-used-time', \"2018-04-23T18\");",
       "afterResponseScript": "var response = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 400.\", function () {\n    pm.response.to.have.status(400);\n});\n\ninsomnia.test(\"Error Exception is thrown in response with details.\", function () {\n    insomnia.expect(response.status).to.eql(400);\n    insomnia.expect(response.reason).to.eql(\"INVALID_ARGUMENT\");\n    insomnia.expect(response.message).to.eql(\"Invalid input arguments\");\n    insomnia.expect(response.details[0].reason).to.eql(\"INVALID_VALUE\");\n    insomnia.expect(response.details[0].message).to.eql(\"The format of the lastUsedTime is invalid. The lastUsedTime must be in java.time.LocalDateTime ZONE_ID_UTC format such as: 2018-09-09T13:38:02.835Z\");\n    insomnia.expect(response.details[0].sourceType).to.eql(\"BODY\");\n    insomnia.expect(response.details[0].source).to.eql(\"lastUsedTime\");\n});"
     },
     {
@@ -933,21 +933,21 @@
       "parentId": "fld_45c85491041147d69ec28b8d",
       "name": "Negative - Patch last used time when date is older than previous year",
       "method": "PATCH",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"lastUsedTime\": \"{{ _['address-service_input-last-used-time'] }}\"\n}"
+        "text": "{\n  \"lastUsedTime\": \"{{ _['address-service_last-used-time'] }}\"\n}"
       },
       "parameters": [],
       "headers": [
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         },
         {
@@ -956,7 +956,7 @@
           "disabled": false
         }
       ],
-      "preRequestScript": "insomnia.environment.set('address-service_input-last-used-time', \"2001-04-23T18:25:43.511Z\");",
+      "preRequestScript": "insomnia.environment.set('address-service_last-used-time', \"2001-04-23T18:25:43.511Z\");",
       "afterResponseScript": "var response = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 400.\", function () {\n    pm.response.to.have.status(400);\n});\n\ninsomnia.test(\"Error Exception is thrown in response with details.\", function () {\n    insomnia.expect(response.status).to.eql(400);\n    insomnia.expect(response.reason).to.eql(\"INVALID_ARGUMENT\");\n    insomnia.expect(response.message).to.eql(\"Last used time is before the created time\");\n    insomnia.expect(response.details[0].reason).to.eql(\"INVALID_VALUE\");\n    insomnia.expect(response.details[0].message).to.eql(\"Last used time is before the created time\");\n    insomnia.expect(response.details[0].sourceType).to.eql(\"BODY\");\n    insomnia.expect(response.details[0].source).to.eql(\"lastUsedTime\");\n});"
     },
     {
@@ -971,7 +971,7 @@
       "parentId": "fld_85441083753844e3ae0add29",
       "name": "Positive - Delete by id existing address",
       "method": "DELETE",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}?masked=true",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}?masked=true",
       "body": {
         "mimeType": "application/json",
         "text": ""
@@ -990,17 +990,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
       "preRequestScript": "",
-      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_input-program-id'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_input-line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_input-cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_input-subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_input-postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_input-countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_input-parent-type'));\n\n});"
+      "afterResponseScript": "var data = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\ninsomnia.test(\"Response body shows address details.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response.programId).to.eql(insomnia.environment.get('address-service_program-id'));\n    insomnia.expect(response.line2).to.eql(insomnia.environment.get('address-service_line2'));\n    insomnia.expect(response.cityTown).to.eql(insomnia.environment.get('address-service_cityTown'));\n    insomnia.expect(response.subdivision).to.eql(insomnia.environment.get('address-service_subdivision'));\n    insomnia.expect(response.postalCode).to.eql(insomnia.environment.get('address-service_postalCode'));\n    insomnia.expect(response.countryCode).to.eql(insomnia.environment.get('address-service_countryCode'));\n    insomnia.expect(response.parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    insomnia.expect(response.parent.type).to.eql(insomnia.environment.get('address-service_parent-type'));\n\n});"
     },
     {
       "_id": "req_22afb6d8b52f4bd4aff4bfb2",
@@ -1008,7 +1008,7 @@
       "parentId": "fld_85441083753844e3ae0add29",
       "name": "Negative - Delete by id non-existant address",
       "method": "DELETE",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}?masked=true",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}/{{ _['address-service_address_id_created'] }}?masked=true",
       "body": {
         "mimeType": "application/json",
         "text": ""
@@ -1027,12 +1027,12 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
@@ -1045,7 +1045,7 @@
       "parentId": "fld_85441083753844e3ae0add29",
       "name": "Positive - Delete by parent id existing addresses",
       "method": "DELETE",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}:deleteByParentId?parentId={{ _['address-service_input-parent-id'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}:deleteByParentId?parentId={{ _['address-service_parent-id'] }}",
       "body": {
         "mimeType": "application/json",
         "text": ""
@@ -1053,7 +1053,7 @@
       "parameters": [
         {
           "name": "parentId",
-          "value": "{{ _['address-service_input-parent-id'] }}"
+          "value": "{{ _['address-service_parent-id'] }}"
         }
       ],
       "headers": [
@@ -1064,17 +1064,17 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
       "preRequestScript": "",
-      "afterResponseScript": "var response = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\ninsomnia.test(\"Response body addresses where parent id matches parent id provided in request.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response[0].programId).to.eql(insomnia.environment.get('address-service_input-program-id'));\n    insomnia.expect(response[0].line2).to.eql(insomnia.environment.get('address-service_input-line2'));\n    insomnia.expect(response[0].cityTown).to.eql(insomnia.environment.get('address-service_input-cityTown'));\n    insomnia.expect(response[0].subdivision).to.eql(insomnia.environment.get('address-service_input-subdivision'));\n    insomnia.expect(response[0].postalCode).to.eql(insomnia.environment.get('address-service_input-postalCode'));\n    insomnia.expect(response[0].countryCode).to.eql(insomnia.environment.get('address-service_input-countryCode'));\n    insomnia.expect(response[0].parent.id).to.eql(insomnia.environment.get('address-service_input-parent-id'));\n    insomnia.expect(response[0].parent.type).to.eql(insomnia.environment.get('address-service_input-parent-type'));\n});"
+      "afterResponseScript": "var response = JSON.parse(responseBody);\n\ninsomnia.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\ninsomnia.test(\"Response body addresses where parent id matches parent id provided in request.\", function () {\n    var response = insomnia.response.json();\n    insomnia.expect(response[0].programId).to.eql(insomnia.environment.get('address-service_program-id'));\n    insomnia.expect(response[0].line2).to.eql(insomnia.environment.get('address-service_line2'));\n    insomnia.expect(response[0].cityTown).to.eql(insomnia.environment.get('address-service_cityTown'));\n    insomnia.expect(response[0].subdivision).to.eql(insomnia.environment.get('address-service_subdivision'));\n    insomnia.expect(response[0].postalCode).to.eql(insomnia.environment.get('address-service_postalCode'));\n    insomnia.expect(response[0].countryCode).to.eql(insomnia.environment.get('address-service_countryCode'));\n    insomnia.expect(response[0].parent.id).to.eql(insomnia.environment.get('address-service_parent-id'));\n    insomnia.expect(response[0].parent.type).to.eql(insomnia.environment.get('address-service_parent-type'));\n});"
     },
     {
       "_id": "req_2811e5dabc5243728589382a",
@@ -1082,7 +1082,7 @@
       "parentId": "fld_85441083753844e3ae0add29",
       "name": "Positive - Delete by parent id no addresses",
       "method": "DELETE",
-      "url": "{{ _['address-service_address-service-url'] }}/{{ _['address-service_address-service-api-addresses-endpoint'] }}:deleteByParentId?parentId={{ _['address-service_input-parent-id'] }}",
+      "url": "{{ _['address-service_url'] }}/{{ _['address-service_addresses-endpoint'] }}:deleteByParentId?parentId={{ _['address-service_parent-id'] }}",
       "body": {
         "mimeType": "application/json",
         "text": ""
@@ -1090,7 +1090,7 @@
       "parameters": [
         {
           "name": "parentId",
-          "value": "{{ _['address-service_input-parent-id'] }}"
+          "value": "{{ _['address-service_parent-id'] }}"
         }
       ],
       "headers": [
@@ -1101,12 +1101,12 @@
         },
         {
           "name": "correlation-id",
-          "value": "{{ _['address-service_input-correlation-id'] }}",
+          "value": "{{ _['address-service_correlation-id'] }}",
           "disabled": false
         },
         {
           "name": "program-id",
-          "value": "{{ _['address-service_input-program-id'] }}",
+          "value": "{{ _['address-service_program-id'] }}",
           "disabled": false
         }
       ],
@@ -2171,7 +2171,7 @@
       "parentId": "fld_47a25c0871914192bcc3d879",
       "name": "/actuator/info",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/api/actuator/info",
+      "url": "{{ _['address-service_url'] }}/api/actuator/info",
       "body": {},
       "parameters": [],
       "headers": [],
@@ -2184,7 +2184,7 @@
       "parentId": "fld_47a25c0871914192bcc3d879",
       "name": "/actuator/health",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/api/actuator/health",
+      "url": "{{ _['address-service_url'] }}/api/actuator/health",
       "body": {},
       "parameters": [],
       "headers": [
@@ -2203,7 +2203,7 @@
       "parentId": "fld_47a25c0871914192bcc3d879",
       "name": "/actuator/metrics",
       "method": "GET",
-      "url": "{{ _['address-service_address-service-url'] }}/api/actuator/metrics",
+      "url": "{{ _['address-service_url'] }}/api/actuator/metrics",
       "body": {},
       "parameters": [],
       "headers": [],
