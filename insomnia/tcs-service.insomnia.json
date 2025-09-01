@@ -1,0 +1,1810 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-01T22:22:17.769724Z",
+  "__export_source": "Postman->Insomnia",
+  "resources": [
+    {
+      "_id": "wrk_b3e9670e89e14964989c4e40",
+      "_type": "workspace",
+      "name": "tcs-service",
+      "description": "transaction config service"
+    },
+    {
+      "_id": "fld_d3bac07579f4434aad12adb3",
+      "_type": "request_group",
+      "parentId": "wrk_b3e9670e89e14964989c4e40",
+      "name": "tcs-service"
+    },
+    {
+      "_id": "fld_31e4371ecd8d43c39dc5512d",
+      "_type": "request_group",
+      "parentId": "fld_d3bac07579f4434aad12adb3",
+      "name": "IssuerEntityConfig By-givenIds [ endpoint /transaction-config/issuer/{{issuerId}}/country/{{countrycd}}/program/{{programid}} ]"
+    },
+    {
+      "_id": "req_7eafd3b3b2e04a80a20eba18",
+      "_type": "request",
+      "parentId": "fld_31e4371ecd8d43c39dc5512d",
+      "name": "[ITF] Get Configuration-by-issuer-countrycd-programid",
+      "method": "POST",
+      "url": "https://blue-src-stage-af-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/issuer/143432/country/US/program/AUTOFILL%23Google_Inc-GOOGLE_e2e_itf%2301",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "223344",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/issuer/143432/country/US/program/SECURE_COF_COMMERCE_PLATFORM%23E2E%2301",
+          "disabled": true
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "A50DA021,ITF",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_853604d0649441b7884dd0df",
+      "_type": "request",
+      "parentId": "fld_31e4371ecd8d43c39dc5512d",
+      "name": "[ITF] Get Configuration-by-issuer-countrycd-programid",
+      "method": "POST",
+      "url": "https://blue-src-itf-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "correlation-id",
+          "value": "223344",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/issuer/143432/country/US/program/SECURE_COF_COMMERCE_PLATFORM%23E2E%2301",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "A50DA021,ITF",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/issuer/143432/country/US/program/AUTOFILL%23Google_Inc-GOOGLE_e2e_itf%2301",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_bcb4620a71b144949a30b49e",
+      "_type": "request_group",
+      "parentId": "fld_d3bac07579f4434aad12adb3",
+      "name": "SRCi-ClientEntityData [ endpoint /v0/client/{{clientId}} ]"
+    },
+    {
+      "_id": "req_c6d315212163449684d23d38",
+      "_type": "request",
+      "parentId": "fld_bcb4620a71b144949a30b49e",
+      "name": "[Stage]Get SRCi & DCF data information.",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/v0/client/2fb2cd53-a454-4818-9e65-e572240db922",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "123-suren",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_8cf546684cee43d8ad80c27f",
+      "_type": "request",
+      "parentId": "fld_bcb4620a71b144949a30b49e",
+      "name": "[Stage][E2E] Get SRCi & DCF data information",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/v0/client/5a9f8c51-7ad1-40c6-b828-b7437b9334f6",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "123-suren",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_0de257360cb740598d128d8c",
+      "_type": "request",
+      "parentId": "fld_bcb4620a71b144949a30b49e",
+      "name": "[PERF][E2E] Get SRCi & DCF data information",
+      "method": "POST",
+      "url": "https://blue-src-perf-87480080-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/v0/client/bab616b2-ab1b-4a9f-b437-ea9407fa5d85",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "123-suren",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "PERF",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_00768b7cb3524c04906876b9",
+      "_type": "request",
+      "parentId": "fld_bcb4620a71b144949a30b49e",
+      "name": "[ITF][E2E] Get SRCi & DCF data information",
+      "method": "POST",
+      "url": "https://blue-src-itf-af-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/v0/client/32614bbf-198b-42a1-8990-91689671de06",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "AGENT_PAY#GUARD_AGENT_PAY-TEST_AGENT_PAY_CLOUD_TOKENS#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "123-suren",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "A50DA021,ITF",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_72ed6e8fbe7d46ccac78c303",
+      "_type": "request",
+      "parentId": "fld_bcb4620a71b144949a30b49e",
+      "name": "[ITF][E2E] Get SRCi & DCF data information Copy",
+      "method": "POST",
+      "url": "https://blue-src-itf-af-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithAppFramework",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/v0/client/32614bbf-198b-42a1-8990-91689671de01",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "AGENT_PAY#GUARD_AGENT_PAY-TEST_AGENT_PAY_CLOUD_TOKENS#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "123-suren",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "A50DA021,ITF",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_3bd191ec0aa54fe4ad52d475",
+      "_type": "request",
+      "parentId": "fld_bcb4620a71b144949a30b49e",
+      "name": "[MTF] [Mani] Get SRCi & DCF data information",
+      "method": "POST",
+      "url": "https://blue-pre-prod-synapse-test-harness.apps.stl.pcfprod00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/v0/client/5c2072ef-22fa-43c9-a825-906143397b51",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "mani-marriott-test-1",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_661c1d85bec74907b222dc5a",
+      "_type": "request",
+      "parentId": "fld_bcb4620a71b144949a30b49e",
+      "name": "[MTF] [PCR] Get SRCi & DCF data information",
+      "method": "POST",
+      "url": "https://blue-pre-prod-synapse-test-harness.apps.stl.pcfprod00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/v0/client/a354d183-d571-484b-928e-cd3d12b4190a",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "mani-marriott-test-1",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_bea2d3c22d2a4a3da0451344",
+      "_type": "request_group",
+      "parentId": "fld_d3bac07579f4434aad12adb3",
+      "name": "internal [ endpoint /transaction-config/client/{{clientid}}/programs"
+    },
+    {
+      "_id": "req_2106529357334b829d7cab7f",
+      "_type": "request",
+      "parentId": "fld_bea2d3c22d2a4a3da0451344",
+      "name": "[Stage]get associated programs for given client id",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/client/2fb2cd53-a454-4818-9e65-e572240db922/programs",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": true
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['tcs-service_$randomUUID'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_830541dff7c14417b4f244a1",
+      "_type": "request",
+      "parentId": "fld_bea2d3c22d2a4a3da0451344",
+      "name": "[MTF][Mani]get associated programs for given client id",
+      "method": "POST",
+      "url": "https://blue-pre-prod-synapse-test-harness.apps.stl.pcfprod00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/client/5c2072ef-22fa-43c9-a825-906143397b51/programs",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['tcs-service_$randomUUID'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_878bb1019ed14dfc9dccec37",
+      "_type": "request",
+      "parentId": "fld_bea2d3c22d2a4a3da0451344",
+      "name": "[MTF][Mani]get associated programs for given DPA id",
+      "method": "POST",
+      "url": "https://blue-pre-prod-synapse-test-harness.apps.stl.pcfprod00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/dpa/ddf9e6f5-3683-de3e-0951-194548bdea01/programs",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['tcs-service_$randomUUID'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_f64176664bcc4cb89a9ac413",
+      "_type": "request",
+      "parentId": "fld_bea2d3c22d2a4a3da0451344",
+      "name": "[Stage]get issuers",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/issuers",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['tcs-service_$randomUUID'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        },
+        {
+          "name": "env-cd",
+          "value": "stage",
+          "disabled": false
+        },
+        {
+          "name": "offset",
+          "value": "10",
+          "disabled": false
+        },
+        {
+          "name": "limit",
+          "value": "10",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_e70ea38c243d4921ac38ec61",
+      "_type": "request_group",
+      "parentId": "fld_d3bac07579f4434aad12adb3",
+      "name": "DpaEntityData [endpoint /transaction-config/v0/client/{{clientid}}/dpa/{{dpaid}} ]"
+    },
+    {
+      "_id": "req_c42977ec75f1427eac9fa32c",
+      "_type": "request",
+      "parentId": "fld_e70ea38c243d4921ac38ec61",
+      "name": "[MTF][Mani] Get DPA entity data information.",
+      "method": "POST",
+      "url": "https://blue-pre-prod-synapse-test-harness.apps.stl.pcfprod00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/v0/client/5c2072ef-22fa-43c9-a825-906143397b51/dpa/ddf9e6f5-3683-de3e-0951-194548bdea01",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['tcs-service_$randomUUID'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_62ef52b39e0142f9824f1975",
+      "_type": "request",
+      "parentId": "fld_e70ea38c243d4921ac38ec61",
+      "name": "[STAGE][E2E] Get DPA entity data information.",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/v0/client/5a9f8c51-7ad1-40c6-b828-b7437b9334f6/dpa/5a9f8c51-7ad1-40c6-b828-b7437b9334f6_87b7936f-7a93-4226-a089-8c764618e692",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['tcs-service_$randomUUID'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_18ee592b921940baa07e235b",
+      "_type": "request",
+      "parentId": "fld_e70ea38c243d4921ac38ec61",
+      "name": "[STAGE] Get DPA entity and programId",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/v0/client/f0589e4f-10f3-4e2e-bab6-d22a3de576c0/dpa/f0589e4f-10f3-4e2e-bab6-d22a3de576c0_ef6399d7-98d5-46aa-a50c-bbcf7a7fa846",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['tcs-service_$randomUUID'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_MERCHANT_OBO#E2E-TEST_DPA_1#01",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_b6938aa7b60d4bc0904ffc79",
+      "_type": "request_group",
+      "parentId": "fld_d3bac07579f4434aad12adb3",
+      "name": "MiddlewareIntegration[ endpoint /transaction-config/srci-client/{{srciclientid}}/dpa/{{dpaid}} ]"
+    },
+    {
+      "_id": "req_de5760457be346ac9d26adbd",
+      "_type": "request",
+      "parentId": "fld_b6938aa7b60d4bc0904ffc79",
+      "name": "[MTF][Mani] GET API to get srci dpa entity information.",
+      "method": "POST",
+      "url": "https://blue-pre-prod-synapse-test-harness.apps.stl.pcfprod00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/srci-client/5c2072ef-22fa-43c9-a825-906143397b51/dpa/ddf9e6f5-3683-de3e-0951-194548bdea01",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['tcs-service_$randomUUID'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_58caf531ee424728b8a8e4a4",
+      "_type": "request",
+      "parentId": "fld_b6938aa7b60d4bc0904ffc79",
+      "name": "[STAGE][E2E] GET API to get srci dpa entity information",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/srci-client/5a9f8c51-7ad1-40c6-b828-b7437b9334f6/dpa/5a9f8c51-7ad1-40c6-b828-b7437b9334f6_87b7936f-7a93-4226-a089-8c764618e692",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['tcs-service_$randomUUID'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_c7bb6b165ba847b18f68d7cd",
+      "_type": "request_group",
+      "parentId": "fld_d3bac07579f4434aad12adb3",
+      "name": "Auth Solutions [ endpoint /transaction-config/auth-solutions/{{certifiedMethodId}} ]"
+    },
+    {
+      "_id": "req_a615be23265543dfbba74720",
+      "_type": "request",
+      "parentId": "fld_c7bb6b165ba847b18f68d7cd",
+      "name": "[Stage] Auth Solutions By Given CertMethodId",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \n}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/auth-solutions/20002",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "12c91a0c-e466-4320-83c3-92d13e8a42ae",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_d54ba2838d47414c935c564d",
+      "_type": "request",
+      "parentId": "fld_c7bb6b165ba847b18f68d7cd",
+      "name": "[PERF] Auth Solutions By Given CertMethodId 20001 FIDO2",
+      "method": "POST",
+      "url": "https://blue-src-perf-87480080-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \n}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/auth-solutions/20001",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "12c91a0c-e466-4320-83c3-92d13e8a42ae",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "PERF",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_e517d221a7ac4a07857e4ff0",
+      "_type": "request",
+      "parentId": "fld_c7bb6b165ba847b18f68d7cd",
+      "name": "[MTF] Auth Solutions By Given CertMethodId 20002 LVLR",
+      "method": "POST",
+      "url": "https://blue-pre-prod-synapse-test-harness.apps.stl.pcfprod00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \n}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/auth-solutions/20002",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "12c91a0c-e466-4320-83c3-92d13e8a42ae",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_78069d3235aa4fe898a4f1e7",
+      "_type": "request",
+      "parentId": "fld_c7bb6b165ba847b18f68d7cd",
+      "name": "[MTF] Auth Solutions By Given CertMethodId 20001 FIDO2",
+      "method": "POST",
+      "url": "https://blue-pre-prod-synapse-test-harness.apps.stl.pcfprod00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \n}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/auth-solutions/20001",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "12c91a0c-e466-4320-83c3-92d13e8a42ae",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_641eb5108d8c4ad090c9fb76",
+      "_type": "request",
+      "parentId": "fld_c7bb6b165ba847b18f68d7cd",
+      "name": "[MTF] Auth Solutions By Given CertMethodId 10032 - PCR with MFA keys FIDO2",
+      "method": "POST",
+      "url": "https://blue-pre-prod-synapse-test-harness.apps.stl.pcfprod00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \n}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/auth-solutions/10032",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "12c91a0c-e466-4320-83c3-92d13e8a42ae",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_f7a52d4934f64a279b101a8c",
+      "_type": "request",
+      "parentId": "fld_c7bb6b165ba847b18f68d7cd",
+      "name": "[Stage] POST Auth Solutions Search By Given certifiedSolutionIds",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"certifiedSolutionIds\": [\n        20002,\n        30001,\n        10001\n    ]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/auth-solutions/search",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "12c91a0c-e466-4320-83c3-92d13e8a42ae",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_1f0766e6777c44d0b389a865",
+      "_type": "request_group",
+      "parentId": "fld_d3bac07579f4434aad12adb3",
+      "name": "Preferences/searchCriteria in payload"
+    },
+    {
+      "_id": "req_5b69d215140e44b7b044101b",
+      "_type": "request",
+      "parentId": "fld_1f0766e6777c44d0b389a865",
+      "name": "[STAGE] preferences/searchCriteria-ByName-and-Value-namesType-1",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"searchCriteria\": [\n        {\n            \"name\": \"COUNTRY\",\n            \"value\": {\n                \"countryId\": \"US\"\n            }\n        },\n        {\n            \"name\": \"SRCI_PROGRAM\",\n            \"value\": {\n                \"srciId\": \"198adcff-4d16-46a2-a536-2d0a2fcde1a2\",\n                \"programId\": \"SRC\"\n            }\n        },\n        {\n            \"name\": \"MERCH_PROGRAM\",\n            \"value\": {\n                \"srciDpaId\": \"708e56d06f5d4dd6a0142647e654cdbc\",\n                \"programId\": \"SRC\"\n            }\n        }\n    ]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "correlation-id",
+          "value": "c6a32c8f-a90e-4924-8146-8acf9fd25b14",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/preferences/search",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_c4cc8440f5624397957c79cf",
+      "_type": "request",
+      "parentId": "fld_1f0766e6777c44d0b389a865",
+      "name": "[STAGE] preferences/searchCriteria-ByName-and-Value-namesType-2",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"searchCriteria\": [\n        {\n            \"name\": \"COUNTRY\",\n            \"value\": {\n                \"countryId\": \"US\"\n            }\n        },\n        {\n            \"name\": \"SRCI_PROGRAM\",\n            \"value\": {\n                \"srciId\": \"198adcff-4d16-46a2-a536-2d0a2fcde1a2\",\n                \"programId\": \"SRC\"\n            }\n        },\n        {\n            \"name\": \"MERCH_PROGRAM\",\n            \"value\": {\n                \"srciDpaId\": \"708e56d06f5d4dd6a0142647e654cdbc\",\n                \"programId\": \"SRC\"\n            }\n        }\n    ]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "correlation-id",
+          "value": "c6a32c8f-a90e-4924-8146-8acf9fd25b14",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/preferences/search",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_6ee3090630ef4699b432e049",
+      "_type": "request_group",
+      "parentId": "fld_d3bac07579f4434aad12adb3",
+      "name": "IssuerSearchCriteria"
+    },
+    {
+      "_id": "req_786770e68a824c1fb878eb70",
+      "_type": "request",
+      "parentId": "fld_6ee3090630ef4699b432e049",
+      "name": "issuerSearchCriteria-nameTypes-method-retrieveIssuerCountryConfig",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"searchCriteria\": [\n        {\n            \"name\": \"ISSUER_COUNTRY\",\n            \"value\": {\n                \"issuerId\": \"118254\",\n                \"countryId\": \"US\",\n                \"configs\": [\n                    {\n                        \"configName\": \"cvm\"\n                    }\n                ]\n            }\n        }\n    ]\n}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/issuer/search",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E-#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "a9c5cc97-887a-44a4-a518-04c4cb94fc20",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_864e5f62145b47498336ade5",
+      "_type": "request",
+      "parentId": "fld_6ee3090630ef4699b432e049",
+      "name": "issuerSearchCriteria-nameTypes-method-retrieveIssuerBinRangeConfig",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"searchCriteria\": [\n        {\n            \"name\": \"ISSUER_BIN_RANGE\",\n            \"value\": {\n                \"issuerId\": \"118254\",\n                \"binRangeStart\": \"520798\"\n            }\n        }\n    ]\n}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/issuer/search",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E-#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "a9c5cc97-887a-44a4-a518-04c4cb94fc20",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_b5972e7de5e743479670056d",
+      "_type": "request",
+      "parentId": "fld_6ee3090630ef4699b432e049",
+      "name": "issuerSearchCriteria-nameTypes-method-retrieveIssuerConfig",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"searchCriteria\": [\n        {\n            \"name\": \"COUNTRY\",\n            \"value\": {\n                \"countryId\": \"US\"\n            }\n        },\n        {\n            \"name\": \"ISSUER\",\n            \"value\": {\n                \"issuerId\": \"118254\"\n            }\n        },\n        {\n            \"name\": \"ISSUER_PROGRAM\",\n            \"value\": {\n                \"issuerId\": \"118254\",\n                \"programId\": \"SECURE_COF_COMMERCE_PLATFORM#E2E-#01\"\n            }\n        },\n        {\n            \"name\": \"ISSUER_COUNTRY\",\n            \"value\": {\n                \"issuerId\": \"118254\",\n                \"countryId\": \"US\",\n                \"configs\": [\n                    {\n                        \"configName\": \"cvm\"\n                    }\n                ]\n            }\n        },\n        {\n            \"name\": \"ISSUER_BIN_RANGE\",\n            \"value\": {\n                \"issuerId\": \"118254\",\n                \"binRangeStart\": \"520798\"\n            }\n        }\n    ]\n}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/issuer/search",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E-#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "a9c5cc97-887a-44a4-a518-04c4cb94fc20",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_a2356a430e144e7780531662",
+      "_type": "request",
+      "parentId": "fld_6ee3090630ef4699b432e049",
+      "name": "issuerSearchCriteria-nameTypes-2",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"searchCriteria\": [\n        {\n            \"name\": \"COUNTRY\",\n            \"value\": {\n                \"countryId\": \"US\"\n            }\n        },\n        {\n            \"name\": \"ISSUER_COUNTRY\",\n            \"value\": {\n                \"issuerId\": \"118254\",\n                \"countryId\": \"US\",\n                \"configs\": [\n                    {\n                        \"configName\": \"cvm\"\n                    }\n                ]\n            }\n        }\n    ]\n}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/issuer/search",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E-#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "a9c5cc97-887a-44a4-a518-04c4cb94fc20",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_a6668d530ae24eddb860cf02",
+      "_type": "request",
+      "parentId": "fld_6ee3090630ef4699b432e049",
+      "name": "issuerSearchCriteria-nameTypes-3",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"searchCriteria\": [\n        {\n            \"name\": \"ISSUER\",\n            \"value\": {\n                \"issuerId\": \"118254\"\n            }\n        }\n    ]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "transaction-config-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/issuer/search",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E-#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "a9c5cc97-887a-44a4-a518-04c4cb94fc20",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    }
+  ]
+}
