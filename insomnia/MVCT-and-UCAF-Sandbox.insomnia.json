@@ -1,0 +1,532 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-01T22:39:01.780776Z",
+  "__export_source": "Postman->Insomnia (ChatGPT)",
+  "resources": [
+    {
+      "_id": "wrk_92bf78ca44944ea3a9e76dd0",
+      "_type": "workspace",
+      "name": "MVCT and UCAF Sandbox (Converted)",
+      "description": "Auto-converted from Postman by ChatGPT"
+    },
+    {
+      "_id": "fld_511ad73c7c224d0396ff7a48",
+      "_type": "request_group",
+      "parentId": "wrk_92bf78ca44944ea3a9e76dd0",
+      "name": "MVCT and UCAF Sandbox"
+    },
+    {
+      "_id": "fld_f58e0dc8c5dd4ab986e6cb7a",
+      "_type": "request_group",
+      "parentId": "fld_511ad73c7c224d0396ff7a48",
+      "name": "SCOF UCAF Sandbox"
+    },
+    {
+      "_id": "fld_23edbc15c4a7498e9b705052",
+      "_type": "request_group",
+      "parentId": "fld_f58e0dc8c5dd4ab986e6cb7a",
+      "name": "utility"
+    },
+    {
+      "_id": "req_1d95c3b8f176494d84bcc482",
+      "_type": "request",
+      "parentId": "fld_23edbc15c4a7498e9b705052",
+      "name": "Get SRCi Client",
+      "method": "POST",
+      "url": "{{ _['checkout-service_automation-test-harness-url'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['checkout-service_transaction-config-service-name'] }}",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/v0/client/{{ _['checkout-service_src-client-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "{{ _['checkout-service_program-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "d954b19c-d649-11e9-bb65-2a2ae2dbcce4",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "var jsonData = insomnia.response.json();\n    pm.response.to.have.status(200);\ninsomnia.environment.set('checkout-service_auth-client-id', jsonData.srciEntityData.authClientId);"
+    },
+    {
+      "_id": "req_14a10b6db0fb4e519d5f3c5a",
+      "_type": "request",
+      "parentId": "fld_23edbc15c4a7498e9b705052",
+      "name": "Get card",
+      "method": "POST",
+      "url": "{{ _['checkout-service_automation-test-harness-url'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/paymentinstrument/src/1/0/card/{{ _['checkout-service_src-digital-card-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "{{ _['checkout-service_program-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['checkout-service_correlation-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "card-services",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_fc821aec544a4d6da191d6d6",
+      "_type": "request",
+      "parentId": "fld_f58e0dc8c5dd4ab986e6cb7a",
+      "name": "0 - Setup Env Sandbox",
+      "method": "GET",
+      "url": "{{ _['checkout-service_automation-test-harness-url'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "insomnia.environment.set('checkout-service_automation-test-harness-url', \"https://blue-pre-prod-af-test-harness.apps.stl.pcfprod00.mastercard.int/api/callWithAppFramework\");\n\n\ninsomnia.environment.set('checkout-service_synapse-target-tag-stage', \"UP\");\ninsomnia.environment.set('checkout-service_synapse-target-tag-itf', \"ITF\");\ninsomnia.environment.set('checkout-service_synapse-target-tag-perf', \"PERF\");\ninsomnia.environment.set('checkout-service_synapse-target-tag-kick1', \"\");\n\ninsomnia.environment.set('checkout-service_mock-option', \"all-mock\");\ninsomnia.environment.set('checkout-service_user-agent', \"nudata_addcard_score:E6B42E33-BD22-471D-A169-32B25F1B4773\");\n\ninsomnia.environment.set('checkout-service_consumer-service-name', \"consumer-services\");\ninsomnia.environment.set('checkout-service_card-service-name', \"card-services\");\ninsomnia.environment.set('checkout-service_address-service-name', \"address-services\");\ninsomnia.environment.set('checkout-service_checkout-service-name', \"orchestration-checkout\");\ninsomnia.environment.set('checkout-service_transaction-config-service-name', \"transaction-config-service\");\n\n\n/* -------------------------------------------------------------------------- */\n/*                                    AUTOFILL                                */\n/* -------------------------------------------------------------------------- */\n\n/* ----------------------------------- ITF ---------------------------------- */\n\n/* ----------------------------------- MTF ---------------------------------- */\ninsomnia.environment.set('checkout-service_program-id', \"SECURE_COF_COMMERCE_PLATFORM#E2E#01\");\ninsomnia.environment.set('checkout-service_src-client-id', \"6aff5cba-3aac-4fe0-b0cd-a52fc948d0c6\");\ninsomnia.environment.set('checkout-service_pan-number', \"5120346356518572\");",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_82f5320cde73423c81f03b05",
+      "_type": "request",
+      "parentId": "fld_f58e0dc8c5dd4ab986e6cb7a",
+      "name": "1 - Enroll Card",
+      "method": "POST",
+      "url": "https://sandbox.api.mastercard.com/src/api/digital/payments/cards",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"serviceId\": \"{{ _['checkout-service_program-id'] }}\",\n    \"srcClientId\": \"{{ _['checkout-service_src-client-id'] }}\",\n    \"srcCorrelationId\": \"{{ _['checkout-service_correlation-id'] }}\",\n    \"complianceSettings\": {\n      \"cookie\": {\n        \"acceptedVersion\": \"LATEST\",\n        \"latestVersion\": \"LATEST\"\n      },\n      \"tnc\": {\n        \"acceptedVersion\": \"LATEST\",\n        \"latestVersion\": \"LATEST\"\n      },\n      \"privacy\": {\n        \"acceptedVersion\": \"LATEST\",\n        \"latestVersion\": \"LATEST\"\n      }\n    },\n    \"card\": {\n      \"cardholderFirstName\": \"Zain\",\n      \"paymentAccountReference\": \"{{ _['checkout-service_email-account'] }}@mailinator.com\",\n      \"cardSecurityCode\": \"000\",\n      \"cardholderFullName\": \"Zain Ali\",\n      \"panExpirationYear\": \"2030\",\n      \"primaryAccountNumber\": \"{{ _['checkout-service_pan-number'] }}\",\n      \"billingAddress\": {\n        \"zip\": \"33955\",\n        \"city\": \"Port Vida\",\n        \"countryCode\": \"US\",\n        \"name\": \"Zain Ali\",\n        \"state\": \"KS\",\n        \"line2\": \"837 Ratke Shoal\",\n        \"line1\": \"Jenifer Lakes\"\n      },\n      \"cardholderLastName\": \"Ali\",\n      \"panExpirationMonth\": \"10\"\n    }\n  }"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['checkout-service_src4c-profile-service-name'] }}",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/src4c/cards",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "cache-control",
+          "value": "no-cache",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "{{ _['checkout-service_auth-client-id'] }}",
+          "disabled": true
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('checkout-service_email-account', uuidv4());\ninsomnia.environment.set('checkout-service_correlation-id', uuidv4());\n\n\nfunction uuidv4() {\n  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {\n    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);\n    return v.toString(16);\n  });\n}",
+      "afterResponseScript": "let jsonData = JSON.parse(responseBody);\n\ninsomnia.environment.set('checkout-service_src-digital-card-id', jsonData.maskedCard.srcDigitalCardId);"
+    },
+    {
+      "_id": "req_5cdf9ed2a0c645df8b0e6e1d",
+      "_type": "request",
+      "parentId": "fld_f58e0dc8c5dd4ab986e6cb7a",
+      "name": "2 - Checkout",
+      "method": "POST",
+      "url": "https://sandbox.api.mastercard.com/src/api/transaction/credentials",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"srcClientId\": \"{{ _['checkout-service_src-client-id'] }}\",\n    \"srcCorrelationId\": \"{{ _['checkout-service_correlation-id'] }}\",\n    \"serviceId\": \"{{ _['checkout-service_program-id'] }}\",\n    \"srcDigitalCardId\": \"{{ _['checkout-service_src-digital-card-id'] }}\",\n    \"dpaTransactionOptions\": {\n        \"transactionAmount\": {\n            \"transactionAmount\": {{ _['checkout-service_$randomPrice'] }},\n            \"transactionCurrencyCode\": \"USD\"\n        },\n        \"paymentOptions\": [\n            {\n                \"dynamicDataType\": \"CARD_APPLICATION_CRYPTOGRAM_SHORT_FORM\"\n            }\n        ]\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "cache-control",
+          "value": "no-cache",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['checkout-service_checkout-service-name'] }}",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/transaction/credentials",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "{{ _['checkout-service_mock-option'] }}",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "{{ _['checkout-service_auth-client-id'] }}",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "var jsonData = insomnia.response.json();\npm.response.to.have.status(200);\nvar responseInPlainJson = jwt_decode(jsonData.checkoutResponseJWS);\nfunction jwt_decode(jwt) {\n    var parts = jwt.split('.'); \n    return JSON.parse(atob(parts[1]));\n}\n\nlet encryptedPayloadHeader = JSON.parse(atob(responseInPlainJson.encryptedPayload.split('.')[0])); \nlet responseInPlainJsonHeader = JSON.parse(atob(jsonData.checkoutResponseJWS.split('.')[0])); \nlet finalResponse = new Object();\n    finalResponse.responseJsonHeader = responseInPlainJsonHeader;\n   finalResponse.CheckoutResponseJson = responseInPlainJson;\n   finalResponse.encryptedPayloadHeader  = JSON.parse(atob(responseInPlainJson.encryptedPayload.split('.')[0]));\n\ntemplate = `\n<pre><code>{{ _['checkout-service_response'] }}</code></pre>\n`;\n\n// pm.visualizer.set removed for Insomnia});"
+    },
+    {
+      "_id": "fld_be8cbb25cac040dd8340529e",
+      "_type": "request_group",
+      "parentId": "fld_511ad73c7c224d0396ff7a48",
+      "name": "MVCT DTCV Sandbox"
+    },
+    {
+      "_id": "fld_ea3ba0e3d8d44577aadb29d1",
+      "_type": "request_group",
+      "parentId": "fld_be8cbb25cac040dd8340529e",
+      "name": "utility"
+    },
+    {
+      "_id": "req_e7a73a41e44846329bbfb62f",
+      "_type": "request",
+      "parentId": "fld_ea3ba0e3d8d44577aadb29d1",
+      "name": "Get SRCi Client",
+      "method": "POST",
+      "url": "{{ _['checkout-service_automation-test-harness-url'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['checkout-service_transaction-config-service-name'] }}",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/v0/client/{{ _['checkout-service_src-client-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "{{ _['checkout-service_program-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "d954b19c-d649-11e9-bb65-2a2ae2dbcce4",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "var jsonData = insomnia.response.json();\n    pm.response.to.have.status(200);\ninsomnia.environment.set('checkout-service_auth-client-id', jsonData.srciEntityData.authClientId);"
+    },
+    {
+      "_id": "req_ed72c5ab15f84c0c9734f964",
+      "_type": "request",
+      "parentId": "fld_ea3ba0e3d8d44577aadb29d1",
+      "name": "Get card",
+      "method": "POST",
+      "url": "{{ _['checkout-service_automation-test-harness-url'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/paymentinstrument/src/1/0/card/{{ _['checkout-service_src-digital-card-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "{{ _['checkout-service_program-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['checkout-service_correlation-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "card-services",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_f0cc402a77d743baa3185240",
+      "_type": "request",
+      "parentId": "fld_be8cbb25cac040dd8340529e",
+      "name": "0 - Setup Env MTF",
+      "method": "GET",
+      "url": "{{ _['checkout-service_automation-test-harness-url'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "insomnia.environment.set('checkout-service_automation-test-harness-url', \"https://blue-pre-prod-af-test-harness.apps.stl.pcfprod00.mastercard.int/api/callWithAppFramework\");\n\n\ninsomnia.environment.set('checkout-service_synapse-target-tag-stage', \"UP\");\ninsomnia.environment.set('checkout-service_synapse-target-tag-itf', \"ITF\");\ninsomnia.environment.set('checkout-service_synapse-target-tag-perf', \"PERF\");\ninsomnia.environment.set('checkout-service_synapse-target-tag-kick1', \"\");\n\ninsomnia.environment.set('checkout-service_mock-option', \"all-mock\");\ninsomnia.environment.set('checkout-service_user-agent', \"nudata_addcard_score:E6B42E33-BD22-471D-A169-32B25F1B4773\");\n\ninsomnia.environment.set('checkout-service_consumer-service-name', \"consumer-services\");\ninsomnia.environment.set('checkout-service_card-service-name', \"card-services\");\ninsomnia.environment.set('checkout-service_address-service-name', \"address-services\");\ninsomnia.environment.set('checkout-service_checkout-service-name', \"orchestration-checkout\");\ninsomnia.environment.set('checkout-service_transaction-config-service-name', \"transaction-config-service\");\n\n\n/* -------------------------------------------------------------------------- */\n/*                                    AUTOFILL                                */\n/* -------------------------------------------------------------------------- */\n\n/* ----------------------------------- ITF ---------------------------------- */\n\n/* ----------------------------------- MTF ---------------------------------- */\ninsomnia.environment.set('checkout-service_program-id', \"AUTOFILL#Google_Autofill_Test#01\");\ninsomnia.environment.set('checkout-service_src-client-id', \"6aff5cba-3aac-4fe0-b0cd-a52fc948d0c6\");\ninsomnia.environment.set('checkout-service_pan-number', \"5120346356518572\");",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_6b2682b0fdf44b1d995cf3d5",
+      "_type": "request",
+      "parentId": "fld_be8cbb25cac040dd8340529e",
+      "name": "1 - Enroll Card",
+      "method": "POST",
+      "url": "https://sandbox.api.mastercard.com/src/api/digital/payments/cards",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"serviceId\": \"{{ _['checkout-service_program-id'] }}\",\n    \"srcClientId\": \"{{ _['checkout-service_src-client-id'] }}\",\n    \"srcCorrelationId\": \"{{ _['checkout-service_correlation-id'] }}\",\n    \"complianceSettings\": {\n      \"cookie\": {\n        \"acceptedVersion\": \"LATEST\",\n        \"latestVersion\": \"LATEST\"\n      },\n      \"tnc\": {\n        \"acceptedVersion\": \"LATEST\",\n        \"latestVersion\": \"LATEST\"\n      },\n      \"privacy\": {\n        \"acceptedVersion\": \"LATEST\",\n        \"latestVersion\": \"LATEST\"\n      }\n    },\n    \"card\": {\n      \"cardholderFirstName\": \"Zain\",\n      \"paymentAccountReference\": \"{{ _['checkout-service_email-account'] }}@mailinator.com\",\n      \"cardSecurityCode\": \"000\",\n      \"cardholderFullName\": \"Zain Ali\",\n      \"panExpirationYear\": \"2030\",\n      \"primaryAccountNumber\": \"{{ _['checkout-service_pan-number'] }}\",\n      \"billingAddress\": {\n        \"zip\": \"33955\",\n        \"city\": \"Port Vida\",\n        \"countryCode\": \"US\",\n        \"name\": \"Zain Ali\",\n        \"state\": \"KS\",\n        \"line2\": \"837 Ratke Shoal\",\n        \"line1\": \"Jenifer Lakes\"\n      },\n      \"cardholderLastName\": \"Ali\",\n      \"panExpirationMonth\": \"10\"\n    }\n  }"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['checkout-service_src4c-profile-service-name'] }}",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/src4c/cards",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "cache-control",
+          "value": "no-cache",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "{{ _['checkout-service_auth-client-id'] }}",
+          "disabled": true
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('checkout-service_email-account', uuidv4());\ninsomnia.environment.set('checkout-service_correlation-id', uuidv4());\n\n\nfunction uuidv4() {\n  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {\n    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);\n    return v.toString(16);\n  });\n}",
+      "afterResponseScript": "let jsonData = JSON.parse(responseBody);\n\ninsomnia.environment.set('checkout-service_src-digital-card-id', jsonData.maskedCard.srcDigitalCardId);"
+    },
+    {
+      "_id": "req_683c74d479da467d8c95dc04",
+      "_type": "request",
+      "parentId": "fld_be8cbb25cac040dd8340529e",
+      "name": "2 - Checkout",
+      "method": "POST",
+      "url": "https://sandbox.api.mastercard.com/src/api/transaction/credentials",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"srcClientId\": \"{{ _['checkout-service_src-client-id'] }}\",\n    \"srcCorrelationId\": \"{{ _['checkout-service_correlation-id'] }}\",\n    \"serviceId\": \"{{ _['checkout-service_program-id'] }}\",\n    \"srcDigitalCardId\": \"{{ _['checkout-service_src-digital-card-id'] }}\",\n    \"dpaTransactionOptions\": {\n        \"transactionAmount\": {\n            \"transactionAmount\": {{ _['checkout-service_$randomPrice'] }},\n            \"transactionCurrencyCode\": \"USD\"\n        },\n        \"paymentOptions\": [\n            {\n                \"dynamicDataType\": \"DYNAMIC_CARD_SECURITY_CODE\"\n            }\n        ]\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "cache-control",
+          "value": "no-cache",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['checkout-service_checkout-service-name'] }}",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/transaction/credentials",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "{{ _['checkout-service_mock-option'] }}",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "{{ _['checkout-service_auth-client-id'] }}",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "var jsonData = insomnia.response.json();\npm.response.to.have.status(200);\nvar responseInPlainJson = jwt_decode(jsonData.checkoutResponseJWS);\nfunction jwt_decode(jwt) {\n    var parts = jwt.split('.'); \n    return JSON.parse(atob(parts[1]));\n}\n\nlet encryptedPayloadHeader = JSON.parse(atob(responseInPlainJson.encryptedPayload.split('.')[0])); \nlet responseInPlainJsonHeader = JSON.parse(atob(jsonData.checkoutResponseJWS.split('.')[0])); \nlet finalResponse = new Object();\n    finalResponse.responseJsonHeader = responseInPlainJsonHeader;\n   finalResponse.CheckoutResponseJson = responseInPlainJson;\n   finalResponse.encryptedPayloadHeader  = JSON.parse(atob(responseInPlainJson.encryptedPayload.split('.')[0]));\n\ntemplate = `\n<pre><code>{{ _['checkout-service_response'] }}</code></pre>\n`;\n\n// pm.visualizer.set removed for Insomnia});"
+    }
+  ]
+}
