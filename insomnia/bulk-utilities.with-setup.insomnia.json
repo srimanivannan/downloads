@@ -1,0 +1,191 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-02T15:27:27.832097Z",
+  "__export_source": "Postman->Insomnia (ChatGPT)",
+  "resources": [
+    {
+      "_id": "wrk_fe2f3bf31d9141a593e6a116",
+      "_type": "workspace",
+      "name": "bulk-utilities (Converted)",
+      "description": "Auto-converted from Postman by ChatGPT"
+    },
+    {
+      "_id": "fld_450046720af143fd9840de33",
+      "_type": "request_group",
+      "parentId": "wrk_fe2f3bf31d9141a593e6a116",
+      "name": "bulk-utilities"
+    },
+    {
+      "_id": "req_967a148600f2464b8593244f",
+      "_type": "request",
+      "parentId": "fld_450046720af143fd9840de33",
+      "name": "Bulk - Enroll a profile in Bulk",
+      "method": "POST",
+      "url": "https://blue-src-stage-issuer-file-transfer-emulator.apps.stl.pcfstage00.mastercard.int/api/ngft/stage/files:generateAndUploadFile",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"profileList\": [\n        {\n            \"fPan\": \"5337838950064580\",\n            \"email\": \"sym-bulk-testing-feb-24-2@mailinator.com\",\n            \"phone\": \"5552349407\",\n            \"firstName\": \"John\",\n            \"lastName\": \"Smith\",\n            \"billingAddress1\": \"777 Avenue\",\n            \"billingAddress2\": \"Street\",\n            \"billingAddressPostalCode\": \"11001\",\n            \"emailVerified\": \"t\",\n            \"phoneCountryCode\": \"1\",\n            \"phoneVerified\": \"t\",\n            \"consumerLanguage\": \"en\",\n            \"cardExpiryMonth\": \"07\",\n            \"cardExpiryYear\": \"2029\",\n            \"recordStatus\": \"A\"\n        }\n    ],\n    \"cid\": \"12345\",\n    \"issuerName\": \"Barclays\",\n    \"numberOfRecords\": 1\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_99f5cd7615334927a4569b65",
+      "_type": "request",
+      "parentId": "fld_450046720af143fd9840de33",
+      "name": "Bulk - Searches for profile",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism?criteria=fPan=\"5207990300000009\"&masked=false",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"josh@mailinator.com\",\n  \"channel\": \"EMAIL\"\n}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "fPan=\"5207990300000009\""
+        },
+        {
+          "name": "masked",
+          "value": "false"
+        }
+      ],
+      "headers": [
+        {
+          "name": "correlation-id",
+          "value": "e625e63f-d99a-4b1b-9715-7819429c971f",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/profiles/search",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "bulk-provisioning-service",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_099daa37067b466a9050f178",
+      "_type": "request",
+      "parentId": "fld_450046720af143fd9840de33",
+      "name": "Bulk - Unenroll a profile",
+      "method": "POST",
+      "url": "https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithPrism?reason=RC_BIND",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"abdul1122@mailinator.com\",\n  \"channel\": \"EMAIL\"\n}"
+      },
+      "parameters": [
+        {
+          "name": "reason",
+          "value": "RC_BIND"
+        }
+      ],
+      "headers": [
+        {
+          "name": "correlation-id",
+          "value": "f625e63f-d99a-4b1b-9715-7819429c971e",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "bulk-provisioning-service",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "DELETE",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/profiles/{{ _['bulk-utilities_profileId'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_693069d35a7a4a48bd6387e2",
+      "_type": "request_group",
+      "parentId": "wrk_fe2f3bf31d9141a593e6a116",
+      "name": "Setup (Initialize Variables)"
+    },
+    {
+      "_id": "req_523fd417f5da46dda379b596",
+      "_type": "request",
+      "parentId": "fld_693069d35a7a4a48bd6387e2",
+      "name": "00 - Initialize bulk-utilities_* variables",
+      "method": "GET",
+      "url": "https://example.invalid/setup",
+      "headers": [],
+      "parameters": [],
+      "body": {
+        "text": ""
+      },
+      "preRequestScript": "// Run once to initialize all bulk-utilities_* variables\nconst keys = [\n  \"bulk-utilities_profileId\"\n];\nfor (const k of keys) {\n  if (insomnia.environment.get(k) === undefined) {\n    insomnia.environment.set(k, '');\n  }\n}\ninsomnia.test('Variables initialized', () => {\n  insomnia.expect(keys.length >= 0).to.equal(true);\n});",
+      "afterResponseScript": ""
+    }
+  ]
+}

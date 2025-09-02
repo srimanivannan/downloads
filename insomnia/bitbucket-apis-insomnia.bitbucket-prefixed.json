@@ -1,0 +1,740 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-02T15:43:41.527026Z",
+  "__export_source": "chatgpt/insomnia-converter",
+  "resources": [
+    {
+      "_id": "wrk_05e84d0cf75a4",
+      "_type": "workspace",
+      "name": "bitbucket-apis (full)",
+      "description": "",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_9de8211b73a84",
+      "_type": "environment",
+      "parentId": "wrk_05e84d0cf75a4",
+      "name": "Base Environment",
+      "data": {
+        "bitbucket_token": "",
+        "bitbucket_repo": "",
+        "bitbucket_base_url": "https://scm.mastercard.int/stash"
+      },
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 0
+    },
+    {
+      "_id": "fld_715d26670d434",
+      "_type": "request_group",
+      "name": "bitbucket",
+      "parentId": "wrk_05e84d0cf75a4",
+      "environment": {},
+      "metaSortKey": -1000000000.0
+    },
+    {
+      "_id": "req_48478cf4521a4",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-pi-core-service",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/pi-core-service",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_a607fc51f88b4",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-pi-event-processor",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/pi-event-processor",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_df8bc0a050fa4",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-authentication-service",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/authentication-service",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_44fd9e6334104",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-authentication-orchestration-service",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/authentication-orchestration-service",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_c4e8fcd1b9cd4",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-authentication-orchestration-service Copy",
+      "method": "GET",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/authentication-orchestration-service",
+      "body": null,
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_27726349e89f4",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-authentication-downstream-simulator",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/authentication-downstream-simulator",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_0e47034489f34",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-authentication-event-processor",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/authentication-event-processor",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_24f794d993174",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-checkout-service",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/checkout-service",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_212988a419894",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-card-art-service",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/card-art-service",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_40a561694b234",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-paymentinstrument-downstream-simulator",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/paymentinstrument-downstream-simulator",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_36afad779c334",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-paymentinstrument-mps-extract-scheduler",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/paymentinstrument-mps-extract-scheduler",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_64f3a75303584",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-paymentinstrument-orphan-cleanup-scheduler",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/paymentinstrument-orphan-cleanup-scheduler",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_a673576936ab4",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-src-mocks-manager",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/src-mocks-manager",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_d06b9cb984ed4",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-axon-showcase",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/axon-showcase",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_fa9c192bed944",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-macs-curiosity-release-specs",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/macs-curiosity-release-specs",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_ad18ad3f0ea44",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-config-repo-be",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/config-repo-be",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_3c765f07b5464",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-nexus-src-data-service",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/nexus-src-data-service",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_dc46fc0adb554",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-octopus",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/octopus",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_5a6d4c2514d54",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-sync-trident-alberta-e2e",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/trident-alberta-e2e",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_81c7e21890cd4",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "fork-test-data-service",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/test-data-service",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_8ab11f8e43a44",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "Don't pick - fork-test-data-service manual branch synchronize in case of failures",
+      "method": "POST",
+      "url": "https://scm.mastercard.int/stash/rest/sync/latest/projects/~E117686/repos/test-data-service/synchronize",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"action\": \"MERGE\",\n    \"context\": {\n        \"commitMessage\": \"Merging in latest from upstream.\"\n    },\n    \"refId\": \"refs/heads/dev\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_3beba968d5554",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "Don't pick audit-events-on-authentication-orchestration-service-dev-branch",
+      "method": "GET",
+      "url": "https://scm.mastercard.int/stash/rest/api/latest/projects/ALBERTA/repos/authentication-orchestration-service/ref-change-activities?ref=refs/heads/dev&limit=2",
+      "body": null,
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_db893845fdf94",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "Don't pick audit-events-on-pi-event-processor-ondev-branch Copy",
+      "method": "GET",
+      "url": "https://scm.mastercard.int/stash/rest/api/latest/projects/ALBERTA/repos/pi-core-service/ref-change-activities?ref=refs/heads/dev&limit=1",
+      "body": null,
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": true
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    },
+    {
+      "_id": "req_8495b279ee544",
+      "_type": "request",
+      "parentId": "fld_715d26670d434",
+      "name": "Don't pick GET pi-event-processor info",
+      "method": "GET",
+      "url": "https://scm.mastercard.int/stash/rest/api/1.0/projects/ALBERTA/repos/pi-event-processor",
+      "body": null,
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    }
+  ]
+}

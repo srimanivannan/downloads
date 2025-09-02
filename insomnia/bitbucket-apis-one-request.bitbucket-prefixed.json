@@ -1,0 +1,68 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-02T15:43:41.528521Z",
+  "__export_source": "chatgpt/insomnia-converter",
+  "resources": [
+    {
+      "_id": "wrk_a3d0bd703d1a4",
+      "_type": "workspace",
+      "name": "bitbucket-apis (single-request)",
+      "description": "",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_4ad6100620144",
+      "_type": "environment",
+      "parentId": "wrk_a3d0bd703d1a4",
+      "name": "Base Environment",
+      "data": {
+        "bitbucket_token": "",
+        "bitbucket_repo": "",
+        "bitbucket_base_url": "https://scm.mastercard.int/stash"
+      },
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 0
+    },
+    {
+      "_id": "fld_5828d1774e054",
+      "_type": "request_group",
+      "name": "bitbucket",
+      "parentId": "wrk_a3d0bd703d1a4",
+      "environment": {},
+      "metaSortKey": -1000000000.0
+    },
+    {
+      "_id": "req_df0718f5f07b4",
+      "_type": "request",
+      "parentId": "fld_5828d1774e054",
+      "name": "fork-sync-{{ _.bitbucket_repo }}",
+      "method": "POST",
+      "url": "{{ _.bitbucket_base_url }}/rest/sync/latest/projects/~E117686/repos/{{ _.bitbucket_repo }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"enabled\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.bitbucket_token }}",
+          "disabled": false
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1000000000.0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "preRequestScript": "",
+      "tests": "insomnia.test('status is 2xx', function () {\n  insomnia.expect(insomnia.response.code).to.be.within(200, 299);\n});\n"
+    }
+  ]
+}

@@ -1,0 +1,473 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-02T15:21:14.653463Z",
+  "__export_source": "Postman->Insomnia (ChatGPT)",
+  "resources": [
+    {
+      "_id": "wrk_7a22cd1e547d42bf85e1123b",
+      "_type": "workspace",
+      "name": "axon-publish (Converted)",
+      "description": "Auto-converted from Postman by ChatGPT"
+    },
+    {
+      "_id": "fld_da65df5a60b642f897587644",
+      "_type": "request_group",
+      "parentId": "wrk_7a22cd1e547d42bf85e1123b",
+      "name": "axon-publish"
+    },
+    {
+      "_id": "fld_ffe268cbf809432eb1c2fb44",
+      "_type": "request_group",
+      "parentId": "fld_da65df5a60b642f897587644",
+      "name": "Set up Env + Headers + Healthcheck"
+    },
+    {
+      "_id": "req_7d4ab1a2d1bb4c9ba7894a7b",
+      "_type": "request",
+      "parentId": "fld_ffe268cbf809432eb1c2fb44",
+      "name": "ITF",
+      "method": "GET",
+      "url": "{{ _['axon-publish_dummy-url'] }}/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "Cookie",
+          "value": "UDSclusterSER_STICKY=sticky.route3",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "//Env-URLs\ninsomnia.environment.set('axon-publish_env', \"ITF\");\nconst envInstanceURL = \"https://src-itf-pid-support-service-blue.apps.stl.pcfstage00.mastercard.int\"\ninsomnia.environment.set('axon-publish_dummy-url', envInstanceURL);\n\nconst serviceURL = \"https://src-stage-pid-axon-support-service-blue.apps.stl.pcfstage00.mastercard.int\"\ninsomnia.environment.set('axon-publish_url', serviceURL);\n\n//ITF Topics\n\ninsomnia.environment.set('axon-publish_eps-near-real-time-topic', \"DigitalPaymentsTechnology.SecureRemoteCommerce.srcOpsTopic.ITF-mc-src-PIEPS-T0-MOBP\");\ninsomnia.environment.set('axon-publish_eps-retry-topic', \"DigitalPaymentsTechnology.SecureRemoteCommerce.srcOpsTopic.ITF-mc-src-PIEPS-Retry-MOBP\");\ninsomnia.environment.set('axon-publish_eps-delay-retry-topic', \"DigitalPaymentsTechnology.SecureRemoteCommerce.srcOpsTopic.ITF-mc-src-PIEPS-T1-MOBP\");\ninsomnia.environment.set('axon-publish_eps-bnd-card-update-event-topic', \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.ITF-mc-src-card-services-digital-card-update-event\");\ninsomnia.environment.set('axon-publish_eps-tds-topic', \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.ITF-mc-src-card-services-TDS-event\");\ninsomnia.environment.set('axon-publish_eps-abu-mdes-topic', \"DigitalPaymentsTechnology.DigitalEnablementServices-MDES.AccountMaintenanceITF\");",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_daed9da036294485b19e409e",
+      "_type": "request",
+      "parentId": "fld_ffe268cbf809432eb1c2fb44",
+      "name": "STAGE",
+      "method": "GET",
+      "url": "{{ _['axon-publish_dummy-url'] }}/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "Cookie",
+          "value": "UDSclusterSER_STICKY=sticky.route3",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "//Env-URLs\ninsomnia.environment.set('axon-publish_env', \"STAGE\");\nconst envInstanceURL = \"https://src-itf-pid-support-service-blue.apps.stl.pcfstage00.mastercard.int\"\ninsomnia.environment.set('axon-publish_dummy-url', envInstanceURL);\n\nconst serviceURL = \"https://src-stage-pid-axon-support-service-blue.apps.stl.pcfstage00.mastercard.int\"\ninsomnia.environment.set('axon-publish_url', serviceURL);\n//ITF Topics\ninsomnia.environment.set('axon-publish_eps-near-real-time-topic', \"DigitalPaymentsTechnology.SecureRemoteCommerce.srcOpsTopic.STG-mc-src-PIEPS-T00-MOBP\");\ninsomnia.environment.set('axon-publish_eps-retry-topic', \"DigitalPaymentsTechnology.SecureRemoteCommerce.srcOpsTopic.STG-mc-src-PIEPS-Retry-MOBP\");\ninsomnia.environment.set('axon-publish_eps-delay-retry-topic', \"DigitalPaymentsTechnology.SecureRemoteCommerce.srcOpsTopic.STG-mc-src-PIEPS-T1-MOBP\");\ninsomnia.environment.set('axon-publish_eps-bnd-card-update-event-topic', \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.STL-mc-src-card-services-digital-card-update-event\");\ninsomnia.environment.set('axon-publish_eps-tds-topic', \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.STL-mc-src-card-services-TDS-event\");\ninsomnia.environment.set('axon-publish_eps-abu-mdes-topic', \"DigitalPaymentsTechnology.SecureRemoteCommerce.STL-Test-AccountMaintenance\");",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_46a72d4881be4f7ebed85c29",
+      "_type": "request_group",
+      "parentId": "fld_da65df5a60b642f897587644",
+      "name": "stage"
+    },
+    {
+      "_id": "req_b8e4232a86cf4c028950458e",
+      "_type": "request",
+      "parentId": "fld_46a72d4881be4f7ebed85c29",
+      "name": "[STAGE][NearRealtimeTOPIC] NTU SUSPENDED",
+      "method": "POST",
+      "url": "https://src-stage-pid-axon-support-service-blue.apps.stl.pcfstage00.mastercard.int/api/producers/avro",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"DigitalPaymentsTechnology.SecureRemoteCommerce.srcOpsTopic.STG-mc-src-PIEPS-T00-MOBP\",\n    \"event_count\": \"1\",\n    \"event_payload\": {\n        \"correlationId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n        \"messageId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n        \"messageTimeStamp\": \"{{ _['axon-publish_$isoTimestamp'] }}\",\n        \"messageType\": \"DIGITAL_CARD_LIFECYCLE_EVENTS\",\n        \"sourceAppName\": \"pi-event-processor\",\n        \"events\": [\n            {\n                \"eventId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n                \"eventType\": \"NTU\",\n                \"eventSubTypes\": [\n                    \"TOKEN_ACTIVATION\"\n                ],\n                \"programId\": \"SRC\",\n                \"eventData\": {\n                    \"payload\": \"{\\\"tokenUniqueReference\\\":\\\"DM4MMC0000000009FLMOJ81KWGXUK1VZSUTMKQR1QFQOIUULF\\\",\\\"status\\\":\\\"SUSPENDED\\\",\\\"statusTimestamp\\\":\\\"2017-07-20T04:56:23.345-07:00\\\",\\\"tdsRegistrationUrl\\\":\\\"tds.Mastercard.com\\\"}\",\n                    \"retryCounter\": 0\n                }\n            }\n        ]\n    }\n}\n//\"target_partition\": \"0\","
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['axon-publish_$randomUUID'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "const requestBody = JSON.parse(pm.request.body.raw);\n//console.log(requestBody);\nconsole.log(\"Value of 'correlationId' in the request payload:\", requestBody.event_payload.correlationId);\nconsole.log(\"Value of 'messageId' in the request payload:\", requestBody.event_payload.messageId);\nconsole.log(\"Value of 'messageTimeStamp' in the request payload:\", requestBody.event_payload.messageTimeStamp);\nconsole.log(\"Value of 'events[0].eventId' in the request payload:\", requestBody.event_payload.events[0].eventId);"
+    },
+    {
+      "_id": "req_9bf4915e186147b8a01d48c9",
+      "_type": "request",
+      "parentId": "fld_46a72d4881be4f7ebed85c29",
+      "name": "[STAGE][NearRealtimeTPOIC] NTU MULTI Message",
+      "method": "POST",
+      "url": "https://src-stage-pid-axon-support-service-blue.apps.stl.pcfstage00.mastercard.int/api/producers/avro",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"DigitalPaymentsTechnology.SecureRemoteCommerce.srcOpsTopic.STG-mc-src-PIEPS-T00-MOBP\",\n    \"event_count\": \"1\",\n    \"event_payload\": {\n        \"correlationId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n        \"messageId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n        \"messageTimeStamp\": \"{{ _['axon-publish_$isoTimestamp'] }}\",\n        \"messageType\": \"DIGITAL_CARD_LIFECYCLE_EVENTS\",\n        \"sourceAppName\": \"pi-event-processor\",\n        \"events\": [\n            {\n                \"eventId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n                \"eventType\": \"NTU\",\n                \"eventSubTypes\": [\"TOKEN_ACTIVATION\"],\n                \"programId\": \"SRC\",\n                \"eventData\": {\n                    \"payload\": \"{\\\"tokenUniqueReference\\\":\\\"DM4MMC000000000UYLCKEOCYGU4RHUQCB04EBCNFDSTSGLFK1\\\",\\\"status\\\":\\\"SUSPENDED\\\",\\\"statusTimestamp\\\":\\\"{{ _['axon-publish_$isoTimestamp'] }}\\\",\\\"tdsRegistrationUrl\\\":\\\"tds.Mastercard.com\\\"}\",\n                    \"retryCounter\": 0\n                }\n            },\n            {\n                \"eventId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n                \"eventType\": \"NTU\",\n                \"eventSubTypes\": [\"TOKEN_ACTIVATION\"],\n                \"programId\": \"SRC\",\n                \"eventData\": {\n                    \"payload\": \"{\\\"tokenUniqueReference\\\":\\\"DWSPMC00000000032d72d4ffcb2f4136a0532d32d72d4fcb\\\",\\\"status\\\":\\\"ACTIVE\\\",\\\"statusTimestamp\\\":\\\"{{ _['axon-publish_$isoTimestamp'] }}\\\",\\\"productConfig\\\":{\\\"brandLogoAssetId\\\":\\\"800200c9-629d-11e3-949a-0739d27e5a66\\\",\\\"isCoBranded\\\":\\\"true\\\",\\\"coBrandName\\\":\\\"Co brand partner\\\",\\\"coBrandLogoAssetId\\\":\\\"dbc55444-496a-4896-b41c-5d5e2dd431e2\\\",\\\"cardBackgroundCombinedAssetId\\\":\\\"739d27e5-629d-11e3-949a-0800200c9a66\\\",\\\"foregroundColor\\\":\\\"000000\\\",\\\"issuerName\\\":\\\"Issuing Bank\\\",\\\"shortDescription\\\":\\\"Bank Rewards Mastercard\\\",\\\"longDescription\\\":\\\"Bank Rewards Mastercard with the super rewards program\\\",\\\"customerServiceUrl\\\":\\\"https://bank.com/customerservice\\\",\\\"customerServiceEmail\\\":\\\"customer-test@mail.com\\\",\\\"termsAndConditionsUrl\\\":\\\"https://bank.com/termsAndConditions\\\",\\\"privacyPolicyUrl\\\":\\\"https://bank.com/privacy\\\",\\\"issuerProductConfigCode\\\":\\\"123456\\\"},\\\"tokenInfo\\\":{\\\"tokenPanSuffix\\\":\\\"1234\\\",\\\"accountPanSuffix\\\":\\\"6789\\\",\\\"alternateAccountIdentifierSuffix\\\":\\\"4567\\\",\\\"tokenExpiry\\\":\\\"1018\\\",\\\"dsrpCapable\\\":true,\\\"tokenAssuranceLevel\\\":0,\\\"productCategory\\\":\\\"CREDIT\\\",\\\"accountPanExpiry\\\":\\\"1020\\\",\\\"accountPanPrefix\\\":\\\"500000\\\"},\\\"eventReasonCode\\\":\\\"REDIGITIZATION_COMPLETE\\\"}\",\n                    \"retryCounter\": 0\n                }\n            },\n            {\n                \"eventId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n                \"eventType\": \"NTU\",\n                \"eventSubTypes\": [\"TOKEN_ACTIVATION\"],\n                \"programId\": \"SRC\",\n                \"eventData\": {\n                    \"payload\": \"{\\\"tokenUniqueReference\\\":\\\"DWSPMC000000000fcb2f4136b2f4136a0532d2f4136a0532\\\",\\\"status\\\":\\\"SUSPENDED\\\",\\\"statusTimestamp\\\":\\\"{{ _['axon-publish_$isoTimestamp'] }}\\\",\\\"suspendedBy\\\":[\\\"TOKEN_REQUESTOR\\\"],\\\"eventReasonCode\\\":\\\"DEVICE_STOLEN\\\"}\",\n                    \"retryCounter\": 0\n                }\n            }\n        ]\n    }\n}\n//\"target_partition\": \"0\","
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['axon-publish_$randomUUID'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "const requestBody = JSON.parse(pm.request.body.raw);\nconsole.log(requestBody);\nconsole.log(\"Value of 'correlationId' in the request payload:\", requestBody.event_payload.correlationId);\nconsole.log(\"Value of 'messageId' in the request payload:\", requestBody.event_payload.messageId);\nconsole.log(\"Value of 'messageTimeStamp' in the request payload:\", requestBody.event_payload.messageTimeStamp);\nconst eventsArray = requestBody.event_payload.events;\n// Loop through the array and print each element\nfor (let i = 0; i < eventsArray.length; i++) {\n    console.log(\"Value of 'events[\"+ (i) + \"].eventId' in the request payload:\", eventsArray[i].eventId);\n}"
+    },
+    {
+      "_id": "req_67f0b0ba37274a1db07d158a",
+      "_type": "request",
+      "parentId": "fld_46a72d4881be4f7ebed85c29",
+      "name": "[STAGE][BND] NTU Suspended",
+      "method": "POST",
+      "url": "https://src-stage-pid-axon-support-service-blue.apps.stl.pcfstage00.mastercard.int/api/producers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.STL-mc-src-card-services-digital-card-update-event\",\n    \"event_count\": \"1\",\n    \"event_payload\": {\n        \"correlationId\": \"CID_CNTU_009\",\n        \"cardUpdateEventList\": [\n            {\n                \"cardId\": \"17d6a01e-2f65-4a38-94db-1d57d2823568\",\n                \"primaryAccountNumberSuffix\": \"4993\",\n                \"paymentNetworkName\": \"mastercard\",\n                \"cardArtUrl\": \"https://sbx.assets.mastercard.com/card-art/combined-image-asset/HIGH-MASK-3x.png\",\n                \"cardIdStatus\": \"SUSPENDED\",\n                \"consumerId\": \"0b8ce28c-1460-4f85-8d3a-f0fc60f00c33\",\n                \"tokenSuffix\": \"3702\",\n                \"coBrandName\": null,\n                \"issuerName\": \"Citi Bank\",\n                \"shortProductDescription\": \"MasterCard Test Bank\",\n                \"longProductDescription\": \"Test Bank for MasterCard MTF\",\n                \"fpanExpiration\": \"1122\",\n                \"programId\": \"SECURE_COF_COMMERCE_PLATFORM#E2E#01\",\n                \"tokenUniqueReference\": \"DM4MMC0000144136c06c79f4ee0c477ba41f45591249bb49\",\n                \"primaryAccountNumberPrefix\": 512035,\n                \"tokenPrefix\": null,\n                \"productCategory\": \"CREDIT\",\n                \"countryCode\": null,\n                \"paymentAccountReference\": \"50013D7L8LCIA9ZZ7D00T2BPQ9DVJ\",\n                \"cardCreatedTimeStamp\": \"2023-03-06T17:37:48.170Z\",\n                \"lastUsedTimeStamp\": \"2023-03-06T17:37:49.303Z\",\n                \"lastUpdateTimeStamp\": \"2023-03-06T17:37:50.654Z\",\n                \"tokenExpiration\": \"0426\",\n                \"enrollmentProviderId\": \"5a9f8c51-7ad1-40c6-b828-b7437b9334f6\",\n                \"clientRoutingId\": \"nc-pod1-smp.apple.com:443\",\n                \"reasonData\": {\n                    \"reason\": null,\n                    \"reasonText\": null,\n                    \"reasonCategory\": null\n                }\n            }\n        ]\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "synapse-target-tag",
+          "value": "UP",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_dc9dc3d973094f69994f6825",
+      "_type": "request_group",
+      "parentId": "fld_da65df5a60b642f897587644",
+      "name": "itf"
+    },
+    {
+      "_id": "req_981fedd2011b4154a62b90d7",
+      "_type": "request",
+      "parentId": "fld_dc9dc3d973094f69994f6825",
+      "name": "[ITF][NearRealtimeTOPIC] NTU SUSPENDED",
+      "method": "POST",
+      "url": "https://src-stage-pid-axon-support-service-blue.apps.stl.pcfstage00.mastercard.int/api/producers/avro",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"DigitalPaymentsTechnology.SecureRemoteCommerce.srcOpsTopic.ITF-mc-src-PIEPS-T0-MOBP\",\n    \"event_count\": \"1\",\n    \"event_payload\": {\n        \"correlationId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n        \"messageId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n        \"messageTimeStamp\": \"{{ _['axon-publish_$isoTimestamp'] }}\",\n        \"messageType\": \"DIGITAL_CARD_LIFECYCLE_EVENTS\",\n        \"sourceAppName\": \"pi-event-processor\",\n        \"events\": [\n            {\n                \"eventId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n                \"eventType\": \"NTU\",\n                \"eventSubTypes\": [\n                    \"TOKEN_ACTIVATION\"\n                ],\n                \"programId\": \"SRC\",\n                \"eventData\": {\n                    \"payload\": \"{\\\"tokenUniqueReference\\\":\\\"DM4MMC1US0000000470aa61d86fc4443ad7b2e466a9664f3\\\",\\\"status\\\":\\\"SUSPENDED\\\",\\\"statusTimestamp\\\":\\\"2024-02-13T04:56:23.345-07:00\\\",\\\"tdsRegistrationUrl\\\":\\\"tds.Mastercard.com\\\"}\",\n                    \"retryCounter\": 0\n                }\n            }\n        ]\n    }\n}\n//    \"target_partition\": \"0\","
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['axon-publish_$randomUUID'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "const requestBody = JSON.parse(pm.request.body.raw);\n//console.log(requestBody);\nconsole.log(\"Value of 'correlationId' in the request payload:\", requestBody.event_payload.correlationId);\nconsole.log(\"Value of 'messageId' in the request payload:\", requestBody.event_payload.messageId);\nconsole.log(\"Value of 'messageTimeStamp' in the request payload:\", requestBody.event_payload.messageTimeStamp);\nconsole.log(\"Value of 'events[0].eventId' in the request payload:\", requestBody.event_payload.events[0].eventId);"
+    },
+    {
+      "_id": "fld_53e6e49dd0c646898f32385c",
+      "_type": "request_group",
+      "parentId": "fld_da65df5a60b642f897587644",
+      "name": "dynamic"
+    },
+    {
+      "_id": "fld_e374a8caf4de42b48652ba38",
+      "_type": "request_group",
+      "parentId": "fld_53e6e49dd0c646898f32385c",
+      "name": "ABU"
+    },
+    {
+      "_id": "req_a298bd317ab84e859ad427e2",
+      "_type": "request",
+      "parentId": "fld_e374a8caf4de42b48652ba38",
+      "name": "[EPS][NearRealtimeTOPIC] ABU replacement_card",
+      "method": "POST",
+      "url": "{{ _['axon-publish_url'] }}/api/producers/axon",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"{{ _['axon-publish_eps-near-real-time-topic'] }}\",\n    \"event_count\": \"1\",\n    \"target_partition\": \"0\",\n    \"event_payload\": {\n        \"correlationId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n        \"events\": [\n            {\n                \"eventData\": {\n                    \"payload\": \"{\\n\\\"requestId\\\": \\\"replacement_card-test-mah-124\\\",\\n\\\"sourceApplication\\\": \\\"pam-mdes-api\\\",\\n\\\"reasonCode\\\": \\\"replacement_card\\\",\\n\\\"eventDateTime\\\": \\\"2022-05-17T11:02:03.123-07:02\\\",\\n\\\"oldCard\\\": {\\n    \\\"accountNumber\\\": \\\"5196670163480968\\\",\\n    \\\"expiryMonth\\\": \\\"02\\\",\\n    \\\"expiryYear\\\": \\\"27\\\"\\n},\\n\\\"newCard\\\": {\\n    \\\"accountNumber\\\": \\\"5196670163480968\\\",\\n    \\\"expiryMonth\\\": \\\"03\\\",\\n    \\\"expiryYear\\\": \\\"27\\\"\\n}\\n    }\",\n                    \"retryCounter\": 0\n                },\n                \"eventId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n                \"eventSubTypes\": [\"replacement_card\"],\n                \"eventType\": \"ABU\",\n                \"programId\": \"SRC\"\n            }\n        ],\n        \"messageId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n        \"messageTimeStamp\": \"2022-03-11T04:56:23.345-07:00\",\n        \"messageType\": \"DIGITAL_CARD_LIFECYCLE_EVENTS\",\n        \"sourceAppName\": \"pi-event-processor-service\"\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "correlation-id",
+          "value": "my-test-schema-2",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_a9bb673d0aa548e8904639ff",
+      "_type": "request",
+      "parentId": "fld_e374a8caf4de42b48652ba38",
+      "name": "[EPS][ABU]-replacement_card",
+      "method": "POST",
+      "url": "{{ _['axon-publish_url'] }}/api/producers/avro",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"{{ _['axon-publish_eps-abu-mdes-topic'] }}\",\n    \"event_count\": \"1\",\n    \"event_payload\": {\n        \"requestId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n        \"sourceApplication\": \"DemoApp-78dd279d-84f0-42bb-82eb-d3e71c6edb58\",\n        \"reasonCode\": \"replacement_card\",\n        \"eventDateTime\": \"2022-04-04T11:02:03.123-07:02\",\n        \"oldCard\": {\n            \"accountNumber\": \"5556670127637984\",\n            \"expiryMonth\": \"01\",\n            \"expiryYear\": \"25\"\n        },\n        \"newCard\": {\n            \"accountNumber\": \"5555031500000256\",\n            \"expiryMonth\": \"09\",\n            \"expiryYear\": \"32\"\n        }\n    }\n}\n//\"target_partition\": \"0\","
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['axon-publish_$randomUUID'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "function uuidv4(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0,v=c=='x'?r:(r&0x3|0x8);return v.toString(16);});}\n\ninsomnia.environment.set('axon-publish_axon-Correlation-Id', uuidv4());",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_ca988eaa8b6f47c79706afce",
+      "_type": "request",
+      "parentId": "fld_e374a8caf4de42b48652ba38",
+      "name": "[EPS][ABU] expiry_update",
+      "method": "POST",
+      "url": "{{ _['axon-publish_url'] }}/api/producers/avro",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"{{ _['axon-publish_eps-abu-mdes-topic'] }}\",\n    \"target_partition\": \"0\",\n    \"event_count\": \"1\",\n    \"event_payload\": {\n        \"requestId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n        \"sourceApplication\": \"DemoApp-78dd279d-84f0-42bb-82eb-d3e71c6edb58\",\n        \"reasonCode\": \"expiry_update\",\n        \"eventDateTime\": \"2022-04-04T11:02:03.123-07:02\",\n        \"oldCard\": {\n            \"accountNumber\": \"5556670127637984\",\n            \"expiryMonth\": \"11\",\n            \"expiryYear\": \"23\"\n        },\n        \"newCard\": {\n            \"accountNumber\": \"5556670127637984\",\n            \"expiryMonth\": \"12\",\n            \"expiryYear\": \"26\"\n        }\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['axon-publish_$randomUUID'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "function uuidv4(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0,v=c=='x'?r:(r&0x3|0x8);return v.toString(16);});}\n\ninsomnia.environment.set('axon-publish_axon-Correlation-Id', uuidv4());",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_0b83adaa13564f99879e0b48",
+      "_type": "request",
+      "parentId": "fld_e374a8caf4de42b48652ba38",
+      "name": "[EPS][ABU] closed_account",
+      "method": "POST",
+      "url": "{{ _['axon-publish_url'] }}/api/producers/avro",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"{{ _['axon-publish_eps-abu-mdes-topic'] }}\",\n    \"target_partition\": \"0\",\n    \"event_count\": \"1\",\n    \"event_payload\": {\n        \"requestId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n        \"sourceApplication\": \"DemoApp-78dd279d-84f0-42bb-82eb-d3e71c6edb58\",\n        \"reasonCode\": \"closed_account\",\n        \"eventDateTime\": \"2022-04-04T11:02:03.123-07:02\",\n        \"oldCard\": {\n            \"accountNumber\": \"5556670127637984\",\n            \"expiryMonth\": \"11\",\n            \"expiryYear\": \"23\"\n        }\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['axon-publish_$randomUUID'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "function uuidv4(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0,v=c=='x'?r:(r&0x3|0x8);return v.toString(16);});}\n\ninsomnia.environment.set('axon-publish_axon-Correlation-Id', uuidv4());",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_5554ab81c45f427c8876aa2c",
+      "_type": "request",
+      "parentId": "fld_e374a8caf4de42b48652ba38",
+      "name": "[EPS][ABU] brand_flip",
+      "method": "POST",
+      "url": "{{ _['axon-publish_url'] }}/api/producers/avro",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"{{ _['axon-publish_eps-abu-mdes-topic'] }}\",\n    \"target_partition\": \"0\",\n    \"event_count\": \"1\",\n    \"event_payload\": {\n        \"requestId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n        \"sourceApplication\": \"DemoApp-78dd279d-84f0-42bb-82eb-d3e71c6edb58\",\n        \"reasonCode\": \"brand_flip\",\n        \"eventDateTime\": \"2022-04-04T11:02:03.123-07:02\",\n        \"oldCard\": {\n            \"accountNumber\": \"5556670127637984\",\n            \"expiryMonth\": \"11\",\n            \"expiryYear\": \"23\"\n        }\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['axon-publish_$randomUUID'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "function uuidv4(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0,v=c=='x'?r:(r&0x3|0x8);return v.toString(16);});}\n\ninsomnia.environment.set('axon-publish_axon-Correlation-Id', uuidv4());",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_39766813a085464b92ba5940",
+      "_type": "request_group",
+      "parentId": "fld_53e6e49dd0c646898f32385c",
+      "name": "NTU"
+    },
+    {
+      "_id": "req_358d59a4957e487cb757165d",
+      "_type": "request",
+      "parentId": "fld_39766813a085464b92ba5940",
+      "name": "[EPS][NearRealtimeTOPIC] NTU SUSPENDED",
+      "method": "POST",
+      "url": "{{ _['axon-publish_url'] }}/api/producers/avro",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"{{ _['axon-publish_eps-near-real-time-topic'] }}\",\n    \"event_count\": \"1\",\n    \"event_payload\": {\n        \"correlationId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n        \"messageId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n        \"messageTimeStamp\": \"{{ _['axon-publish_$isoTimestamp'] }}\",\n        \"messageType\": \"DIGITAL_CARD_LIFECYCLE_EVENTS\",\n        \"sourceAppName\": \"pi-event-processor\",\n        \"events\": [\n            {\n                \"eventId\": \"{{ _['axon-publish_$randomUUID'] }}\",\n                \"eventType\": \"NTU\",\n                \"eventSubTypes\": [\n                    \"TOKEN_ACTIVATION\"\n                ],\n                \"programId\": \"SRC\",\n                \"eventData\": {\n                    \"payload\": \"{\\\"tokenUniqueReference\\\":\\\"DM4MMC1US0000000470aa61d86fc4443ad7b2e466a9664f3\\\",\\\"status\\\":\\\"SUSPENDED\\\",\\\"statusTimestamp\\\":\\\"{{ _['axon-publish_$isoTimestamp'] }}\\\",\\\"tdsRegistrationUrl\\\":\\\"tds.Mastercard.com\\\"}\",\n                    \"retryCounter\": 0\n                }\n            }\n        ]\n    }\n}\n//    \"target_partition\": \"0\","
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['axon-publish_$randomUUID'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "const requestBody = JSON.parse(pm.request.body.raw);\n//console.log(requestBody);\nconsole.log(\"Value of 'correlationId' in the request payload:\", requestBody.event_payload.correlationId);\nconsole.log(\"Value of 'messageId' in the request payload:\", requestBody.event_payload.messageId);\nconsole.log(\"Value of 'messageTimeStamp' in the request payload:\", requestBody.event_payload.messageTimeStamp);\nconsole.log(\"Value of 'events[0].eventId' in the request payload:\", requestBody.event_payload.events[0].eventId);"
+    },
+    {
+      "_id": "fld_427674b918fe4e21b9f63ae1",
+      "_type": "request_group",
+      "parentId": "fld_53e6e49dd0c646898f32385c",
+      "name": "BND"
+    },
+    {
+      "_id": "req_eed656809d9440a9bd32cbe8",
+      "_type": "request",
+      "parentId": "fld_427674b918fe4e21b9f63ae1",
+      "name": "[BND] NTU Suspended",
+      "method": "POST",
+      "url": "{{ _['axon-publish_url'] }}/api/producers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"{{ _['axon-publish_eps-bnd-card-update-event-topic'] }}\",\n    \"event_count\": \"1\",\n    \"event_payload\": {\n        \"correlationId\": \"CID_CNTU_009\",\n        \"cardUpdateEventList\": [\n            {\n                \"cardId\": \"17d6a01e-2f65-4a38-94db-1d57d2823568\",\n                \"primaryAccountNumberSuffix\": \"4993\",\n                \"paymentNetworkName\": \"mastercard\",\n                \"cardArtUrl\": \"https://sbx.assets.mastercard.com/card-art/combined-image-asset/HIGH-MASK-3x.png\",\n                \"cardIdStatus\": \"SUSPENDED\",\n                \"consumerId\": \"0b8ce28c-1460-4f85-8d3a-f0fc60f00c33\",\n                \"tokenSuffix\": \"3702\",\n                \"coBrandName\": null,\n                \"issuerName\": \"Citi Bank\",\n                \"shortProductDescription\": \"MasterCard Test Bank\",\n                \"longProductDescription\": \"Test Bank for MasterCard MTF\",\n                \"fpanExpiration\": \"1122\",\n                \"programId\": \"SECURE_COF_COMMERCE_PLATFORM#E2E#01\",\n                \"tokenUniqueReference\": \"DM4MMC0000144136c06c79f4ee0c477ba41f45591249bb49\",\n                \"primaryAccountNumberPrefix\": 512035,\n                \"tokenPrefix\": null,\n                \"productCategory\": \"CREDIT\",\n                \"countryCode\": null,\n                \"paymentAccountReference\": \"50013D7L8LCIA9ZZ7D00T2BPQ9DVJ\",\n                \"cardCreatedTimeStamp\": \"2023-03-06T17:37:48.170Z\",\n                \"lastUsedTimeStamp\": \"2023-03-06T17:37:49.303Z\",\n                \"lastUpdateTimeStamp\": \"2023-03-06T17:37:50.654Z\",\n                \"tokenExpiration\": \"0426\",\n                \"enrollmentProviderId\": \"5a9f8c51-7ad1-40c6-b828-b7437b9334f6\",\n                \"clientRoutingId\": \"nc-pod1-smp.apple.com:443\",\n                \"reasonData\": {\n                    \"reason\": null,\n                    \"reasonText\": null,\n                    \"reasonCategory\": null\n                }\n            }\n        ]\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "synapse-target-tag",
+          "value": "UP",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_d93ade3f2d9543b9b115fc04",
+      "_type": "request_group",
+      "parentId": "fld_53e6e49dd0c646898f32385c",
+      "name": "migration"
+    },
+    {
+      "_id": "req_8663b08391914a5597ea2818",
+      "_type": "request",
+      "parentId": "fld_d93ade3f2d9543b9b115fc04",
+      "name": "[V2] Migration Avro",
+      "method": "POST",
+      "url": "{{ _['axon-publish_url'] }}/api/producers/avro",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"DigitalPaymentsTechnology.SecureRemoteCommerce.mc-src-pi-migrate-cardmetadata\",\n    \"event_count\": \"1\",\n    \"event_payload\": {\n        \"correlationId\": \"eccbf087-f159-4d69-b31d-00bec75c0474\",\n        \"messageId\": \"c9b1d82e-0866-446e-9bf1-7453d4aebccf\",\n        \"messageTimeStamp\": null,\n        \"messageType\": \"CARD_META_DATA_MIGRATION\",\n        \"sourceAppName\": \"PAYMENTINSTRUMENT_ORPHAN_SCHEDULER\",\n        \"events\": [\n            {\n                \"eventId\": \"f15e7047-2d42-4624-b8c0-7236eac0d342\",\n                \"eventType\": \"MIGRATE\",\n                \"eventSubTypes\": null,\n                \"programId\": \"SRC_C2P#MCI#01\",\n                \"eventData\": {\n                    \"payload\": \"{\\\"createdDate\\\":1662174097612,\\\"modifiedDate\\\":1662174116955,\\\"isNew\\\":false,\\\"cardId\\\":\\\"718ef079-5867-4d74-8821-837b47f5b162\\\",\\\"cardMetaData\\\":{\\\"cardId\\\":\\\"718ef079-5867-4d74-8821-837b47f5b162\\\",\\\"tokenRequestorId\\\":\\\"50122967937\\\",\\\"hashedPan\\\":\\\"5570bb8c64cb31c3719cdbcb3cb31c17e3c93866016687f12ccddac841c59bea\\\",\\\"expiryDate\\\":\\\"1130\\\",\\\"consumerId\\\":\\\"e11146ab-3ecd-4f2f-ac6c-7bc1e685b66b\\\",\\\"primaryAccountNumberSource\\\":\\\"CARD_ADDED_MANUALLY\\\",\\\"primaryAccountNumberSuffix\\\":\\\"6142\\\",\\\"cardIdStatus\\\":\\\"ACTIVE\\\",\\\"encryptedCardCriticalData\\\":\\\"20a6e1a85aa237bc53c54bbe45d3b5ae10dabd680db31f475fd889d56e8cd2b4909d696171d17798e677e3b762b1670d92833d4b4fd87950a2fa92db2353d7ccc5683b38f9bf9baaa9b3c5b127b3d0b8901a9ed266150089103ef4fc56df210f32de225d9ec27c3b8959614cf20441fa1e558b26b210be4b5c54fe00f09b17479d\\\",\\\"cardArtUrl\\\":\\\"https://stage.assets.mastercard.com/card-art/itf/combined-image-asset/fb5febb9-d944-4565-b077-c5623eb2f969.png\\\",\\\"tokenMetaData\\\":{\\\"tokenUniqueReference\\\":\\\"DM4MMC00001143932fe514928c584efab422fe20c6ade06b\\\",\\\"panUniqueReference\\\":\\\"FM4MMC0000114393f2b99f29536e4c6cb84d54cc262500a2\\\",\\\"paymentAccountReference\\\":\\\"5001ANBU9YFPGMI5HID5CZ6OD8151\\\",\\\"productConfig\\\":{\\\"brandLogoAssetId\\\":\\\"3789637f-32a1-4810-a138-4bf34501c509\\\",\\\"isCoBranded\\\":\\\"false\\\",\\\"coBrandName\\\":null,\\\"coBrandLogoAssetId\\\":null,\\\"cardBackgroundCombinedAssetId\\\":\\\"a6157169-9ca5-43e1-98df-c3d2994ee036\\\",\\\"foregroundColor\\\":\\\"234454\\\",\\\"issuerName\\\":\\\"TESTFORSRC\\\",\\\"shortDescription\\\":\\\"TESTFORSRC\\\",\\\"longDescription\\\":null,\\\"customerServiceUrl\\\":null,\\\"termsAndConditionsUrl\\\":null,\\\"privacyPolicyUrl\\\":null,\\\"issuerProductConfigCode\\\":\\\"122333dddd\\\"},\\\"tokenInfo\\\":{\\\"tokenPanSuffix\\\":\\\"8060\\\",\\\"accountPanSuffix\\\":\\\"6142\\\",\\\"financialAccountSuffix\\\":null,\\\"alternateAccountIdentifierSuffix\\\":null,\\\"tokenExpiry\\\":\\\"1125\\\",\\\"dsrpCapable\\\":\\\"true\\\",\\\"productCategory\\\":\\\"DEBIT\\\",\\\"tokenAssuranceLevel\\\":10,\\\"accountPanExpiry\\\":\\\"1130\\\",\\\"accountPanPrefix\\\":null},\\\"authenticationMethods\\\":[],\\\"decision\\\":\\\"APPROVED\\\",\\\"preferredAuthMethod\\\":null,\\\"existingTokenAuthorizationStatus\\\":null},\\\"programId\\\":\\\"SECURE_COF_MERCHANT#E2E-TEST_DPA_1#01\\\",\\\"isVerified\\\":true,\\\"cardCreatedTimestamp\\\":1662159697.611,\\\"lastUsedTimestamp\\\":1662159716.951,\\\"isAuthRequired\\\":false,\\\"primaryAccountNumberPrefix\\\":\\\"542415\\\",\\\"correlationId\\\":\\\"aa6ac87e-19a3-4e70-bcda-b8447fdb16d6\\\",\\\"pushAccReceipt\\\":null,\\\"avsResponseCode\\\":null,\\\"authenticated\\\":null,\\\"cardVerifications\\\":null,\\\"paymentCardType\\\":\\\"DEBIT\\\",\\\"issuerCountryCode\\\":\\\"840\\\",\\\"issuerCustomerId\\\":\\\"114393\\\",\\\"lastUpdatedTimestamp\\\":null,\\\"sourceCardId\\\":null,\\\"sourceProgramId\\\":null,\\\"isAddressVerificationRequired\\\":true,\\\"enrollmentSourceReference\\\":null,\\\"enrollmentType\\\":null,\\\"enrollmentProviderId\\\":\\\"a5b2ab26-f07f-4eb8-ab83-387fcfb32db4\\\",\\\"clientRoutingId\\\":null,\\\"nonTokenIssuerAuthMethodData\\\":null,\\\"clientSiteId\\\":null,\\\"tokenPanEncrypted\\\":\\\"20a6e1a85aa237bc53c54bbe45d3b5ae108d402aafb228d9fd67c8a52eeb4deaac2daaa053b14db0cbc31b9a5f220bee7b9d64b3ef05c82b2374f2b5194780ab16\\\",\\\"tokenPanExpiryEncrypted\\\":\\\"20a6e1a85aa237bc53c54bbe45d3b5ae10905674b55887a0cfccf7d4ea01d3f8a4270a80debaaee7a35f709ac15089160c\\\",\\\"tokenType\\\":\\\"CLOUD\\\",\\\"encryptedStaticToken\\\":null,\\\"dpanLookupIdentifier\\\":null,\\\"sourceTokenIdentifier\\\":null,\\\"isCriticalDataRemoved\\\":\\\"N\\\",\\\"isMigrated\\\":null},\\\"hashedPan\\\":\\\"5570bb8c64cb31c3719cdbcb3cb31c17e3c93866016687f12ccddac841c59bea\\\",\\\"expiryDate\\\":\\\"1130\\\",\\\"consumerId\\\":\\\"e11146ab-3ecd-4f2f-ac6c-7bc1e685b66b\\\",\\\"tokenUniqueReference\\\":\\\"DM4MMC00001143932fe514928c584efab422fe20c6ade06b\\\",\\\"correlationID\\\":\\\"aa6ac87e-19a3-4e70-bcda-b8447fdb16d6\\\",\\\"pushAccountReceipt\\\":null,\\\"programId\\\":\\\"SECURE_COF_MERCHANT#E2E-TEST_DPA_1#01\\\",\\\"enrollmentSourceReference\\\":null,\\\"panUniqueReference\\\":\\\"FM4MMC0000114393f2b99f29536e4c6cb84d54cc262500a2\\\",\\\"clientRoutingId\\\":null,\\\"clientSiteId\\\":null,\\\"tokenPanEncrypted\\\":\\\"20a6e1a85aa237bc53c54bbe45d3b5ae108d402aafb228d9fd67c8a52eeb4deaac2daaa053b14db0cbc31b9a5f220bee7b9d64b3ef05c82b2374f2b5194780ab16\\\",\\\"tokenPanExpiryEncrypted\\\":\\\"20a6e1a85aa237bc53c54bbe45d3b5ae10905674b55887a0cfccf7d4ea01d3f8a4270a80debaaee7a35f709ac15089160c\\\",\\\"tokenType\\\":\\\"CLOUD\\\",\\\"dpanLookupIdentifier\\\":null,\\\"sourceTokenIdentifier\\\":null,\\\"encryptedStaticToken\\\":null,\\\"isMigrated\\\":null,\\\"isCriticalDataRemoved\\\":\\\"N\\\",\\\"mpsOperationWrapper\\\":{\\\"MPS_LOOKUP\\\":[{\\\"type\\\":\\\"COUNTRY_CODE\\\",\\\"lastUpdatedTimeStamp\\\":1662159697.611,\\\"successTimeStamp\\\":1662159697.611,\\\"failedAttempts\\\":0,\\\"status\\\":\\\"SUCCESS\\\"},{\\\"type\\\":\\\"PRODUCT_CATEGORY\\\",\\\"lastUpdatedTimeStamp\\\":1662159697.611,\\\"successTimeStamp\\\":1662159697.611,\\\"failedAttempts\\\":0,\\\"status\\\":\\\"SUCCESS\\\"},{\\\"type\\\":\\\"ISSUER_CUSTOMER_ID\\\",\\\"lastUpdatedTimeStamp\\\":1662159697.611,\\\"successTimeStamp\\\":1662159697.611,\\\"failedAttempts\\\":0,\\\"status\\\":\\\"SUCCESS\\\"}]},\\\"retentionExpiryDate\\\":null,\\\"id\\\":\\\"718ef079-5867-4d74-8821-837b47f5b162\\\",\\\"new\\\":false}\",\n                    \"retryCounter\": 0\n                }\n            }\n        ]\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "correlation-id",
+          "value": "my-test-schema-4",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_f5fccb722c6c4a5f9c6c8763",
+      "_type": "request",
+      "parentId": "fld_d93ade3f2d9543b9b115fc04",
+      "name": "[V2] Migration Axon",
+      "method": "POST",
+      "url": "{{ _['axon-publish_url'] }}/api/producers/axon",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"DigitalPaymentsTechnology.SecureRemoteCommerce.itf-mc-src-pi-migrate-cardmetadata\",\n    \"event_count\": \"1\",\n    \"event_payload\": {\n        \"correlationId\": \"eccbf097-f159-4d69-b31d-00bec75c0479\",\n        \"messageId\": \"c9c1d82e-0866-446e-9cf1-8453d4aebccf\",\n        \"messageTimeStamp\": null,\n        \"messageType\": \"CARD_META_DATA_MIGRATION\",\n        \"sourceAppName\": \"PAYMENTINSTRUMENT_ORPHAN_SCHEDULER\",\n        \"events\": [\n            {\n                \"eventId\": \"f16e7047-3d42-4624-b8c0-8236eac0d342\",\n                \"eventType\": \"MIGRATE\",\n                \"eventSubTypes\": null,\n                \"programId\": \"SRC_C2P#MCI#01\",\n                \"eventData\": {\n                    \"payload\": \"{\\\"createdDate\\\":1662174097612,\\\"modifiedDate\\\":1662174116955,\\\"isNew\\\":false,\\\"cardId\\\":\\\"718ef079-5867-4d74-8821-837b47f5b162\\\",\\\"cardMetaData\\\":{\\\"cardId\\\":\\\"718ef079-5867-4d74-8821-837b47f5b162\\\",\\\"tokenRequestorId\\\":\\\"50122967937\\\",\\\"hashedPan\\\":\\\"5570bb8c64cb31c3719cdbcb3cb31c17e3c93866016687f12ccddac841c59bea\\\",\\\"expiryDate\\\":\\\"1130\\\",\\\"consumerId\\\":\\\"e11146ab-3ecd-4f2f-ac6c-7bc1e685b66b\\\",\\\"primaryAccountNumberSource\\\":\\\"CARD_ADDED_MANUALLY\\\",\\\"primaryAccountNumberSuffix\\\":\\\"6142\\\",\\\"cardIdStatus\\\":\\\"ACTIVE\\\",\\\"encryptedCardCriticalData\\\":\\\"20a6e1a85aa237bc53c54bbe45d3b5ae10dabd680db31f475fd889d56e8cd2b4909d696171d17798e677e3b762b1670d92833d4b4fd87950a2fa92db2353d7ccc5683b38f9bf9baaa9b3c5b127b3d0b8901a9ed266150089103ef4fc56df210f32de225d9ec27c3b8959614cf20441fa1e558b26b210be4b5c54fe00f09b17479d\\\",\\\"cardArtUrl\\\":\\\"https://stage.assets.mastercard.com/card-art/itf/combined-image-asset/fb5febb9-d944-4565-b077-c5623eb2f969.png\\\",\\\"tokenMetaData\\\":{\\\"tokenUniqueReference\\\":\\\"DM4MMC00001143932fe514928c584efab422fe20c6ade06b\\\",\\\"panUniqueReference\\\":\\\"FM4MMC0000114393f2b99f29536e4c6cb84d54cc262500a2\\\",\\\"paymentAccountReference\\\":\\\"5001ANBU9YFPGMI5HID5CZ6OD8151\\\",\\\"productConfig\\\":{\\\"brandLogoAssetId\\\":\\\"3789637f-32a1-4810-a138-4bf34501c509\\\",\\\"isCoBranded\\\":\\\"false\\\",\\\"coBrandName\\\":null,\\\"coBrandLogoAssetId\\\":null,\\\"cardBackgroundCombinedAssetId\\\":\\\"a6157169-9ca5-43e1-98df-c3d2994ee036\\\",\\\"foregroundColor\\\":\\\"234454\\\",\\\"issuerName\\\":\\\"TESTFORSRC\\\",\\\"shortDescription\\\":\\\"TESTFORSRC\\\",\\\"longDescription\\\":null,\\\"customerServiceUrl\\\":null,\\\"termsAndConditionsUrl\\\":null,\\\"privacyPolicyUrl\\\":null,\\\"issuerProductConfigCode\\\":\\\"122333dddd\\\"},\\\"tokenInfo\\\":{\\\"tokenPanSuffix\\\":\\\"8060\\\",\\\"accountPanSuffix\\\":\\\"6142\\\",\\\"financialAccountSuffix\\\":null,\\\"alternateAccountIdentifierSuffix\\\":null,\\\"tokenExpiry\\\":\\\"1125\\\",\\\"dsrpCapable\\\":\\\"true\\\",\\\"productCategory\\\":\\\"DEBIT\\\",\\\"tokenAssuranceLevel\\\":10,\\\"accountPanExpiry\\\":\\\"1130\\\",\\\"accountPanPrefix\\\":null},\\\"authenticationMethods\\\":[],\\\"decision\\\":\\\"APPROVED\\\",\\\"preferredAuthMethod\\\":null,\\\"existingTokenAuthorizationStatus\\\":null},\\\"programId\\\":\\\"SECURE_COF_MERCHANT#E2E-TEST_DPA_1#01\\\",\\\"isVerified\\\":true,\\\"cardCreatedTimestamp\\\":1662159697.611,\\\"lastUsedTimestamp\\\":1662159716.951,\\\"isAuthRequired\\\":false,\\\"primaryAccountNumberPrefix\\\":\\\"542415\\\",\\\"correlationId\\\":\\\"aa6ac87e-19a3-4e70-bcda-b8447fdb16d6\\\",\\\"pushAccReceipt\\\":null,\\\"avsResponseCode\\\":null,\\\"authenticated\\\":null,\\\"cardVerifications\\\":null,\\\"paymentCardType\\\":\\\"DEBIT\\\",\\\"issuerCountryCode\\\":\\\"840\\\",\\\"issuerCustomerId\\\":\\\"114393\\\",\\\"lastUpdatedTimestamp\\\":null,\\\"sourceCardId\\\":null,\\\"sourceProgramId\\\":null,\\\"isAddressVerificationRequired\\\":true,\\\"enrollmentSourceReference\\\":null,\\\"enrollmentType\\\":null,\\\"enrollmentProviderId\\\":\\\"a5b2ab26-f07f-4eb8-ab83-387fcfb32db4\\\",\\\"clientRoutingId\\\":null,\\\"nonTokenIssuerAuthMethodData\\\":null,\\\"clientSiteId\\\":null,\\\"tokenPanEncrypted\\\":\\\"20a6e1a85aa237bc53c54bbe45d3b5ae108d402aafb228d9fd67c8a52eeb4deaac2daaa053b14db0cbc31b9a5f220bee7b9d64b3ef05c82b2374f2b5194780ab16\\\",\\\"tokenPanExpiryEncrypted\\\":\\\"20a6e1a85aa237bc53c54bbe45d3b5ae10905674b55887a0cfccf7d4ea01d3f8a4270a80debaaee7a35f709ac15089160c\\\",\\\"tokenType\\\":\\\"CLOUD\\\",\\\"encryptedStaticToken\\\":null,\\\"dpanLookupIdentifier\\\":null,\\\"sourceTokenIdentifier\\\":null,\\\"isCriticalDataRemoved\\\":\\\"N\\\",\\\"isMigrated\\\":null},\\\"hashedPan\\\":\\\"5570bb8c64cb31c3719cdbcb3cb31c17e3c93866016687f12ccddac841c59bea\\\",\\\"expiryDate\\\":\\\"1130\\\",\\\"consumerId\\\":\\\"e11146ab-3ecd-4f2f-ac6c-7bc1e685b66b\\\",\\\"tokenUniqueReference\\\":\\\"DM4MMC00001143932fe514928c584efab422fe20c6ade06b\\\",\\\"correlationID\\\":\\\"aa6ac87e-19a3-4e70-bcda-b8447fdb16d6\\\",\\\"pushAccountReceipt\\\":null,\\\"programId\\\":\\\"SECURE_COF_MERCHANT#E2E-TEST_DPA_1#01\\\",\\\"enrollmentSourceReference\\\":null,\\\"panUniqueReference\\\":\\\"FM4MMC0000114393f2b99f29536e4c6cb84d54cc262500a2\\\",\\\"clientRoutingId\\\":null,\\\"clientSiteId\\\":null,\\\"tokenPanEncrypted\\\":\\\"20a6e1a85aa237bc53c54bbe45d3b5ae108d402aafb228d9fd67c8a52eeb4deaac2daaa053b14db0cbc31b9a5f220bee7b9d64b3ef05c82b2374f2b5194780ab16\\\",\\\"tokenPanExpiryEncrypted\\\":\\\"20a6e1a85aa237bc53c54bbe45d3b5ae10905674b55887a0cfccf7d4ea01d3f8a4270a80debaaee7a35f709ac15089160c\\\",\\\"tokenType\\\":\\\"CLOUD\\\",\\\"dpanLookupIdentifier\\\":null,\\\"sourceTokenIdentifier\\\":null,\\\"encryptedStaticToken\\\":null,\\\"isMigrated\\\":null,\\\"isCriticalDataRemoved\\\":\\\"N\\\",\\\"mpsOperationWrapper\\\":{\\\"MPS_LOOKUP\\\":[{\\\"type\\\":\\\"COUNTRY_CODE\\\",\\\"lastUpdatedTimeStamp\\\":1662159697.611,\\\"successTimeStamp\\\":1662159697.611,\\\"failedAttempts\\\":0,\\\"status\\\":\\\"SUCCESS\\\"},{\\\"type\\\":\\\"PRODUCT_CATEGORY\\\",\\\"lastUpdatedTimeStamp\\\":1662159697.611,\\\"successTimeStamp\\\":1662159697.611,\\\"failedAttempts\\\":0,\\\"status\\\":\\\"SUCCESS\\\"},{\\\"type\\\":\\\"ISSUER_CUSTOMER_ID\\\",\\\"lastUpdatedTimeStamp\\\":1662159697.611,\\\"successTimeStamp\\\":1662159697.611,\\\"failedAttempts\\\":0,\\\"status\\\":\\\"SUCCESS\\\"}]},\\\"retentionExpiryDate\\\":null,\\\"id\\\":\\\"718ef079-5867-4d74-8821-837b47f5b162\\\",\\\"new\\\":false}\",\n                    \"retryCounter\": 0\n                }\n            }\n        ]\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "correlation-id",
+          "value": "my-test-schema-4",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_5bb16e933f4c4bffb7bdb45c",
+      "_type": "request_group",
+      "parentId": "wrk_7a22cd1e547d42bf85e1123b",
+      "name": "Setup (Initialize Variables)"
+    },
+    {
+      "_id": "req_5bc0beb33aff474788a885c9",
+      "_type": "request",
+      "parentId": "fld_5bb16e933f4c4bffb7bdb45c",
+      "name": "00 - Initialize axon_ variables",
+      "method": "GET",
+      "url": "https://example.invalid/setup",
+      "headers": [],
+      "parameters": [],
+      "body": {
+        "text": ""
+      },
+      "preRequestScript": "// Run once to initialize all axon-publish_* variables (and axon_* alias).\nconst keysA = [\n  \"axon-publish_$isoTimestamp\",\n  \"axon-publish_$randomUUID\",\n  \"axon-publish_dummy-url\",\n  \"axon-publish_eps-abu-mdes-topic\",\n  \"axon-publish_eps-bnd-card-update-event-topic\",\n  \"axon-publish_eps-near-real-time-topic\",\n  \"axon-publish_url\"\n];\nconst keysB = [\n  \"axon_$isoTimestamp\",\n  \"axon_$randomUUID\",\n  \"axon_dummy-url\",\n  \"axon_eps-abu-mdes-topic\",\n  \"axon_eps-bnd-card-update-event-topic\",\n  \"axon_eps-near-real-time-topic\",\n  \"axon_url\"\n];\nfor (const k of keysA.concat(keysB)) {\n  if (insomnia.environment.get(k) === undefined) {\n    insomnia.environment.set(k, '');\n  }\n}\nfor (let i=0;i<keysA.length;i++){\n  const a=keysA[i], b=keysB[i];\n  const va=insomnia.environment.get(a);\n  const vb=insomnia.environment.get(b);\n  if ((va||'') && !(vb||'')) insomnia.environment.set(b, va);\n  if ((vb||'') && !(va||'')) insomnia.environment.set(a, vb);\n}\ninsomnia.test('Variables initialized', () => {\n  insomnia.expect(keysA.length >= 0).to.equal(true);\n});",
+      "afterResponseScript": ""
+    }
+  ]
+}

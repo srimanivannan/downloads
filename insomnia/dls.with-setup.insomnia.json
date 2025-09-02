@@ -1,0 +1,224 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-02T15:31:18.155597Z",
+  "__export_source": "Postman->Insomnia (ChatGPT)",
+  "resources": [
+    {
+      "_id": "wrk_49804a110ed941e59ceab0e3",
+      "_type": "workspace",
+      "name": "dls (Converted)",
+      "description": "Auto-converted from Postman by ChatGPT"
+    },
+    {
+      "_id": "fld_c1f68a0465394fada6902a27",
+      "_type": "request_group",
+      "parentId": "wrk_49804a110ed941e59ceab0e3",
+      "name": "dls"
+    },
+    {
+      "_id": "req_da005818a86244649183fbb9",
+      "_type": "request",
+      "parentId": "fld_c1f68a0465394fada6902a27",
+      "name": "IdTypeAndIdValue TUR USA",
+      "method": "GET",
+      "url": "https://digital-locator-service-mdes-blue.apps.stl.pcfstage00.mastercard.int/locator/identifiers/TUR/values/DM4MMC0000000003LIIDAWMUADNBWBFVMV0ZE78574I8GSQV",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_66b714e7dbf84c14949218a2",
+      "_type": "request",
+      "parentId": "fld_c1f68a0465394fada6902a27",
+      "name": "IdTypeAndIdValue TUR IND",
+      "method": "GET",
+      "url": "https://digital-locator-service-mdes-blue.apps.stl.pcfstage00.mastercard.int/locator/identifiers/TUR/values/DM4MMC0000000005WLOUFBGSGJAS0XPJXWIHNR7JN9NROLOY",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_bed1b4309035469da5cbb29a",
+      "_type": "request",
+      "parentId": "fld_c1f68a0465394fada6902a27",
+      "name": "IdTypeAndIdValue CARDID",
+      "method": "GET",
+      "url": "https://digital-locator-service-kickone-blue.apps.stl.pcfstage00.mastercard.int/locator/identifiers/CARDID/values/DzBZzsgHRseeWoGSgpfb3A000000000000BR",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_d782f577487044d1a8477b04",
+      "_type": "request",
+      "parentId": "fld_c1f68a0465394fada6902a27",
+      "name": "TypesApi",
+      "method": "GET",
+      "url": "https://digital-locator-service-mdes-blue.apps.stl.pcfstage00.mastercard.int/locator/types",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_c259433b172b47e5b8dcd14f",
+      "_type": "request",
+      "parentId": "fld_c1f68a0465394fada6902a27",
+      "name": "cache-invalidate",
+      "method": "GET",
+      "url": "https://digital-locator-service-mdes-blue.apps.stl.pcfstage00.mastercard.int/locator/cache-invalidate",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_de68065a7aaf4e968624bcf7",
+      "_type": "request",
+      "parentId": "fld_c1f68a0465394fada6902a27",
+      "name": "Smart-Ids",
+      "method": "GET",
+      "url": "https://digital-locator-service-mdes-blue.apps.stl.pcfstage00.mastercard.int/locator/smart-ids",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_55df91210c604ab0b6ebd104",
+      "_type": "request",
+      "parentId": "fld_c1f68a0465394fada6902a27",
+      "name": "region-countries",
+      "method": "GET",
+      "url": "https://digital-locator-service-mdes-blue.apps.stl.pcfstage00.mastercard.int/locator/region-countries",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_b20c3d82b64c4368a2601a50",
+      "_type": "request",
+      "parentId": "fld_c1f68a0465394fada6902a27",
+      "name": "IdTypes-pagination",
+      "method": "GET",
+      "url": "https://digital-locator-service-mdes-blue.apps.stl.pcfstage00.mastercard.int/locator/identifiers/TUR?limit=1&offset=1",
+      "body": {},
+      "parameters": [
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "offset",
+          "value": "1"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_b3f2d6b3577c4f0c9ae108de",
+      "_type": "request",
+      "parentId": "fld_c1f68a0465394fada6902a27",
+      "name": "POST IdTypeAndIdValue TUR IND",
+      "method": "POST",
+      "url": "https://digital-locator-service-mdes-blue.apps.stl.pcfstage00.mastercard.int/locator/identifiers-queries/id-details",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"idType\": \"TUR\",\n    \"idValue\": \"DM4MMC0000000005WLOUFBGSGJAS0XPJXWIHNR7JN9NROLOY\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_7cc0d8a1ba2c426cac702676",
+      "_type": "request_group",
+      "parentId": "wrk_49804a110ed941e59ceab0e3",
+      "name": "Setup (Initialize Variables)"
+    },
+    {
+      "_id": "req_3db639a4938a4d989a2d1a50",
+      "_type": "request",
+      "parentId": "fld_7cc0d8a1ba2c426cac702676",
+      "name": "00 - Initialize dls_* variables",
+      "method": "GET",
+      "url": "https://example.invalid/setup",
+      "headers": [],
+      "parameters": [],
+      "body": {
+        "text": ""
+      },
+      "preRequestScript": "// Run once to initialize all dls_* variables\nconst keys = [];\nfor (const k of keys) {\n  if (insomnia.environment.get(k) === undefined) {\n    insomnia.environment.set(k, '');\n  }\n}\ninsomnia.test('Variables initialized', () => {\n  insomnia.expect(keys.length >= 0).to.equal(true);\n});",
+      "afterResponseScript": ""
+    }
+  ]
+}
