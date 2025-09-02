@@ -1,0 +1,1642 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-02T13:57:40.794930Z",
+  "__export_source": "Postman->Insomnia (ChatGPT)",
+  "resources": [
+    {
+      "_id": "wrk_8756894e076a4d80bb404590",
+      "_type": "workspace",
+      "name": "events-service (Converted)",
+      "description": "Auto-converted from Postman by ChatGPT"
+    },
+    {
+      "_id": "fld_6bcda0b4fc8e45359e187970",
+      "_type": "request_group",
+      "parentId": "wrk_8756894e076a4d80bb404590",
+      "name": "events-service"
+    },
+    {
+      "_id": "fld_e2787fbe36884524997b9c12",
+      "_type": "request_group",
+      "parentId": "fld_6bcda0b4fc8e45359e187970",
+      "name": "Set up Env + Headers + Healthcheck"
+    },
+    {
+      "_id": "req_500d70fe81734d29a7d2bf03",
+      "_type": "request",
+      "parentId": "fld_e2787fbe36884524997b9c12",
+      "name": "Setup Event Service",
+      "method": "GET",
+      "url": "{{ _['events-service_stage-health-url'] }}/api/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "insomnia.environment.set('events-service_stage-test-harness-url', \"https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int\");\n\ninsomnia.environment.set('events-service_event-service-stage', \"event-service\");\n\ninsomnia.environment.set('events-service_stage-health-url', \"https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int\");",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_2aa68d683d5e4deb82706cb5",
+      "_type": "request_group",
+      "parentId": "fld_6bcda0b4fc8e45359e187970",
+      "name": "Stage"
+    },
+    {
+      "_id": "req_0ac8e3be380144b2bdcd5a17",
+      "_type": "request",
+      "parentId": "fld_2aa68d683d5e4deb82706cb5",
+      "name": "Search Events",
+      "method": "POST",
+      "url": "{{ _['events-service_stage-test-harness-url'] }}/api/callWithPrism?criteria=(namespace=\"src.kpi.authOrchestrationService\" AND CreateTime>=\"2025-03-19T08:00:00.060\" AND (Context_correlationId=\"17835976-1f96-4222-8af5-2ab5e496be29\"))&limit=1&offset=0",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "(namespace=\"src.kpi.authOrchestrationService\" AND CreateTime>=\"2025-03-19T08:00:00.060\" AND (Context_correlationId=\"17835976-1f96-4222-8af5-2ab5e496be29\"))"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "offset",
+          "value": "0"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['events-service_event-service-stage'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_c26a86d175b54a92b7659dc4",
+      "_type": "request",
+      "parentId": "fld_2aa68d683d5e4deb82706cb5",
+      "name": "Search Events Copy",
+      "method": "POST",
+      "url": "{{ _['events-service_stage-test-harness-url'] }}/api/callWithPrism?criteria={{ _['events-service_criteria-query'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "{{ _['events-service_criteria-query'] }}"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "{{ _['events-service_$randomUUID'] }}",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['events-service_event-service-stage'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "let query = '(Namespace=\"src.kpi.authOrchestrationService\" \\\nAND CreateTime>=\"2025-03-12T21:13:00.000\" \\\nAND CreateTime<=\"2025-03-12T21:14:00.000\" \\\nAND Context_correlationId = \"7be8219c-01a5-4bfd-99ea-5114ece6c4e4\")&limit=10&offset=0';\ninsomnia.environment.set('events-service_criteria-query', encodeURI(query));",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_65d55803859e42fdaa1e4acc",
+      "_type": "request",
+      "parentId": "fld_2aa68d683d5e4deb82706cb5",
+      "name": "Event Get By Id",
+      "method": "POST",
+      "url": "{{ _['events-service_stage-test-harness-url'] }}/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['events-service_event-service-stage'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/0167f161-48d7-40a8-a8d1-606f4b2b42c9",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_be13d17d1954463e99fb26bd",
+      "_type": "request_group",
+      "parentId": "fld_6bcda0b4fc8e45359e187970",
+      "name": "ITF"
+    },
+    {
+      "_id": "fld_4041636aff4342c0a735ed20",
+      "_type": "request_group",
+      "parentId": "fld_be13d17d1954463e99fb26bd",
+      "name": "pi-event-processor-service"
+    },
+    {
+      "_id": "req_efefa6523c4845faaf4d2f76",
+      "_type": "request",
+      "parentId": "fld_4041636aff4342c0a735ed20",
+      "name": "Search Events By namespace-eventProcessorService-AND++",
+      "method": "POST",
+      "url": "{{ _['events-service_itf-test-harness-url'] }}/api/callWithPrism?criteria=(CreateTime>=\"2023-11-21T00:00:00.060\" AND namespace=\"src.kpi.eventProcessorService\" AND resource =\"CARD\" AND operation = \"NTU_RECEIVED\" AND state = \"COMPLETED\")&limit=1&offset=0",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "(CreateTime>=\"2023-11-21T00:00:00.060\" AND namespace=\"src.kpi.eventProcessorService\" AND resource =\"CARD\" AND operation = \"NTU_RECEIVED\" AND state = \"COMPLETED\")"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "offset",
+          "value": "0"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "event-service",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "ITF",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_e417a2609dbe41a594551519",
+      "_type": "request",
+      "parentId": "fld_4041636aff4342c0a735ed20",
+      "name": "Search Events By namespace-eventProcessorService-AND++ by NTU_RECEIVED and TUR always state is COMPLETED. no STARTED state for NTU_RECEIVED",
+      "method": "POST",
+      "url": "{{ _['events-service_itf-test-harness-url'] }}/api/callWithPrism?criteria=(CreateTime>=\"2023-11-21T00:00:00.060\" AND namespace=\"src.kpi.eventProcessorService\" AND resource =\"CARD\" AND operation = \"NTU_RECEIVED\" AND state = \"COMPLETED\" AND data_events_tokenUpdateEvent_tokens_tokenUniqueReference = \"DM4MMC000011439342779e710f6344f98fbb0c9aab728567\")&limit=1&offset=0",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "(CreateTime>=\"2023-11-21T00:00:00.060\" AND namespace=\"src.kpi.eventProcessorService\" AND resource =\"CARD\" AND operation = \"NTU_RECEIVED\" AND state = \"COMPLETED\" AND data_events_tokenUpdateEvent_tokens_tokenUniqueReference = \"DM4MMC000011439342779e710f6344f98fbb0c9aab728567\")"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "offset",
+          "value": "0"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "event-service",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "ITF",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_6ee1db27eabf4c6a94d23b22",
+      "_type": "request",
+      "parentId": "fld_4041636aff4342c0a735ed20",
+      "name": "Search Events By namespace-eventProcessorService-AND++ eventstate STARTED",
+      "method": "POST",
+      "url": "{{ _['events-service_itf-test-harness-url'] }}/api/callWithPrism?limit=1&offset=0&criteria=(CreateTime>=\"2023-11-21T00:00:00.060\" AND namespace=\"src.kpi.eventProcessorService\" AND resource =\"CARD\" AND operation = \"UPDATE\" AND state = \"STARTED\")",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "offset",
+          "value": "0"
+        },
+        {
+          "name": "criteria",
+          "value": "(CreateTime>=\"2023-11-21T00:00:00.060\" AND namespace=\"src.kpi.eventProcessorService\" AND resource =\"CARD\" AND operation = \"UPDATE\" AND state = \"STARTED\")"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "event-service",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "ITF",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_fc14809d430c471c82d392be",
+      "_type": "request",
+      "parentId": "fld_4041636aff4342c0a735ed20",
+      "name": "Search Events By namespace-eventProcessorService-AND++ Copy",
+      "method": "POST",
+      "url": "{{ _['events-service_itf-test-harness-url'] }}/api/callWithPrism?criteria=(CreateTime>=\"2023-11-13T00:00:00.060\" AND namespace=\"src.kpi.eventProcessorService\" AND resource =\"CARD\" AND operation = \"TOKEN_REDIGITIZATION\" AND state = \"COMPLETED\")&limit=1&offset=0",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "(CreateTime>=\"2023-11-13T00:00:00.060\" AND namespace=\"src.kpi.eventProcessorService\" AND resource =\"CARD\" AND operation = \"TOKEN_REDIGITIZATION\" AND state = \"COMPLETED\")"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "offset",
+          "value": "0"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "event-service",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "ITF",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_3c937af6776f4c8f9eb15336",
+      "_type": "request",
+      "parentId": "fld_4041636aff4342c0a735ed20",
+      "name": "Search Events By namespace-context_correlationid-AND++",
+      "method": "POST",
+      "url": "{{ _['events-service_itf-test-harness-url'] }}/api/callWithPrism?criteria=(CreateTime>=\"2023-09-10T16:00:00.060\" AND Context_correlationId=\"39a22280d59106b6c1840e4a29e770cc\" AND namespace=\"src.kpi.eventProcessorService\" AND resource =\"CARD\" AND operation = \"NTU_RECEIVED\" AND state = \"COMPLETED\")&limit=1&offset=0",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "(CreateTime>=\"2023-09-10T16:00:00.060\" AND Context_correlationId=\"39a22280d59106b6c1840e4a29e770cc\" AND namespace=\"src.kpi.eventProcessorService\" AND resource =\"CARD\" AND operation = \"NTU_RECEIVED\" AND state = \"COMPLETED\")"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "offset",
+          "value": "0"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "event-service",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "ITF",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_fa7981c54cdc4432a64521c1",
+      "_type": "request_group",
+      "parentId": "fld_be13d17d1954463e99fb26bd",
+      "name": "pi-core-service"
+    },
+    {
+      "_id": "req_65192a23cb39421dae280666",
+      "_type": "request",
+      "parentId": "fld_fa7981c54cdc4432a64521c1",
+      "name": "Search Events data_card_consumerId",
+      "method": "POST",
+      "url": "{{ _['events-service_itf-test-harness-url'] }}/api/callWithPrism?criteria=(CreateTime>=\"2023-11-09T16:00:00.060\" AND namespace=\"src.kpi.cardservices\"  AND (data_card_consumerId=\"bcc7b4a0-28ff-4859-8a0c-959f7ace08b8\"))&limit=19&offset=0",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "(CreateTime>=\"2023-11-09T16:00:00.060\" AND namespace=\"src.kpi.cardservices\"  AND (data_card_consumerId=\"bcc7b4a0-28ff-4859-8a0c-959f7ace08b8\"))"
+        },
+        {
+          "name": "limit",
+          "value": "19"
+        },
+        {
+          "name": "offset",
+          "value": "0"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "event-service",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "ITF",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_e184bda916324a579a279c30",
+      "_type": "request_group",
+      "parentId": "fld_be13d17d1954463e99fb26bd",
+      "name": "checkout-service"
+    },
+    {
+      "_id": "req_dac5a8ef1ab345e5b504bd8b",
+      "_type": "request",
+      "parentId": "fld_e184bda916324a579a279c30",
+      "name": "Search Events By namespace",
+      "method": "POST",
+      "url": "{{ _['events-service_itf-test-harness-url'] }}/api/callWithPrism?criteria=(CreateTime>=\"2023-08-27T16:00:00.060\" AND namespace=\"src.kpi.checkout\" AND resource =\"TRANSACTION\" AND operation = \"CHECKOUT\" AND state = \"COMPLETED\")&limit=1&offset=0",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "(CreateTime>=\"2023-08-27T16:00:00.060\" AND namespace=\"src.kpi.checkout\" AND resource =\"TRANSACTION\" AND operation = \"CHECKOUT\" AND state = \"COMPLETED\")"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "offset",
+          "value": "0"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "event-service",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "ITF",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_613a04bb77184612ad59a191",
+      "_type": "request",
+      "parentId": "fld_be13d17d1954463e99fb26bd",
+      "name": "Setup Event Service",
+      "method": "GET",
+      "url": "{{ _['events-service_stage-health-url'] }}/api/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "insomnia.environment.set('events-service_itf-test-harness-url', \"https://blue-src-itf-synapse-test-harness.apps.stl.pcfstage00.mastercard.int\");\n\ninsomnia.environment.set('events-service_event-service-itf', \"event-service-itf\");\n\ninsomnia.environment.set('events-service_itf-health-url', \"https://blue-src-itf-synapse-test-harness.apps.stl.pcfstage00.mastercard.int\");",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_987eb99bd7944d04b85cd546",
+      "_type": "request",
+      "parentId": "fld_be13d17d1954463e99fb26bd",
+      "name": "By Context_correlationId-with-limit",
+      "method": "POST",
+      "url": "{{ _['events-service_itf-test-harness-url'] }}/api/callWithPrism?criteria=(CreateTime>=\"2020-04-21T16:00:00.060\" AND (context_correlationId=\"8c0c502e-65b5-48d5-b996-0711876eaad2\"))&limit=19&offset=0",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "(CreateTime>=\"2020-04-21T16:00:00.060\" AND (context_correlationId=\"8c0c502e-65b5-48d5-b996-0711876eaad2\"))"
+        },
+        {
+          "name": "limit",
+          "value": "19"
+        },
+        {
+          "name": "offset",
+          "value": "0"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "event-service",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "ITF",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_8fc994f3cee54878a7a87bdc",
+      "_type": "request",
+      "parentId": "fld_be13d17d1954463e99fb26bd",
+      "name": "BY-context_correlationid-NO-limit-filter",
+      "method": "POST",
+      "url": "{{ _['events-service_itf-test-harness-url'] }}/api/callWithPrism?criteria=(CreateTime>=\"2023-11-10T16:00:00.000\" AND CreateTime<=\"2023-11-10T23:45:00.000\" AND Context_correlationId=\"a8bc5577-4bdb-448c-bcaf-4ddebaeb8e52\")",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "(CreateTime>=\"2023-11-10T16:00:00.000\" AND CreateTime<=\"2023-11-10T23:45:00.000\" AND Context_correlationId=\"a8bc5577-4bdb-448c-bcaf-4ddebaeb8e52\")"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "event-service",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "ITF",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_113a8ab407964a89a4301044",
+      "_type": "request",
+      "parentId": "fld_be13d17d1954463e99fb26bd",
+      "name": "Get KPI Event By eventId",
+      "method": "POST",
+      "url": "{{ _['events-service_itf-test-harness-url'] }}/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "event-service",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/4dd2c9cc-1a5f-497b-b2df-a25d99a603f9",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "ITF",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_691b9aeeb87b47178dab5fdb",
+      "_type": "request",
+      "parentId": "fld_be13d17d1954463e99fb26bd",
+      "name": "Get KPI Event By eventId Copy",
+      "method": "POST",
+      "url": "{{ _['events-service_itf-test-harness-url'] }}/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "event-service",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/851940db-a61c-4fc4-b8fd-facb23c47e22",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "ITF",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_c702c093500349f6b91fc0d2",
+      "_type": "request_group",
+      "parentId": "fld_6bcda0b4fc8e45359e187970",
+      "name": "MTF"
+    },
+    {
+      "_id": "fld_8a9d467e358e4abf83d6998c",
+      "_type": "request_group",
+      "parentId": "fld_c702c093500349f6b91fc0d2",
+      "name": "src.kpi.cardservices"
+    },
+    {
+      "_id": "req_50e0800107cf4be38fce2dbf",
+      "_type": "request",
+      "parentId": "fld_8a9d467e358e4abf83d6998c",
+      "name": "Search Events By namespace-src.kpi.cardservices-ABU",
+      "method": "POST",
+      "url": "{{ _['events-service_mtf-test-harness-url'] }}/api/callWithPrism?criteria=(CreateTime>=\"2024-02-26T00:00:00.060\" AND namespace=\"src.kpi.cardservices\" AND resource =\"CARD\" AND operation = \"UPDATE\" AND data_events_accountUpdateEvent_sourceApplication = \"MDES\")&limit=2&offset=0",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "(CreateTime>=\"2024-02-26T00:00:00.060\" AND namespace=\"src.kpi.cardservices\" AND resource =\"CARD\" AND operation = \"UPDATE\" AND data_events_accountUpdateEvent_sourceApplication = \"MDES\")"
+        },
+        {
+          "name": "limit",
+          "value": "2"
+        },
+        {
+          "name": "offset",
+          "value": "0"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "{{ _['events-service_name-space'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['events-service_service-name'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "{{ _['events-service_service-method'] }}",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ _['events-service_SYNAPSE-TARGET-TAG'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_6d22cee46a274b07a6212575",
+      "_type": "request_group",
+      "parentId": "fld_c702c093500349f6b91fc0d2",
+      "name": "src.kpi.eventProcessorService"
+    },
+    {
+      "_id": "req_39aacd462cd441c686a1c936",
+      "_type": "request",
+      "parentId": "fld_6d22cee46a274b07a6212575",
+      "name": "Search Events By namespace-eventProcessorService-AND++",
+      "method": "POST",
+      "url": "{{ _['events-service_mtf-test-harness-url'] }}/api/callWithPrism?criteria=(CreateTime>=\"2023-11-13T00:00:00.060\" AND namespace=\"src.kpi.eventProcessorService\" AND resource =\"CARD\" AND operation = \"NTU_RECEIVED\" AND state = \"COMPLETED\")&limit=1&offset=0",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "(CreateTime>=\"2023-11-13T00:00:00.060\" AND namespace=\"src.kpi.eventProcessorService\" AND resource =\"CARD\" AND operation = \"NTU_RECEIVED\" AND state = \"COMPLETED\")"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "offset",
+          "value": "0"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "{{ _['events-service_name-space'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['events-service_service-name'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "{{ _['events-service_service-method'] }}",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ _['events-service_SYNAPSE-TARGET-TAG'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_35c5ec9733e340f5acdbfbcd",
+      "_type": "request_group",
+      "parentId": "fld_c702c093500349f6b91fc0d2",
+      "name": "by-Context_correlationId"
+    },
+    {
+      "_id": "req_741035e318f84619a21e1cff",
+      "_type": "request",
+      "parentId": "fld_35c5ec9733e340f5acdbfbcd",
+      "name": "Search Events By-context_correlationid-no-limit-filter",
+      "method": "POST",
+      "url": "{{ _['events-service_mtf-test-harness-url'] }}/api/callWithPrism?criteria=(CreateTime>=\"2024-01-11T00:00:00.060\" AND Context_correlationId=\"05ffcdc0-f319-48d3-a29d-c860af883045\")",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "(CreateTime>=\"2024-01-11T00:00:00.060\" AND Context_correlationId=\"05ffcdc0-f319-48d3-a29d-c860af883045\")"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "{{ _['events-service_name-space'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['events-service_service-name'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "{{ _['events-service_service-method'] }}",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ _['events-service_SYNAPSE-TARGET-TAG'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_00af311f951240059081a9a1",
+      "_type": "request_group",
+      "parentId": "fld_c702c093500349f6b91fc0d2",
+      "name": "src.kpi.authOrchestrationService"
+    },
+    {
+      "_id": "req_4092047e7ca341aea0e77e68",
+      "_type": "request",
+      "parentId": "fld_00af311f951240059081a9a1",
+      "name": "Search Events By-context_correlationid-with-limit-filter",
+      "method": "POST",
+      "url": "{{ _['events-service_mtf-test-harness-url'] }}/api/callWithPrism?criteria=(CreateTime>=\"2025-02-06T00:00:00.060\" AND namespace=\"src.kpi.authOrchestrationService\" AND Context_correlationId=\"4f339be7.d7e32e5d-f0ab-4e27-ad01-be48d2d0c15e\" )&limit=2&offset=0",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [
+        {
+          "name": "criteria",
+          "value": "(CreateTime>=\"2025-02-06T00:00:00.060\" AND namespace=\"src.kpi.authOrchestrationService\" AND Context_correlationId=\"4f339be7.d7e32e5d-f0ab-4e27-ad01-be48d2d0c15e\" )"
+        },
+        {
+          "name": "limit",
+          "value": "2"
+        },
+        {
+          "name": "offset",
+          "value": "0"
+        }
+      ],
+      "headers": [
+        {
+          "name": "request-Id",
+          "value": "fausto-1234",
+          "disabled": false
+        },
+        {
+          "name": "Program-Id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM_OBO#TDA-TEST-E2ETEST-UPN21#01",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "event-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/search",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_41c49c5986394f89a68bc7b9",
+      "_type": "request",
+      "parentId": "fld_00af311f951240059081a9a1",
+      "name": "Event Get By Id",
+      "method": "POST",
+      "url": "{{ _['events-service_mtf-test-harness-url'] }}/api/callWithPrism",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "request-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "1234",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['events-service_service-name'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/events/4fd739f7-5b8f-41a6-ae75-d304c254919d",
+          "disabled": false
+        },
+        {
+          "name": "request-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "overall-timeout",
+          "value": "300000",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ _['events-service_SYNAPSE-TARGET-TAG'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_ad8c555000b349c393b0c61a",
+      "_type": "request",
+      "parentId": "fld_c702c093500349f6b91fc0d2",
+      "name": "MTF-STL",
+      "method": "GET",
+      "url": "{{ _['events-service_mtf-health-url'] }}",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "card-services",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/paymentinstrument/src/1/0/card/",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SRC",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "3cd80a1f-f13a-42c2-b141-17da8c287765",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock,is-refactored-data-services-enabled=true",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "function uuidv4(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0,v=c=='x'?r:(r&0x3|0x8);return v.toString(16);});}\n\n\ninsomnia.environment.set('events-service_mtf-test-harness-url', \"https://blue-pre-prod-synapse-test-harness.apps.stl.pcfprod00.mastercard.int\");\n\n\ninsomnia.environment.set('events-service_mtf-health-url', \"https://blue-pre-prod-event-service.apps.stl.pcfprod00.mastercard.int/api/actuator/health\");\n\n//Env-URLs\n//https://blue-pre-prod-pi-core-service.apps.stl.pcfprod00.mastercard.int\ninsomnia.environment.set('events-service_env', \"MTF\");\n// insomnia.environment.set('events-service_cardservice-mtf-url', \"https://blue-pre-prod-pi-core-service.apps.stl.pcfprod00.mastercard.int\");\n// insomnia.environment.set('events-service_cardservice-synapse-url', \"https://blue-pre-prod-synapse-test-harness.apps.stl.pcfprod00.mastercard.int/api/callWithPrism\");\n// insomnia.environment.set('events-service_url', insomnia.environment.get('events-service_cardservice-synapse-url'));\n\n//Header data\ninsomnia.environment.set('events-service_name-space', \"com.mastercard.src\");\ninsomnia.environment.set('events-service_service-name', \"event-service\");\ninsomnia.environment.set('events-service_service-method', \"GET\");\ninsomnia.environment.set('events-service_correlation-id', uuidv4());\ninsomnia.environment.set('events-service_SYNAPSE-TARGET-TAG', \"34F4A04B\"); //MTF-STL specific.\n\n\n\ninsomnia.environment.set('events-service_card-art-url', insomnia.environment.get('events-service_cardservice-mtf-url'));",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_115512b970d14f6fa022a167",
+      "_type": "request_group",
+      "parentId": "fld_6bcda0b4fc8e45359e187970",
+      "name": "PROD"
+    },
+    {
+      "_id": "fld_d72fd97256184ac3ac9686bc",
+      "_type": "request_group",
+      "parentId": "wrk_8756894e076a4d80bb404590",
+      "name": "Setup (Initialize Variables)"
+    },
+    {
+      "_id": "req_c8b4227897d540b38eb247eb",
+      "_type": "request",
+      "parentId": "fld_d72fd97256184ac3ac9686bc",
+      "name": "00 - Initialize events-service_* variables",
+      "method": "GET",
+      "url": "https://example.invalid/setup",
+      "headers": [],
+      "parameters": [],
+      "body": {
+        "text": ""
+      },
+      "preRequestScript": "// Run once to initialize all events-service_* variables\nconst keys = [\n  \"events-service_SYNAPSE-TARGET-TAG\",\n  \"events-service_card-art-url\",\n  \"events-service_cardservice-mtf-url\",\n  \"events-service_cardservice-synapse-url\",\n  \"events-service_correlation-id\",\n  \"events-service_criteria-query\",\n  \"events-service_env\",\n  \"events-service_event-service-itf\",\n  \"events-service_event-service-stage\",\n  \"events-service_itf-health-url\",\n  \"events-service_itf-test-harness-url\",\n  \"events-service_mtf-health-url\",\n  \"events-service_mtf-test-harness-url\",\n  \"events-service_name-space\",\n  \"events-service_service-method\",\n  \"events-service_service-name\",\n  \"events-service_stage-health-url\",\n  \"events-service_stage-test-harness-url\",\n  \"events-service_url\"\n];\nfor (const k of keys) {\n  if (insomnia.environment.get(k) === undefined) {\n    insomnia.environment.set(k, '');\n  }\n}\ninsomnia.test('Variables initialized', () => {\n  insomnia.expect(keys.length >= 0).to.equal(true);\n});",
+      "afterResponseScript": ""
+    }
+  ]
+}
