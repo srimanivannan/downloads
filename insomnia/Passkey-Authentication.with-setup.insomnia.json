@@ -1,0 +1,585 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-02T12:22:17.947076Z",
+  "__export_source": "Postman->Insomnia",
+  "resources": [
+    {
+      "_id": "wrk_0e30f95a03cb4318a216bc6c",
+      "_type": "workspace",
+      "name": "Passkey Authentication (with setup)",
+      "description": "Passkey Authentication Flow with setup"
+    },
+    {
+      "_id": "fld_f809d79d15db481997e0e549",
+      "_type": "request_group",
+      "parentId": "wrk_0e30f95a03cb4318a216bc6c",
+      "name": "Passkey Authentication"
+    },
+    {
+      "_id": "fld_540ec8e65ffc4a7ab7fed50d",
+      "_type": "request_group",
+      "parentId": "fld_f809d79d15db481997e0e549",
+      "name": "1st Party Passkey"
+    },
+    {
+      "_id": "req_2a70e5ef5686489cb18585a1",
+      "_type": "request",
+      "parentId": "fld_540ec8e65ffc4a7ab7fed50d",
+      "name": "0 - Setup Env [stage]",
+      "method": "GET",
+      "url": "{{ _['checkout-service_automation-test-harness-url'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": true
+        },
+        {
+          "name": "cache-control",
+          "value": "no-cache",
+          "disabled": true
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": true
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['checkout-service_src4c-checkout-service-name'] }}",
+          "disabled": true
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/src4c/transaction/credentials",
+          "disabled": true
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": true
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "UP",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "function uuidv4(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0,v=c=='x'?r:(r&0x3|0x8);return v.toString(16);});}\nconst synapseTag = \"UP\";\nconst certifiedMfaId = \"20001\"; \n\n\n// US | CREDIT | 118254\n// const binRangeStart = \"5207990300000000000\"\n// const binRangeEnd = \"5207990399999999999\"\nconst binRangeStart = \"5207990300000000000\"\nconst binRangeEnd = \"5207990399999999999\"\n\ninsomnia.environment.set('checkout-service_instance-id', uuidv4());\ninsomnia.environment.set('checkout-service_app-instance-id', uuidv4());\ninsomnia.environment.set('checkout-service_external-instance-id', uuidv4());\ninsomnia.environment.set('checkout-service_bin-range-start', binRangeStart);\ninsomnia.environment.set('checkout-service_bin-range-end', binRangeEnd);\ninsomnia.environment.set('checkout-service_certified-mfa-id', certifiedMfaId);\ninsomnia.environment.set('checkout-service_authenticationFactors', \"020H\");\n/*******************************************************/\n\n\n\nvar stageSynapse = \"https://blue-src-stage-synapse-test-harness.apps.stl.pcfstage00.mastercard.int/\";\nvar jwtGenerationURL = \"https://blue-src-stage-alberta-libs-harness.apps.stl.pcfstage00.mastercard.int/\";\ninsomnia.environment.set('checkout-service_jwt-generation-test-harness', \"https://blue-src-stage-alberta-libs-harness.apps.stl.pcfstage00.mastercard.int/\");\ninsomnia.environment.set('checkout-service_automation-test-harness-url', \"https://blue-src-stage-af-test-harness.apps.stl.pcfstage00.mastercard.int/api/callWithAppFramework\");\n\n\ninsomnia.environment.set('checkout-service_synapse-target-tag-stage', \"UP\");\ninsomnia.environment.set('checkout-service_synapse-target-tag-itf', \"ITF\");\ninsomnia.environment.set('checkout-service_synapse-target-tag-perf', \"PERF\");\ninsomnia.environment.set('checkout-service_synapse-target-tag-kick1', \"\");\n\ninsomnia.environment.set('checkout-service_mock-option', \"all-mock\");\ninsomnia.environment.set('checkout-service_user-agent', \"nudata_addcard_score:E6B42E33-BD22-471D-A169-32B25F1B4773\");\n\ninsomnia.environment.set('checkout-service_consumer-service-name', \"consumer-services\");\ninsomnia.environment.set('checkout-service_card-service-name', \"card-services\");\ninsomnia.environment.set('checkout-service_address-service-name', \"address-services\");\ninsomnia.environment.set('checkout-service_checkout-service-name', \"orchestration-checkout\");\ninsomnia.environment.set('checkout-service_transaction-config-service-name', \"transaction-config-service\");\n\n\n\n/* ---------------------------------- STAGE --------------------------------- */\n// insomnia.environment.set('checkout-service_src-client-id', \"54e380ef-9fd0-4590-86c2-e196770bf01d\");\n// insomnia.environment.set('checkout-service_program-id', \"SECURE_COF_COMMERCE_PLATFORM#AKASHTESTNAME111-UPN3#01\");\n\ninsomnia.environment.set('checkout-service_src-client-id', \"13435294-fa4e-4acb-8fe6-05ab66b08881\");\ninsomnia.environment.set('checkout-service_program-id', \"SECURE_COF_COMMERCE_PLATFORM#START_CPD_STG#01\");\n\n\n// insomnia.environment.set('checkout-service_pan-number', \"5207990372810210\")\ninsomnia.environment.set('checkout-service_pan-number', \"5207980000064587\")\n// insomnia.environment.set('checkout-service_pan-number', \"5554958163457714\")\n// insomnia.environment.set('checkout-service_pan-number', \"5204248976020410\")\n\n\n\n\ninsomnia.environment.set('checkout-service_synapse-target-tag', \"UP\")\n/* ----------------------------------- ITF ---------------------------------- */\n/* ----------------------------------- MTF ---------------------------------- */",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_30af2b6154234b74825c47e2",
+      "_type": "request",
+      "parentId": "fld_540ec8e65ffc4a7ab7fed50d",
+      "name": "1 - Create & Activate Consumer",
+      "method": "POST",
+      "url": "{{ _['checkout-service_automation-test-harness-url'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"biometrics\": {},\n    \"cookie_consent_version\": \"2.1\",\n    \"email\": \"{{ _['checkout-service_$randomEmail'] }}\",\n    \"first_name\": \"Zain\",\n    \"last_name\": \"Ali\",\n    \"mobile\": \"{{ _['checkout-service_phone-number'] }}\",\n    \"preferred_language\": \"EN\",\n    \"privacy_policy_version\": \"2.1\",\n    \"residency_country_code\": \"US\",\n    \"tnc_version\": \"2.1\",\n    \"mobile_country_code\": \"1\",\n    \"wallet_id\": \"masterpass\",\n    \"status\": \"ACTIVE\",\n    \"enrollment_provider_id\": \"test\",\n    \"identity_types\": [\n        \"EMAIL\"\n    ]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['checkout-service_consumer-service-name'] }}",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/consumers",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "{{ _['checkout-service_program-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['checkout-service_correlation-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ _['checkout-service_synapse-target-tag'] }}",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "{{ _['checkout-service_mock-option'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "function uuidv4(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0,v=c=='x'?r:(r&0x3|0x8);return v.toString(16);});}\ninsomnia.environment.set('checkout-service_correlation-id', uuidv4());\ninsomnia.environment.set('checkout-service_phone-number', _.random(1000000000, 9999999999));",
+      "afterResponseScript": "var jsonData = insomnia.response.json();\n    pm.response.to.have.status(201);\ninsomnia.environment.set('checkout-service_consumer-id', jsonData.consumer_id);"
+    },
+    {
+      "_id": "req_02862cbb74a04ca09624023e",
+      "_type": "request",
+      "parentId": "fld_540ec8e65ffc4a7ab7fed50d",
+      "name": "2 - Create Card",
+      "method": "POST",
+      "url": "{{ _['checkout-service_automation-test-harness-url'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{  \n   \"primaryAccountNumber\":\"{{ _['checkout-service_pan-number'] }}\",\n   \"expiryDate\":\"1129\",\n   \"tokenRequestorId\":\"50123197928\",\n   \"primaryAccountNumberSource\":\"CARD_ADDED_VIA_APPLICATION\",\n   \"cvc2\":123,\n   \"cardHolderName\":\"Zain Ali\",\n   \"consumerId\":\"{{ _['checkout-service_consumer-id'] }}\",\n   \"programId\":null,\n   \"ipAddress\":null,\n   \"geoLocation\":null,\n   \"address\":null\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['checkout-service_card-service-name'] }}",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/paymentinstrument/src/1/0/card",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "{{ _['checkout-service_program-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['checkout-service_correlation-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ _['checkout-service_synapse-target-tag'] }}",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "{{ _['checkout-service_mock-option'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "var jsonData = insomnia.response.json();\n    pm.response.to.have.status(200);\ninsomnia.environment.set('checkout-service_src-digital-card-id', jsonData.cardMetaData.cardId);"
+    },
+    {
+      "_id": "req_c739bcf3fc37432db36ea1eb",
+      "_type": "request",
+      "parentId": "fld_540ec8e65ffc4a7ab7fed50d",
+      "name": "3 - Get SRCi Client",
+      "method": "POST",
+      "url": "{{ _['checkout-service_automation-test-harness-url'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "name-space",
+          "value": "com.mastercard.digital.platform",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "{{ _['checkout-service_transaction-config-service-name'] }}",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/transaction-config/v0/client/{{ _['checkout-service_src-client-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "GET",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "{{ _['checkout-service_program-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "d954b19c-d649-11e9-bb65-2a2ae2dbcce4",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ _['checkout-service_synapse-target-tag'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "var jsonData = insomnia.response.json();\n    pm.response.to.have.status(200);\ninsomnia.environment.set('checkout-service_auth-client-id', jsonData.srciEntityData.authClientId);"
+    },
+    {
+      "_id": "req_71600e22ca94485db1661e86",
+      "_type": "request",
+      "parentId": "fld_540ec8e65ffc4a7ab7fed50d",
+      "name": "4.1 - Authentication Initiate IDV",
+      "method": "POST",
+      "url": "{{ _['checkout-service_automation-test-harness-url'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"srcCorrelationId\": \"{{ _['checkout-service_correlation-id'] }}\",\n    \"srcClientId\": \"{{ _['checkout-service_src-client-id'] }}\",\n    \"serviceId\": \"{{ _['checkout-service_program-id'] }}\",\n    \"srcDigitalCardId\": \"{{ _['checkout-service_src-digital-card-id'] }}\",\n    \"authenticationContext\": {\n        \"authenticationReasons\": [\n            \"CONSUMER_IDENTITY_VALIDATION\"\n        ]\n    },\n    \"authenticationMethod\": {\n        \"authenticationMethodType\": \"SMS_OTP\",\n        \"authenticationSubject\": \"CARDHOLDER\",\n        \"authenticationCredentialReference\": \"12X-XXX-XX32\"\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "SRC-Correlation-Id",
+          "value": "{{ _['checkout-service_correlation-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "authentication-orchestration-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/accountholder/authentications/authenticate",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "UP",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "function uuidv4(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0,v=c=='x'?r:(r&0x3|0x8);return v.toString(16);});}\n//6qvOpax-RfmxofywZTcnyQ000000000000US\nvar correlationId = uuidv4(); \n\nconsole.log(\"spk-ext-fido-correlationId = \" + correlationId);\ninsomnia.environment.set('checkout-service_spk-ext-fido-correlationId', correlationId);\n\n\n//\"srcClientId\": \"13435294-fa4e-4acb-8fe6-05ab66b08881\",",
+      "afterResponseScript": "let jsonData = insomnia.response.json();\n\ninsomnia.environment.set('checkout-service_fido-authSessionId', jsonData.authenticationSessionId);"
+    },
+    {
+      "_id": "req_92bb346c4a60464d86177d6c",
+      "_type": "request",
+      "parentId": "fld_540ec8e65ffc4a7ab7fed50d",
+      "name": "4.1 - Authentication Authenticate IDV",
+      "method": "POST",
+      "url": "{{ _['checkout-service_automation-test-harness-url'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"srcCorrelationId\": \"{{ _['checkout-service_correlation-id'] }}\",\n    \"srcClientId\": \"{{ _['checkout-service_src-client-id'] }}\",\n    \"serviceId\": \"{{ _['checkout-service_program-id'] }}\",\n    \"authenticationSessionId\": \"{{ _['checkout-service_fido-authSessionId'] }}\",\n    \"srcDigitalCardId\": \"{{ _['checkout-service_src-digital-card-id'] }}\",\n    \"authenticationMethod\": {\n        \"authenticationMethodType\": \"SMS_OTP\",\n        \"authenticationSubject\": \"CARDHOLDER\",\n        \"authenticationCredentialReference\": \"12X-XXX-XX32\",\n        \"methodAttributes\": {\n            \"otpValue\": \"987654\"\n        }\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "SRC-Correlation-Id",
+          "value": "{{ _['checkout-service_correlation-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "authentication-orchestration-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/accountholder/authentications/authenticate",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "UP",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "function uuidv4(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0,v=c=='x'?r:(r&0x3|0x8);return v.toString(16);});}\n//6qvOpax-RfmxofywZTcnyQ000000000000US\nvar correlationId = uuidv4(); \n\nconsole.log(\"spk-ext-fido-correlationId = \" + correlationId);\ninsomnia.environment.set('checkout-service_spk-ext-fido-correlationId', correlationId);\n\n\n//\"srcClientId\": \"13435294-fa4e-4acb-8fe6-05ab66b08881\",",
+      "afterResponseScript": "let jsonData = insomnia.response.json();\n\ninsomnia.environment.set('checkout-service_spk-ext-fido-authSessionId', jsonData.authenticationSessionId);"
+    },
+    {
+      "_id": "req_4299e4e7696a4d5ab4bbd3f4",
+      "_type": "request",
+      "parentId": "fld_540ec8e65ffc4a7ab7fed50d",
+      "name": "5. 1P Das POA - JWT Util",
+      "method": "POST",
+      "url": "https://authentication-downstream-simulator.apps.stl.pcfstage00.mastercard.int/accountholder/authentications/das/jwt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n   \"srcDigitalCardId\": \"{{ _['checkout-service_src-digital-card-id'] }}\",\n   \"appInstanceId\": \"{{ _['checkout-service_app-instance-id'] }}\",\n   \"clientSessionId\": \"{{ _['checkout-service_correlation-id'] }}\",\n   \"consumerId\": \"fcda39ed-78dc-4c25-9c79-8ec04ebd44bb\",\n   \"dasAuthenticatorInstanceId\": \"{{ _['checkout-service_dasAuthenticatorInstanceId'] }}\",\n   \"dasKeyAliasId\": \"20250324171807-das-mac-sign-stg\",\n   \"XdasKeyAliasId\": \"20240627155011-das-mac-sign-stg\",\n   \"isChallengePerformed\": \"true\",\n   \"assertionType\": \"authentication\",\n   \"certifiedMFAMethodId\": \"{{ _['checkout-service_certified-mfa-id'] }}\",\n   \"authenticationFactors\": \"020A\",\n   \"authenticatingEntityId\": \"A3001\",\n   \"authenticationMethod\": \"FIDO2\",\n   \"authenticationReasons\": \"TRANSACTION_AUTHENTICATION\"\n}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "SRC-Correlation-Id",
+          "value": "eedf9087-d98e-4288-827e-7046649e4b2f",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "a62069ce-3a25-408a-a7d2-6645b0daef72",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('checkout-service_clientSessionId', insomnia.environment.get('checkout-service_correlation-id'));\n\ninsomnia.environment.set('checkout-service_dasAuthenticatorInstanceId', \"r2B6mkiTTzWPb2T56koUYA000000000010US\");\ninsomnia.environment.set('checkout-service_certifiedMFAMethodId', \"20001\");",
+      "afterResponseScript": "let jsonData = insomnia.response.json();\nvar dasPoa = jsonData.proofOfAuthentication;\ninsomnia.environment.set('checkout-service_proofOfAuthentication', dasPoa);\n//console.log(insomnia.environment.get('checkout-service_proofOfAuthentication'));\nconsole.log(dasPoa);"
+    },
+    {
+      "_id": "req_3d1fe4b28ee74db487edf7ea",
+      "_type": "request",
+      "parentId": "fld_540ec8e65ffc4a7ab7fed50d",
+      "name": "6. B2C Authenticate",
+      "method": "POST",
+      "url": "{{ _['checkout-service_automation-test-harness-url'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"srcDigitalCardId\": \"{{ _['checkout-service_src-digital-card-id'] }}\",\n    \"accountReference\": {\n        \"srcDigitalCardId\": \"{{ _['checkout-service_src-digital-card-id'] }}\"\n    },\n    \"authenticationContext\": {\n        \"authenticationReasons\": [\n            \"TRANSACTION_AUTHENTICATION\"\n        ],\n        \"dpaTransactionOptions\": {\n            \"dpaShippingPreference\": \"FULL\",\n            \"dpaBillingPreference\": \"FULL\",\n            \"threeDsPreference\": \"NONE\",\n            \"paymentOptions\": [\n                {\n                    \"dpaDynamicDataTtlMinutes\": 15,\n                    \"dpaPanRequested\": false,\n                    \"dynamicDataType\": \"CARD_APPLICATION_CRYPTOGRAM_SHORT_FORM\"\n                }\n            ],\n            \"consumerEmailAddressRequested\": true,\n            \"consumerNameRequested\": true,\n            \"consumerPhoneNumberRequested\": true,\n            \"consumerNationalIdentifierRequested\": false,\n            \"confirmPayment\": false,\n            \"dpaAcceptedBillingCountries\": [],\n            \"dpaAcceptedShippingCountries\": [],\n            \"dpaLocale\": \"en_US\",\n            \"authenticationPreferences\": {\n                \"authenticationMethods\": [],\n                \"suppressChallenge\": false,\n                \"payloadRequested\": \"AUTHENTICATED\"\n            },\n            \"transactionAmount\": {\n                \"transactionAmount\": 100,\n                \"transactionCurrencyCode\": \"USD\"\n            },\n            \"merchantCategoryCode\": \"0008\",\n            \"merchantCountryCode\": \"US\",\n            \"customInputData\": {\n                \"com.mastercard.dcfExperience\": \"WITHIN_CHECKOUT\"\n            },\n            \"threeDsInputData\": {\n                \"dpa\": {\n                    \"dpaPresentationName\": \"Vitrine\",\n                    \"dpaName\": \"Vitrine Test Merchant\",\n                    \"acquirerId\": \"550e8400\",\n                    \"acquirerBin\": \"44444\"\n                },\n                \"acquirer\": {\n                    \"merchantID\": \"550e8400\",\n                    \"bin\": \"44444\"\n                }\n            }\n        },\n        \"dpaData\": {\n            \"dpaPresentationName\": \"Vitrine\",\n            \"dpaName\": \"Vitrine Test Merchant\",\n            \"acquirerId\": \"550e8400\",\n            \"acquirerBin\": \"44444\",\n            \"merchantCategoryCode\": \"0008\",\n            \"merchantCountryCode\": \"US\"\n        },\n        \"srcDpaId\": \"b756a2b0-ef62-4c62-a6de-f72e75ce5f17\",\n        \"acquirerMerchantId\": \"550e8400\",\n        \"acquirerBIN\": \"44444\",\n        \"consumerDeviceData\": {\n            \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\",\n            \"screenWidth\": 1728,\n            \"screenHeight\": 1117,\n            \"spcSupported\": false,\n            \"deviceRecognitionToken\": \"eyJraWQiOiIyMDI0MDczMDE4NDQzMi1kYXMtc2lnbi1zdGciLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJodHRwczpcL1wvc3RhZ2UudmVyaWZ5Lm1hc3RlcmNhcmQuY29tIiwiY2xpZW50U2Vzc2lvbklkIjoiMzRmNGEwNGIuNjM1NTg5ZmQtNTY0ZS00YjM3LWFjNWQtYzQyYjgwNjlmNGExIiwiaXNzIjoiaHR0cHM6XC9cL3N0YWdlLnZlcmlmeS5tYXN0ZXJjYXJkLmNvbSIsImV4cCI6MTcyODM5NTg4OSwiZGV2aWNlSWQiOiJTSTkxLVlQTVRicU1zMGJDbGVjLTVRMDAwMDAwMDAwMDEwVVMiLCJpYXQiOjE3MjgzOTQ5ODksImp0aSI6IjdhODU2NDEyLThmMTEtNGI0ZC04MWJjLWIxOTY5NTAwODg3OCJ9.D9ZwYhfUInYHGx5uC9_olQ5sA-BPBdMM_ArWXlrjPYTpirwDJWe9OO4Wm18iIuusaVC_BPEcYWvgQKWAgD9G9zPenk7fHPa5dpoIsK5E8gNiv4WHU6llwvb8ZBjkXF2YjsXImLnttDxLuVOUQOyvY0IlIKn5JpQtzNmy1Tf-W52M9fIWoT3sLEuEj0f99Tgl7E09L0riJgk3LHkLcGmfvoJP-9KWye4v57cfZP_9lQ4AsMBlVQ-D5Fx9QCVIsi-iZeEe0dfrn6_mMdvjq-m11vTht75QZDM4r22vdKpOLoQS0dEEWT12QfXJTGteS4HjSXOkcTKhwoYYncJJM13vqg\"\n        }\n    },\n    \"srcCorrelationId\": \"{{ _['checkout-service_correlation-id'] }}\",\n    \"srcClientId\": \"{{ _['checkout-service_src-client-id'] }}\",\n    \"serviceId\": \"{{ _['checkout-service_program-id'] }}\",\n    \"srciTransactionId\": \"1cf37ac8-05b2-4e71-bf84-143ae1aae459\",\n    \"authenticationMethod\": {\n        \"authenticationMethodType\": \"FIDO2\",\n        \"authenticationSubject\": \"CARDHOLDER\",\n        \"uriData\": {\n            \"uri\": \"https://stage.src.mastercard.com/auth\",\n            \"uriType\": \"WEB_URI\"\n        },\n        \"methodAttributes\": {\n            \"boundMfaMethod\": {\n                \"mfaMethod\": {\n                    \"type\": \"FIDO2\",\n                    \"assertionData\": {\n                        \"proofOfAuthentication\": \"{{ _['checkout-service_proofOfAuthentication'] }}\"\n                    },\n                    \"certifiedMfaMethodId\": \"{{ _['checkout-service_certified-mfa-id'] }}\",\n                    \"mfaMethodInstanceId\": \"{{ _['checkout-service_dasAuthenticatorInstanceId'] }}\",\n                    \"fidoMfaMethodData\": {\n                        \"relyingPartyInfo\": {\n                            \"name\": \"mastercard.com\"\n                        },\n                        \"fidoUserName\": \"n*****d@gmail.com\",\n                        \"fidoDisplayName\": \"n*****d@gmail.com\",\n                        \"fidoUserId\": \"860b4b86-6d98-4a1d-8f29-63a349d21c28\",\n                        \"isSpcEnabled\": false\n                    }\n                },\n                \"authenticatorDeviceBindingAssessment\": \"VERIFIED_FOR_USE_ON_THIS_DEVICE\",\n                \"authenticatorLocation\": \"THIS_DEVICE\"\n            },\n            \"extAuthProviderMetaData\": {\n                \"authSessionId\": \"jc8CdL6YQ6-O-xs9HBJT3g000000000010US\",\n                \"accessToken\": \"eyJraWQiOiIyMDI0MDkwMjExMTAzOC1zdGctbWMtZGFzLWZlZHJhdGVkLXRva2VuLXNyYy1tYXN0ZXJjYXJkLWludCIsImFsZyI6IlJTMjU2In0.eyJhdWQiOiJkaWdpdGFsYXV0aGVudGljYXRpb25zZXJ2aWNlIiwic3ViIjoiNjNkNGNiZWYtOGYwZC00NzRkLTk0ZTItN2IyY2ExZjg2ZjhmIiwibmJmIjoxNzI4Mzk0OTkwLCJpc3MiOiJodHRwczpcL1wvbWFzdGVyY2FyZC5jb20iLCJleHAiOjE3MjgzOTU4OTAsImlhdCI6MTcyODM5NDk5MCwianRpIjoiMjNiMGI5M2UtMGM5Ni00YTM4LTg0YzItNjVlMGViZDUzODNlIn0.n1YYTJLca55eqNx8I2_WYRSLxUajOtTomvyuszB61tZfEwTZorjh4tO9uLq3nooTNxDWS6ynsJOjepIU27eAkOKQASF92xyie4EzjCRRGqZlgULrb9ZHXIuWisc7NesBvv95BnuN6WB8H6xhj_tgYUIda4jLSMxay1va-RKqWKGs5Y3X29qCj5277wUnEATSuh6ADjfa7-FCrjWIVeY5rkeTq20Ju7fGP7RLy690W3DoBOyA17Scgx_Xv4BMhlObINdFPQxgVfYqLYYfR3AbqatSo5i5LMikDim1nr-yqJc6HtuzKsfC6mg_R5igGbfHIAjzyRLIwXCD3PpaqrgnuA\"\n            }\n        }\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "SRC-Client-Id",
+          "value": "5a9f8c51-7ad1-40c6-b828-b7437b9334f6",
+          "disabled": true
+        },
+        {
+          "name": "SRC-Correlation-Id",
+          "value": "00b1e460-2fa3-4bbe-92d2-d0ab206f48b3",
+          "disabled": true
+        },
+        {
+          "name": "X-SRC-CARD-TOKEN",
+          "value": "{{ _['checkout-service_authTokenWithPrelimsClaims'] }}",
+          "disabled": true
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": true
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "authentication-orchestration-service",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/accountholder/authentications/authenticate",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "34F4A04B",
+          "disabled": true
+        },
+        {
+          "name": "Cookie",
+          "value": "appInstanceId=bc9f4f9f-e454-4297-8745-20a929901b32",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "{{ _['checkout-service_program-id'] }}",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "a749c20a-6a10-4480-80f0-7b0df3c78fe5",
+          "disabled": true
+        },
+        {
+          "name": "X-SRC-FEATURE-TOGGLE",
+          "value": "auth-provider.migrate-to-composite-auth-token=true",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "console.log(insomnia.environment.get('checkout-service_proofOfAuthentication'));",
+      "afterResponseScript": "let jsonData = insomnia.response.json();\nvar assuranceData = jsonData.assuranceData.verificationData[0].additionalData;\ninsomnia.environment.set('checkout-service_authentication-assurnace-data', assuranceData);\n\nconsole.log(assuranceData)"
+    },
+    {
+      "_id": "req_60e4e4997d8c427a856d78f8",
+      "_type": "request",
+      "parentId": "fld_540ec8e65ffc4a7ab7fed50d",
+      "name": "7. Checkout",
+      "method": "POST",
+      "url": "{{ _['checkout-service_automation-test-harness-url'] }}",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"srcClientId\": \"{{ _['checkout-service_src-client-id'] }}\",\n    \"srcCorrelationId\": \"{{ _['checkout-service_correlation-id'] }}\",\n    \"serviceId\": \"{{ _['checkout-service_program-id'] }}\",\n    \"srcDigitalCardId\": \"{{ _['checkout-service_src-digital-card-id'] }}\",\n    \"dpaTransactionOptions\": {\n        \"transactionAmount\": {\n            \"transactionAmount\": 100,\n            \"transactionCurrencyCode\": \"USD\"\n        },\n        \"paymentOptions\": [\n            {\n                \"dynamicDataType\": \"CARD_APPLICATION_CRYPTOGRAM_SHORT_FORM\"\n            }\n        ]\n    },\n    \"dpaData\": {\n        \"dpaUri\": \"request.com\",\n        \"dpaName\": \"requestName\"\n    },\n    \"assuranceData\": {\n        \"verificationData\": [\n            {\n                \"verificationType\": \"CARDHOLDER\",\n                \"verificationEntity\": \"02\",\n                \"verificationMethod\": \"07\",\n                \"verificationResults\": \"01\",\n                \"verificationTimestamp\": \"1733782512105\",\n                \"verificationEvents\": [\n                    \"01\"\n                ],\n                \"additionalData\": \"{{ _['checkout-service_authentication-assurnace-data'] }}\"\n            }\n        ]\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "cache-control",
+          "value": "no-cache",
+          "disabled": false
+        },
+        {
+          "name": "name-space",
+          "value": "com.mastercard.src",
+          "disabled": false
+        },
+        {
+          "name": "service-name",
+          "value": "orchestration-checkout",
+          "disabled": false
+        },
+        {
+          "name": "end-point-uri",
+          "value": "/api/transaction/credentials",
+          "disabled": false
+        },
+        {
+          "name": "service-method",
+          "value": "POST",
+          "disabled": false
+        },
+        {
+          "name": "SRC-DSA-Id",
+          "value": "0b44f47163a44f4b831500e45722dd31",
+          "disabled": true
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "8U0xAqjK0_yAkt8EyJtrXrnM0rxRLIzzExFRFEFx6e1895ff",
+          "disabled": true
+        },
+        {
+          "name": "SYNAPSE-TARGET-TAG",
+          "value": "{{ _['checkout-service_synapse-target-tag'] }}",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "{{ _['checkout-service_mock-option'] }}",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "{{ _['checkout-service_auth-client-id'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "var additionalData = {\n  \"type\": \"PROPRIETARY\",\n  \"certifiedMfaMethodId\": null,\n  \"mfaMethodInstanceId\": null,\n  \"mfaMethodInstanceId\": null,\n  \"assertion\": insomnia.environment.get('checkout-service_assertion-jwt'),\n  \"authenticationFactors\": null\n}\n\nadditionalData.certifiedMfaMethodId = insomnia.environment.get('checkout-service_certified-mfa-id')\n//additionalData.externalMfaMethodInstanceId = insomnia.environment.get('checkout-service_external-instance-id')\nadditionalData.mfaMethodInstanceId = insomnia.environment.get('checkout-service_instance-id')\nadditionalData.authenticationFactors = insomnia.environment.get('checkout-service_authenticationFactors')\n\nconst additionalDataB64 = btoa(JSON.stringify(additionalData))\n\ninsomnia.environment.set('checkout-service_additional-data', additionalDataB64)\nconsole.log(additionalDataB64)\n// console.log(insomnia.environment.get('checkout-service_additional-data'));",
+      "afterResponseScript": "var jsonData = insomnia.response.json();\npm.response.to.have.status(200);\nvar responseInPlainJson = jwt_decode(jsonData.checkoutResponseJWS);\nfunction jwt_decode(jwt) {\n    var parts = jwt.split('.'); \n    return JSON.parse(atob(parts[1]));\n}\n\nlet encryptedPayloadHeader = JSON.parse(atob(responseInPlainJson.encryptedPayload.split('.')[0])); \nlet responseInPlainJsonHeader = JSON.parse(atob(jsonData.checkoutResponseJWS.split('.')[0])); \nlet finalResponse = new Object();\n    finalResponse.responseJsonHeader = responseInPlainJsonHeader;\n   finalResponse.CheckoutResponseJson = responseInPlainJson;\n   finalResponse.encryptedPayloadHeader  = JSON.parse(atob(responseInPlainJson.encryptedPayload.split('.')[0]));\n\ntemplate = `\n<pre><code>{{ _['checkout-service_response'] }}</code></pre>\n`;\n\n// pm.visualizer.set removed for Insomnia});"
+    },
+    {
+      "_id": "fld_a10b55e7e076494bb54c45b8",
+      "_type": "request_group",
+      "parentId": "wrk_0e30f95a03cb4318a216bc6c",
+      "name": "Setup (Init Variables)"
+    },
+    {
+      "_id": "req_810fd05b8dda481b922caefa",
+      "_type": "request",
+      "parentId": "fld_a10b55e7e076494bb54c45b8",
+      "name": "00 - Initialize checkout-service_* variables",
+      "method": "GET",
+      "url": "https://example.invalid/health",
+      "headers": [],
+      "parameters": [],
+      "body": {
+        "text": ""
+      },
+      "preRequestScript": "// Run this request once to create/init variables in the Base Environment.\nconst keys = [\n  \"checkout-service_program-id\",\n  \"checkout-service_auth-client-id\",\n  \"checkout-service_app-instance-id\",\n  \"checkout-service_synapse-target-tag\",\n  \"checkout-service_consumer-id\",\n  \"checkout-service_fido-authSessionId\",\n  \"checkout-service_pan-number\",\n  \"checkout-service_automation-test-harness-url\",\n  \"checkout-service_transaction-config-service-name\",\n  \"checkout-service_$randomEmail\",\n  \"checkout-service_phone-number\",\n  \"checkout-service_src4c-checkout-service-name\",\n  \"checkout-service_dasAuthenticatorInstanceId\",\n  \"checkout-service_card-service-name\",\n  \"checkout-service_mock-option\",\n  \"checkout-service_certified-mfa-id\",\n  \"checkout-service_authentication-assurnace-data\",\n  \"checkout-service_consumer-service-name\",\n  \"checkout-service_authTokenWithPrelimsClaims\",\n  \"checkout-service_response\",\n  \"checkout-service_src-client-id\",\n  \"checkout-service_src-digital-card-id\",\n  \"checkout-service_proofOfAuthentication\",\n  \"checkout-service_correlation-id\"\n];\nfor (const k of keys) {\n  if (insomnia.environment.get(k) === undefined) {\n    insomnia.environment.set(k, '');\n  }\n}\n// After running, open Manage Environments and fill in values.",
+      "afterResponseScript": ""
+    }
+  ]
+}
