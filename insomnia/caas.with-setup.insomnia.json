@@ -1,0 +1,2318 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-02T14:57:45.922861Z",
+  "__export_source": "Postman->Insomnia (ChatGPT)",
+  "resources": [
+    {
+      "_id": "wrk_1cf1473d90414b748d8e8a22",
+      "_type": "workspace",
+      "name": "caas (Converted)",
+      "description": "Auto-converted from Postman by ChatGPT"
+    },
+    {
+      "_id": "fld_05cd216846aa4a6ca8cfe662",
+      "_type": "request_group",
+      "parentId": "wrk_1cf1473d90414b748d8e8a22",
+      "name": "caas"
+    },
+    {
+      "_id": "fld_699b39a3ee424391bb0ef82f",
+      "_type": "request_group",
+      "parentId": "fld_05cd216846aa4a6ca8cfe662",
+      "name": "Set up Env + Headers + Healthcheck"
+    },
+    {
+      "_id": "req_cb78a318012942028105b564",
+      "_type": "request",
+      "parentId": "fld_699b39a3ee424391bb0ef82f",
+      "name": "Set common headers",
+      "method": "GET",
+      "url": "https://src-itf-pid-support-service-blue.apps.stl.pcfstage00.mastercard.int/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "insomnia.environment.set('caas_CaaS-Encoding-Out', \"hex\");\r\ninsomnia.environment.set('caas_CaaS-Encoding-In', \"hex\");",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_2ff077182ad94f6fa84c1a89",
+      "_type": "request",
+      "parentId": "fld_699b39a3ee424391bb0ef82f",
+      "name": "Set downstream mock header",
+      "method": "GET",
+      "url": "https://src-itf-pid-support-service-blue.apps.stl.pcfstage00.mastercard.int/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "// Ref: https://confluence.mastercard.int/pages/viewpage.action?pageId=530418916\n// Examples: \n// x-src-mocks-manager=all-mock      // x-src-mocks-manager=all-live\n// x-src-mocks-manager=mdes          // x-src-mocks-manager=mdes,caas,bnc\n\n//Invoke LIVE/MOCK endpoints for ALL services\n insomnia.environment.set('caas_x-src-mocks-manager', \"all-live\");  // \"all-mock\"\n// insomnia.environment.set('caas_x-src-mocks-manager', \"all-mock\");\n\n// Invoke MOCK endpoints for MDES service\n// insomnia.environment.set('caas_x-src-mocks-manager', \"mdes\");\n// Invoke MOCK endpoints for CAAS and BNC service\n// insomnia.environment.set('caas_x-src-mocks-manager', \"caas,bnc\");\n// Invoke MOCK endpoints for BNC service\n// insomnia.environment.set('caas_x-src-mocks-manager', \"bnc\");\n\n//bnc does not work with the header, bnc is based on stage config, not header\n//caas, mdes work with header config",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_2e988ad2881d447ba28c2a2c",
+      "_type": "request",
+      "parentId": "fld_699b39a3ee424391bb0ef82f",
+      "name": "Local Simulator",
+      "method": "GET",
+      "url": "https://blue-src-stage-src-mocks-manager.apps.stl.pcfstage00.mastercard.int/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "//Env-URLs\ninsomnia.environment.set('caas_env', \"localhost\");\nconst envInstanceURL = \"http://localhost:8085\";\ninsomnia.environment.set('caas_caas-url', envInstanceURL);",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_03615a18d3af4d1a9fc0cc3d",
+      "_type": "request",
+      "parentId": "fld_699b39a3ee424391bb0ef82f",
+      "name": "Kick-one-simulator",
+      "method": "GET",
+      "url": "https://blue-src-stage-src-mocks-manager.apps.stl.pcfstage00.mastercard.int/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=UTF-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "//Env-URLs\ninsomnia.environment.set('caas_env', \"kick-one\");\nconst envInstanceURL = \"https://paymentinstrument-downstream-simulator-ms.apps.stl.pcfstage00.mastercard.int\"\n\ninsomnia.environment.set('caas_caas-url', envInstanceURL);",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_83a9b8ace1a44313b834d885",
+      "_type": "request",
+      "parentId": "fld_699b39a3ee424391bb0ef82f",
+      "name": "STAGE Simulator",
+      "method": "GET",
+      "url": "https://blue-src-stage-src-mocks-manager.apps.stl.pcfstage00.mastercard.int/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=UTF-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "//Env-URLs\ninsomnia.environment.set('caas_env', \"STAGE\");\nconst envInstanceURL = \"https://paymentinstrument-downstream-simulator.apps.stl.pcfstage00.mastercard.int\"\ninsomnia.environment.set('caas_caas-url', envInstanceURL);",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_7403a4aedd184d3ab4498aea",
+      "_type": "request",
+      "parentId": "fld_699b39a3ee424391bb0ef82f",
+      "name": "PERF Simulator",
+      "method": "GET",
+      "url": "https://src-stage-pid-support-service-blue.apps.stl.pcfstage00.mastercard.int/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=UTF-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "//Env-URLs\ninsomnia.environment.set('caas_env', \"PERF\");\nconst envInstanceURL = \"https://src-perf-paymentinstrument-downstream-simulator-blue.apps.stl.pcfstage00.mastercard.int\"\n\ninsomnia.environment.set('caas_caas-url', envInstanceURL);",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_8cbf1909677c43cf870649ad",
+      "_type": "request",
+      "parentId": "fld_699b39a3ee424391bb0ef82f",
+      "name": "DEV live caas",
+      "method": "GET",
+      "url": "https://caas-proxy.apps.stl.bnw-dev-pas.mastercard.int/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=UTF-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "//Env-URLs\ninsomnia.environment.set('caas_env', \"DEV\");\nconst envInstanceURL = \"https://caas-proxy.apps.stl.bnw-dev-pas.mastercard.int\"\ninsomnia.environment.set('caas_caas-url', envInstanceURL);",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_51fcc9915ff44ebe87a9cb9c",
+      "_type": "request",
+      "parentId": "fld_699b39a3ee424391bb0ef82f",
+      "name": "STAGE live caas",
+      "method": "GET",
+      "url": "https://src-stage-pid-support-service-blue.apps.stl.pcfstage00.mastercard.int/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=UTF-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "//Env-URLs\ninsomnia.environment.set('caas_env', \"STAGE\");\nconst envInstanceURL = \"https://src-stage-pid-support-service-blue.apps.stl.pcfstage00.mastercard.int\"\ninsomnia.environment.set('caas_caas-url', envInstanceURL);",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_9b66334983d341c7bc8801a3",
+      "_type": "request",
+      "parentId": "fld_699b39a3ee424391bb0ef82f",
+      "name": "ITF live caas",
+      "method": "GET",
+      "url": "https://src-itf-pid-support-service-blue.apps.stl.pcfstage00.mastercard.int/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=UTF-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "//Env-URLs\ninsomnia.environment.set('caas_env', \"ITF\");\nconst envInstanceURL = \"https://src-itf-pid-support-service-blue.apps.stl.pcfstage00.mastercard.int\"\ninsomnia.environment.set('caas_caas-url', envInstanceURL);",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_0904a59151b647af89d1ce97",
+      "_type": "request_group",
+      "parentId": "fld_05cd216846aa4a6ca8cfe662",
+      "name": "paymentinstrument-downstream-simulator-mani"
+    },
+    {
+      "_id": "req_2a78fba6c85248de829f5ac6",
+      "_type": "request",
+      "parentId": "fld_0904a59151b647af89d1ce97",
+      "name": "mock-manager-wrapped-encrypt",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-encrypt/aes-256",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b22636172644163636f756e7444617461223a7b226163636f756e744e756d626572223a2235343535303331353039323132363437222c226578706972794d6f6e7468223a223038222c2265787069727959656172223a223239222c227365637572697479436f6465223a6e756c6c7d2c2266696e616e6369616c4163636f756e7444617461223a6e756c6c2c226163636f756e74486f6c64657244617461223a7b226163636f756e74486f6c6465724e616d65223a6e756c6c2c226163636f756e74486f6c64657241646472657373223a6e756c6c2c22636f6e73756d65724964656e746966696572223a6e756c6c2c226163636f756e74486f6c646572456d61696c41646472657373223a6e756c6c2c226163636f756e74486f6c6465724d6f62696c6550686f6e654e756d626572223a6e756c6c7d2c22736f75726365223a224143434f554e545f41444445445f4d414e55414c4c59222c226461746156616c6964556e74696c54696d657374616d70223a6e756c6c7d\",\n    \"wrappingKeyFingerprint\": \"d1dd85789e83ec52199ae5d80d475e20f9a9fe73\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\n//var plainText = \"test\";\nvar encrypted = CryptoJS.enc.Base64.parse(\"test\");\nconsole.log(encrypted)",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_15dc61a38ebc4112a32cde37",
+      "_type": "request",
+      "parentId": "fld_0904a59151b647af89d1ce97",
+      "name": "mock-manager-wrapped-decrypt",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"e1d67aa0fef6803d0a1bb8ec73c6e8dc590321501beecef7936c4111cc32d63cb4f7ff875f86f94cf0c32974c90362e081057055b4fc3022c3bcb121d1323ceb\",\n    \"wrappedKey\": \"d4d19c0427744610de531d05e30cd57e03e1fb6558983db55474b0fe77ea3124dc6cfcdb905efd426762667efa8d920a6a2f671625f269abd052a6270369160fd9255abbff0b185b4df24764644b82f25c219a53783030e3572f5b516d67a4d18fd85ec1f69415769886bc312ae2f750abad7a028135054a787917ccbd87757d0a21c92e0443b799ef74c19271344d2372c183ea6b67c239f20ceab3ba9c2ad7d7d2dfadd5437b5c6b0d7ecd8d2f961b8db9468de147e5a95286e9743fb773a284a3d8b22dadde4649490a5bed42947f6ea4e60760df4cc9405b8fe9a49f751a4447ba8b98b150c85cefc2cca4441a4eaf1362eeb5682ea91c0604605d423b25\",\n    \"unwrappingKeyFingerprint\": \"12e842e2e0cc0127558e554b4ada7ce36d0a3abb\",\n    \"iv\": \"2388f1ca8717edde0011a275bd3a499f\",\n    \"oaepHashingAlgorithm\": \"SHA512\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_433cf59ee8834590b4601352",
+      "_type": "request",
+      "parentId": "fld_0904a59151b647af89d1ce97",
+      "name": "decrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/decrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"e1d67aa0fef6803d0a1bb8ec73c6e8dc590321501beecef7936c4111cc32d63cb4f7ff875f86f94cf0c32974c90362e081057055b4fc3022c3bcb121d1323ceb\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_bca0a8af6ba442c68838cbea",
+      "_type": "request",
+      "parentId": "fld_0904a59151b647af89d1ce97",
+      "name": "decrypt/aes works",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/decrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"27648eba9312f15b54c97eb1842ca4e0107f61b673ad6123eb044748500c7154993d1c54ce8ab2e8e52867bce24c0d355e2549d319e0e51d91ebaae3a12a2f77b06b1cf52094a5772007f1e1c5942902b5a832ddc478780e6d5f6365b9fd43d42b308e8ba1a60c4ce93e5242b8be11cbc9b13415cfcafa51d9ca1d0077472b3cfd\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_1e0a7c3c97d6472bb64da4d7",
+      "_type": "request",
+      "parentId": "fld_0904a59151b647af89d1ce97",
+      "name": "STAGE: /v2/core/encrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/encrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b227072696d6172794163636f756e744e756d626572223a2235343535303331353039323132363437222c2265787069727944617465223a2230383330222c2263617264486f6c6465724e616d65223a226d616e69227d\",\n    \"alias\": \"src-stg-card-svc-aes-256-20180713\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_225b09d83af64906aeb587f4",
+      "_type": "request",
+      "parentId": "fld_0904a59151b647af89d1ce97",
+      "name": "STAGE: /v2/core/encrypt/aes Failing",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/encrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b227072696d6172794163636f756e744e756d626572223a2235343535303331373530303030383831222c2265787069727944617465223a2230353335222c2263617264486f6c6465724e616d65223a22416c69736f6e2044754275717565227d\",\n    \"alias\": \"src-stg-card-svc-aes-256-20180713\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "mdes,all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_b7bebd8bcc5c4ba793fc0f26",
+      "_type": "request",
+      "parentId": "fld_0904a59151b647af89d1ce97",
+      "name": "my-kick-one",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"0f0ba1fdf5c8b575df934ca608b6c4016d49697c7eb901a3228045e476bfa90b759e06c50bfa2f559698146a910b3fcef1a5eb2d61d8d50b089d1c3b29aaaf633b83fa7376f8f460bb702f8872cfb0fa675f53a0aafa2711a7b273e04c47f316717cc50600a114def4d59e79550a771b91b924294f2dd557fefe1ccdd533c6407cbc95c9f406d57fc77dbdcc7743e014ed686fdac5001b0199d402cea8a42ec99e92c77d7fda2c9ea950c9010ddd64f36e697b9fa21601559ad8a6dfc856e1fc4cbff395e6e3b8daf85a165c626d5c974032b7057c6a1e35ecdd9b9235747b0b\",\n    \"wrappedKey\": \"27fe52d80d02abfe8d539a54ab8d35a1f2963a1368bdb2bb3e74856c5bd43528df64a4739beede700797166d11ec19ec9d5bc101b1885818e7c40058d930a90254373bcf7810ecbecc75807458412c821bbd308dc56a84e009c3f03e2285b9321d8198cd7f370e671e9077dd7ae15315fc1fbcf4280bcdfe31287267ebccf3dd8d11e461240e629de4d50a9a1f1856a3764029ca730e919de79aa28b1435d7cafa4d9a0746a6df76d1146325c360aea0c770d75b756ce31f5c3260a129e6bd05452d9afb52f447242f2e8ee91580d160a0de152c5ae183384757cff96ce85c2852921f4d38d14ac9ee77a9b2cbfef4ad6f04d898e6cfd774d9ded631a87001df\",\n    \"unwrappingKeyFingerprint\": \"d1dd85789e83ec52199ae5d80d475e20f9a9fe73\",\n    \"iv\": \"0fb3a9fb608aaac39e035d40cee647da\",\n    \"oaepHashingAlgorithm\": \"SHA512\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_4980816309524bbc84edb2d7",
+      "_type": "request",
+      "parentId": "fld_0904a59151b647af89d1ce97",
+      "name": "simulator-wrapped-decrypt",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"0f0ba1fdf5c8b575df934ca608b6c4016d49697c7eb901a3228045e476bfa90b759e06c50bfa2f559698146a910b3fcef1a5eb2d61d8d50b089d1c3b29aaaf633b83fa7376f8f460bb702f8872cfb0fa675f53a0aafa2711a7b273e04c47f316717cc50600a114def4d59e79550a771b91b924294f2dd557fefe1ccdd533c6407cbc95c9f406d57fc77dbdcc7743e014ed686fdac5001b0199d402cea8a42ec99e92c77d7fda2c9ea950c9010ddd64f36e697b9fa21601559ad8a6dfc856e1fc4cbff395e6e3b8daf85a165c626d5c974032b7057c6a1e35ecdd9b9235747b0b\",\n    \"wrappedKey\": \"27fe52d80d02abfe8d539a54ab8d35a1f2963a1368bdb2bb3e74856c5bd43528df64a4739beede700797166d11ec19ec9d5bc101b1885818e7c40058d930a90254373bcf7810ecbecc75807458412c821bbd308dc56a84e009c3f03e2285b9321d8198cd7f370e671e9077dd7ae15315fc1fbcf4280bcdfe31287267ebccf3dd8d11e461240e629de4d50a9a1f1856a3764029ca730e919de79aa28b1435d7cafa4d9a0746a6df76d1146325c360aea0c770d75b756ce31f5c3260a129e6bd05452d9afb52f447242f2e8ee91580d160a0de152c5ae183384757cff96ce85c2852921f4d38d14ac9ee77a9b2cbfef4ad6f04d898e6cfd774d9ded631a87001df\",\n    \"unwrappingKeyFingerprint\": \"d1dd85789e83ec52199ae5d80d475e20f9a9fe73\",\n    \"iv\": \"0fb3a9fb608aaac39e035d40cee647da\",\n    \"oaepHashingAlgorithm\": \"SHA512\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_0b1b135f305d46d48ccb681f",
+      "_type": "request_group",
+      "parentId": "fld_05cd216846aa4a6ca8cfe662",
+      "name": "stage-paymentinstrument-downstream-simulator"
+    },
+    {
+      "_id": "req_123eb85179534785bab814c6",
+      "_type": "request",
+      "parentId": "fld_0b1b135f305d46d48ccb681f",
+      "name": "mock-manager-wrapped-encrypt",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-encrypt/aes-256",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b22636172644163636f756e7444617461223a7b226163636f756e744e756d626572223a2235343535303331353039323132363437222c226578706972794d6f6e7468223a223038222c2265787069727959656172223a223239222c227365637572697479436f6465223a6e756c6c7d2c2266696e616e6369616c4163636f756e7444617461223a6e756c6c2c226163636f756e74486f6c64657244617461223a7b226163636f756e74486f6c6465724e616d65223a6e756c6c2c226163636f756e74486f6c64657241646472657373223a6e756c6c2c22636f6e73756d65724964656e746966696572223a6e756c6c2c226163636f756e74486f6c646572456d61696c41646472657373223a6e756c6c2c226163636f756e74486f6c6465724d6f62696c6550686f6e654e756d626572223a6e756c6c7d2c22736f75726365223a224143434f554e545f41444445445f4d414e55414c4c59222c226461746156616c6964556e74696c54696d657374616d70223a6e756c6c7d\",\n    \"wrappingKeyFingerprint\": \"d1dd85789e83ec52199ae5d80d475e20f9a9fe73\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "// // CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\n// //var plainText = \"test\";\n// var encrypted = CryptoJS.enc.Base64.parse(\"test\");\n// console.log(encrypted)",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_1710d1b62b544eeabbbdfc59",
+      "_type": "request",
+      "parentId": "fld_0b1b135f305d46d48ccb681f",
+      "name": "mock-manager-wrapped-encrypt Copy",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-encrypt/aes-256",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b22636172644163636f756e7444617461223a7b226163636f756e744e756d626572223a2235343535303331353039323132363437222c226578706972794d6f6e7468223a223038222c2265787069727959656172223a223239222c227365637572697479436f6465223a6e756c6c7d2c2266696e616e6369616c4163636f756e7444617461223a6e756c6c2c226163636f756e74486f6c64657244617461223a7b226163636f756e74486f6c6465724e616d65223a6e756c6c2c226163636f756e74486f6c64657241646472657373223a6e756c6c2c22636f6e73756d65724964656e746966696572223a6e756c6c2c226163636f756e74486f6c646572456d61696c41646472657373223a6e756c6c2c226163636f756e74486f6c6465724d6f62696c6550686f6e654e756d626572223a6e756c6c7d2c22736f75726365223a224143434f554e545f41444445445f4d414e55414c4c59222c226461746156616c6964556e74696c54696d657374616d70223a6e756c6c7d\",\n    \"wrappingKeyFingerprint\": \"d1dd85789e83ec52199ae5d80d475e20f9a9fe73\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "// // CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\n// //var plainText = \"test\";\n// var encrypted = CryptoJS.enc.Base64.parse(\"test\");\n// console.log(encrypted)",
+      "afterResponseScript": "var jsonData = insomnia.response.json();\n    pm.response.to.have.status(200);\ninsomnia.environment.set('caas_simulatorCipher', jsonData.cipher);\ninsomnia.environment.set('caas_simulatorIv', jsonData.iv);\ninsomnia.environment.set('caas_simulatorWrappedKey', jsonData.wrappedKey);\n\n//Save TRID from request\nlet jsonReqData = JSON.parse(pm.request.body[pm.request.body.mode]);\ninsomnia.environment.set('caas_simulatorWrappingKeyFingerprint', jsonReqData.wrappingKeyFingerprint);"
+    },
+    {
+      "_id": "req_6ecb7eb4b4c74f70b8574de8",
+      "_type": "request",
+      "parentId": "fld_0b1b135f305d46d48ccb681f",
+      "name": "mock-manager-wrapped-decrypt-returns-what-you-send-use-it-for-pi-eps-testing-note-iv-and-fingerprint-it's-in-simulator",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"7B202020202022726573706F6E7365486F7374223A202273697465312E4D6173746572636172642E636F6D20222C202020202022726571756573744964223A20226D6163732D6D6465732D73726472657472792D6D6573736167652D746573742D31222C2020202020227061796D656E74417070496E7374616E63654964223A2022313233343536373839222C20202020202272656469676974697A6174696F6E5265717569726564223A20747275652C202020202022746F6B656E73223A205B2020202020202020207B2020202020202020202020202022746F6B656E556E697175655265666572656E6365223A2022444D344D4D43303030303030303030524B495755384C56595A5338584E5159594636564656463050494F5230374A305256222C2020202020202020202020202022737461747573223A2022414354495645222C202020202020202020202020202273746174757354696D657374616D70223A2022323032342D30312D30315430343A35363A32332E3030305A222C2020202020202020202020202022746473526567697374726174696F6E55726C223A20227464732E4D6173746572636172642E636F6D222020202020202020207D20202020205D207D\",\n    \"wrappedKey\": \"d4d19c0427744610de531d05e30cd57e03e1fb6558983db55474b0fe77ea3124dc6cfcdb905efd426762667efa8d920a6a2f671625f269abd052a6270369160fd9255abbff0b185b4df24764644b82f25c219a53783030e3572f5b516d67a4d18fd85ec1f69415769886bc312ae2f750abad7a028135054a787917ccbd87757d0a21c92e0443b799ef74c19271344d2372c183ea6b67c239f20ceab3ba9c2ad7d7d2dfadd5437b5c6b0d7ecd8d2f961b8db9468de147e5a95286e9743fb773a284a3d8b22dadde4649490a5bed42947f6ea4e60760df4cc9405b8fe9a49f751a4447ba8b98b150c85cefc2cca4441a4eaf1362eeb5682ea91c0604605d423b25\",\n    \"unwrappingKeyFingerprint\": \"12e842e2e0cc0127558e554b4ada7ce36d0a3aab\",\n    \"iv\": \"2388f1ca8717edde0011a275bd3a488d\",\n    \"oaepHashingAlgorithm\": \"SHA512\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "//// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\nvar jsonData = insomnia.response.json();\n//console.log(jsonData);\n\ninsomnia.test(\"Status code is 200\", () => {\n  pm.response.to.have.status(200);\n  const hexString = jsonData.message;\n  //console.log(hexString);\n\n  const decodedString = CryptoJS.enc.Hex.parse(hexString).toString(CryptoJS.enc.Utf8);\n  console.log(decodedString);\n  const decodedJson = JSON.parse(decodedString);\n  console.log(decodedJson);\n  console.log(JSON.stringify(decodedJson, null, 2));\n});"
+    },
+    {
+      "_id": "req_d9bf17bd1b80439eb03f6017",
+      "_type": "request",
+      "parentId": "fld_0b1b135f305d46d48ccb681f",
+      "name": "mock-manager-wrapped-decrypt-interpolation",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"{{ _['caas_simulatorCipher'] }}\",\n    \"wrappedKey\": \"{{ _['caas_simulatorWrappedKey'] }}\",\n    \"unwrappingKeyFingerprint\": \"12e842e2e0cc0127558e554b4ada7ce36d0a3abb\",\n    \"iv\": \"{{ _['caas_simulatorIv'] }}\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_740d454114c0413bba8185b0",
+      "_type": "request",
+      "parentId": "fld_0b1b135f305d46d48ccb681f",
+      "name": "decrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/decrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"e1d67aa0fef6803d0a1bb8ec73c6e8dc590321501beecef7936c4111cc32d63cb4f7ff875f86f94cf0c32974c90362e081057055b4fc3022c3bcb121d1323ceb\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_d76438a093994ed1b36bed6e",
+      "_type": "request",
+      "parentId": "fld_0b1b135f305d46d48ccb681f",
+      "name": "decrypt/aes  BASE64 data works",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/decrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"eyAgICAgInJlc3BvbnNlSG9zdCI6ICJzaXRlMS5NYXN0ZXJjYXJkLmNvbSAiLCAgICAgInJlcXVlc3RJZCI6ICJtYWNzLW1kZXMtc3JkcmV0cnktbWVzc2FnZS10ZXN0LTEiLCAgICAgInBheW1lbnRBcHBJbnN0YW5jZUlkIjogIjEyMzQ1Njc4OSIsICAgICAicmVkaWdpdGl6YXRpb25SZXF1aXJlZCI6IHRydWUsICAgICAidG9rZW5zIjogWyAgICAgICAgIHsgICAgICAgICAgICAgInRva2VuVW5pcXVlUmVmZXJlbmNlIjogIkRNNE1NQzAwMDAwMDAwMFJLSVdVOExWWVpTOFhOUVlZRjZWRlZGMFBJT1IwN0owUlYiLCAgICAgICAgICAgICAic3RhdHVzIjogIkFDVElWRSIsICAgICAgICAgICAgICJzdGF0dXNUaW1lc3RhbXAiOiAiMjAyNC0wMS0wMVQwNDo1NjoyMy4wMDBaIiwgICAgICAgICAgICAgInRkc1JlZ2lzdHJhdGlvblVybCI6ICJ0ZHMuTWFzdGVyY2FyZC5jb20iICAgICAgICAgfSAgICAgXSB9\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-live",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "//// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\nvar jsonData = insomnia.response.json();\n//console.log(jsonData);\n\ninsomnia.test(\"Status code is 200\", () => {\n  pm.response.to.have.status(200);\n  const hexString = jsonData.message;\n  //console.log(hexString);\n\n  const decodedString = CryptoJS.enc.Hex.parse(hexString).toString(CryptoJS.enc.Utf8);\n  console.log(decodedString);\n  const decodedJson = JSON.parse(decodedString);\n  console.log(decodedJson);\n  console.log(JSON.stringify(decodedJson, null, 2));\n});"
+    },
+    {
+      "_id": "req_3c84eeb54e454207b872e650",
+      "_type": "request",
+      "parentId": "fld_0b1b135f305d46d48ccb681f",
+      "name": "STAGE: /v2/core/encrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/encrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b227072696d6172794163636f756e744e756d626572223a2235343535303331353039323132363437222c2265787069727944617465223a2230383330222c2263617264486f6c6465724e616d65223a226d616e69227d\",\n    \"alias\": \"src-stg-card-svc-aes-256-20180713\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_b9dfd06000104a43876a0cea",
+      "_type": "request",
+      "parentId": "fld_0b1b135f305d46d48ccb681f",
+      "name": "STAGE: /v2/core/encrypt/aes Failing",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/encrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b227072696d6172794163636f756e744e756d626572223a2235343535303331373530303030383831222c2265787069727944617465223a2230353335222c2263617264486f6c6465724e616d65223a22416c69736f6e2044754275717565227d\",\n    \"alias\": \"src-stg-card-svc-aes-256-20180713\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "mdes,all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_ba8d34c30b174807a69ba906",
+      "_type": "request_group",
+      "parentId": "fld_05cd216846aa4a6ca8cfe662",
+      "name": "src-perf-paymentinstrument-downstream-simulator-blue"
+    },
+    {
+      "_id": "req_5a443ecccb284e279050d013",
+      "_type": "request",
+      "parentId": "fld_ba8d34c30b174807a69ba906",
+      "name": "src-perf-mock-manager-wrapped-encrypt",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-encrypt/aes-256",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b22636172644163636f756e7444617461223a7b226163636f756e744e756d626572223a2235343535303331353039323132363437222c226578706972794d6f6e7468223a223038222c2265787069727959656172223a223239222c227365637572697479436f6465223a6e756c6c7d2c2266696e616e6369616c4163636f756e7444617461223a6e756c6c2c226163636f756e74486f6c64657244617461223a7b226163636f756e74486f6c6465724e616d65223a6e756c6c2c226163636f756e74486f6c64657241646472657373223a6e756c6c2c22636f6e73756d65724964656e746966696572223a6e756c6c2c226163636f756e74486f6c646572456d61696c41646472657373223a6e756c6c2c226163636f756e74486f6c6465724d6f62696c6550686f6e654e756d626572223a6e756c6c7d2c22736f75726365223a224143434f554e545f41444445445f4d414e55414c4c59222c226461746156616c6964556e74696c54696d657374616d70223a6e756c6c7d\",\n    \"wrappingKeyFingerprint\": \"d1dd85789e83ec52199ae5d80d475e20f9a9fe73\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_ed7182b2155141929ac936f2",
+      "_type": "request",
+      "parentId": "fld_ba8d34c30b174807a69ba906",
+      "name": "src-perf-mock-manager-wrapped-encrypt-INVALID_PAN",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-encrypt/aes-256",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b22636172644163636f756e7444617461223a7b226163636f756e744e756d626572223a2235343535303230303030383436393132222c226578706972794d6f6e7468223a223031222c2265787069727959656172223a223235222c227365637572697479436f6465223a6e756c6c7d2c2266696e616e6369616c4163636f756e7444617461223a6e756c6c2c226163636f756e74486f6c64657244617461223a7b226163636f756e74486f6c6465724e616d65223a224a6f686e204b656e7432222c226163636f756e74486f6c64657241646472657373223a6e756c6c2c22636f6e73756d65724964656e746966696572223a6e756c6c2c226163636f756e74486f6c646572456d61696c41646472657373223a6e756c6c2c226163636f756e74486f6c6465724d6f62696c6550686f6e654e756d626572223a6e756c6c2c22746f6b656e526571756573746f724163636f756e74486f6c6465724964223a6e756c6c7d2c22736f75726365223a224143434f554e545f41444445445f5649415f4150504c49434154494f4e222c226461746156616c6964556e74696c54696d657374616d70223a6e756c6c7d\",\n    \"wrappingKeyFingerprint\": \"d1dd85789e83ec52199ae5d80d475e20f9a9fe73\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_dfd25a570b094357a27a3ded",
+      "_type": "request",
+      "parentId": "fld_ba8d34c30b174807a69ba906",
+      "name": "src-perf-mock-manager-encrypt-aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/encrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b227072696d6172794163636f756e744e756d626572223a2235343535303230303030383436393132222c2265787069727944617465223a2230313635222c2263617264486f6c6465724e616d65223a224a6f686e204b656e7432227d\",\n    \"alias\": \"src-stg-card-svc-aes-256-20180713\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Ou",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_2ee5a8f2443648e0b2075c41",
+      "_type": "request_group",
+      "parentId": "fld_05cd216846aa4a6ca8cfe662",
+      "name": "itf-via-mocks-manager"
+    },
+    {
+      "_id": "req_47fe7409e16b4b8888a4a550",
+      "_type": "request",
+      "parentId": "fld_2ee5a8f2443648e0b2075c41",
+      "name": "/v2/core/encrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/encrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7B2009227072696D6172794163636F756E744E756D62657222203A202235313230333438373933353135343530222C2009226578706972794461746522203A202230383337222C20092263617264486F6C6465724E616D6522203A20226D616E6976616E6E616E7372696E69766173616E6E6E6E6E6E6E6E22207D\",\n    \"alias\": \"src-itf-card-svc-aes-256-20190322\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "{{ _['caas_CaaS-Encoding-Out'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "{{ _['caas_CaaS-Encoding-In'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "{{ _['caas_x-src-mocks-manager'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_c1cd2aea6da14927ba6cd0a6",
+      "_type": "request",
+      "parentId": "fld_2ee5a8f2443648e0b2075c41",
+      "name": "/v2/core/decrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/decrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"20a6e1a85aa237bc53c54bbe45d3b5ae10a9f7b4d20dfb5ab7fe009a15867e79ee230ebf62c7f67ee1c7689a5123925fbd1c8d0e49fd2db749568a7834b2387a8a0067322a2b95ab95be357844961ab5c131a20df8a2132e17d727b2f420f8786fa9722c7d1862fda7ca1007c2a055334f12f2bcae2ba5dbd6ff1a850d8dba01909e3f6ee53dd78d1a2507610309b0d4acebe45ed027c372981696b6840eefd9dd4ff801233cbf827e1de4fb67c0bb760e\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "{{ _['caas_CaaS-Encoding-Out'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "{{ _['caas_CaaS-Encoding-In'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "{{ _['caas_x-src-mocks-manager'] }}",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "//// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\nvar jsonData = insomnia.response.json();\n//console.log(jsonData);\n\ninsomnia.test(\"Status code is 200\", () => {\n  pm.response.to.have.status(200);\n  const hexString = jsonData.message;\n  //console.log(hexString);\n\n  const decodedString = CryptoJS.enc.Hex.parse(hexString).toString(CryptoJS.enc.Utf8);\n  console.log(decodedString);\n  const decodedJson = JSON.parse(decodedString);\n  console.log(decodedJson);\n  console.log(JSON.stringify(decodedJson, null, 2));\n});"
+    },
+    {
+      "_id": "req_0870eda9763147878512f6a4",
+      "_type": "request",
+      "parentId": "fld_2ee5a8f2443648e0b2075c41",
+      "name": "/v2/core/wrapped-decrypt",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"fb311e988eb18657d7042fdfc931128b5b5392d1780ec66c5d24daef2954f177cf18d7f7dac73ffc410d4a8dfb2c8a8e07b4c1e86b2da9f07d661c8bfaa2daa645be2f863f6c9cc46afa0c60bbfdecaca87781b761b09188fb665c22bb566bca353a06d6dff9ddc312d8422b30940ab2c48db6f166c052ba89f7b720776f304f60bc94d6fe82a3b898e643cc1767394577fc583914eb8fc604b7221d210934273ba9af00820238d863229293667a437a992ce01c51d0bdff49dd384b6e1675738091a1cd0b3e3606e241059c2c36ee00d357ccba55de9945189e8e6822b1a1db38ac58727597682a52d01cb485103b757085ecb955ffe0712bcbbab5f06d973f0278797500bac0738fe4abff337be1c66608af9433f251e5932148f7b194bd1fc260af47be3fb5d49c141d67575b3a665301aac19084454d52c49412606792de6af59aeaf3dfadb4563e4a5e9d00fae1f8fbee6be3415900d4bce76955f37c19875a89bda108a4f4e8c4dd3d411a99733eb4221c9da0bc1e19edc3fb4c2f74dccbe54795bf676edaf8780e3a95be8cbc366497a334f03540f4b2f4cb6de5c3070a3d6d535cfb7336c9d0f9d6c477def0746b62bbb9867b62fbb97dc57e6a9f906440983797bd83b1d577f91574b32a492031193b86c4ff7854b47fdf1e67e9f54daa034c5ce8065b111f72618281a17b635c8d7b732032627f2c163ec2b9123156fd3d2c0a179ffabb746bf50444d706d9d5a09ad4de40b32b5031b8ef8227d5b30e318fed0ff62674ddbb839202dc568b4afd68531eae233b8dffbd30caefdb45aecf0512c8ad5a9386b4dcf82af052ab68183259b9444a8134b434df606f98dc2782ec1e433c1ef6401d7db3798db963da1d5f2ffc20cb9e5794e2490a83ffc1c0c9a8062805544acfabe2f7d25d2f1e31a45f7e5956af6f9ff503d05fe6507ddf4d14ac88e153f997c7607f2ee104c2b4ce79991c6a927fb515d578081e79472185041d653458ad760ba1f72ee80b88449b175832a2989b57bb35a13271befe7b5af112301c76241a48846fef0a19f82a970467ef3a9ad664b3282ada6ae3e3ff177d0a38a1a6f35bcc7d975cd79e0f5adcfdf0d75894ca37e0d7ba15c329fcc0f1703c7613d84318a1e744eae15c007fb0305622dbe9c0884ddcf87d7e9520bc33dd659be91aca6bca6eceb0d43f80a8cf47dcb55af393393d9ea1ee13818b3e9b3cd59d62ab44348fd27eb47ef1fd6ee090029f4393312b3a4f8c453de59ff6563ffaed831a0147ac1121737b6aedb233a7281e528193186b4e5a4b4120660312cd041131cbe6b06882d46d7979405030efff6f2bee6f2420536361f37c107ca7f57fd44c1a43c4c0d066b4b0a0\",\n    \"wrappedKey\": \"009383009a8c3daebd99cae58e289df6c16991944247e1623777fcac08acdab5a324179211dd8c3f9f0a3c3d1c70474a79a3540dea47905c7dc2f5fc72341fa9eefbeddfdf207a350df869eb07f2e31d0249cefbb23718441cabe797124451fde3d35bbae564b68a6b3afd8ba455260249381ee0ece71638b2a49fd387a61dbc969e6d904b72c5e52d881ce81fdfb264ae4203b21a1f683e19aeb0526ea553d95a841b92f420baab0c2335ad4c055bf29c4b402d79eab5bb1ea63b9ec493e6142f47c2e6af885582c19dd662571b24c0894325c8bf7965d20a4025618dba35cb95a5776fed676a999f63a3b12aec15e21ef6cdf0f5b60273e14689139f24f521\",\n    \"unwrappingKeyFingerprint\": \"da037e088dbda7c8ff8195975e813077474f3c9d\",\n    \"iv\": \"d2cb1e017276d676347098fc8f0ab52a\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "{{ _['caas_CaaS-Encoding-Out'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "{{ _['caas_CaaS-Encoding-In'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "{{ _['caas_x-src-mocks-manager'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "//// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\nvar jsonData = insomnia.response.json();\n//console.log(jsonData);\n\ninsomnia.test(\"Status code is 200\", () => {\n  pm.response.to.have.status(200);\n  const hexString = jsonData.message;\n  //console.log(hexString);\n\n  const decodedString = CryptoJS.enc.Hex.parse(hexString).toString(CryptoJS.enc.Utf8);\n  console.log(decodedString);\n  const decodedJson = JSON.parse(decodedString);\n  console.log(decodedJson);\n  console.log(JSON.stringify(decodedJson, null, 2));\n});"
+    },
+    {
+      "_id": "req_076508d004c648c9b00b08cd",
+      "_type": "request",
+      "parentId": "fld_2ee5a8f2443648e0b2075c41",
+      "name": "/v2/core/wrapped-decrypt",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"045a3ad39edaf0aa7e93be693cb1f05e8b8b1f94385e49b17e40f246d316a1dd2aab14f36fedaf0aadcd02ae8280600e3a1e095627577d6c6c07821d693bbcc3d21d6b0cf6b5900edfd16f4077956fb26a32803fc26608d01281456651b430ff09db4f387e20875cc18354cb719ce4d2129909609a9f35576c4ce35a7f69ee9da644f0ceea8b2c294b149d7623eb3fac\",\n    \"wrappedKey\": \"9154b65fa6ccd5294cafeb5394110f5373889cb5ebd41904fa4b88807126ec4b86cab3c38c417461f84ceb60269177da75170ac0d97e178a3b89e73ae7cd5fc9a0418f602451e39bb91e5da49fef8e257f63e92c628b4f6c85fa56fbc6e377ab7ce522a301ebeb339c52b090e23aef60162002ac7425351ed75c41f5f175dfd2ffff70960ca61eb6fb332b1b30743ba673d99c272a93ad71b732fe97ddd5a876dd9cc2618dc24dd6e39f7a609715e46fc1802d65ffb4c3f06f9c2b1f02d79b8d54d2861e8f14ca3d7c24ef74b39eb2e6ca2a805e153dc8a48315e86acfd7932e6ec24a8d64ba33252a4adad4cf24f6836b00f6e682b9f8c9a64f614f34105e24\",\n    \"unwrappingKeyFingerprint\": \"da037e088dbda7c8ff8195975e813077474f3c9d\",\n    \"iv\": \"5dee7a71f110afd4e3e772c19a1ca242\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "{{ _['caas_CaaS-Encoding-Out'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "{{ _['caas_CaaS-Encoding-In'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "{{ _['caas_x-src-mocks-manager'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "//// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\nvar jsonData = insomnia.response.json();\n//console.log(jsonData);\n\ninsomnia.test(\"Status code is 200\", () => {\n  pm.response.to.have.status(200);\n  const hexString = jsonData.message;\n  //console.log(hexString);\n\n  const decodedString = CryptoJS.enc.Hex.parse(hexString).toString(CryptoJS.enc.Utf8);\n  console.log(decodedString);\n  const decodedJson = JSON.parse(decodedString);\n  console.log(decodedJson);\n  console.log(JSON.stringify(decodedJson, null, 2));\n});"
+    },
+    {
+      "_id": "req_325acb1e25a9410196900810",
+      "_type": "request",
+      "parentId": "fld_2ee5a8f2443648e0b2075c41",
+      "name": "/v2/core/wrapped-decrypt",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"a74d4d26a57f9c9c24a98f52a848e9500eea7626c68a14538d3d5ad282037e9c5bc2085e82f9395f9b8d2e062543a1ac94b7c78b57a6bf9af1ed82a896c9e3a238fcd404fead5bb486407e79236a35dcb3d16fd4dc8749ea2958429e81407d6c5287ddd2bd2310e635f1c8d84d0e7bd8f4b0114ae5be5fb9940d7383809d2c07e78542c1bae444c173a31bb1f5d02b2e9431046380041871a10704726ef27888a8c851bea73f4de2debceb7365b96550664364f7ad4a5935c80d3649abbdc2ac0b9bbd3cdfb792c9cbba05b714cbf6b5f3b02034279059873c8a569379d1ef36b636b048e2ca80a210ca06a5f7118d99928cd796efdb1e482e5253753f6db923cb3b6736c6fd64e51768f974d99a7c6d6397ab558498821298fa29dff5a75dd51b9804cb39aeb217cde9f95e90d531fa36639135152e9e30a87a3aa22725ec3b54b85b1655de83638398d6df6ca3337d6e6e5b729780661ca46892f05dbd37de18bef0c5fb8ad882fce8653db873db828aa1b90be63e2ca9ee61926544b5f97aa58feaf6285ddc4027f45665ce878fcf63123ab7fb50e89048bf63a7053a8bd711a96b584b21f64af70ad955a4e3468065231992c52ab61d5ee4bd066c33951a44da8528874d0789783e0b1e678d157834bcde6ed7111dfb24c2a70e442e7061186d6cb9b9e8cc85c65af2b00f8f1d245f1e963203198de81a6f6a952cb8f8122ae4e32c9a95ef0333ce93957787d70e665c95d051b95482674bb442e8117ca9f1c105bbe3ff9e7f6156df13b1d28a1ea0b4e029ebe059073aa3e2a4071a7b1c462fb0dd45744ea0117d96b4c8ce443c56a6b80dc19b02c2e543ce1ebc46ab0a0adf3a5aca0daa4659ebe9b483147e232d1a470df2f49b71c9fc5bae3350c32bbd88a3073519703d0b4f6ae960372c86cb69195670b2c4203c6ec38246faa5f514d6ab2dd6049e1d445e502146cd19f0bdc19a0419b678897eb42598048600598eea7115b797631b27971defb415683f839747a2b403102d673a1e2bbbdd6b5b1419da67ad2cb4f43492685c173a7803d58ee72467bddae8bc87a2f95343b91c76ddc13c725c96a76124cac44d6bda9b058467e4155aa69307b50690f47124762c6b4b14db42066a573cf44a226bb9a2829adc1da0092a9714dc6baafd3adfc163c2a66cf107d570d13403fb79f6a588759bfaea6ad05a3ef721cfad10a4dc58058072c2997a093d93283a1db02c929ffdd4eca085ae242d5ae152f2e50512fb74fe34760e96acd6f70266b43345f4ba3ff52273767e0d95d6b5a3d224d4607bc90185a91ea0de68a2698ece9535a35611ed46c46a6252b6f8f1c7eaa174f96f6247b5d49c2c3eb016aa1d8df4100e7d576c3ada511f1f47504b3ef6ffc56bc717a31f87e44868727707aa8bafad0c19db2e6d7c01da9e8c6066e19fc3f5c209686fb4acd7fac10bec1b71635362d38ae95b176b9b13cad5cf056baf63801eac7534bcf4170d2cbf49a8bd3cc36897e9ad94b6d138986db79c257313728966d2eccf54c42dd516f95b32f5461d3fdd445f23c8f318e52d9b1e3197e7b6d77eb8f00768eb3f645290cfa0ac30ebc03873ce571190f7bb4debe9115cf9cd72937714aba148dc0302bac257471e376e410093ec9fe4488d33ad26440541804a62b3b9ca609d2c96d0ca13acd678c76cb0c545561467bb3684fbb62f1f0fe24c6601287cd42af92527e79766085486e16ec9d002f32e181bf9cb5f31636c3fe5a6b07f88a53287e7b7c0e2631e9cb8d3b79acbe72ec87231fabd83d81dbac60ad83e1dd8e3a20476e4c3f9b161227e8ab85f3d14b4ec80ac3246b48ce0c14005e4769b4cba8fd955891b76ab0a1cec9ae04abafa632dc85daa50427755695f15c98a922a46844c7657d0af6afc033dcb9a0b48a4b27a08d746a7f4df20b4fa81c330c8f6a3e47bc6dbfd59037b01c6d1d473f27e31ff896f693c1f80e52c4f088e69429a62d5a60e15c7fb82132c6e15a0cd04312848050e98beb5ebf5ecf69277dbc2e95d4a49aebd37a01a22828b5db4da55e07e593397ccb45b9047e05f823cd3b76c55dd4f20fa89e67f2943f19e13d5ef13b8d013aa0c3df1d7a05425837406238fe280520586a42420f3d7871e93d3c6a769ae6b8b67d733c50a5bb6a6be6b2c2713850899888df1a49a6d77618d6a73ea027dec0401a18ce67ed7b7355bdd1671c605cc2e2e198609894125ce2b528f4042a37ae88d7be69fdcaa39ac1f3f0027d079d75281413ad402bcfcbd40d43c23dc9eccc63ded9b825be3642371364b1afbd6174f548618e337381ae204fa964fa0b9b507d88eab2507ebc2e107118a0215c495d9fa32ff24b0330018241f7692ea33a6d8e398d5c1d90ddeeaf5d7194a87cd46b9b9f18677a1d0430c15e21b9d4e580b68d9626faf3987cd986a58c3ef3815b88beddf4f8e385c790b5e26cd8f0e3d7166f489246c65e7ba67bb50b6b1c0f74311955b4072df38aa2d4929d2f5f7b2e0b456cc6d80980a537c1fd6b0389caa7c4cff057d6aa9355b10251926ea1f4a9d2dd8997ddba39c0a4632283e7d7c934fdba597ebc2c37acf7b469745676cc983e4ef4521f90e5f572449bde95089402ba51bfd946bdb08a357c01129f43f98a0c5db8eb0cebdaa6ea5f1a05935912370be1346b49d08f273ad3f560f0cd06247186765f88caf6a900f552dc082f685b055dfb5ac8984cb84b170f759128b6e67dd226f820015bf552d025079b9da0fea6057f177a95603941112ec523cc2ac90cd99c70a3422f9336adcbaccd9d61a34137649bf35747bdf949799619cf34962b38241d37ac6d10f7c05c21b0a189d543e0ed8e248cbc6c50602feb03d4fa2e1151e0f077ae508b7494193dac63b253aa5bf361d4b639c8f106e8f7efb97a2ef2c881fcc65590fddaf2b17bb631b8359e31104b6734ad7cd0a4f54ea65c9478c91b4a99ead2fe426cabaae8215c5ff132c18ec06be767f201e7385a21aaebca945b0ac31a98722f7e676cdb1a9aeb6a423651bcffc2a527ef3a9a2cacfdd08509c8b0e6920651f2fbd66d346f968fe878a5db0f0d735c94c925211e89bfcd74e1aaec3d5791971037a6eb2bcb2384fe3325ac8047bee0fb2bb50d002a32f1c0dfd9558243bec4a383b65ad\",\n    \"wrappedKey\": \"4e1b98fbcea7b356f5b35c1daba09e35f4528c6e09db28575e38ba5869b27acbada59f1f4ec771d7d9f907722f9a61f0620c44e2dde6daebfe42fa63d70b7b9c267a87178402b42898c8a881ca2b13e343249792467e6d41aaca50f6643819885614a83b91bb356dd4129fe3ed4d9bb713e22243347fcf82857a7e2c06fa422e67ae10d4d9c7fd9366f8757104e1d48f8af8d6416a83eaf00b028f6e554d108074824cd60cbe302637a04fa6741a2c876e118b05ff0140610e00193f49249846773af66b4a64122f0fa44d82047ae3b4e3cf1e16d2160a575b02fede7d4ac6b3bea11ef06c7056196f0b466657dd78954ad514015c5a7e03c528eed96c4881c1\",\n    \"unwrappingKeyFingerprint\": \"da037e088dbda7c8ff8195975e813077474f3c9d\",\n    \"iv\": \"1c4cd358e6ee8a6a9127e20a8644d623\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "{{ _['caas_CaaS-Encoding-Out'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "{{ _['caas_CaaS-Encoding-In'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "{{ _['caas_x-src-mocks-manager'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "//// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\nvar jsonData = insomnia.response.json();\n//console.log(jsonData);\n\ninsomnia.test(\"Status code is 200\", () => {\n  pm.response.to.have.status(200);\n  const hexString = jsonData.message;\n  //console.log(hexString);\n\n  const decodedString = CryptoJS.enc.Hex.parse(hexString).toString(CryptoJS.enc.Utf8);\n  console.log(decodedString);\n  const decodedJson = JSON.parse(decodedString);\n  console.log(decodedJson);\n  console.log(JSON.stringify(decodedJson, null, 2));\n});"
+    },
+    {
+      "_id": "req_fa5c20bd5a844bc2be5dad56",
+      "_type": "request",
+      "parentId": "fld_2ee5a8f2443648e0b2075c41",
+      "name": "/v2/core/wrapped-decrypt BY certificate",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"7b0e5fe5c55da9948b096aaaa840aab9b26555468debbfe865279ed29ea640a656a9329877ca604ea87c6226e8a7f32697b0fa594b5acc926ac9e2aa376bf8405bafe2067193aac182581c597399f249f402e15de0de548be1e9ad92188d93c53ce89533a0a9ff097600f3f079fe6f671e05274f6779db7426f992841f279c68f78be97b238d14bf3104b56885b5d8a725e3f20fb21aeeea541ff78fcc6a087120187dc769c8e416565a5aff8fd1213a12489b911315d3cb8123b029467c4180c4ee1f0b45307517278928b97ecde1e20d3dc3734e52dd56f3d49d145bf41a16f1f0f979fdb256e6ddca93bb1950207b294fc13669dee6a445e1af510c7417ec913c2ac28b79ac4fa0519017ba40b8ae775b826f0ac4eac70364ba21803cd3410a3ceed045da7b6f6d8b4a6dcea70aad263b439549361672f8556f5cebefc44773b572a30003a24311ef1f0c1842c3cf2477dc7bdcb7ecbbade8dc4be471eb913af95b1f2480b6658546aa12df79a89ea370f81b3e4c589440672ab591dbfe0c3fc724b5e9d7fddabe9b7c4254a02e21fa11316a3b43d37f2224117095b0c272ed1a293d76b8c25e52aed03bc4d8da14ebc124cc3b356215d331307dcda39959cbc93e98a05f310423819d0a929cf0aa7adafe217feda66e2cb141e35b30516b8b570b1e44c63837fc1a4b539200f1ff124796d4fb7f23532230429fe01f0778a1cf36bd4dbfaea7b2d5617a17e1a7ed86ec9386f0c67f603c96e500ae4c4e4a06468de5eedd74e73ddb48d07d24b7ed056c10aa892a912b8bea79a8ff5baffbe25f990a2afe94e86444df78d9978a7ba1b7575f8bf84a60f83d03e00246873125e19d298038388ee384c401df93a30082b45c00365278969dd4cb6b9979883e4031f0df03501fb127818e34e14f7b0bfba5a85781661f449415196435025c5451113f605b3e31b7f2e749c04b1ea018939c21ccf6e6f447e76d1290c9c31c93082b8c1a009d2806eef7023bcdf59a4e0d0f827671650f9b2583e84947a65b83746f38d5c08eca8c2f103470c728166067c4532b0398a436035e77167724dbf5a995f722cebb5c7b1d18373c972d2a283f4c8b47835daabc75aeccc9a393c76ddf2a8ea7de783566d3623bd025cfd0fecd8cd42a8f5e7382e733ab2e40301169a9685bd8afc530fd6dd7a3c2690c723ed4911753e3ac4d65f6b4794ccb9141ea20b403acf36fb03fdba0eb10b5e49181927e22bd1ff29a341f9db2ac3cc397743774cb393d68049a59a9e42c38579cce67e06b645a6d7328430b34c08d1abd7599dc3a8a2121a14c30618d8bda14513e38bdc9045599fa3a9b301a40b5e2922a21ab9d74c131f77c18f0d55a4d7760df3ee1d4bb51ac501e5e3d81680b186f23b01ea7c788198a74322ae4204916b010ba63b9d247c09e168a195752da15ff488f080dc1be065adb5ccccccbff46a3b9943ec6b7336ce9bbf0758920fd83d3d14f557adc666340a29f679ab7596f6ee688806f7465cc4692ae3cfdf3cf64413e3267b8db4f4bd52bbdfa6f8141819f74e8408f62f8cbb3036bd337f2f7c3dd332be4656516c03337df909df77651d2b9c7d0207e4a2e92569185dc2f226d42de6b9ec687c2574cb9b90452f39e3d681485b6da3f9bb60cd754fdb745c4a237b36dafb5a03574ea96593bbf2321658e189b906e2e333248d30824b25660500722d12559a69aaf771a0dacbaf1fec1b79c96ca542f134a2995681fa7b361556df41d2939fa2a47f4f2f30858f3d41986ca68b7acdc793cafafcd90b2718ab65b87ee756108fd300a3ac77429c075c4137f97a7f4a904b85ea2668ce1421b3d2c71ea36767e677720b0ff60424815ab6d8c2c8f268b9a1d4a1f2f673332979447e9e80f9cd806879ae51fd819bbf63eacd5ed2b60097749935acea9f2f1a6f7df06e4b652ecd8e902a4e019accdef9376211daa7b63989993dde6bbbdc87ba494e9e2cdab9fc135595f75112ddab780ec1516e3224ad6a2be26d2a945c1b69ce82a27ea11ba4f158a49d804946a87d88076c9d831b6951300b96d851b669b5ad3ddc3ce52dd0ed7e8b3a2de2c82035dae42c3d4532b4073b44f17d36fefc200cf82a8ea2d7f7aaafe3024a20b8def3c3eb2bbf55df3e107aaabbbdea1704e2e93f18e830c0f11e11047dbcb70e43ce0be7c3d7c0f8701bcaf7ebce6c718d3e1d0018de507cb9c8c011ba7f4a6e4a5f3e045cce4c0e51b63dd60981868f561eb597015bd514bac896a94fdfddb6db7e685013f1a593acdaaad20cde882d63b8e76e249e4d4bde9309545904fdc9e18ad70c8795a51c3e4aef8ea90a293f39a1d1750d87ff53b99c47b971d7cd0f42cc037d88570bed4806a62810f41217b1ee6f5dc197f7497abe76ab81945226bed13754da236543cf987d7ccfeacc2a743374da6150bec11fdba3982930d26ae1d1f70bf086158ad24b0e51889c2ac5154218cc4e1a0166a98069eb2b1f60f31f99799604bf154d2c26586af2049a61548b7100e1f8b2bdef066865bf69435dad150322516a26f3625877b4e3c9ff081cd2973425fba6ff3ace4de1530c611f50b511b7973e70614a29a3cde73414b0f2fc903042d7dc8ab5ef0073b4952194abac632631f7048a664812ad68ba6e18bf93dc32b0b80116fc3d6818c277b9d1e418c16a4cf912f6eda2b144e344948951c3297aaed994d529918c12a6952709670435b9e3ac0505a92768404ff1f9e2e40ddcc19bd1a145811abf0637cb712b7c73e65ee414b6da4f0e4e11648bac344cd7238e825b7318fccd95bda79b2dbbc98f855b21aaef591b69024bea8ffbc5dafe05aefa594f178c5cbd02a167f266fed9096c16c49b7216d7e6597405c6a6b12a96fa8d742b53452e4fb461be1aa938331f5c94668a1de4fe378f04ef3a4f7cb583b38670fa641b633d881144bc5bee9fd4d1ef23fc8ef20822b0f45d5afc8226a7608338de6fb3dd009b2f72023cd52ce36ab057508a7c407aed139bcd3fdc9aed9b19ba21bb150364cd53984fbc9ff988a7a988501609c6a36b5abacb50dd58e0c761902592351ac57e19a5435af881e4e3f81d26300a9fb87adaa350a2ebadd48a76a9ca0ede2b81ac408ac0db9f4d56f80b158ae1bde68de274692148c15dfe6ef\",\n    \"wrappedKey\": \"0fda89ef1331df67370ae563fb0b1af6198f247e36ac8bd23ebca8374abfcc4ba6f428b47f77c5e06c48511a2265f7c2d96ad4cf2a6b1890419dc3cad7eda72c5c87c7635c30dd14fdeeb0d2bd86f83a4436d8e9cb4477e948452d08cf431cdc3801dd306d50e95c94a906db245353439c3d23b5f6afaf3d5cd17ff7627f73399b4993928f9f4789ddbd5c4ce7efd4715f88fff00f5831b87a85acfe6377257128ad8fbea6073e8c434bab116791a9250901c9a8413c396472c7964ffce49ff400077e6a3864b009d7f6a2643bb4e4738381512c9de7fcf854415549a133cdf296ab75c5db4d2518a722b6634bc697f3863bb5ac6872eb052a30f5583bd95527\",\n    \"unwrappingKeyFingerprint\": \"da037e088dbda7c8ff8195975e813077474f3c9d\",\n    \"iv\": \"f258809736fd6cf0310895e22ed4e91c\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "{{ _['caas_CaaS-Encoding-Out'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "{{ _['caas_CaaS-Encoding-In'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "{{ _['caas_x-src-mocks-manager'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "//// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\nvar jsonData = insomnia.response.json();\n//console.log(jsonData);\n\ninsomnia.test(\"Status code is 200\", () => {\n  pm.response.to.have.status(200);\n  const hexString = jsonData.message;\n  //console.log(hexString);\n\n  const decodedString = CryptoJS.enc.Hex.parse(hexString).toString(CryptoJS.enc.Utf8);\n  console.log(decodedString);\n  const decodedJson = JSON.parse(decodedString);\n  console.log(decodedJson);\n  console.log(JSON.stringify(decodedJson, null, 2));\n});"
+    },
+    {
+      "_id": "req_eca4c4d7d27d4c8b9ae29633",
+      "_type": "request",
+      "parentId": "fld_2ee5a8f2443648e0b2075c41",
+      "name": "/v2/core/wrapped-encrypt/aes-256",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/wrapped-encrypt/aes-256",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7B202020202022726573706F6E7365486F7374223A202273697465312E4D6173746572636172642E636F6D20222C202020202022726571756573744964223A2022616479656E2D6D756C74692D7475722D636865636B2D35222C2020202020227061796D656E74417070496E7374616E63654964223A2022313233343536373839222C202020202022746F6B656E73223A205B2020202020202020207B2020202020202020202020202022636F7272656C6174696F6E4964223A2022676874732D79726974692D31323434222C2020202020202020202020202022746F6B656E556E697175655265666572656E6365223A2022444D344D4D43303030303134343133363032343066363730643862653461323438323936636430343337396536613062222C2020202020202020202020202022737461747573223A2022414354495645222C20202020202020202020202020226572726F72223A206E756C6C2C20202020202020202020202020226576656E74526561736F6E436F6465223A20224F54484552222C202020202020202020202020202273746174757354696D657374616D70223A2022323032332D30392D30365430343A35363A32332E3334352D30373A3030222C202020202020202020202020202273757370656E6465644279223A206E756C6C2C2020202020202020202020202022746473526567697374726174696F6E55726C223A20227464732E4D6173746572636172642E636F6D222C2020202020202020202020202022746F6B656E526571756573746F724964223A20223530323937313239313030222C202020202020202020202020202270726F64756374436F6E666967223A207B2020202020202020202020202020202020226272616E644C6F676F41737365744964223A202238313066316330622D333333302D343263312D393962662D376365383137623666343538222C2020202020202020202020202020202020226973737565724C6F676F41737365744964223A202265326163393139342D613230352D343832652D396364622D376563316263303066356336222C2020202020202020202020202020202020226973436F4272616E646564223A202266616C7365222C202020202020202020202020202020202022636F4272616E644E616D65223A206E756C6C2C202020202020202020202020202020202022636F4272616E644C6F676F41737365744964223A206E756C6C2C202020202020202020202020202020202022636172644261636B67726F756E64436F6D62696E656441737365744964223A202234623363616165352D633637312D346438312D616232652D643532646363386635386633222C202020202020202020202020202020202022636172644261636B67726F756E6441737365744964223A202231383431333966332D373830612D343233392D623366372D623737396362353233353164222C20202020202020202020202020202020202269636F6E41737365744964223A202262356631613435382D663932662D343735622D383534302D643735653431393733376366222C202020202020202020202020202020202022666F726567726F756E64436F6C6F72223A2022633030663030222C2020202020202020202020202020202020226973737565724E616D65223A202250726F664E616D65204272617A696C222C20202020202020202020202020202020202273686F72744465736372697074696F6E223A20224272617A696C20436F6D626F222C2020202020202020202020202020202020226C6F6E674465736372697074696F6E223A206E756C6C2C202020202020202020202020202020202022637573746F6D65725365727669636555726C223A206E756C6C2C202020202020202020202020202020202022637573746F6D657253657276696365456D61696C223A206E756C6C2C202020202020202020202020202020202022637573746F6D65725365727669636550686F6E654E756D626572223A20223535352D3535352D34313031222C2020202020202020202020202020202020226973737565724D6F62696C65417070223A206E756C6C2C2020202020202020202020202020202020226F6E6C696E6542616E6B696E674C6F67696E55726C223A206E756C6C2C2020202020202020202020202020202020227465726D73416E64436F6E646974696F6E7355726C223A206E756C6C2C20202020202020202020202020202020202270726976616379506F6C69637955726C223A206E756C6C2C20202020202020202020202020202020202269737375657250726F64756374436F6E666967436F6465223A202250726F664E616D6522202020202020202020202020207D2C2020202020202020202020202022746F6B656E496E666F223A207B202020202020202020202020202020202022746F6B656E50616E537566666978223A202239343336222C2020202020202020202020202020202020226163636F756E7450616E537566666978223A202239313435222C2020202020202020202020202020202020226163636F756E7450616E507265666978223A2022353239383035222C20202020202020202020202020202020202266696E616E6369616C4163636F756E74537566666978223A206E756C6C2C202020202020202020202020202020202022616C7465726E6174654163636F756E744964656E746966696572537566666978223A206E756C6C2C202020202020202020202020202020202022746F6B656E457870697279223A202231303236222C2020202020202020202020202020202020226163636F756E7450616E457870697279223A202230333335222C2020202020202020202020202020202020226473727043617061626C65223A20747275652C202020202020202020202020202020202022746F6B656E4173737572616E63654C6576656C223A2031302C20202020202020202020202020202020202270726F6475637443617465676F7279223A202243524544495422202020202020202020202020207D2020202020202020207D20202020205D207D\",\n    \"wrappingKeyFingerprint\": \"da037e088dbda7c8ff8195975e813077474f3c9d\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "{{ _['caas_CaaS-Encoding-Out'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "{{ _['caas_CaaS-Encoding-In'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "{{ _['caas_x-src-mocks-manager'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\n//var plainText = \"test\";\nvar encrypted = CryptoJS.enc.Base64.parse(\"test\");\nconsole.log(encrypted)",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_eb493d2425764c93a0b9f28c",
+      "_type": "request",
+      "parentId": "fld_2ee5a8f2443648e0b2075c41",
+      "name": "/v2/core/wrapped-encrypt/aes-256 BY certificate",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/wrapped-encrypt/aes-256",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7B202020202022726573706F6E7365486F7374223A202273697465312E4D6173746572636172642E636F6D20222C202020202022726571756573744964223A2022616479656E2D6D756C74692D7475722D636865636B2D35222C2020202020227061796D656E74417070496E7374616E63654964223A2022313233343536373839222C202020202022746F6B656E73223A205B2020202020202020207B2020202020202020202020202022636F7272656C6174696F6E4964223A2022676874732D79726974692D31323434222C2020202020202020202020202022746F6B656E556E697175655265666572656E6365223A2022444D344D4D43303030303134343133363032343066363730643862653461323438323936636430343337396536613062222C2020202020202020202020202022737461747573223A2022414354495645222C20202020202020202020202020226572726F72223A206E756C6C2C20202020202020202020202020226576656E74526561736F6E436F6465223A20224F54484552222C202020202020202020202020202273746174757354696D657374616D70223A2022323032332D30392D30365430343A35363A32332E3334352D30373A3030222C202020202020202020202020202273757370656E6465644279223A206E756C6C2C2020202020202020202020202022746473526567697374726174696F6E55726C223A20227464732E4D6173746572636172642E636F6D222C2020202020202020202020202022746F6B656E526571756573746F724964223A20223530323937313239313030222C202020202020202020202020202270726F64756374436F6E666967223A207B2020202020202020202020202020202020226272616E644C6F676F41737365744964223A202238313066316330622D333333302D343263312D393962662D376365383137623666343538222C2020202020202020202020202020202020226973737565724C6F676F41737365744964223A202265326163393139342D613230352D343832652D396364622D376563316263303066356336222C2020202020202020202020202020202020226973436F4272616E646564223A202266616C7365222C202020202020202020202020202020202022636F4272616E644E616D65223A206E756C6C2C202020202020202020202020202020202022636F4272616E644C6F676F41737365744964223A206E756C6C2C202020202020202020202020202020202022636172644261636B67726F756E64436F6D62696E656441737365744964223A202234623363616165352D633637312D346438312D616232652D643532646363386635386633222C202020202020202020202020202020202022636172644261636B67726F756E6441737365744964223A202231383431333966332D373830612D343233392D623366372D623737396362353233353164222C20202020202020202020202020202020202269636F6E41737365744964223A202262356631613435382D663932662D343735622D383534302D643735653431393733376366222C202020202020202020202020202020202022666F726567726F756E64436F6C6F72223A2022633030663030222C2020202020202020202020202020202020226973737565724E616D65223A202250726F664E616D65204272617A696C222C20202020202020202020202020202020202273686F72744465736372697074696F6E223A20224272617A696C20436F6D626F222C2020202020202020202020202020202020226C6F6E674465736372697074696F6E223A206E756C6C2C202020202020202020202020202020202022637573746F6D65725365727669636555726C223A206E756C6C2C202020202020202020202020202020202022637573746F6D657253657276696365456D61696C223A206E756C6C2C202020202020202020202020202020202022637573746F6D65725365727669636550686F6E654E756D626572223A20223535352D3535352D34313031222C2020202020202020202020202020202020226973737565724D6F62696C65417070223A206E756C6C2C2020202020202020202020202020202020226F6E6C696E6542616E6B696E674C6F67696E55726C223A206E756C6C2C2020202020202020202020202020202020227465726D73416E64436F6E646974696F6E7355726C223A206E756C6C2C20202020202020202020202020202020202270726976616379506F6C69637955726C223A206E756C6C2C20202020202020202020202020202020202269737375657250726F64756374436F6E666967436F6465223A202250726F664E616D6522202020202020202020202020207D2C2020202020202020202020202022746F6B656E496E666F223A207B202020202020202020202020202020202022746F6B656E50616E537566666978223A202239343336222C2020202020202020202020202020202020226163636F756E7450616E537566666978223A202239313435222C2020202020202020202020202020202020226163636F756E7450616E507265666978223A2022353239383035222C20202020202020202020202020202020202266696E616E6369616C4163636F756E74537566666978223A206E756C6C2C202020202020202020202020202020202022616C7465726E6174654163636F756E744964656E746966696572537566666978223A206E756C6C2C202020202020202020202020202020202022746F6B656E457870697279223A202231303236222C2020202020202020202020202020202020226163636F756E7450616E457870697279223A202230333335222C2020202020202020202020202020202020226473727043617061626C65223A20747275652C202020202020202020202020202020202022746F6B656E4173737572616E63654C6576656C223A2031302C20202020202020202020202020202020202270726F6475637443617465676F7279223A202243524544495422202020202020202020202020207D2020202020202020207D20202020205D207D\",\n    \"certificate\": \"-----BEGIN CERTIFICATE----- MIIFdDCCA1ygAwIBAgIRALevc8nmCBFh7IMWUX4USAowDQYJKoZIhvcNAQELBQAw gbgxEzARBgoJkiaJk/IsZAEZFgNjb20xGjAYBgoJkiaJk/IsZAEZFgptYXN0ZXJj YXJkMQswCQYDVQQGEwJCRTEdMBsGA1UEChMUTWFzdGVyQ2FyZCBXb3JsZHdpZGUx GzAZBgNVBAsTEkNvcnBvcmF0ZSBTZWN1cml0eTE8MDoGA1UEAxMzTWFzdGVyQ2Fy ZCBQUkQgQXBwbGljYXRpb24gSW5mcmFzdHJ1Y3R1cmUgU3ViIENBIEcyMB4XDTE4 MDgzMDE1NDk1OFoXDTIyMDgyOTE1NDQzN1owgboxCzAJBgNVBAYTAlVTMREwDwYD VQQIEwhNaXNzb3VyaTEUMBIGA1UEBxMLU2FpbnQgTG91aXMxNDAyBgNVBAoTK01h c3RlckNhcmQgV29ybGRXaWRlIC0gQ29tbW9uIFByb2RJbmZyYSBTU0wxEDAOBgNV BAsTB2FsYmVydGExOjA4BgNVBAMTMXNyYy13cmFwLWVuYy1jYXJkLXN2Y3MubXRm LmFsYmVydGEubWFzdGVyY2FyZC5pbnQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAw ggEKAoIBAQCj8V7FqzaMhoyPp7cv6kHDM53jRweTmXY3sjirZripZlS5Sl6do12u /acQEOoYKorHhYEnZRk2BiueBCqZ3RIhgJ5XhdnkVhKt6SwFeyBT12jwSniB4e1d 1V4e/YihKpUVj0USagUC6jYL8urv+ku+uejXCP5euPKoxWdGKBi5Q8Mc9SN+PrbL T1Iom/6/xVYaYXJxH19PziNS/ebOi7wejwr+L7rmEiE4xWeGfktLAb5hso5e00zq 21i7Ivpz1nz41TCeZWg9pw8c/Eq0xrs19by6L4SOm5iDtzh6fzDyQSmOFgWeIpyQ 5+lrorX/CUfqcjXmpzMhvDXn4ba9+bx9AgMBAAGjdTBzMA4GA1UdDwEB/wQEAwIF oDATBgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaA FEugoiCvMvBmXcsZeZiYsmzl7SfUMB0GA1UdDgQWBBQg5ULE9UvF0yQK94w8rdP3 JN3pBTANBgkqhkiG9w0BAQsFAAOCAgEAMYGPvgFeSlcX17To/bngEYi8rzmCJr3G aGNwAsucBKOSCcJKi+8L0feq8ane0yoX8FW10Js+vn1vLNxLVFe0gKwOISVxqjDk ClMrArA93XHHmG9QhgnBxc+L6i4txep1FZqk5hFBz1vjm3PWdTMMGzHlhLiAzM1X /Sjib9wvunJQUckr8A+x0HRVtsJtgizXZaT8c94Uf3W2QH1q0RWXi/hPTvuIXYXD ybV0O3/Yg3ro1mMY3Ywh4GCH/x5WgEZlsGCYeiHrk0DPhAhTLTWCK0WDQJbXItz3 cCVBiSsQ1g4LjYYq4exRdHsxjUdsEzvHNPW4HPGeDfSSdDut4JTUZL+ShAjr8fkL fVZiY26Xshj6DT74ep2n9Km3nMjrayubAYcVUyTHCepAecC0EzqtlRvX2wZNF8XJ YH+2IxZh8fFsCPmkBQzwRW7zw5ROnNaakt8YGw+3FT8Ga35Ps/2Gyes8pk1hbnOd H1TNRM8tfhH/qJ3Gm4fVYIxVGCRlYXEUoVBhjj13DDfhI5XYZ1DUbNgGezUaMvxJ JeA6fnmqOaM+NGuYc+wmmuN+bb/LsgD+z1SRNu1No2h913B+uAMYX32W4inaWlyM Xmoh7hN07OcmSWEH0MF7p0qUYLqlAuvVVVhr/hia/ckmlEOynd+w4cNP9WDTPt9b iFa96mLE0jM= -----END CERTIFICATE-----\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "{{ _['caas_CaaS-Encoding-Out'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "{{ _['caas_CaaS-Encoding-In'] }}",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "{{ _['caas_x-src-mocks-manager'] }}",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\n//var plainText = \"test\";\nvar encrypted = CryptoJS.enc.Base64.parse(\"test\");\nconsole.log(encrypted)",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_a92809aad4794d0e8b8873e1",
+      "_type": "request_group",
+      "parentId": "fld_05cd216846aa4a6ca8cfe662",
+      "name": "stage-via-mocks-manager"
+    },
+    {
+      "_id": "req_7dbebeacdfc44567b87ccacd",
+      "_type": "request",
+      "parentId": "fld_a92809aad4794d0e8b8873e1",
+      "name": "/v2/core/wrapped-encrypt/aes-256",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/wrapped-encrypt/aes-256",
+      "body": {
+        "mimeType": "application/json",
+        "text": "// check x-src-mocks-manager header. it should be live or nothing\n{\n    \"message\": \"7b22636172644163636f756e7444617461223a7b226163636f756e744e756d626572223a2235343535303331353039323132363437222c226578706972794d6f6e7468223a223038222c2265787069727959656172223a223239222c227365637572697479436f6465223a6e756c6c7d2c2266696e616e6369616c4163636f756e7444617461223a6e756c6c2c226163636f756e74486f6c64657244617461223a7b226163636f756e74486f6c6465724e616d65223a6e756c6c2c226163636f756e74486f6c64657241646472657373223a6e756c6c2c22636f6e73756d65724964656e746966696572223a6e756c6c2c226163636f756e74486f6c646572456d61696c41646472657373223a6e756c6c2c226163636f756e74486f6c6465724d6f62696c6550686f6e654e756d626572223a6e756c6c7d2c22736f75726365223a224143434f554e545f41444445445f4d414e55414c4c59222c226461746156616c6964556e74696c54696d657374616d70223a6e756c6c7d\",\n    \"wrappingKeyFingerprint\": \"d1dd85789e83ec52199ae5d80d475e20f9a9fe73\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_279ed12a525a4240854e6ab1",
+      "_type": "request",
+      "parentId": "fld_a92809aad4794d0e8b8873e1",
+      "name": "/v2/core/wrapped-decrypt",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "/*\ncheck x-src-mocks-manager header. it should be live or nothing.\nAfter receiving response. go to mdes utility and do base64 decode. don't worry about just character \n*/\n{\n    \"cipher\": \"8b6c881f2576f33fbc0bd0f4e8c83988925309e4b3fe0481e5fbdffdbd24e46aeb7fc6f88b93c2f7011b8ceb9a74746a6276d811a04af0111f6ca61077a1252ab15d41b4352b6201a5f2d1a88870d82188587f33ac2e1dc18513872f3f53d1e24f48655007d7baad77eeedae11a7733871fff846cbeedc4e5e27156d7ac12e32efa3a4b4b92201c31c38c5b01fed12bb45b1f3086f0b0beb0c4b77248dd5a92dc99d41d97427ec1cbda9e5b5714152f97622068a74f580961a9a72c9b3332394e19f12fe078f058b0f1620678dda7d1776128ae4a2d9df69334198325da470656b962c3a2d09e01ed921a0720316d94c49dab92d602bdad404ab83060fdb53cb3e147afa17318727d1864ea06103f0274b372608e34432792a6c0995487902088ecffe67b2366faca48702470b0303d25424b7761f449eefaf4abdd55562aed241208bbbf07255a2e76bee1e8449a73cebf0f447e4d1cc7660c33f3ab81e9ae5587c7cb85162ef1affa33d0f9d0b43d3378a59fc7bea54b4285831a369f2f0d1\",\n    \"wrappedKey\": \"411c9f3a46e898121dc3f4c4caed1978daa51cec027b80b01a7b3e8b0038a685fe026dff6c587b84977ab159213ffb0b12d9bb4caf891b4fdc46304fc205c7084121318535094a9ade71e5e3c4d39e393d533d16371d667593cdfd2059d2e4225e6e3923b935e15f40c2eda2bf9c5e4f2be4ba94400c616bf8777677e530751ee275faed40d1c7cf15c36dcaa0191fb0d259ddc98c24e9c4c75558b2341a429f7d83243e473233657b7215988a6fd8ebfe4348c2231bc277cc80259e2b1263802390789353f3553c5bfb05823d3032d3daa25f4d6b179e9d472b9f19256207ba6196aa16a6889cb8af25a609931b726c064b97cdd9375627036abc119a03ee5f\",\n    \"unwrappingKeyFingerprint\": \"d1dd85789e83ec52199ae5d80d475e20f9a9fe73\",\n    \"iv\": \"454ae581d6408733ba6b11f43916b9d2\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "var jsonData = insomnia.response.json();\ninsomnia.test(\"Status code is 200\", function () {\n  pm.response.to.have.status(200);\n  const hexString = jsonData.message;\n  // Decode the hexadecimal string to a plain string\n  const decodedString = CryptoJS.enc.Hex.parse(hexString).toString(CryptoJS.enc.Utf8);\n  const decodedJson = JSON.parse(decodedString);\n  //console.log(decodedJson);\n  console.log(JSON.stringify(decodedJson, null, 2));\n});"
+    },
+    {
+      "_id": "req_9d5b82a4a43a416b83e81cd5",
+      "_type": "request",
+      "parentId": "fld_a92809aad4794d0e8b8873e1",
+      "name": "/v2/core/wrapped-decrypt",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "/*\ncheck x-src-mocks-manager header. it should be live or nothing.\nAfter receiving response. go to mdes utility and do base64 decode. don't worry about just character \n*/\n{\n    \"cipher\": \"8b6c881f2576f33fbc0bd0f4e8c83988925309e4b3fe0481e5fbdffdbd24e46aeb7fc6f88b93c2f7011b8ceb9a74746a6276d811a04af0111f6ca61077a1252ab15d41b4352b6201a5f2d1a88870d82188587f33ac2e1dc18513872f3f53d1e24f48655007d7baad77eeedae11a7733871fff846cbeedc4e5e27156d7ac12e32efa3a4b4b92201c31c38c5b01fed12bb45b1f3086f0b0beb0c4b77248dd5a92dc99d41d97427ec1cbda9e5b5714152f97622068a74f580961a9a72c9b3332394e19f12fe078f058b0f1620678dda7d1776128ae4a2d9df69334198325da470656b962c3a2d09e01ed921a0720316d94c49dab92d602bdad404ab83060fdb53cb3e147afa17318727d1864ea06103f0274b372608e34432792a6c0995487902088ecffe67b2366faca48702470b0303d25424b7761f449eefaf4abdd55562aed241208bbbf07255a2e76bee1e8449a73cebf0f447e4d1cc7660c33f3ab81e9ae5587c7cb85162ef1affa33d0f9d0b43d3378a59fc7bea54b4285831a369f2f0d1\",\n    \"wrappedKey\": \"411c9f3a46e898121dc3f4c4caed1978daa51cec027b80b01a7b3e8b0038a685fe026dff6c587b84977ab159213ffb0b12d9bb4caf891b4fdc46304fc205c7084121318535094a9ade71e5e3c4d39e393d533d16371d667593cdfd2059d2e4225e6e3923b935e15f40c2eda2bf9c5e4f2be4ba94400c616bf8777677e530751ee275faed40d1c7cf15c36dcaa0191fb0d259ddc98c24e9c4c75558b2341a429f7d83243e473233657b7215988a6fd8ebfe4348c2231bc277cc80259e2b1263802390789353f3553c5bfb05823d3032d3daa25f4d6b179e9d472b9f19256207ba6196aa16a6889cb8af25a609931b726c064b97cdd9375627036abc119a03ee5f\",\n    \"unwrappingKeyFingerprint\": \"d1dd85789e83ec52199ae5d80d475e20f9a9fe73\",\n    \"iv\": \"454ae581d6408733ba6b11f43916b9d2\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "//// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\nvar jsonData = insomnia.response.json();\n//console.log(jsonData);\n\ninsomnia.test(\"Status code is 200\", () => {\n  pm.response.to.have.status(200);\n  const hexString = jsonData.message;\n  //console.log(hexString);\n\n  const decodedString = CryptoJS.enc.Hex.parse(hexString).toString(CryptoJS.enc.Utf8);\n  console.log(decodedString);\n  const decodedJson = JSON.parse(decodedString);\n  console.log(decodedJson);\n  console.log(JSON.stringify(decodedJson, null, 2));\n});"
+    },
+    {
+      "_id": "req_6ebf31275d604ac6904dfd0d",
+      "_type": "request",
+      "parentId": "fld_a92809aad4794d0e8b8873e1",
+      "name": "/v2/core/decrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/decrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"27648eba9312f15b54c97eb1842ca4e0100f585f1ff76fcbe18d4fb71653ce5fe8910f048d56543fca160a2159f70da290055c2847b1932c0dfd1bcd24ad660f669f521a350f66a44b96c667ed7231e7f896075e5602fe8fc7a93990623edee37805438cbbfaa1495c8456d4fb095aece981f61c83448b5520c80b58bb18ad31a3\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "//// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\nvar jsonData = insomnia.response.json();\n//console.log(jsonData);\n\ninsomnia.test(\"Status code is 200\", () => {\n  pm.response.to.have.status(200);\n  const hexString = jsonData.message;\n  //console.log(hexString);\n\n  const decodedString = CryptoJS.enc.Hex.parse(hexString).toString(CryptoJS.enc.Utf8);\n  console.log(decodedString);\n  const decodedJson = JSON.parse(decodedString);\n  console.log(decodedJson);\n  console.log(JSON.stringify(decodedJson, null, 2));\n});"
+    },
+    {
+      "_id": "req_e0d617e41d5a491faaca18fb",
+      "_type": "request",
+      "parentId": "fld_a92809aad4794d0e8b8873e1",
+      "name": "/v2/core/decrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/decrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"27648eba9312f15b54c97eb1842ca4e0100f585f1ff76fcbe18d4fb71653ce5fe8910f048d56543fca160a2159f70da290055c2847b1932c0dfd1bcd24ad660f669f521a350f66a44b96c667ed7231e7f896075e5602fe8fc7a93990623edee37805438cbbfaa1495c8456d4fb095aece981f61c83448b5520c80b58bb18ad31a3\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "//// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\nvar jsonData = insomnia.response.json();\n//console.log(jsonData);\n\ninsomnia.test(\"Status code is 200\", () => {\n  pm.response.to.have.status(200);\n  const hexString = jsonData.message;\n  //console.log(hexString);\n\n  const decodedString = CryptoJS.enc.Hex.parse(hexString).toString(CryptoJS.enc.Utf8);\n  console.log(decodedString);\n  const decodedJson = JSON.parse(decodedString);\n  console.log(decodedJson);\n  console.log(JSON.stringify(decodedJson, null, 2));\n});"
+    },
+    {
+      "_id": "req_2c6dbe2910f94f0fb4b3e1b0",
+      "_type": "request",
+      "parentId": "fld_a92809aad4794d0e8b8873e1",
+      "name": "/v2/core/decrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/decrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"27648eba9312f15b54c97eb1842ca4e0107f61b673ad6123eb044748500c7154993d1c54ce8ab2e8e52867bce24c0d355e2549d319e0e51d91ebaae3a12a2f77b06b1cf52094a5772007f1e1c5942902b5a832ddc478780e6d5f6365b9fd43d42b308e8ba1a60c4ce93e5242b8be11cbc9b13415cfcafa51d9ca1d0077472b3cfd\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "//// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\nvar jsonData = insomnia.response.json();\n//console.log(jsonData);\n\ninsomnia.test(\"Status code is 200\", () => {\n  pm.response.to.have.status(200);\n  const hexString = jsonData.message;\n  //console.log(hexString);\n\n  const decodedString = CryptoJS.enc.Hex.parse(hexString).toString(CryptoJS.enc.Utf8);\n  console.log(decodedString);\n  const decodedJson = JSON.parse(decodedString);\n  console.log(decodedJson);\n  console.log(JSON.stringify(decodedJson, null, 2));\n});"
+    },
+    {
+      "_id": "req_7bdd1a38817847ffbaf89616",
+      "_type": "request",
+      "parentId": "fld_a92809aad4794d0e8b8873e1",
+      "name": "/v2/core/encrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/encrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b227072696d6172794163636f756e744e756d626572223a2235343535303331353039323132363437222c2265787069727944617465223a2230383330222c2263617264486f6c6465724e616d65223a226d616e69227d\",\n    \"alias\": \"src-stg-card-svc-aes-256-20180713\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_ad5875b649704903823b2c5b",
+      "_type": "request",
+      "parentId": "fld_a92809aad4794d0e8b8873e1",
+      "name": "/v2/core/encrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/caas/v2/core/encrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b227072696d6172794163636f756e744e756d626572223a2235343535303331373530303030383831222c2265787069727944617465223a2230353335222c2263617264486f6c6465724e616d65223a22416c69736f6e2044754275717565227d\",\n    \"alias\": \"src-stg-card-svc-aes-256-20180713\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-live",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_498f228e86ac4691b9629866",
+      "_type": "request_group",
+      "parentId": "fld_05cd216846aa4a6ca8cfe662",
+      "name": "dev"
+    },
+    {
+      "_id": "req_c977a435299a478d9f6bfb5b",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/wrapped-encrypt/aes-256 (mdes wrappingKeyAlias)",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-encrypt/aes-256",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b22636172644163636f756e7444617461223a7b226163636f756e744e756d626572223a2235343535303331353039323132363437222c226578706972794d6f6e7468223a223038222c2265787069727959656172223a223239222c227365637572697479436f6465223a6e756c6c7d2c2266696e616e6369616c4163636f756e7444617461223a6e756c6c2c226163636f756e74486f6c64657244617461223a7b226163636f756e74486f6c6465724e616d65223a6e756c6c2c226163636f756e74486f6c64657241646472657373223a6e756c6c2c22636f6e73756d65724964656e746966696572223a6e756c6c2c226163636f756e74486f6c646572456d61696c41646472657373223a6e756c6c2c226163636f756e74486f6c6465724d6f62696c6550686f6e654e756d626572223a6e756c6c7d2c22736f75726365223a224143434f554e545f41444445445f4d414e55414c4c59222c226461746156616c6964556e74696c54696d657374616d70223a6e756c6c7d\",\n    \"wrappingKeyAlias\":\"66899-wrapping-key-01\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}\n// Note: it is wrappingKeyAlias. not wrappingKeyFingerPrint. I took it from MDES. https://fusion.mastercard.int/stash/projects/DISTRIBUTED-CAAS/repos/caas-client-onboarding/browse/clients/MDES/development.json#56"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\n//var plainText = \"test\";\nvar encrypted = CryptoJS.enc.Base64.parse(\"test\");\nconsole.log(encrypted)",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_4d132203a16a43ab8e8e060b",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/wrapped-encrypt/aes-256 (devclient wrappingKeyAlias)",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-encrypt/aes-256",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b22636172644163636f756e7444617461223a7b226163636f756e744e756d626572223a2235343535303331353039323132363437222c226578706972794d6f6e7468223a223038222c2265787069727959656172223a223239222c227365637572697479436f6465223a6e756c6c7d2c2266696e616e6369616c4163636f756e7444617461223a6e756c6c2c226163636f756e74486f6c64657244617461223a7b226163636f756e74486f6c6465724e616d65223a6e756c6c2c226163636f756e74486f6c64657241646472657373223a6e756c6c2c22636f6e73756d65724964656e746966696572223a6e756c6c2c226163636f756e74486f6c646572456d61696c41646472657373223a6e756c6c2c226163636f756e74486f6c6465724d6f62696c6550686f6e654e756d626572223a6e756c6c7d2c22736f75726365223a224143434f554e545f41444445445f4d414e55414c4c59222c226461746156616c6964556e74696c54696d657374616d70223a6e756c6c7d\",\n    \"wrappingKeyAlias\":\"verify-rsa-2048\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\n//var plainText = \"test\";\nvar encrypted = CryptoJS.enc.Base64.parse(\"test\");\nconsole.log(encrypted)",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_856dcd0c9c35466c9f683ab2",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/wrapped-encrypt/aes-256 (wrappingKeyFingerprint)",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-encrypt/aes-256",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b22636172644163636f756e7444617461223a7b226163636f756e744e756d626572223a2235343535303331353039323132363437222c226578706972794d6f6e7468223a223038222c2265787069727959656172223a223239222c227365637572697479436f6465223a6e756c6c7d2c2266696e616e6369616c4163636f756e7444617461223a6e756c6c2c226163636f756e74486f6c64657244617461223a7b226163636f756e74486f6c6465724e616d65223a6e756c6c2c226163636f756e74486f6c64657241646472657373223a6e756c6c2c22636f6e73756d65724964656e746966696572223a6e756c6c2c226163636f756e74486f6c646572456d61696c41646472657373223a6e756c6c2c226163636f756e74486f6c6465724d6f62696c6550686f6e654e756d626572223a6e756c6c7d2c22736f75726365223a224143434f554e545f41444445445f4d414e55414c4c59222c226461746156616c6964556e74696c54696d657374616d70223a6e756c6c7d\",\n    \"wrappingKeyFingerprint\": \"0081d44f72dd068608ddd731bbd7e0303b804513\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}\n\n//    \"wrappingKeyFingerprint\": \"0081d44f72dd068608ddd731bbd7e0303b804513\","
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\n//var plainText = \"test\";\nvar encrypted = CryptoJS.enc.Base64.parse(\"test\");\nconsole.log(encrypted)",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_54f82fbb9f6742e5921b9162",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/wrapped-encrypt/aes-256 (certificate)",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-encrypt/aes-256",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b22636172644163636f756e7444617461223a7b226163636f756e744e756d626572223a2235343535303331353039323132363437222c226578706972794d6f6e7468223a223038222c2265787069727959656172223a223239222c227365637572697479436f6465223a6e756c6c7d2c2266696e616e6369616c4163636f756e7444617461223a6e756c6c2c226163636f756e74486f6c64657244617461223a7b226163636f756e74486f6c6465724e616d65223a6e756c6c2c226163636f756e74486f6c64657241646472657373223a6e756c6c2c22636f6e73756d65724964656e746966696572223a6e756c6c2c226163636f756e74486f6c646572456d61696c41646472657373223a6e756c6c2c226163636f756e74486f6c6465724d6f62696c6550686f6e654e756d626572223a6e756c6c7d2c22736f75726365223a224143434f554e545f41444445445f4d414e55414c4c59222c226461746156616c6964556e74696c54696d657374616d70223a6e756c6c7d\",\n    \"certificate\": \"-----BEGIN CERTIFICATE----- MIIFdDCCA1ygAwIBAgIRALevc8nmCBFh7IMWUX4USAowDQYJKoZIhvcNAQELBQAw gbgxEzARBgoJkiaJk/IsZAEZFgNjb20xGjAYBgoJkiaJk/IsZAEZFgptYXN0ZXJj YXJkMQswCQYDVQQGEwJCRTEdMBsGA1UEChMUTWFzdGVyQ2FyZCBXb3JsZHdpZGUx GzAZBgNVBAsTEkNvcnBvcmF0ZSBTZWN1cml0eTE8MDoGA1UEAxMzTWFzdGVyQ2Fy ZCBQUkQgQXBwbGljYXRpb24gSW5mcmFzdHJ1Y3R1cmUgU3ViIENBIEcyMB4XDTE4 MDgzMDE1NDk1OFoXDTIyMDgyOTE1NDQzN1owgboxCzAJBgNVBAYTAlVTMREwDwYD VQQIEwhNaXNzb3VyaTEUMBIGA1UEBxMLU2FpbnQgTG91aXMxNDAyBgNVBAoTK01h c3RlckNhcmQgV29ybGRXaWRlIC0gQ29tbW9uIFByb2RJbmZyYSBTU0wxEDAOBgNV BAsTB2FsYmVydGExOjA4BgNVBAMTMXNyYy13cmFwLWVuYy1jYXJkLXN2Y3MubXRm LmFsYmVydGEubWFzdGVyY2FyZC5pbnQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAw ggEKAoIBAQCj8V7FqzaMhoyPp7cv6kHDM53jRweTmXY3sjirZripZlS5Sl6do12u /acQEOoYKorHhYEnZRk2BiueBCqZ3RIhgJ5XhdnkVhKt6SwFeyBT12jwSniB4e1d 1V4e/YihKpUVj0USagUC6jYL8urv+ku+uejXCP5euPKoxWdGKBi5Q8Mc9SN+PrbL T1Iom/6/xVYaYXJxH19PziNS/ebOi7wejwr+L7rmEiE4xWeGfktLAb5hso5e00zq 21i7Ivpz1nz41TCeZWg9pw8c/Eq0xrs19by6L4SOm5iDtzh6fzDyQSmOFgWeIpyQ 5+lrorX/CUfqcjXmpzMhvDXn4ba9+bx9AgMBAAGjdTBzMA4GA1UdDwEB/wQEAwIF oDATBgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaA FEugoiCvMvBmXcsZeZiYsmzl7SfUMB0GA1UdDgQWBBQg5ULE9UvF0yQK94w8rdP3 JN3pBTANBgkqhkiG9w0BAQsFAAOCAgEAMYGPvgFeSlcX17To/bngEYi8rzmCJr3G aGNwAsucBKOSCcJKi+8L0feq8ane0yoX8FW10Js+vn1vLNxLVFe0gKwOISVxqjDk ClMrArA93XHHmG9QhgnBxc+L6i4txep1FZqk5hFBz1vjm3PWdTMMGzHlhLiAzM1X /Sjib9wvunJQUckr8A+x0HRVtsJtgizXZaT8c94Uf3W2QH1q0RWXi/hPTvuIXYXD ybV0O3/Yg3ro1mMY3Ywh4GCH/x5WgEZlsGCYeiHrk0DPhAhTLTWCK0WDQJbXItz3 cCVBiSsQ1g4LjYYq4exRdHsxjUdsEzvHNPW4HPGeDfSSdDut4JTUZL+ShAjr8fkL fVZiY26Xshj6DT74ep2n9Km3nMjrayubAYcVUyTHCepAecC0EzqtlRvX2wZNF8XJ YH+2IxZh8fFsCPmkBQzwRW7zw5ROnNaakt8YGw+3FT8Ga35Ps/2Gyes8pk1hbnOd H1TNRM8tfhH/qJ3Gm4fVYIxVGCRlYXEUoVBhjj13DDfhI5XYZ1DUbNgGezUaMvxJ JeA6fnmqOaM+NGuYc+wmmuN+bb/LsgD+z1SRNu1No2h913B+uAMYX32W4inaWlyM Xmoh7hN07OcmSWEH0MF7p0qUYLqlAuvVVVhr/hia/ckmlEOynd+w4cNP9WDTPt9b iFa96mLE0jM= -----END CERTIFICATE-----\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "all-mock",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "// CryptoJS require removed; if needed load via Insomnia's sandbox or inline helpers\n//var plainText = \"test\";\nvar encrypted = CryptoJS.enc.Base64.parse(\"test\");\nconsole.log(encrypted)",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_ecccb21950614609be92030e",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/wrapped-decrypt(unwrappingKeyFingerprint)",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"c55686f50f6a6daf28e14a554bd5ed16f1b372a69890393150cde5cb125935f8bbdc13e8cb7cb2e629ca8756ff47140250c8c032c8fce9732c0a66753bb6fe6d34ff436846a89f541fa3a52b32c104bbdd952bbe6e9e5a57210570745f0fd19ea49193a4635fcd136cf9895c2a9d664149fd9cef1627a5b2fd04eb60616d9d1f0d79b14c71248aba24cbf794a13900c346044a4ea53701914ff7fa39103b98decc7f4c30b09165e804518decf9f5cd8c6ff0d3f53a071f5153c77a915c11d1be6ff9c82614a1830adf8777932c5ab5b2c7d5e25639a999c5d50bf3bcced90f960e888b64e80d8a71278e3246a704ec710bfc80f8f497cbdd59511ecfbac4be86ad1e254582fff2e296cf89d7ed7beced827923037d66f70d699df2f46411791668b7d91727236738f78e101e174696ea3fa2ed9fe81d190e616f6e293233be19ab5700566a4f5b1e9d31ff2e2fc6263aeeb21b0eccc0ef6e9f4fa4647d6db236bcb7d7c56d543dbc26c84b958003eea717e2662271882ec01fd793e39c90a661\",\n    \"wrappedKey\": \"28040611eb3074ecb9dcf7f0d6e97d90b313527bcd6d36953be168aa5d2645f37ec05e0d19493d6b1ad6189a30f886349e2bf216299d714df482c5d97fd3e0515f2e39e39e16b80ea026076a4fb74b9c6b650df1da572426567e7347e9242331a1cee397269261e52b994423940d6a00f9b7c2fb1960406d54b3c059f3f49e0b232df172c2b80cb180cbf43bb2f912e1b6ab3a88a9b061d464bee84c780413747430e1cd90ecc43a786e8b35ca21130dd2b7b0e0b83f232f1b58e836f9a18c2f4edbbd6b1693d8d64e16359a207b4d39a8fdbdf3eb10a30cd09092babbd236e0998a2b9a38a8c1927d47e3f7a686d5e8f9774e375bfc1965a95495f98238a796\",\n    \"unwrappingKeyFingerprint\": \"0081d44f72dd068608ddd731bbd7e0303b804513\",\n    \"iv\": \"90310ef227396591a43e9308d6a92a04\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_0c9748800a114e53af6d35f4",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/wrapped-decrypt(unwrappingKeyFingerprint) Copy",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"c55686f50f6a6daf28e14a554bd5ed16f1b372a69890393150cde5cb125935f8bbdc13e8cb7cb2e629ca8756ff47140250c8c032c8fce9732c0a66753bb6fe6d34ff436846a89f541fa3a52b32c104bbdd952bbe6e9e5a57210570745f0fd19ea49193a4635fcd136cf9895c2a9d664149fd9cef1627a5b2fd04eb60616d9d1f0d79b14c71248aba24cbf794a13900c346044a4ea53701914ff7fa39103b98decc7f4c30b09165e804518decf9f5cd8c6ff0d3f53a071f5153c77a915c11d1be6ff9c82614a1830adf8777932c5ab5b2c7d5e25639a999c5d50bf3bcced90f960e888b64e80d8a71278e3246a704ec710bfc80f8f497cbdd59511ecfbac4be86ad1e254582fff2e296cf89d7ed7beced827923037d66f70d699df2f46411791668b7d91727236738f78e101e174696ea3fa2ed9fe81d190e616f6e293233be19ab5700566a4f5b1e9d31ff2e2fc6263aeeb21b0eccc0ef6e9f4fa4647d6db236bcb7d7c56d543dbc26c84b958003eea717e2662271882ec01fd793e39c90a661\",\n    \"wrappedKey\": \"28040611eb3074ecb9dcf7f0d6e97d90b313527bcd6d36953be168aa5d2645f37ec05e0d19493d6b1ad6189a30f886349e2bf216299d714df482c5d97fd3e0515f2e39e39e16b80ea026076a4fb74b9c6b650df1da572426567e7347e9242331a1cee397269261e52b994423940d6a00f9b7c2fb1960406d54b3c059f3f49e0b232df172c2b80cb180cbf43bb2f912e1b6ab3a88a9b061d464bee84c780413747430e1cd90ecc43a786e8b35ca21130dd2b7b0e0b83f232f1b58e836f9a18c2f4edbbd6b1693d8d64e16359a207b4d39a8fdbdf3eb10a30cd09092babbd236e0998a2b9a38a8c1927d47e3f7a686d5e8f9774e375bfc1965a95495f98238a796\",\n    \"unwrappingKeyFingerprint\": \"0081d44f72dd068608ddd731bbd7e0303b804513\",\n    \"iv\": \"90310ef227396591a43e9308d6a92a04\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_0de75812856248d799389cda",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/wrapped-decrypt(mdes wrappingKeyAlias)",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"c55686f50f6a6daf28e14a554bd5ed16f1b372a69890393150cde5cb125935f8bbdc13e8cb7cb2e629ca8756ff47140250c8c032c8fce9732c0a66753bb6fe6d34ff436846a89f541fa3a52b32c104bbdd952bbe6e9e5a57210570745f0fd19ea49193a4635fcd136cf9895c2a9d664149fd9cef1627a5b2fd04eb60616d9d1f0d79b14c71248aba24cbf794a13900c346044a4ea53701914ff7fa39103b98decc7f4c30b09165e804518decf9f5cd8c6ff0d3f53a071f5153c77a915c11d1be6ff9c82614a1830adf8777932c5ab5b2c7d5e25639a999c5d50bf3bcced90f960e888b64e80d8a71278e3246a704ec710bfc80f8f497cbdd59511ecfbac4be86ad1e254582fff2e296cf89d7ed7beced827923037d66f70d699df2f46411791668b7d91727236738f78e101e174696ea3fa2ed9fe81d190e616f6e293233be19ab5700566a4f5b1e9d31ff2e2fc6263aeeb21b0eccc0ef6e9f4fa4647d6db236bcb7d7c56d543dbc26c84b958003eea717e2662271882ec01fd793e39c90a661\",\n    \"wrappedKey\": \"28040611eb3074ecb9dcf7f0d6e97d90b313527bcd6d36953be168aa5d2645f37ec05e0d19493d6b1ad6189a30f886349e2bf216299d714df482c5d97fd3e0515f2e39e39e16b80ea026076a4fb74b9c6b650df1da572426567e7347e9242331a1cee397269261e52b994423940d6a00f9b7c2fb1960406d54b3c059f3f49e0b232df172c2b80cb180cbf43bb2f912e1b6ab3a88a9b061d464bee84c780413747430e1cd90ecc43a786e8b35ca21130dd2b7b0e0b83f232f1b58e836f9a18c2f4edbbd6b1693d8d64e16359a207b4d39a8fdbdf3eb10a30cd09092babbd236e0998a2b9a38a8c1927d47e3f7a686d5e8f9774e375bfc1965a95495f98238a796\",\n    \"unwrappingKeyAlias\":\"66899-wrapping-key-01\",\n    \"iv\": \"90310ef227396591a43e9308d6a92a04\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_de0d2f65313e46b8a3e2583b",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/wrapped-decrypt(mdes wrappingKeyAlias)",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"c55686f50f6a6daf28e14a554bd5ed16f1b372a69890393150cde5cb125935f8bbdc13e8cb7cb2e629ca8756ff47140250c8c032c8fce9732c0a66753bb6fe6d34ff436846a89f541fa3a52b32c104bbdd952bbe6e9e5a57210570745f0fd19ea49193a4635fcd136cf9895c2a9d664149fd9cef1627a5b2fd04eb60616d9d1f0d79b14c71248aba24cbf794a13900c346044a4ea53701914ff7fa39103b98decc7f4c30b09165e804518decf9f5cd8c6ff0d3f53a071f5153c77a915c11d1be6ff9c82614a1830adf8777932c5ab5b2c7d5e25639a999c5d50bf3bcced90f960e888b64e80d8a71278e3246a704ec710bfc80f8f497cbdd59511ecfbac4be86ad1e254582fff2e296cf89d7ed7beced827923037d66f70d699df2f46411791668b7d91727236738f78e101e174696ea3fa2ed9fe81d190e616f6e293233be19ab5700566a4f5b1e9d31ff2e2fc6263aeeb21b0eccc0ef6e9f4fa4647d6db236bcb7d7c56d543dbc26c84b958003eea717e2662271882ec01fd793e39c90a661\",\n    \"wrappedKey\": \"28040611eb3074ecb9dcf7f0d6e97d90b313527bcd6d36953be168aa5d2645f37ec05e0d19493d6b1ad6189a30f886349e2bf216299d714df482c5d97fd3e0515f2e39e39e16b80ea026076a4fb74b9c6b650df1da572426567e7347e9242331a1cee397269261e52b994423940d6a00f9b7c2fb1960406d54b3c059f3f49e0b232df172c2b80cb180cbf43bb2f912e1b6ab3a88a9b061d464bee84c780413747430e1cd90ecc43a786e8b35ca21130dd2b7b0e0b83f232f1b58e836f9a18c2f4edbbd6b1693d8d64e16359a207b4d39a8fdbdf3eb10a30cd09092babbd236e0998a2b9a38a8c1927d47e3f7a686d5e8f9774e375bfc1965a95495f98238a796\",\n    \"unwrappingKeyAlias\":\"66899-wrapping-key-01\",\n    \"iv\": \"90310ef227396591a43e9308d6a92a04\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_b62650ff2aeb4264828195d1",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/wrapped-decrypt(devclient wrappingKeyAlias)",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/wrapped-decrypt",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"048dd2072709791c6d4c0fc52fe7399fd69817732a2d76ca423d92587f7714e27cf7a99141d069b46ffb679f030e4729c1d167bad751fd988237a57a2e7c84a0b6f77387f7c4237c440097dce44d437479bbfc9d42af777564e846589c8569752a45d7e19b71e59fa14824f243982f80c4056a70cf35b99c948b13ee148f25cc20b776e18cac9e43d37906086d771bc448e0da995bad6170dea2dbde29760097ef58545b7de15808b242672e4d57432fe544f04e576739c45782e5d5db97527ac65673e8b1719a53b0f1877a7c5e98f383321f2d8d9cedf4a52a0c4f092cba3d40a8c4cfd41cf3e2e5b47e1c0c075ba80bca1c462577b23c489cf3ab4269893190bd376cdfd605d9e59bd33fdf29674a05c59e81c4fdbbf94c711a5674fe6f758ffa8cffa427f400dafe4aad0b5e314d9cd149e49e7763ae113c7b9fa4c4f30f59dc70cefed88d29317928301c82c43a9458fbabeb0fe4d73fe033d3bacee0b50c8b94b6b02e3ffb6d7e591b99862a5e7286439288b887ac4035cc0b38bd937e\",\n    \"wrappedKey\": \"1622ef5951814c5bbdddb771f76559024bf6c5cda77f25d195406e7304160dd26518ecd8202ddbd849c788935fd03e24c254bd9c0266461de169a4066c5f7b003e0eff12bffccfa91983e8c729bed8e4e0d29f0c7df15caa7c4b968d7c363ce946a770eca258faa72e5dc88b46dbeea13d4a57446100c6cca8927bfe4dddd2af07d795735426f0cc8d0003397201b57b0be4a01afffbca2542e88d27369161033414d6577343e6e95ad630c7ba2d1f4bbb7f96037bb4d988b0fe123131cf6a043a37f389280f4d305f029b7a10fbadfb2063a024015b6f65a80b408df96d6b365a20c76cb2d454eaae243156cffdbabb69353b9e7f65838c48f79927b35872b5\",\n    \"unwrappingKeyAlias\":\"verify-rsa-2048\",\n    \"iv\": \"1c8ab89464b4ce83e211484568f4e0d3\",\n    \"oaepHashingAlgorithm\": \"SHA256\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_450da5142e614b239e0d4d3a",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/decrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/decrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"3939353533454644314144353438383410f2fc2651354cef299fbcb34b9f5dd172784d9fc6213d1a8e9b229fbf7fdd39cd56ea997bc858bddc5f0982642f838f01033348df5881ba20b78341dbac58e05ccd82917fb8d54b5c1725f01dbefe56a20cb73ecfe7c8af788b1227c857efa4f9a1f4cac2efea4334d33df963690f3de4a9ecf60b38ee44591e4d3d1cc3234fd7\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_66f0704ecab8488fa5c89d97",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/decrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/decrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"eyJwcmltYXJ5QWNjb3VudE51bWJlciI6IjY3OTk5NzQyODczNzM5MTIiLCJleHBpcnlEYXRlIjoiMDUzMyIsImNhcmRIb2xkZXJOYW1lIjpudWxsfQ==\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_d5ca854ddd5042fa957b5f1c",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/decrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/decrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cipher\": \"27648eba9312f15b54c97eb1842ca4e0107f61b673ad6123eb044748500c7154993d1c54ce8ab2e8e52867bce24c0d355e2549d319e0e51d91ebaae3a12a2f77b06b1cf52094a5772007f1e1c5942902b5a832ddc478780e6d5f6365b9fd43d42b308e8ba1a60c4ce93e5242b8be11cbc9b13415cfcafa51d9ca1d0077472b3cfd\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_f4c7a3a4060c4ace8e3ec1b3",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/encrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/encrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b227072696d6172794163636f756e744e756d626572223a2235343535303331353039323132363437222c2265787069727944617465223a2230383330222c2263617264486f6c6465724e616d65223a226d616e69227d\",\n    \"alias\": \"dev-test-aes-128-1\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_4b6c41d66716450d81c033d3",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/encrypt/aes Copy",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/encrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b227072696d6172794163636f756e744e756d626572223a2235343535303331353039323132363437222c2265787069727944617465223a2230383330222c2263617264486f6c6465724e616d65223a226d616e69227d\",\n    \"alias\": \"src-stg-card-svc-aes-256-20180713\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_f23260d01cc94b37bf5c6fbc",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/encrypt/aes single PAN",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/encrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"30353237\",\n    \"alias\": \"dev-test-aes-256-1\"\n}\n//dev-test-aes-128-1"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_6bd21a9e73954ff29bfb1c0c",
+      "_type": "request",
+      "parentId": "fld_498f228e86ac4691b9629866",
+      "name": "/v2/core/encrypt/aes",
+      "method": "POST",
+      "url": "{{ _['caas_caas-url'] }}/v2/core/encrypt/aes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"message\": \"7b227072696d6172794163636f756e744e756d626572223a2235343535303331373530303030383831222c2265787069727944617465223a2230353335222c2263617264486f6c6465724e616d65223a22416c69736f6e2044754275717565227d\",\n    \"alias\": \"dev-test-aes-256-1\"\n}\n//\"alias\": \"dev-test-aes-128-1\""
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "CaaS-Encoding-Out",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        },
+        {
+          "name": "CaaS-Encoding-In",
+          "value": "hex",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json; charset=utf-8",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_375f6c0f52aa49b3a2a29175",
+      "_type": "request_group",
+      "parentId": "wrk_1cf1473d90414b748d8e8a22",
+      "name": "Setup (Initialize Variables)"
+    },
+    {
+      "_id": "req_186cd2f2f2264dd991f7221b",
+      "_type": "request",
+      "parentId": "fld_375f6c0f52aa49b3a2a29175",
+      "name": "00 - Initialize caas_* variables",
+      "method": "GET",
+      "url": "https://example.invalid/setup",
+      "headers": [],
+      "parameters": [],
+      "body": {
+        "text": ""
+      },
+      "preRequestScript": "// Run once to initialize all caas_* variables\nconst keys = [\n  \"caas_CaaS-Encoding-In\",\n  \"caas_CaaS-Encoding-Out\",\n  \"caas_caas-url\",\n  \"caas_simulatorCipher\",\n  \"caas_simulatorIv\",\n  \"caas_simulatorWrappedKey\",\n  \"caas_x-src-mocks-manager\"\n];\nfor (const k of keys) {\n  if (insomnia.environment.get(k) === undefined) {\n    insomnia.environment.set(k, '');\n  }\n}\ninsomnia.test('Variables initialized', () => {\n  insomnia.expect(keys.length >= 0).to.equal(true);\n});",
+      "afterResponseScript": ""
+    }
+  ]
+}

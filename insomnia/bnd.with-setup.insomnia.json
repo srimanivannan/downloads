@@ -1,0 +1,354 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-02T14:53:06.436290Z",
+  "__export_source": "Postman->Insomnia (ChatGPT)",
+  "resources": [
+    {
+      "_id": "wrk_02d929ee471f4a319e758984",
+      "_type": "workspace",
+      "name": "bnd (Converted)",
+      "description": "Auto-converted from Postman by ChatGPT"
+    },
+    {
+      "_id": "fld_fd2d29961d9048fdad5f79a2",
+      "_type": "request_group",
+      "parentId": "wrk_02d929ee471f4a319e758984",
+      "name": "bnd"
+    },
+    {
+      "_id": "req_5f20de8cc1f3440d900f92ec",
+      "_type": "request",
+      "parentId": "fld_fd2d29961d9048fdad5f79a2",
+      "name": "SetUp Stage Environment",
+      "method": "GET",
+      "url": "https://blue-src-stage-business-notification-dispatcher-service.apps.stl.pcfstage00.mastercard.int/api/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "insomnia.environment.set('bnd_TOPIC_TDS', \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.STL-mc-src-card-services-TDS-event\");\ninsomnia.environment.set('bnd_TOPIC_NTU', \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.STL-mc-src-card-services-digital-card-update-event\");\ninsomnia.environment.set('bnd_TOPIC_MRN', \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.STL-mc-src-mr-dpaBatchEvents\");\ninsomnia.environment.set('bnd_TOPIC_RETRY', \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.STL-mc-src-notification-retry-event\");",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_e4452d8562444a99ad1870de",
+      "_type": "request",
+      "parentId": "fld_fd2d29961d9048fdad5f79a2",
+      "name": "SetUp ITF Environment",
+      "method": "GET",
+      "url": "https://blue-src-itf-business-notification-dispatcher-service.apps.stl.pcfstage00.mastercard.int/api/actuator/health",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "insomnia.environment.set('bnd_TOPIC_TDS', \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.ITF-mc-src-card-services-TDS-event\");\ninsomnia.environment.set('bnd_TOPIC_NTU', \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.ITF-mc-src-card-services-digital-card-update-event\");\ninsomnia.environment.set('bnd_TOPIC_MRN', \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.ITF-mc-src-mr-dpaBatchEvents\");\ninsomnia.environment.set('bnd_TOPIC_RETRY', \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.ITF-mc-src-notification-retry-event\");",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_33863ef062504a3aaba81bd4",
+      "_type": "request",
+      "parentId": "fld_fd2d29961d9048fdad5f79a2",
+      "name": "TDS",
+      "method": "POST",
+      "url": "https://axon-producer-test-application-ntu-tds.apps.stl.pcfstage00.mastercard.int/api/producers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\r\n    \"topic_name\": \"{{ _['bnd_TOPIC_TDS'] }}\",\r\n    \"event_count\": \"1\",\r\n    \"event_payload\": {\r\n        \"correlationId\": \"CID_CTEST_TDS_004\",\r\n        \"transactions\": [\r\n            {\r\n                \"programId\": \"SECURE_COF_COMMERCE_PLATFORM#E2E#01\",\r\n                \"issuerCountryCode\": \"IND\",\r\n                \"issuerCustomerId\": \"104207\",\r\n                \"enrollmentProviderId\": \"5a9f8c51-7ad1-40c6-b828-b7437b9334f6\",\r\n                \"clientRoutingId\": \"clientRoutingId1\",\r\n                \"consumerId\": \"bf751323-6056-4faa-aeb6-ad1c778a8807\",\r\n                \"cardId\": \"ffcb681b-2a48-43cf-9e42-29e7275df6be\",\r\n                \"tokenUniqueReference\": \"DWSPMC000000000fcb2f4136b2f4136a0532d2f4136a0555\",\r\n                \"recordId\": \"1234\",\r\n                \"transactionIdentifier\": \"6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b\",\r\n                \"transactionType\": \"ATM_WITHDRAWAL\",\r\n                \"amount\": \"190.00\",\r\n                \"currencyCode\": \"usd\",\r\n                \"authorizationStatus\": \"CLEARED\",\r\n                \"transactionTimestamp\": \"2023-01-25T12:00:00.000-07:00\",\r\n                \"merchantName\": \"Bob'\\\"s Burgers\",\r\n                \"merchantType\": \"5812\",\r\n                \"merchantPostalCode\": \"61000\",\r\n                \"installments\": 1,\r\n                \"transactionCountryCode\": \"USD\",\r\n                \"comboCardAccountType\": \"CREDIT\",\r\n                \"issuerResponseInformation\": \"MAX_AMOUNT_EXCEEDED\",\r\n                \"clientSiteId\": \"https://mc.com/sitea\"\r\n            }\r\n        ]\r\n    }\r\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "synapse-target-tag",
+          "value": "UP",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_0a8bed51a0a548c0a8500f0f",
+      "_type": "request",
+      "parentId": "fld_fd2d29961d9048fdad5f79a2",
+      "name": "NTU SUSPENDED",
+      "method": "POST",
+      "url": "https://axon-producer-test-application-ntu-tds.apps.stl.pcfstage00.mastercard.int/api/producers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\r\n    \"topic_name\": \"{{ _['bnd_TOPIC_NTU'] }}\",\r\n    \"event_count\": \"1\",\r\n    \"event_payload\": {\r\n        \"correlationId\": \"CID_CNTU_009\",\r\n        \"cardUpdateEventList\": [\r\n            {\r\n                \"cardId\": \"17d6a01e-2f65-4a38-94db-1d57d2823568\",\r\n                \"primaryAccountNumberSuffix\": \"4993\",\r\n                \"paymentNetworkName\": \"mastercard\",\r\n                \"cardArtUrl\": \"https://sbx.assets.mastercard.com/card-art/combined-image-asset/HIGH-MASK-3x.png\",\r\n                \"cardIdStatus\": \"SUSPENDED\",\r\n                \"consumerId\": \"0b8ce28c-1460-4f85-8d3a-f0fc60f00c33\",\r\n                \"tokenSuffix\": \"3702\",\r\n                \"coBrandName\": null,\r\n                \"issuerName\": \"Citi Bank\",\r\n                \"shortProductDescription\": \"MasterCard Test Bank\",\r\n                \"longProductDescription\": \"Test Bank for MasterCard MTF\",\r\n                \"fpanExpiration\": \"1122\",\r\n                \"programId\": \"SECURE_COF_COMMERCE_PLATFORM#E2E#01\",\r\n                \"tokenUniqueReference\": \"DM4MMC0000144136c06c79f4ee0c477ba41f45591249bb49\",\r\n                \"primaryAccountNumberPrefix\": 512035,\r\n                \"tokenPrefix\": null,\r\n                \"productCategory\": \"CREDIT\",\r\n                \"countryCode\": null,\r\n                \"paymentAccountReference\": \"50013D7L8LCIA9ZZ7D00T2BPQ9DVJ\",\r\n                \"cardCreatedTimeStamp\": \"2023-03-06T17:37:48.170Z\",\r\n                \"lastUsedTimeStamp\": \"2023-03-06T17:37:49.303Z\",\r\n                \"lastUpdateTimeStamp\": \"2023-03-06T17:37:50.654Z\",\r\n                \"tokenExpiration\": \"0426\",\r\n                \"enrollmentProviderId\": \"5a9f8c51-7ad1-40c6-b828-b7437b9334f6\",\r\n                \"clientRoutingId\": \"nc-pod1-smp.apple.com:443\",\r\n                \"clientSiteId\": \"pr-pod3-smp\",\r\n                \"reasonData\": {\r\n                    \"reason\": null,\r\n                    \"reasonText\": null,\r\n                    \"reasonCategory\": null\r\n                }\r\n            }\r\n        ]\r\n    }\r\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "synapse-target-tag",
+          "value": "UP",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_d25ee5c5c4a64d76af42ca4d",
+      "_type": "request",
+      "parentId": "fld_fd2d29961d9048fdad5f79a2",
+      "name": "[ITF] NTU DELETED-valid-program-id-and-clientid-so-that-bnl-will-go-through",
+      "method": "POST",
+      "url": "https://axon-producer-test-application-ntu-tds.apps.stl.pcfstage00.mastercard.int/api/producers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"{{ _['bnd_TOPIC_NTU'] }}\",\n    \"event_count\": \"1\",\n    \"event_payload\": {\n        \"correlationId\": \"token-deactivation-bnd-reasoncode-test-13\",\n        \"cardUpdateEventList\": [\n            {\n                \"cardId\": \"OChutsYjSMG8CgfWTV0kRA000000000000US\",\n                \"primaryAccountNumberSuffix\": \"6301\",\n                \"paymentNetworkName\": \"mastercard\",\n                \"cardArtUrl\": \"https://stage.assets.mastercard.com/card-art/itf/combined-image-asset/fb5febb9-d944-4565-b077-c5623eb2f969.png\",\n                \"cardIdStatus\": \"DELETED\",\n                \"consumerId\": \"4e2e251a-cc7a-487f-b6d2-4878ca83aa0b\",\n                \"tokenSuffix\": \"5476\",\n                \"issuerName\": \"TESTFORSRC\",\n                \"shortProductDescription\": \"TESTFORSRC\",\n                \"foregroundColor\": \"234454\",\n                \"fpanExpiration\": \"1126\",\n                \"programId\": \"SECURE_COF_COMMERCE_PLATFORM_OBO#FAR_EASTERN_INTERNATIONAL_BANK-DE277762_CPOBO_ITF_01#01\",\n                \"tokenUniqueReference\": \"DM4MMC0000114393928fd43039574f4d87f5cedbbc79103f\",\n                \"primaryAccountNumberPrefix\": \"542415\",\n                \"productCategory\": \"CREDIT\",\n                \"countryCode\": \"840\",\n                \"paymentAccountReference\": \"50014UXKE8KMOCB4U9DT2OTFR7KP9\",\n                \"cardCreatedTimeStamp\": \"2023-12-05T17:26:58.593Z\",\n                \"lastUsedTimeStamp\": \"2023-12-05T17:27:15.300Z\",\n                \"lastUpdateTimeStamp\": \"2023-12-05T20:41:42.986Z\",\n                \"tokenExpiration\": \"0127\",\n                \"enrollmentProviderId\": \"272d5130-4b9f-41cf-b8c2-8c8b5c292698\",\n                \"reasonData\": {\n                    \"reason\": \"DEVICE_LOST\",\n                    \"reasonText\": \"Cardholder confirmed token device lost\",\n                    \"reasonCategory\": \"TOKEN\"\n                }\n            }\n        ]\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_a50c7f6a42e14f8aba17d405",
+      "_type": "request",
+      "parentId": "fld_fd2d29961d9048fdad5f79a2",
+      "name": "[STAGE] NTU ACTIVE-valid-program-id-and-clientid-so-that-bnl-will-go-through",
+      "method": "POST",
+      "url": "https://axon-producer-test-application-ntu-tds.apps.stl.pcfstage00.mastercard.int/api/producers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"topic_name\": \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.STL-mc-src-card-services-digital-card-update-event\",\n    \"event_count\": \"1\",\n    \"event_payload\": {\n        \"correlationId\": \"TestNewReasonStage{{ _['bnd_$randomInt'] }}\",\n        \"cardUpdateEventList\": [\n            {\n                \"cardId\": \"cc536bf4-ec4d-44d3-bc38-d75ab3d686be\",\n                \"primaryAccountNumberSuffix\": \"9749\",\n                \"paymentNetworkName\": \"mastercard\",\n                \"cardArtUrl\": \"https://stage.assets.mastercard.com/card-art/combined-image-asset/HIGH-MASK-3x.png\",\n                \"cardIdStatus\": \"ACTIVE\",\n                \"consumerId\": \"4ab5192a-1e12-4113-b6d7-314ed209abx4\",\n                \"tokenSuffix\": \"8566\",\n                \"coBrandName\": null,\n                \"issuerName\": \"Citi Bank\",\n                \"shortProductDescription\": \"Citi Bank Product Configuration\",\n                \"longProductDescription\": \"Citi Bank Product Configuration for Manitoba over the MDES platform\",\n                \"fpanExpiration\": \"1122\",\n                \"programId\": \"SECURE_COF_COMMERCE_PLATFORM#E2E#01\",\n                \"tokenUniqueReference\": \"DM4MMC00000000011d1d3699e129489595db3ff0c7539217\",\n                \"primaryAccountNumberPrefix\": null,\n                \"tokenPrefix\": null,\n                \"productCategory\": \"UNKNOWN\",\n                \"countryCode\": null,\n                \"paymentAccountReference\": \"5001BKFL3Q6CIGAL1OKC5A5PP9A15\",\n                \"cardCreatedTimeStamp\": \"2021-07-23T14:10:14.168Z\",\n                \"lastUsedTimeStamp\": null,\n                \"lastUpdateTimeStamp\": \"2021-07-23T14:10:16.676Z\",\n                \"tokenExpiration\": \"0824\",\n                \"enrollmentProviderId\": \"\",\n                \"clientRoutingId\": \"nc-pod1-smp.apple.com:443\",\n                \"reasonData\": {\n                    \"reason\": \"DEVICE_LOST\",\n                    \"reasonText\": \"Cardholder confirmed token device lost\",\n                    \"reasonCategory\": \"TOKEN\"\n                }\n            }\n        ]\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_a80f0487ce33451e8f4f1a33",
+      "_type": "request",
+      "parentId": "fld_fd2d29961d9048fdad5f79a2",
+      "name": "ABU",
+      "method": "POST",
+      "url": "https://axon-producer-test-application-ntu-tds.apps.stl.pcfstage00.mastercard.int/api/producers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\r\n    \"topic_name\": \"DigitalPaymentsTechnology.SecureRemoteCommerce.STL-Test-AccountMaintenance\",\r\n    \"event_count\": \"1\",\r\n    \"event_payload\": {\r\n        \"requestId\": \"c7d11bec-91d1-4d01-bce2-7e736311cd6b\",\r\n        \"sourceApplication\": \"78dd279d-84f0-42bb-82eb-d3e71c6edb58\",\r\n        \"reasonCode\": \"replacement_card\",\r\n        \"eventDateTime\": \"2022-04-04T11:02:03.123-07:02\",\r\n        \"oldCard\": {\r\n            \"accountNumber\": \"5556670127637984\",\r\n            \"expiryMonth\": \"01\",\r\n            \"expiryYear\": \"25\"\r\n        },\r\n        \"newCard\": {\r\n            \"accountNumber\": \"5555031500000256\",\r\n            \"expiryMonth\": \"09\",\r\n            \"expiryYear\": \"32\"\r\n        }\r\n    }\r\n}\r\n//    \"target_partition\": \"0\","
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "synapse-target-tag",
+          "value": "UP",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_55b1963eacbe44658a2e3dba",
+      "_type": "request",
+      "parentId": "fld_fd2d29961d9048fdad5f79a2",
+      "name": "MRN",
+      "method": "POST",
+      "url": "https://axon-producer-test-application-mrn.apps.stl.pcfstage00.mastercard.int/api/producers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"topic_name\": \"{{ _['bnd_TOPIC_MRN'] }}\",\n  \"event_count\": \"1\",\n  \"event_payload\": {\n    \"messageId\": \"ac4da7a4-3e22-45cf-afb5-893fb1bfce5d\",\n    \"sourceAppName\": \"merchant-registration-service\",\n    \"messageType\": \"DPA_BATCH_EVENTS\",\n    \"messageTimeStamp\": \"2020-02-24T11:32:32.060Z\",\n    \"correlationId\": \"correlationId_MRN_AM_AUTO_015\",\n    \"events\": [{\n        \"eventId\": \"bf751323-6055-4faa-aeb6-ad1c778a8807\",\n        \"eventType\": \"BATCH_LIFECYCLE_EVENT\",\n        \"eventSubTypes\": \"FAILED\",\n        \"srciData\": {\n          \"srciId\": \"1cbc3af3-34f3-4017-9c7d-7bc195a5bf8f\",\n          \"clientRoutingId\": \"89311789185\",\n          \"clientSiteId\": \"https://mc.com/siteb\"\n        },\n        \"eventData\": {\n          \"requestId\": \"03ec3702-cd48-4ee9-8ddf-3e052b2f6e0f\",\n          \"batchId\": \"16c06939-83fe-47c2-8bba-5eb9429cb194\",\n          \"batchStatus\": \"COMPLETED_SUCCESSFULLY\",\n          \"batchStartTime\": \"string\",\n          \"batchEndTime\": \"string\",\n          \"errorMessage\": \"string\",\n          \"items\": [{\n              \"action\": \"ADD\",\n              \"serviceId\": \"string\",\n              \"programName\": \"string\",\n              \"status\": \"SUCCESSFUL\",\n              \"error\": {\n                \"status\": 0,\n                \"reason\": \"string\",\n                \"message\": \"string\",\n                \"errordetail\": [{\n                    \"reason\": \"string\",\n                    \"sourceType\": \"string\",\n                    \"message\": \"string\",\n                    \"source\": \"string\"\n                  }]\n              },\n              \"dpaResults\": [{\n                  \"srcDpaId\": \"string\",\n                  \"status\": \"SUCCESSFUL\",\n                  \"dpaName\": \"string\",\n                  \"error\": {\n                    \"status\": 0,\n                    \"reason\": \"string\",\n                    \"message\": \"string\",\n                    \"errordetail\": [{\n                        \"reason\": \"string\",\n                        \"sourceType\": \"string\",\n                        \"message\": \"string\",\n                        \"source\": \"string\"\n                      }]\n                  }\n                }]\n            }\n          ]\n        }\n    }]\n  }\n}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "synapse-target-tag",
+          "value": "UP",
+          "disabled": true
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": "pm.collectionVariables.get\r\ninsomnia.environment.get('bnd_batchId');"
+    },
+    {
+      "_id": "req_5a37c64859134f8b8ac49b94",
+      "_type": "request",
+      "parentId": "fld_fd2d29961d9048fdad5f79a2",
+      "name": "TDS Retry Success",
+      "method": "POST",
+      "url": "correlationIdNTUTestAM53789",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\r\n\t\"topic_name\": \"{{ _['bnd_TOPIC_RETRY'] }}\",\r\n\t\"event_count\": \"1\",\r\n\t\"event_payload\": {\r\n\t\t\"programId\": \"SECURE_COF_COMMERCE_PLATFORM#DEVTEST#02\",\r\n\t\t\"eventType\": \"tds\",\r\n\t\t\"clientId\": \"08518770-f366-4e9c-a477-279b3678c74a\",\r\n\t\t\"deliveryInfo\": {\r\n\t\t\t\"baseUrl\": \"https://stage.outbound.api.gateway.mastercard.int:18443/src/outbound\",\r\n\t\t\t\"endpointUri\": \"/src_mc_int_bnl/notifications/stage/transaction\",\r\n\t\t\t\"deliveryChannel\": \"HTTP\",\r\n\t\t\t\"encryptionDetails\": {\r\n\t\t\t\t\"encryptionEnabled\": false,\r\n\t\t\t\t\"publicKey\": null\r\n\t\t\t},\r\n\t\t\t\"throttleConfig\": {\r\n\t\t\t\t\"quotaKbPerDay\": -1,\r\n\t\t\t\t\"rateLimitParams\": {\r\n\t\t\t\t\t\"maxTps\": -1,\r\n\t\t\t\t\t\"maxDataVolumePerSecInKB\": -1\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"retryPolicy\": {\r\n\t\t\t\"policyName\": \"ATT_3_RETRY_0_1000_1.0\",\r\n\t\t\t\"maxAttempts\": 3,\r\n\t\t\t\"attemptIntervalsInSec\": [\r\n\t\t\t\t2,\r\n\t\t\t\t4\r\n\t\t\t],\r\n\t\t\t\"maxRetries\": 0,\r\n\t\t\t\"retryInitialBackoffMs\": 1000,\r\n\t\t\t\"retryBackoffDelayFactor\": 1\r\n\t\t},\r\n\t\t\"businessEvent\": {\r\n\t\t\t\"correlationId\": \"CID_TDS_Retry_AM_03\",\r\n\t\t\t\"transactions\": [{\r\n\t\t\t\t\"siteId\": null,\r\n\t\t\t\t\"clientRoutingId\": \"x-src-client-routing-Id001\",\r\n\t\t\t\t\"tokenUniqueReference\": \"DWSPMC000000000fcb2f4136b2f4136a0532d2f4136a0532\",\r\n\t\t\t\t\"enrollmentProviderId\": \"\",\r\n\t\t\t\t\"recordId\": \"123456\",\r\n\t\t\t\t\"transactionIdentifier\": \"6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b\",\r\n\t\t\t\t\"transactionType\": \"ATM_WITHDRAWAL\",\r\n\t\t\t\t\"amount\": 123.45,\r\n\t\t\t\t\"currencyCode\": \"usd\",\r\n\t\t\t\t\"authorizationStatus\": \"CLEARED\",\r\n\t\t\t\t\"transactionTimestamp\": \"2019-04-25T12:00:00.000-07:00\",\r\n\t\t\t\t\"merchantName\": \"Bob's Burgers\",\r\n\t\t\t\t\"merchantType\": \"5812\",\r\n\t\t\t\t\"merchantPostalCode\": \"61000\",\r\n\t\t\t\t\"installments\": 1,\r\n\t\t\t\t\"transactionCountryCode\": \"USD\",\r\n\t\t\t\t\"comboCardAccountType\": \"CREDIT\",\r\n\t\t\t\t\"issuerResponseInformation\": \"MAX_AMOUNT_EXCEEDED\",\r\n\t\t\t\t\"programId\": \"SECURE_COF_COMMERCE_PLATFORM#DEVTEST#02\",\r\n\t\t\t\t\"consumerId\": \"bf751323-6056-4faa-aeb6-ad1c778a8807\",\r\n\t\t\t\t\"cardId\": \"ffcb681b-2a48-43cf-9e42-29e7275df6be\",\r\n\t\t\t\t\"issuerCustomerId\": null,\r\n\t\t\t\t\"issuerCountryCode\": null\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"dispatchAudit\": {\r\n\t\t\t\"attempts\": [{\r\n\t\t\t\t\"responses\": [{\r\n\t\t\t\t\t\"status\": \"FAILURE\",\r\n\t\t\t\t\t\"requestTime\": 1629200386021,\r\n\t\t\t\t\t\"responseTime\": 1629200386055,\r\n\t\t\t\t\t\"responseCode\": 404,\r\n\t\t\t\t\t\"responseBody\": \"{\\\"Errors\\\":[{\\\"Error\\\":{\\\"Details\\\":null,\\\"Source\\\":\\\"Gateway\\\",\\\"ReasonCode\\\":\\\"NOT_FOUND\\\",\\\"Description\\\":\\\"Not Found\\\",\\\"Recoverable\\\":false}}]}\\n\",\r\n\t\t\t\t\t\"executionTime\": 34\r\n\t\t\t\t}],\r\n\t\t\t\t\"attemptStatus\": \"FAILURE\",\r\n\t\t\t\t\"latestResponse\": {\r\n\t\t\t\t\t\"status\": \"FAILURE\",\r\n\t\t\t\t\t\"requestTime\": 1629200386021,\r\n\t\t\t\t\t\"responseTime\": 1629200386055,\r\n\t\t\t\t\t\"responseCode\": 404,\r\n\t\t\t\t\t\"responseBody\": \"{\\\"Errors\\\":[{\\\"Error\\\":{\\\"Details\\\":null,\\\"Source\\\":\\\"Gateway\\\",\\\"ReasonCode\\\":\\\"NOT_FOUND\\\",\\\"Description\\\":\\\"Not Found\\\",\\\"Recoverable\\\":false}}]}\\n\",\r\n\t\t\t\t\t\"executionTime\": 34\r\n\t\t\t\t}\r\n\t\t\t}],\r\n\t\t\t\"latestRetryAfterHeaderTime\": -1\r\n\t\t},\r\n\t\t\"type\": \"TDSBusinessEvent\",\r\n\t\t\"dispatchRequest\": {\r\n\t\t\t\"correlationId\": \"CID_TDS_Retry_AM_002\",\r\n\t\t\t\"notificationId\": \"correlationIDTDSVaibhav706\",\r\n\t\t\t\"eventId\": \"correlationIDTDSVaibhav706\",\r\n\t\t\t\"deliveryInfo\": {\r\n\t\t\t\t\"deliveryChannel\": \"HTTP\",\r\n\t\t\t\t\"baseUrl\": \"https://stage.outbound.api.gateway.mastercard.int:18443/src/outbound\",\r\n\t\t\t\t\"endpointUri\": \"/src_mc_int_bnl/notifications/stage/transaction\",\r\n\t\t\t\t\"encryptionDetails\": {\r\n\t\t\t\t\t\"encryptionEnabled\": false,\r\n\t\t\t\t\t\"publicKey\": null\r\n\t\t\t\t},\r\n\t\t\t\t\"throttleConfig\": {\r\n\t\t\t\t\t\"quotaKBperDay\": -1,\r\n\t\t\t\t\t\"rateLimitParams\": {\r\n\t\t\t\t\t\t\"maxTps\": -1,\r\n\t\t\t\t\t\t\"maxDataVolumePerSecInKB\": -1\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t\"retryMechanism\": {\r\n\t\t\t\t\"enableRetry\": false,\r\n\t\t\t\t\"maxRetries\": 0,\r\n\t\t\t\t\"retryInitialBackoffMs\": 1000,\r\n\t\t\t\t\"retryBackoffDelayFactor\": 1\r\n\t\t\t},\r\n\t\t\t\"notification\": {\r\n\t\t\t\t\"headers\": {\r\n\t\t\t\t\t\"x-src-client-routing-id\": \"x-src-client-routing-Id001\",\r\n\t\t\t\t\t\"x-mc-correlation-id\": \"correlationIDTDSVaibhav706\"\r\n\t\t\t\t},\r\n\t\t\t\t\"payload\": \"{\\\"transactions\\\":[{\\\"srcDigitalCardId\\\":\\\"ffcb681b-2a48-43cf-9e42-29e7275df6be\\\",\\\"serviceId\\\":\\\"SECURE_COF_COMMERCE_PLATFORM#DEVTEST#02\\\",\\\"srcConsumerId\\\":\\\"bf751323-6056-4faa-aeb6-ad1c778a8807\\\",\\\"tokenUniqueReference\\\":\\\"DWSPMC000000000fcb2f4136b2f4136a0532d2f4136a0532\\\",\\\"recordId\\\":\\\"123456\\\",\\\"transactionIdentifier\\\":\\\"6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b\\\",\\\"transactionType\\\":\\\"ATM_WITHDRAWAL\\\",\\\"amount\\\":123.45,\\\"currencyCode\\\":\\\"840\\\",\\\"authorizationStatus\\\":\\\"CLEARED\\\",\\\"transactionTimestamp\\\":\\\"1556218800000\\\",\\\"merchantName\\\":\\\"Bob's Burgers\\\",\\\"merchantType\\\":\\\"5812\\\",\\\"merchantPostalCode\\\":\\\"61000\\\",\\\"installments\\\":1,\\\"transactionCountryCode\\\":\\\"USD\\\",\\\"comboCardAccountType\\\":\\\"CREDIT\\\",\\\"issuerResponseInformation\\\":\\\"MAX_AMOUNT_EXCEEDED\\\"}]}\"\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "synapse-target-tag",
+          "value": "UP",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_5005760988774b5e9802e4a4",
+      "_type": "request",
+      "parentId": "fld_fd2d29961d9048fdad5f79a2",
+      "name": "NTU Retry Success",
+      "method": "POST",
+      "url": "https://axon-producer-test-application-ntu-tds.apps.stl.pcfstage00.mastercard.int/api/producers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\r\n    \"topic_name\": \"{{ _['bnd_TOPIC_RETRY'] }}\",\r\n    \"event_count\": \"1\",\r\n    \"event_payload\": {\r\n        \"programId\": \"SECURE_COF_COMMERCE_PLATFORM#DEVTEST#02\",\r\n        \"eventType\": \"ntu\",\r\n        \"clientId\": \"08518770-f366-4e9c-a477-279b3678c74a\",\r\n        \"deliveryInfo\": {\r\n            \"baseUrl\": \"https://stage.outbound.api.gateway.mastercard.int:18443/src/outbound\",\r\n            \"endpointUri\": \"/src_mc_int_bnl/notifications/card123/stage\",\r\n            \"deliveryChannel\": \"HTTP\",\r\n            \"encryptionDetails\": {\r\n                \"encryptionEnabled\": false,\r\n                \"publicKey\": null\r\n            },\r\n            \"throttleConfig\": {\r\n                \"quotaKbPerDay\": -1,\r\n                \"rateLimitParams\": {\r\n                    \"maxTps\": -1,\r\n                    \"maxDataVolumePerSecInKB\": -1\r\n                }\r\n            }\r\n        },\r\n        \"retryPolicy\": {\r\n            \"policyName\": \"ATT_3_RETRY_0_1000_1.0\",\r\n            \"maxAttempts\": 3,\r\n            \"attemptIntervalsInSec\": [\r\n                1,\r\n                2\r\n            ],\r\n            \"maxRetries\": 0,\r\n            \"retryInitialBackoffMs\": 1000,\r\n            \"retryBackoffDelayFactor\": 1\r\n        },\r\n        \"businessEvent\": {\r\n            \"correlationId\": \"CID_NTU_Retry_AM_RT_009\",\r\n            \"cardUpdateEventList\": [\r\n                {\r\n                    \"siteId\": null,\r\n                    \"clientRoutingId\": \"x-src-client-routing-Id0111\",\r\n                    \"cardId\": \"e6016322-ac86-4ac7-8567-e7b8a424c70b\",\r\n                    \"enrollmentProviderId\": \"\",\r\n                    \"primaryAccountNumberSuffix\": \"6828\",\r\n                    \"paymentNetworkName\": \"MasterCard\",\r\n                    \"cardArtUrl\": \"https://stage.assets.mastercard.com/card-art/combined-image-asset/9d42df54-c5fd-438b-a886-ff0bd1e8f7ec.png\",\r\n                    \"cardIdStatus\": \"DELETED\",\r\n                    \"consumerId\": \"test @yml.com\",\r\n                    \"tokenSuffix\": \"01234\",\r\n                    \"coBrandName\": \"coBrandName\",\r\n                    \"issuerName\": \"Citi Bank\",\r\n                    \"shortProductDescription\": \"Citi Bank Product Configuration\",\r\n                    \"longProductDescription\": \"Citi Bank Product Configuration for Manitoba over the MDES platform\",\r\n                    \"fpanExpiration\": \"0423\",\r\n                    \"programId\": \"SECURE_COF_COMMERCE_PLATFORM#DEVTEST#02\",\r\n                    \"tokenUniqueReference\": \"DM4MMC00000000019ef92450acea481c8dc886e42edee2c6_5\",\r\n                    \"primaryAccountNumberPrefix\": \"545503\",\r\n                    \"tokenPrefix\": \"123456\",\r\n                    \"productCategory\": \"CREDIT\",\r\n                    \"countryCode\": \"933\",\r\n                    \"paymentAccountReference\": \"500150F5DE22SND132Y6PR32AR5HB\",\r\n                    \"cardCreatedTimeStamp\": \"2020-02-24T11:32:32.060Z\",\r\n                    \"lastUsedTimeStamp\": \"2020-02-24T11:32:32.060Z\",\r\n                    \"lastUpdateTimeStamp\": \"2020-04-01T17:20:17.565+05:30\",\r\n                    \"tokenExpiration\": \"0421\",\r\n                    \"reasonData\": {\r\n                        \"reasonCategory\": \"DD\",\r\n                        \"reason\": \"DEVICE_FOUND\",\r\n                        \"reasonText\": \"Issuer or cardholder confirmed no fraudulent token transactions\"\r\n                    }\r\n                }\r\n            ]\r\n        },\r\n        \"dispatchAudit\": {\r\n            \"attempts\": [\r\n                {\r\n                    \"responses\": [\r\n                        {\r\n                            \"status\": \"FAILURE\",\r\n                            \"requestTime\": 1629204788230,\r\n                            \"responseTime\": 1629204788260,\r\n                            \"responseCode\": 404,\r\n                            \"responseBody\": \"{\\\"Errors\\\":[{\\\"Error\\\":{\\\"Details\\\":null,\\\"Source\\\":\\\"Gateway\\\",\\\"ReasonCode\\\":\\\"NOT_FOUND\\\",\\\"Description\\\":\\\"Not Found\\\",\\\"Recoverable\\\":false}}]}\\n\",\r\n                            \"executionTime\": 30\r\n                        }\r\n                    ],\r\n                    \"attemptStatus\": \"FAILURE\",\r\n                    \"latestResponse\": {\r\n                        \"status\": \"FAILURE\",\r\n                        \"requestTime\": 1629204788230,\r\n                        \"responseTime\": 1629204788260,\r\n                        \"responseCode\": 404,\r\n                        \"responseBody\": \"{\\\"Errors\\\":[{\\\"Error\\\":{\\\"Details\\\":null,\\\"Source\\\":\\\"Gateway\\\",\\\"ReasonCode\\\":\\\"NOT_FOUND\\\",\\\"Description\\\":\\\"Not Found\\\",\\\"Recoverable\\\":false}}]}\\n\",\r\n                        \"executionTime\": 30\r\n                    }\r\n                }\r\n            ],\r\n            \"latestRetryAfterHeaderTime\": -1\r\n        },\r\n        \"type\": \"NTUBusinessEvent\",\r\n        \"dispatchRequest\": {\r\n            \"correlationId\": \"correlationIdNTUVaibhav537\",\r\n            \"notificationId\": \"correlationIdNTUVaibhav537\",\r\n            \"eventId\": \"correlationIdNTUVaibhav537\",\r\n            \"deliveryInfo\": {\r\n                \"deliveryChannel\": \"HTTP\",\r\n                \"baseUrl\": \"https://stage.outbound.api.gateway.mastercard.int:18443/src/outbound\",\r\n                \"endpointUri\": \"/src_mc_int_bnl/notifications/stage/card/sitea\",\r\n                \"encryptionDetails\": {\r\n                    \"encryptionEnabled\": false,\r\n                    \"publicKey\": null\r\n                },\r\n                \"throttleConfig\": {\r\n                    \"quotaKBperDay\": -1,\r\n                    \"rateLimitParams\": {\r\n                        \"maxTps\": -1,\r\n                        \"maxDataVolumePerSecInKB\": -1\r\n                    }\r\n                }\r\n            },\r\n            \"retryMechanism\": {\r\n                \"enableRetry\": false,\r\n                \"maxRetries\": 0,\r\n                \"retryInitialBackoffMs\": 1000,\r\n                \"retryBackoffDelayFactor\": 1\r\n            },\r\n            \"notification\": {\r\n                \"headers\": {\r\n                    \"x-src-client-routing-id\": \"x-src-client-routing-Id0111\",\r\n                    \"x-mc-correlation-id\": \"correlationIdNTUVaibhav537\"\r\n                },\r\n                \"payload\": \"{\\\"digitalCardUpdateNotifications\\\":[{\\\"reason\\\":null,\\\"maskedCard\\\":{\\\"srcDigitalCardId\\\":\\\"e6016322-ac86-4ac7-8567-e7b8a424c70b\\\",\\\"srcPaymentCardId\\\":null,\\\"panBin\\\":\\\"545503\\\",\\\"panLastFour\\\":\\\"6828\\\",\\\"tokenBinRange\\\":\\\"123456\\\",\\\"tokenLastFour\\\":\\\"01234\\\",\\\"digitalCardData\\\":{\\\"status\\\":\\\"CANCELLED\\\",\\\"presentationName\\\":\\\"\\\",\\\"descriptorName\\\":\\\"Citi Bank Product Configuration\\\",\\\"artUri\\\":\\\"https://stage.assets.mastercard.com/card-art/combined-image-asset/9d42df54-c5fd-438b-a886-ff0bd1e8f7ec.png\\\",\\\"artHeight\\\":null,\\\"artWidth\\\":null,\\\"pendingEvents\\\":null},\\\"panExpirationMonth\\\":\\\"04\\\",\\\"panExpirationYear\\\":\\\"2023\\\",\\\"paymentCardDescriptor\\\":\\\"MasterCard\\\",\\\"paymentCardType\\\":\\\"CREDIT\\\",\\\"digitalCardFeatures\\\":null,\\\"maskedBillingAddress\\\":null,\\\"dcf\\\":null,\\\"serviceId\\\":\\\"SECURE_COF_COMMERCE_PLATFORM#DEVTEST#02\\\",\\\"paymentAccountReference\\\":\\\"500150F5DE22SND132Y6PR32AR5HB\\\",\\\"dateOfCardCreated\\\":\\\"2020-02-24T11:32:32.060Z\\\",\\\"dateOfCardLastUsed\\\":\\\"2020-02-24T11:32:32.060Z\\\",\\\"tokenUniqueReference\\\":\\\"DM4MMC00000000019ef92450acea481c8dc886e42edee2c6_5\\\"},\\\"eventTimeStamp\\\":\\\"1585741817000\\\"}]}\"\r\n            }\r\n        }\r\n    }\r\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "synapse-target-tag",
+          "value": "UP",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_12130db748b94c8dafff1f4c",
+      "_type": "request",
+      "parentId": "fld_fd2d29961d9048fdad5f79a2",
+      "name": "MRN Retry Success",
+      "method": "POST",
+      "url": "https://axon-producer-test-application-ntu-tds.apps.stl.pcfstage00.mastercard.int/api/producers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\r\n    \"topic_name\": \"{{ _['bnd_TOPIC_RETRY'] }}\",\r\n    \"event_count\": \"1\",\r\n    \"event_payload\": {\r\n        \"programId\": null,\r\n        \"eventType\": \"mrn\",\r\n        \"clientId\": \"b774e9a6-1bdb-4f74-88f7-9918ac017b39\",\r\n        \"deliveryInfo\": {\r\n            \"baseUrl\": \"https://stage.outbound.api.gateway.mastercard.int:18443/src/outbound/\",\r\n            \"endpointUri\": \"/digitalcards/apple/pod1\",\r\n            \"deliveryChannel\": \"HTTP\",\r\n            \"encryptionDetails\": {\r\n                \"encryptionEnabled\": false,\r\n                \"publicKey\": null\r\n            },\r\n            \"throttleConfig\": {\r\n                \"quotaKbPerDay\": -1,\r\n                \"rateLimitParams\": {\r\n                    \"maxTps\": -1,\r\n                    \"maxDataVolumePerSecInKB\": -1\r\n                }\r\n            }\r\n        },\r\n        \"retryPolicy\": {\r\n            \"policyName\": \"ATT_3_RETRY_0_1000_1.0\",\r\n            \"maxAttempts\": 3,\r\n            \"attemptIntervalsInSec\": [\r\n                1,\r\n                2\r\n            ],\r\n            \"maxRetries\": 0,\r\n            \"retryInitialBackoffMs\": 1000,\r\n            \"retryBackoffDelayFactor\": 1\r\n        },\r\n        \"businessEvent\": {\r\n            \"correlationId\": \"CID_MRN_Retry_006\",\r\n            \"messageId\": \"ac4da7a4-3e22-45cf-afb5-893fb1bfce5d\",\r\n            \"sourceAppName\": \"merchant-registration-service\",\r\n            \"messageType\": \"DPA_BATCH_EVENTS\",\r\n            \"messageTimeStamp\": \"2020-02-24T11:32:32.060Z\",\r\n            \"events\": [\r\n                {\r\n                    \"eventId\": \"bf751323-6055-4faa-aeb6-ad1c778a8807\",\r\n                    \"eventType\": \"BATCH_LIFECYCLE_EVENT\",\r\n                    \"eventSubTypes\": \"FAILED\",\r\n                    \"srciData\": {\r\n                        \"srciId\": \"b774e9a6-1bdb-4f74-88f7-9918ac017b39\",\r\n                        \"clientRoutingId\": \"89311789185\",\r\n                        \"siteId\": \"\"\r\n                    },\r\n                    \"eventData\": {\r\n                        \"requestId\": \"03ec3702-cd48-4ee9-8ddf-3e052b2f6e0f\",\r\n                        \"batchId\": \"a8a1715e-413c-44fe-bcb6-dcc2eb1ac6a02\",\r\n                        \"batchStatus\": \"COMPLETED_SUCCESSFULLY\",\r\n                        \"batchStartTime\": \"string\",\r\n                        \"batchEndTime\": \"string\",\r\n                        \"errorMessage\": \"string\",\r\n                        \"items\": [\r\n                            {\r\n                                \"action\": \"ADD\",\r\n                                \"serviceId\": \"string\",\r\n                                \"programName\": \"string\",\r\n                                \"status\": \"SUCCESSFUL\",\r\n                                \"error\": {\r\n                                    \"status\": 0,\r\n                                    \"reason\": \"string\",\r\n                                    \"message\": \"string\",\r\n                                    \"errordetail\": [\r\n                                        {\r\n                                            \"reason\": \"string\",\r\n                                            \"sourceType\": \"string\",\r\n                                            \"message\": \"string\",\r\n                                            \"source\": \"string\"\r\n                                        }\r\n                                    ]\r\n                                },\r\n                                \"dpaResults\": [\r\n                                    {\r\n                                        \"srcDpaId\": \"string\",\r\n                                        \"status\": \"SUCCESSFUL\",\r\n                                        \"dpaName\": \"string\",\r\n                                        \"error\": {\r\n                                            \"status\": 0,\r\n                                            \"reason\": \"string\",\r\n                                            \"message\": \"string\",\r\n                                            \"errordetail\": [\r\n                                                {\r\n                                                    \"reason\": \"string\",\r\n                                                    \"sourceType\": \"string\",\r\n                                                    \"message\": \"string\",\r\n                                                    \"source\": \"string\"\r\n                                                }\r\n                                            ]\r\n                                        }\r\n                                    }\r\n                                ]\r\n                            }\r\n                        ]\r\n                    }\r\n                }\r\n            ]\r\n        },\r\n        \"dispatchAudit\": {\r\n            \"attempts\": [\r\n                {\r\n                    \"responses\": [\r\n                        {\r\n                            \"status\": \"FAILURE\",\r\n                            \"requestTime\": 1629266410135,\r\n                            \"responseTime\": 1629266410155,\r\n                            \"responseCode\": 404,\r\n                            \"responseBody\": \"{\\\"Errors\\\":[{\\\"Error\\\":{\\\"ReasonCode\\\":\\\"NOT_FOUND\\\",\\\"Description\\\":\\\"Not Found\\\",\\\"Recoverable\\\":false,\\\"Details\\\":null,\\\"Source\\\":\\\"Gateway\\\"}}]}\\n\",\r\n                            \"executionTime\": 20\r\n                        }\r\n                    ],\r\n                    \"latestResponse\": {\r\n                        \"status\": \"FAILURE\",\r\n                        \"requestTime\": 1629266410135,\r\n                        \"responseTime\": 1629266410155,\r\n                        \"responseCode\": 404,\r\n                        \"responseBody\": \"{\\\"Errors\\\":[{\\\"Error\\\":{\\\"ReasonCode\\\":\\\"NOT_FOUND\\\",\\\"Description\\\":\\\"Not Found\\\",\\\"Recoverable\\\":false,\\\"Details\\\":null,\\\"Source\\\":\\\"Gateway\\\"}}]}\\n\",\r\n                        \"executionTime\": 20\r\n                    },\r\n                    \"attemptStatus\": \"FAILURE\"\r\n                }\r\n            ],\r\n            \"latestRetryAfterHeaderTime\": -1\r\n        },\r\n        \"type\": \"MrnBusinessEvent\",\r\n        \"dispatchRequest\": {\r\n            \"correlationId\": \"vaibhavMRNCoorelationid_0081\",\r\n            \"notificationId\": \"vaibhavMRNCoorelationid_0081\",\r\n            \"eventId\": \"vaibhavMRNCoorelationid_0081\",\r\n            \"deliveryInfo\": {\r\n                \"deliveryChannel\": \"HTTP\",\r\n                \"baseUrl\": \"https://stage.outbound.api.gateway.mastercard.int:18443/src/outbound/\",\r\n                \"endpointUri\": \"/src_mc_int_bnl/notifications/dpa/sitea/stage\",\r\n                \"encryptionDetails\": {\r\n                    \"encryptionEnabled\": false,\r\n                    \"publicKey\": null\r\n                },\r\n                \"throttleConfig\": {\r\n                    \"quotaKBperDay\": -1,\r\n                    \"rateLimitParams\": {\r\n                        \"maxTps\": -1,\r\n                        \"maxDataVolumePerSecInKB\": -1\r\n                    }\r\n                }\r\n            },\r\n            \"retryMechanism\": {\r\n                \"enableRetry\": false,\r\n                \"maxRetries\": 0,\r\n                \"retryInitialBackoffMs\": 1000,\r\n                \"retryBackoffDelayFactor\": 1\r\n            },\r\n            \"notification\": {\r\n                \"headers\": {\r\n                    \"x-mc-correlation-id\": \"vaibhavMRNCoorelationid_0081\",\r\n                    \"X-ZION\": \"89311789185\"\r\n                },\r\n                \"payload\": \"{\\\"requestId\\\":\\\"03ec3702-cd48-4ee9-8ddf-3e052b2f6e0f\\\",\\\"batchId\\\":\\\"a8a1715e-413c-44fe-bcb6-dcc2eb1ac6a02\\\",\\\"batchStatus\\\":\\\"COMPLETED_SUCCESSFULLY\\\",\\\"batchStartTime\\\":\\\"string\\\",\\\"batchEndTime\\\":\\\"string\\\",\\\"errorMessage\\\":\\\"string\\\",\\\"items\\\":[{\\\"action\\\":\\\"ADD\\\",\\\"serviceId\\\":\\\"string\\\",\\\"programName\\\":\\\"string\\\",\\\"status\\\":\\\"SUCCESSFUL\\\",\\\"error\\\":{\\\"status\\\":0,\\\"reason\\\":\\\"string\\\",\\\"message\\\":\\\"string\\\",\\\"errordetail\\\":[{\\\"reason\\\":\\\"string\\\",\\\"sourceType\\\":\\\"string\\\",\\\"message\\\":\\\"string\\\",\\\"source\\\":\\\"string\\\"}]},\\\"dpaResults\\\":[{\\\"srcDpaId\\\":\\\"string\\\",\\\"status\\\":\\\"SUCCESSFUL\\\",\\\"dpaName\\\":\\\"string\\\",\\\"error\\\":{\\\"status\\\":0,\\\"reason\\\":\\\"string\\\",\\\"message\\\":\\\"string\\\",\\\"errordetail\\\":[{\\\"reason\\\":\\\"string\\\",\\\"sourceType\\\":\\\"string\\\",\\\"message\\\":\\\"string\\\",\\\"source\\\":\\\"string\\\"}]}}]}]}\"\r\n            }\r\n        }\r\n    }\r\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "synapse-target-tag",
+          "value": "UP",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_bed14d5c83054f9282372c0f",
+      "_type": "request",
+      "parentId": "fld_fd2d29961d9048fdad5f79a2",
+      "name": "NTU SRCi Event",
+      "method": "POST",
+      "url": "https://axon-producer-test-application-ntu-tds.apps.stl.pcfstage00.mastercard.int/api/producers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\r\n    \"topic_name\": \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.STL-mc-src-card-services-digital-card-update-event\",\r\n    \"event_count\": \"1\",\r\n    \"event_payload\": {\r\n        \"correlationId\": \"correlationId_AM_SRCI_006\",\r\n        \"cardUpdateEventList\": [\r\n            {\r\n                \"cardId\": \"cc536bf4-ec4d-44d3-bc38-d75ab3d686be\",\r\n                \"primaryAccountNumberSuffix\": \"9749\",\r\n                \"paymentNetworkName\": \"mastercard\",\r\n                \"cardArtUrl\": \"https://stage.assets.mastercard.com/card-art/combined-image-asset/HIGH-MASK-3x.png\",\r\n                \"cardIdStatus\": \"ACTIVE\",\r\n                \"consumerId\": \"4ab5192a-1e12-4113-b6d7-314ed209abx4\",\r\n                \"tokenSuffix\": \"8566\",\r\n                \"coBrandName\": \"abc\",\r\n                \"issuerName\": \"Citi Bank\",\r\n                \"shortProductDescription\": \"Citi Bank Product Configuration\",\r\n                \"longProductDescription\": \"Citi Bank Product Configuration for Manitoba over the MDES platform\",\r\n                \"fpanExpiration\": \"1122\",\r\n                \"programId\": \"SECURE_COF_MERCHANT_OBO#MASTERCARD-DPAPRESENTATIONNAME_AK_3650#01\",\r\n                \"tokenUniqueReference\": \"DM4MMC00000000011d1d3699e129489595db3ff0c7539217\",\r\n                \"primaryAccountNumberPrefix\": \"1234\",\r\n                \"tokenPrefix\": \"1234\",\r\n                \"productCategory\": \"UNKNOWN\",\r\n                \"countryCode\": \"INR\",\r\n                \"paymentAccountReference\": \"5001BKFL3Q6CIGAL1OKC5A5PP9A15\",\r\n                \"cardCreatedTimeStamp\": \"2021-07-23T14:10:14.168Z\",\r\n                \"lastUsedTimeStamp\": null,\r\n                \"lastUpdateTimeStamp\": \"2021-07-23T14:10:16.676Z\",\r\n                \"tokenExpiration\": \"0824\",\r\n                \"enrollmentProviderId\": \"a4ed9b4c-e9bf-48a4-919f-33558e808569\",\r\n                \"clientRoutingId\": \"nc-pod1-smp.apple.com:443\",\r\n                \"reasonData\": {\r\n                    \"reason\": \"TOKEN_ACTIVATED\",\r\n                    \"reasonText\": \"Issuer or cardholder confirmed Token Activated\",\r\n                    \"reasonCategory\": \"TOKEN\"\r\n                }\r\n            }\r\n        ]\r\n    }\r\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "synapse-target-tag",
+          "value": "UP",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_95a9e05bda144f8b86b9432f",
+      "_type": "request",
+      "parentId": "fld_fd2d29961d9048fdad5f79a2",
+      "name": "NTU Redirect Success",
+      "method": "POST",
+      "url": "https://axon-producer-test-application-ntu-tds.apps.stl.pcfstage00.mastercard.int/api/producers",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\r\n    \"topic_name\": \"DigitalPaymentsTechnology.CheckoutServices-MasterPass.STL-mc-src-card-services-digital-card-update-event\",\r\n    \"event_count\": \"1\",\r\n    \"event_payload\": {\r\n        \"correlationId\": \"CD_NTU_Rediret_enabled_AM_004\",\r\n        \"cardUpdateEventList\": [\r\n            {\r\n                \"cardId\": \"e6016322-ac86-4ac7-8567-e7b8a424c70b\",\r\n                \"primaryAccountNumberSuffix\": \"6828\",\r\n                \"paymentNetworkName\": \"MasterCard\",\r\n                \"lastUpdateTimeStamp\": \"2020-04-01T17:20:17.565+05:30\",\r\n                \"cardArtUrl\": \"https://stage.assets.mastercard.com/card-art/combined-image-asset/demo.png\",\r\n                \"cardIdStatus\": \"ACTIVE\",\r\n                \"consumerId\": \"test@yml.com\",\r\n                \"tokenSuffix\": \"01234\",\r\n                \"coBrandName\": \"coBrandName\",\r\n                \"issuerName\": \"Citi Bank\",\r\n                \"shortProductDescription\": \"Citi Bank Product Configuration\",\r\n                \"longProductDescription\": \"Citi Bank Product Configuration for Manitoba over the MDES platform\",\r\n                \"fpanExpiration\": \"0423\",\r\n                \"programId\": \"SECURE_COF_COMMERCE_PLATFORM#E2E-Manitoba#01\",\r\n                \"tokenUniqueReference\": \"DM4MMC00000000019ef92450acea481c8dc886e42edee2c6_5\",\r\n                \"primaryAccountNumberPrefix\": \"545503\",\r\n                \"tokenPrefix\": \"123456\",\r\n                \"productCategory\": \"CREDIT\",\r\n                \"countryCode\": \"567\",\r\n                \"paymentAccountReference\": \"500150F5DE22SND132Y6PR32AR5HB\",\r\n                \"cardCreatedTimeStamp\": \"2020-02-24T11:32:32.060Z\",\r\n                \"lastUsedTimeStamp\": \"2020-02-24T11:32:32.060Z\",\r\n                \"tokenExpiration\": \"\",\r\n                \"enrollmentProviderId\": \"b774e9a6-1bdb-4f74-88f7-9918ac017b38\",\r\n                \"clientRoutingId\": \"x-src-client-routing-Id0111\",\r\n                \"clientSiteId\": \"https://mc.com/301\",\r\n                \"reasonData\": {\r\n                    \"reasonCategory\": \"TOKEN\",\r\n                    \"reason\": \"testReason\",\r\n                    \"reasonText\": \"Issuer or cardholder confirmed Token Activated\"\r\n                }\r\n            }\r\n        ]\r\n    }\r\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "synapse-target-tag",
+          "value": "UP",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_c7148c2bfdaf4f7ba4549d16",
+      "_type": "request_group",
+      "parentId": "wrk_02d929ee471f4a319e758984",
+      "name": "Setup (Initialize Variables)"
+    },
+    {
+      "_id": "req_df3470748045474db80c6294",
+      "_type": "request",
+      "parentId": "fld_c7148c2bfdaf4f7ba4549d16",
+      "name": "00 - Initialize bnd_* variables",
+      "method": "GET",
+      "url": "https://example.invalid/setup",
+      "headers": [],
+      "parameters": [],
+      "body": {
+        "text": ""
+      },
+      "preRequestScript": "// Run once to initialize all bnd_* variables\nconst keys = [\n  \"bnd_$randomInt\",\n  \"bnd_TOPIC_MRN\",\n  \"bnd_TOPIC_NTU\",\n  \"bnd_TOPIC_RETRY\",\n  \"bnd_TOPIC_TDS\"\n];\nfor (const k of keys) {\n  if (insomnia.environment.get(k) === undefined) {\n    insomnia.environment.set(k, '');\n  }\n}\ninsomnia.test('Variables initialized', () => {\n  insomnia.expect(keys.length >= 0).to.equal(true);\n});",
+      "afterResponseScript": ""
+    }
+  ]
+}

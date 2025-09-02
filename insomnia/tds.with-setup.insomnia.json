@@ -1,0 +1,1607 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-02T14:48:52.722318Z",
+  "__export_source": "Postman->Insomnia (ChatGPT)",
+  "resources": [
+    {
+      "_id": "wrk_601ab8bc2a5e4db494f82202",
+      "_type": "workspace",
+      "name": "tds (Converted)",
+      "description": "Auto-converted from Postman by ChatGPT"
+    },
+    {
+      "_id": "fld_2d11c086f3ef411caba2480b",
+      "_type": "request_group",
+      "parentId": "wrk_601ab8bc2a5e4db494f82202",
+      "name": "tds"
+    },
+    {
+      "_id": "fld_f6e01a91514b43ec8f7dc88d",
+      "_type": "request_group",
+      "parentId": "fld_2d11c086f3ef411caba2480b",
+      "name": "Setup ENV"
+    },
+    {
+      "_id": "req_75566b79428e4f458b5af257",
+      "_type": "request",
+      "parentId": "fld_f6e01a91514b43ec8f7dc88d",
+      "name": "Setup Trident TDS URL with MTF env",
+      "method": "GET",
+      "url": "https://api.mastercard.com/health",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('tds_baseUrl', \"https://src-support-apps-test-data-service.apps.stl.bnw-dev-pas.mastercard.int\")\ninsomnia.environment.set('tds_tdsenv', \"mtf\")",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_a5c5f3bbf62745d7bf03e060",
+      "_type": "request",
+      "parentId": "fld_f6e01a91514b43ec8f7dc88d",
+      "name": "Setup Trident TDS URL with ITF env",
+      "method": "GET",
+      "url": "https://api.mastercard.com/health",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "insomnia.environment.set('tds_baseUrl', \"https://src-support-apps-test-data-service.apps.stl.bnw-dev-pas.mastercard.int\")\ninsomnia.environment.set('tds_tdsenv', \"itf\")",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_91eaa51178a848c88ea46d7b",
+      "_type": "request_group",
+      "parentId": "fld_2d11c086f3ef411caba2480b",
+      "name": "country"
+    },
+    {
+      "_id": "req_812fc4ead0404a6ebfab53e0",
+      "_type": "request",
+      "parentId": "fld_91eaa51178a848c88ea46d7b",
+      "name": "getCountryCode",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/country/code?country=<string>",
+      "body": {},
+      "parameters": [
+        {
+          "name": "country",
+          "value": "<string>"
+        }
+      ],
+      "headers": [
+        {
+          "name": "x-src-mocks-manager",
+          "value": "<string>",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_62290d08059a40daa4a16ddd",
+      "_type": "request",
+      "parentId": "fld_91eaa51178a848c88ea46d7b",
+      "name": "getCountryLanguage",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/country/languages?country=<string>",
+      "body": {},
+      "parameters": [
+        {
+          "name": "country",
+          "value": "<string>"
+        }
+      ],
+      "headers": [
+        {
+          "name": "x-src-mocks-manager",
+          "value": "<string>",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_ea191e9630b842ef9bed8993",
+      "_type": "request_group",
+      "parentId": "fld_2d11c086f3ef411caba2480b",
+      "name": "{{tdsenv}}"
+    },
+    {
+      "_id": "fld_a1cc3f17ed004f1aa3afc7b9",
+      "_type": "request_group",
+      "parentId": "fld_ea191e9630b842ef9bed8993",
+      "name": "card"
+    },
+    {
+      "_id": "req_01b9ab5830f74c098e260b8e",
+      "_type": "request",
+      "parentId": "fld_a1cc3f17ed004f1aa3afc7b9",
+      "name": "This end point returns one card.",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/:env/card?brand=MASTERCARD&card-type=CREDIT&country=US&is-fpan=false&status=OK",
+      "body": {},
+      "parameters": [
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "card-type",
+          "value": "CREDIT"
+        },
+        {
+          "name": "country",
+          "value": "US"
+        },
+        {
+          "name": "is-fpan",
+          "value": "false"
+        },
+        {
+          "name": "status",
+          "value": "OK"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_5f72348936a2489ea712d61b",
+      "_type": "request",
+      "parentId": "fld_a1cc3f17ed004f1aa3afc7b9",
+      "name": "markCard",
+      "method": "POST",
+      "url": "{{ _['tds_baseUrl'] }}/:env/card?error=<string>&number=<string>&ops=<string>&status=<string>",
+      "body": {},
+      "parameters": [
+        {
+          "name": "error",
+          "value": "<string>"
+        },
+        {
+          "name": "number",
+          "value": "<string>"
+        },
+        {
+          "name": "ops",
+          "value": "<string>"
+        },
+        {
+          "name": "status",
+          "value": "<string>"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "*/*",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_945dc46d0b00434399caee71",
+      "_type": "request",
+      "parentId": "fld_a1cc3f17ed004f1aa3afc7b9",
+      "name": "getNotUsedCards",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/:env/card/notused",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "*/*",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_df688a4d1c5a4fd2969bb56a",
+      "_type": "request_group",
+      "parentId": "fld_ea191e9630b842ef9bed8993",
+      "name": "dpa"
+    },
+    {
+      "_id": "req_6102762a4d584ed89022b02c",
+      "_type": "request",
+      "parentId": "fld_df688a4d1c5a4fd2969bb56a",
+      "name": "Return a dpa list by search parameters for given environment",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/:env/dpa?encryptedPayload=<boolean>&integration=NotApplicable&limit=1&pciCompliant=<boolean>&scenario=<string>",
+      "body": {},
+      "parameters": [
+        {
+          "name": "encryptedPayload",
+          "value": "<boolean>"
+        },
+        {
+          "name": "integration",
+          "value": "NotApplicable"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "pciCompliant",
+          "value": "<boolean>"
+        },
+        {
+          "name": "scenario",
+          "value": "<string>"
+        }
+      ],
+      "headers": [
+        {
+          "name": "programId",
+          "value": "<string>",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_f350c83c84114b8abcfb3948",
+      "_type": "request",
+      "parentId": "fld_df688a4d1c5a4fd2969bb56a",
+      "name": "Return a dpa by search parameters for given environment",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/:env/dpa/:dpaId",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "programId",
+          "value": "<string>",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_e5a8c63e30ee41aaac833054",
+      "_type": "request_group",
+      "parentId": "fld_ea191e9630b842ef9bed8993",
+      "name": "issuers/srcFeatures/authentication/methodSupport"
+    },
+    {
+      "_id": "req_585b54f677d44d50930c5cc9",
+      "_type": "request",
+      "parentId": "fld_e5a8c63e30ee41aaac833054",
+      "name": "This end point returns list of issuer supported authentication meta data if any based on scenario and type",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/:env/issuers/srcFeatures/authentication/methodSupport?methodSupportScenario=<string>&methodType=<string>&status=<string>",
+      "body": {},
+      "parameters": [
+        {
+          "name": "methodSupportScenario",
+          "value": "<string>"
+        },
+        {
+          "name": "methodType",
+          "value": "<string>"
+        },
+        {
+          "name": "status",
+          "value": "<string>"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_f3166a9796a543e4aa405d1d",
+      "_type": "request",
+      "parentId": "fld_e5a8c63e30ee41aaac833054",
+      "name": "This end point returns a card if any based on issuerSupportedAuthRequest",
+      "method": "POST",
+      "url": "{{ _['tds_baseUrl'] }}/:env/issuers/srcFeatures/authentication/methodSupport/cards",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"methodType\": \"<string>\",\n  \"scenario\": \"<string>\",\n  \"status\": \"<string>\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_c95f8d6a1b074af4b3d9d05d",
+      "_type": "request",
+      "parentId": "fld_e5a8c63e30ee41aaac833054",
+      "name": "This end point returns list of issuer supported authentication meta data if any based on scenario and type",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/:env/issuers/srcFeatures/authentication/methodSupport/v2?methodSupportScenario=<string>&methodType=<string>&status=<string>",
+      "body": {},
+      "parameters": [
+        {
+          "name": "methodSupportScenario",
+          "value": "<string>"
+        },
+        {
+          "name": "methodType",
+          "value": "<string>"
+        },
+        {
+          "name": "status",
+          "value": "<string>"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_c1833d6a2c2b498da7cd7948",
+      "_type": "request",
+      "parentId": "fld_ea191e9630b842ef9bed8993",
+      "name": "getAddressesBasedOnTheCountryForAnEnv",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/:env/addresses?country=US&languageCode=<string>&languageLocale=<string>&limit=100",
+      "body": {},
+      "parameters": [
+        {
+          "name": "country",
+          "value": "US"
+        },
+        {
+          "name": "languageCode",
+          "value": "<string>"
+        },
+        {
+          "name": "languageLocale",
+          "value": "<string>"
+        },
+        {
+          "name": "limit",
+          "value": "100"
+        }
+      ],
+      "headers": [
+        {
+          "name": "x-src-mocks-manager",
+          "value": "<string>",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_688c844f4d604aed910f6ce3",
+      "_type": "request",
+      "parentId": "fld_ea191e9630b842ef9bed8993",
+      "name": "Returns a valid akamai header based on parameters provided.",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/:env/akamai/header",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_429bd5af81164da592e5c273",
+      "_type": "request",
+      "parentId": "fld_ea191e9630b842ef9bed8993",
+      "name": "This end point returns list of cards that can be used for different testing scenarios in Src project. ",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/:env/cards?brand=MASTERCARD&card-type=RANDOM&country=<string>&is-fpan=<boolean>&limit=1&status=OK",
+      "body": {},
+      "parameters": [
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "card-type",
+          "value": "RANDOM"
+        },
+        {
+          "name": "country",
+          "value": "<string>"
+        },
+        {
+          "name": "is-fpan",
+          "value": "<boolean>"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "status",
+          "value": "OK"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_311333eb12d5416c9efa4f8e",
+      "_type": "request",
+      "parentId": "fld_ea191e9630b842ef9bed8993",
+      "name": "The end point that returns a federated ID JWT",
+      "method": "POST",
+      "url": "{{ _['tds_baseUrl'] }}/:env/federatedId",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"jwtAuthData\": {\n    \"amr\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"aud\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"auth_time\": \"<long>\",\n    \"email\": \"<string>\",\n    \"email_verified\": \"<boolean>\",\n    \"exp\": \"<long>\",\n    \"iat\": \"<long>\",\n    \"iss\": \"<string>\",\n    \"jti\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"phone_number_verified\": \"<boolean>\",\n    \"src_email_mask\": \"<string>\",\n    \"src_phone_number_mask\": \"<string>\",\n    \"sub\": \"<string>\"\n  },\n  \"jwtData\": {\n    \"alg\": \"<string>\",\n    \"kid\": \"<string>\",\n    \"typ\": \"<string>\"\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_de20edb945c84febbd6baa4f",
+      "_type": "request",
+      "parentId": "fld_ea191e9630b842ef9bed8993",
+      "name": "This endpoint is responsible to return a Person entity who has name, email and phone number.",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/:env/persons?country=US&domain=mock&limit=100&locale=<string>",
+      "body": {},
+      "parameters": [
+        {
+          "name": "country",
+          "value": "US"
+        },
+        {
+          "name": "domain",
+          "value": "mock"
+        },
+        {
+          "name": "limit",
+          "value": "100"
+        },
+        {
+          "name": "locale",
+          "value": "<string>"
+        }
+      ],
+      "headers": [
+        {
+          "name": "x-src-mocks-manager",
+          "value": "<string>",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_84e960adea074bbc86b445aa",
+      "_type": "request",
+      "parentId": "fld_ea191e9630b842ef9bed8993",
+      "name": "This endpoint is responsible to return Phone Numbers with a country code.",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/:env/phoneNumbers?country=US&limit=100",
+      "body": {},
+      "parameters": [
+        {
+          "name": "country",
+          "value": "US"
+        },
+        {
+          "name": "limit",
+          "value": "100"
+        }
+      ],
+      "headers": [
+        {
+          "name": "x-src-mocks-manager",
+          "value": "<string>",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_f080c698b1c04c0588d34605",
+      "_type": "request",
+      "parentId": "fld_ea191e9630b842ef9bed8993",
+      "name": "This end point returns a card id & masked card number with the provided tokenOutcome from ITT.",
+      "method": "POST",
+      "url": "{{ _['tds_baseUrl'] }}/:env/pushReceipt?signaturesupport=false",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"brand\": \"<string>\",\n  \"cardHolderData\": {\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"line3\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"emailAddress\": \"<string>\",\n    \"mobileNumber\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"country\": \"<string>\",\n  \"tokenOutcome\": \"<string>\",\n  \"trid\": \"<string>\"\n}"
+      },
+      "parameters": [
+        {
+          "name": "signaturesupport",
+          "value": "false"
+        }
+      ],
+      "headers": [
+        {
+          "name": "x-src-mocks-manager",
+          "value": "<string>",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_ae7c2dccb96d4a58ab6c5c0e",
+      "_type": "request",
+      "parentId": "fld_ea191e9630b842ef9bed8993",
+      "name": "This end point returns a Push Account Receipt for a provided card number.",
+      "method": "POST",
+      "url": "{{ _['tds_baseUrl'] }}/:env/pushReceiptByCardNumber?signaturesupport=false",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"cardHolderData\": {\n    \"billingAddress\": {\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"line3\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"emailAddress\": \"<string>\",\n    \"mobileNumber\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"cardNumberLastFour\": \"<string>\",\n  \"trid\": \"<string>\"\n}"
+      },
+      "parameters": [
+        {
+          "name": "signaturesupport",
+          "value": "false"
+        }
+      ],
+      "headers": [
+        {
+          "name": "x-src-mocks-manager",
+          "value": "<string>",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json;charset=UTF-8",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_6907b46049dd4454928d137b",
+      "_type": "request",
+      "parentId": "fld_ea191e9630b842ef9bed8993",
+      "name": "getTransactionAuthenticationValidationValues",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/:env/srcFeatures/authentication/mbvs/authValidationStaticValues?authenticationIndicatorScenario=<string>",
+      "body": {},
+      "parameters": [
+        {
+          "name": "authenticationIndicatorScenario",
+          "value": "<string>"
+        }
+      ],
+      "headers": [
+        {
+          "name": "x-src-mocks-manager",
+          "value": "<string>",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_649c4f39a4f34e15ac959f6e",
+      "_type": "request",
+      "parentId": "fld_ea191e9630b842ef9bed8993",
+      "name": "Return a dpa list by search parameters for a given srci in a given environment",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/:env/srci/:srciId/dpa?encryptedPayload=<boolean>&integration=NotApplicable&limit=1&pciCompliant=<boolean>&scenario=<string>",
+      "body": {},
+      "parameters": [
+        {
+          "name": "encryptedPayload",
+          "value": "<boolean>"
+        },
+        {
+          "name": "integration",
+          "value": "NotApplicable"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "pciCompliant",
+          "value": "<boolean>"
+        },
+        {
+          "name": "scenario",
+          "value": "<string>"
+        }
+      ],
+      "headers": [
+        {
+          "name": "programId",
+          "value": "<string>",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_aefa49e2b2534589a3d006f7",
+      "_type": "request",
+      "parentId": "fld_ea191e9630b842ef9bed8993",
+      "name": "getSrcConsumerForAnEnv",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/:env/srcis?cofAllowed=<boolean>&communicationChannel=<string>&fpanAllowed=<boolean>&fpanWithToken=<boolean>&ownership=<string>&programId=<string>&role=<string>&scenarios=<string>&scenarios=<string>",
+      "body": {},
+      "parameters": [
+        {
+          "name": "cofAllowed",
+          "value": "<boolean>"
+        },
+        {
+          "name": "communicationChannel",
+          "value": "<string>"
+        },
+        {
+          "name": "fpanAllowed",
+          "value": "<boolean>"
+        },
+        {
+          "name": "fpanWithToken",
+          "value": "<boolean>"
+        },
+        {
+          "name": "ownership",
+          "value": "<string>"
+        },
+        {
+          "name": "programId",
+          "value": "<string>"
+        },
+        {
+          "name": "role",
+          "value": "<string>"
+        },
+        {
+          "name": "scenarios",
+          "value": "<string>"
+        },
+        {
+          "name": "scenarios",
+          "value": "<string>"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_e1363c5cf66c4fe5804dac15",
+      "_type": "request_group",
+      "parentId": "fld_2d11c086f3ef411caba2480b",
+      "name": "find-cards-in-stage"
+    },
+    {
+      "_id": "req_53d5d4db00db42bf983319ca",
+      "_type": "request",
+      "parentId": "fld_e1363c5cf66c4fe5804dac15",
+      "name": "get-stage-us-TOKENIZED-isFpan=false-card",
+      "method": "GET",
+      "url": "https://src-support-apps-test-data-service.apps.stl.bnw-dev-pas.mastercard.int/stage/cards?is-fpan=false&brand=MASTERCARD&status=OK&limit=5&card-type=CREDIT&country=US",
+      "body": {},
+      "parameters": [
+        {
+          "name": "is-fpan",
+          "value": "false"
+        },
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "status",
+          "value": "OK"
+        },
+        {
+          "name": "limit",
+          "value": "5"
+        },
+        {
+          "name": "card-type",
+          "value": "CREDIT"
+        },
+        {
+          "name": "country",
+          "value": "US"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_da948d93cd6d48049b1a39b5",
+      "_type": "request",
+      "parentId": "fld_e1363c5cf66c4fe5804dac15",
+      "name": "get-stage-INDIA-TOKENIZED-isFpan=false-card-don't-use-SRC-programid-when-enroll-to-avoid-pan-ineligible",
+      "method": "GET",
+      "url": "https://src-support-apps-test-data-service.apps.stl.bnw-dev-pas.mastercard.int/stage/cards?is-fpan=false&brand=MASTERCARD&status=OK&limit=10&card-type=CREDIT&country=IN",
+      "body": {},
+      "parameters": [
+        {
+          "name": "is-fpan",
+          "value": "false"
+        },
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "status",
+          "value": "OK"
+        },
+        {
+          "name": "limit",
+          "value": "10"
+        },
+        {
+          "name": "card-type",
+          "value": "CREDIT"
+        },
+        {
+          "name": "country",
+          "value": "IN"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_a35a45154c8e4dc2a454482c",
+      "_type": "request",
+      "parentId": "fld_e1363c5cf66c4fe5804dac15",
+      "name": "get-stage-us-NON-TOKENIZED-isFpan=true-card-works",
+      "method": "GET",
+      "url": "https://src-support-apps-test-data-service.apps.stl.bnw-dev-pas.mastercard.int/stage/cards?is-fpan=true&brand=MASTERCARD&status=OK&limit=10&card-type=CREDIT&country=US",
+      "body": {},
+      "parameters": [
+        {
+          "name": "is-fpan",
+          "value": "true"
+        },
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "status",
+          "value": "OK"
+        },
+        {
+          "name": "limit",
+          "value": "10"
+        },
+        {
+          "name": "card-type",
+          "value": "CREDIT"
+        },
+        {
+          "name": "country",
+          "value": "US"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_91034b522713455a9f5349c7",
+      "_type": "request_group",
+      "parentId": "fld_2d11c086f3ef411caba2480b",
+      "name": "find-cards-in-mtf"
+    },
+    {
+      "_id": "req_921d5c286710471b89e250b8",
+      "_type": "request",
+      "parentId": "fld_91034b522713455a9f5349c7",
+      "name": "get-mtf-IN-single-card-mtf-india-don't-use-program-id-SRC-to-avoid-pan-ineligible",
+      "method": "GET",
+      "url": "https://src-support-apps-test-data-service.apps.stl.bnw-dev-pas.mastercard.int/mtf/cards?is-fpan=false&brand=MASTERCARD&status=OK&limit=1&card-type=CREDIT&country=BR",
+      "body": {},
+      "parameters": [
+        {
+          "name": "is-fpan",
+          "value": "false"
+        },
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "status",
+          "value": "OK"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "card-type",
+          "value": "CREDIT"
+        },
+        {
+          "name": "country",
+          "value": "BR"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_05cf70e8bec442b1b8b6c589",
+      "_type": "request",
+      "parentId": "fld_91034b522713455a9f5349c7",
+      "name": "get-mtf-us-non-tokenized-isFpan=true-card",
+      "method": "GET",
+      "url": "https://src-support-apps-test-data-service.apps.stl.bnw-dev-pas.mastercard.int/mtf/cards?is-fpan=true&brand=MASTERCARD&status=OK&limit=1&card-type=CREDIT&country=US",
+      "body": {},
+      "parameters": [
+        {
+          "name": "is-fpan",
+          "value": "true"
+        },
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "status",
+          "value": "OK"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "card-type",
+          "value": "CREDIT"
+        },
+        {
+          "name": "country",
+          "value": "US"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_2105e6987cf94586bb637bc3",
+      "_type": "request",
+      "parentId": "fld_91034b522713455a9f5349c7",
+      "name": "get-mtf-us-PAN_INELIGIBLE-is-fpan=true",
+      "method": "GET",
+      "url": "https://src-stage-test-data-service.apps.stl.pcfstage00.mastercard.int/mtf/cards?is-fpan=true&brand=MASTERCARD&status=SRC4C_OK&limit=1&card-type=RANDOM&country=IN",
+      "body": {},
+      "parameters": [
+        {
+          "name": "is-fpan",
+          "value": "true"
+        },
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "status",
+          "value": "SRC4C_OK"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "card-type",
+          "value": "RANDOM"
+        },
+        {
+          "name": "country",
+          "value": "IN"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_7bb601dec9fe44f3a97b5d1d",
+      "_type": "request",
+      "parentId": "fld_91034b522713455a9f5349c7",
+      "name": "get-mtf-us-PAN_INELIGIBLE-is-fpan=false",
+      "method": "GET",
+      "url": "https://src-stage-test-data-service.apps.stl.pcfstage00.mastercard.int/mtf/cards?is-fpan=false&brand=MASTERCARD&status=SRC4C_OK&limit=1&card-type=RANDOM&country=IN",
+      "body": {},
+      "parameters": [
+        {
+          "name": "is-fpan",
+          "value": "false"
+        },
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "status",
+          "value": "SRC4C_OK"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "card-type",
+          "value": "RANDOM"
+        },
+        {
+          "name": "country",
+          "value": "IN"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_513f2dd304d34ebbafcd28ee",
+      "_type": "request_group",
+      "parentId": "fld_2d11c086f3ef411caba2480b",
+      "name": "find-cards-in-itf"
+    },
+    {
+      "_id": "req_7a4125acb16f40a8a643ce79",
+      "_type": "request",
+      "parentId": "fld_513f2dd304d34ebbafcd28ee",
+      "name": "get-itf-us-NON-TOKENIZED-isFpan=true-card",
+      "method": "GET",
+      "url": "https://src-support-apps-test-data-service.apps.stl.bnw-dev-pas.mastercard.int/itf/cards?is-fpan=true&brand=MASTERCARD&status=OK&limit=1&card-type=CREDIT&country=US",
+      "body": {},
+      "parameters": [
+        {
+          "name": "is-fpan",
+          "value": "true"
+        },
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "status",
+          "value": "OK"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "card-type",
+          "value": "CREDIT"
+        },
+        {
+          "name": "country",
+          "value": "US"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_0ea7a10940fa4d6da9192c9b",
+      "_type": "request",
+      "parentId": "fld_513f2dd304d34ebbafcd28ee",
+      "name": "get-itf-US-TOKENIZED-isFpan=false-card (CREDIT)",
+      "method": "GET",
+      "url": "https://src-support-apps-test-data-service.apps.stl.bnw-dev-pas.mastercard.int/itf/cards?is-fpan=false&brand=MASTERCARD&status=OK&limit=10&card-type=CREDIT&country=US",
+      "body": {},
+      "parameters": [
+        {
+          "name": "is-fpan",
+          "value": "false"
+        },
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "status",
+          "value": "OK"
+        },
+        {
+          "name": "limit",
+          "value": "10"
+        },
+        {
+          "name": "card-type",
+          "value": "CREDIT"
+        },
+        {
+          "name": "country",
+          "value": "US"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_15a5e3631000426fa5ab724c",
+      "_type": "request",
+      "parentId": "fld_513f2dd304d34ebbafcd28ee",
+      "name": "get-itf-US-TOKENIZED-isFpan=false-card (DEBIT)",
+      "method": "GET",
+      "url": "https://src-support-apps-test-data-service.apps.stl.bnw-dev-pas.mastercard.int/itf/cards?is-fpan=false&brand=MASTERCARD&status=OK&limit=10&card-type=CREDIT&country=US",
+      "body": {},
+      "parameters": [
+        {
+          "name": "is-fpan",
+          "value": "false"
+        },
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "status",
+          "value": "OK"
+        },
+        {
+          "name": "limit",
+          "value": "10"
+        },
+        {
+          "name": "card-type",
+          "value": "CREDIT"
+        },
+        {
+          "name": "country",
+          "value": "US"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_3a8667e7010d4c7b84b014d7",
+      "_type": "request",
+      "parentId": "fld_513f2dd304d34ebbafcd28ee",
+      "name": "get-itf-GB-TOKENIZED-isFpan=false-card (DEBIT)",
+      "method": "GET",
+      "url": "https://src-support-apps-test-data-service.apps.stl.bnw-dev-pas.mastercard.int/itf/cards?is-fpan=false&brand=MASTERCARD&status=OK&limit=1&card-type=DEBIT&country=GB",
+      "body": {},
+      "parameters": [
+        {
+          "name": "is-fpan",
+          "value": "false"
+        },
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "status",
+          "value": "OK"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "card-type",
+          "value": "DEBIT"
+        },
+        {
+          "name": "country",
+          "value": "GB"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_8dce932b48ec4ae3ab027a0c",
+      "_type": "request",
+      "parentId": "fld_513f2dd304d34ebbafcd28ee",
+      "name": "get-itf-GB-TOKENIZED-isFpan=false-card (CREDIT)",
+      "method": "GET",
+      "url": "https://src-support-apps-test-data-service.apps.stl.bnw-dev-pas.mastercard.int/itf/cards?is-fpan=false&brand=MASTERCARD&status=OK&limit=1&card-type=CREDIT&country=GB",
+      "body": {},
+      "parameters": [
+        {
+          "name": "is-fpan",
+          "value": "false"
+        },
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "status",
+          "value": "OK"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "card-type",
+          "value": "CREDIT"
+        },
+        {
+          "name": "country",
+          "value": "GB"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_68130e491e9a45ecb296183f",
+      "_type": "request",
+      "parentId": "fld_2d11c086f3ef411caba2480b",
+      "name": "getCardResults",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/card/stats",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "*/*",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_bf737d60447e4ec89b578c52",
+      "_type": "request",
+      "parentId": "fld_2d11c086f3ef411caba2480b",
+      "name": "getNuDetectKeyV2",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/nuDetectKeyV2",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "*/*",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_76c8551a98fb4cdea941974e",
+      "_type": "request",
+      "parentId": "fld_2d11c086f3ef411caba2480b",
+      "name": "The end point that returns a Signed JWT",
+      "method": "POST",
+      "url": "{{ _['tds_baseUrl'] }}/signJwt?key_id=default",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"claimSet\": \"<string>\",\n  \"header\": \"<string>\"\n}"
+      },
+      "parameters": [
+        {
+          "name": "key_id",
+          "value": "default"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_2556db18ab9545a4bdbcfd41",
+      "_type": "request",
+      "parentId": "fld_2d11c086f3ef411caba2480b",
+      "name": "getTransactionAuthenticationIndicators",
+      "method": "GET",
+      "url": "{{ _['tds_baseUrl'] }}/srcFeatures/authentication/mfa?authenticationIndicatorScenario=<string>",
+      "body": {},
+      "parameters": [
+        {
+          "name": "authenticationIndicatorScenario",
+          "value": "<string>"
+        }
+      ],
+      "headers": [
+        {
+          "name": "x-src-mocks-manager",
+          "value": "<string>",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_22c5b456a9ed4012876228c5",
+      "_type": "request",
+      "parentId": "fld_2d11c086f3ef411caba2480b",
+      "name": "local-get-mtf-india-cards",
+      "method": "GET",
+      "url": "http://localhost:9000/mtf/cards?is-fpan=false&brand=MASTERCARD&status=OK&limit=1&card-type=CREDIT&country=IN",
+      "body": {},
+      "parameters": [
+        {
+          "name": "is-fpan",
+          "value": "false"
+        },
+        {
+          "name": "brand",
+          "value": "MASTERCARD"
+        },
+        {
+          "name": "status",
+          "value": "OK"
+        },
+        {
+          "name": "limit",
+          "value": "1"
+        },
+        {
+          "name": "card-type",
+          "value": "CREDIT"
+        },
+        {
+          "name": "country",
+          "value": "IN"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_b23dd747310742c49a610f24",
+      "_type": "request_group",
+      "parentId": "wrk_601ab8bc2a5e4db494f82202",
+      "name": "Setup (Initialize Variables)"
+    },
+    {
+      "_id": "req_ff9cdca132fd441398d1161c",
+      "_type": "request",
+      "parentId": "fld_b23dd747310742c49a610f24",
+      "name": "00 - Initialize tds_* variables",
+      "method": "GET",
+      "url": "https://example.invalid/setup",
+      "headers": [],
+      "parameters": [],
+      "body": {
+        "text": ""
+      },
+      "preRequestScript": "// Run once to initialize all tds_* variables\nconst keys = [\n  \"tds_baseUrl\",\n  \"tds_tdsenv\"\n];\nfor (const k of keys) {\n  if (insomnia.environment.get(k) === undefined) {\n    insomnia.environment.set(k, '');\n  }\n}\ninsomnia.test('Variables initialized', () => {\n  insomnia.expect(keys.length >= 0).to.equal(true);\n});",
+      "afterResponseScript": ""
+    }
+  ]
+}

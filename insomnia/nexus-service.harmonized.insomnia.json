@@ -1,0 +1,588 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-02T14:37:20.137279Z",
+  "__export_source": "Postman->Insomnia (ChatGPT)",
+  "resources": [
+    {
+      "_id": "wrk_b1d01e7804144abeb342b6fd",
+      "_type": "workspace",
+      "name": "nexus-service (Converted, Harmonized)",
+      "description": "Auto-converted from Postman by ChatGPT (harmonized prefix)"
+    },
+    {
+      "_id": "fld_408a467a4ed1420fb0c160de",
+      "_type": "request_group",
+      "parentId": "wrk_b1d01e7804144abeb342b6fd",
+      "name": "nexus-service"
+    },
+    {
+      "_id": "fld_4835ccbb3cdb49a0bcd755c4",
+      "_type": "request_group",
+      "parentId": "fld_408a467a4ed1420fb0c160de",
+      "name": "itf"
+    },
+    {
+      "_id": "req_f73607b2578749289f08ac50",
+      "_type": "request",
+      "parentId": "fld_4835ccbb3cdb49a0bcd755c4",
+      "name": "[NTU] tokenUpdate-itf-works-based-on-x-openapi-clientid-header-which-you-can-find-in-config-repo-be",
+      "method": "POST",
+      "url": "https://blue-src-itf-nexus-src-data-service.apps.stl.pcfstage00.mastercard.int/cards/7145c33e-28e3-443f-ab8d-da8d9c7ceac6/simulate/tokenUpdate",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"status\": \"SUSPENDED\",\n    \"eventReasonCode\": \"SUSPECTED_FRAUD\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "12345",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "rSVNrUnx-WxHtfnoGVI1XiqmSXtylAZPnnntHP_e4003a051",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_074947c5dae7478baae762ee",
+      "_type": "request",
+      "parentId": "fld_4835ccbb3cdb49a0bcd755c4",
+      "name": "[ABU] cardUpdate-stage-itf-works-based-on-x-openapi-clientid-header-which-you-can-find-in-config-repo-be",
+      "method": "POST",
+      "url": "https://blue-src-itf-nexus-src-data-service.apps.stl.pcfstage00.mastercard.int/cards/67999735388433446/simulate/cardUpdateMessage",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"currentExpiry\": {\n        \"month\": 11,\n        \"year\": 31\n    },\n    \"requestedExpiry\": {\n        \"month\": 11,\n        \"year\": 34\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "12345",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "rSVNrUnx-WxHtfnoGVI1XiqmSXtylAZPnnntHP_e4003a051",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_e4ae0d5744744554a52b5900",
+      "_type": "request",
+      "parentId": "fld_4835ccbb3cdb49a0bcd755c4",
+      "name": "events-lifecycleUpdates",
+      "method": "GET",
+      "url": "https://blue-src-itf-nexus-src-data-service.apps.stl.pcfstage00.mastercard.int/notifications/scof/cards/:cardId/events/lifecycleUpdates",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "12345",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "rSVNrUnx-WxHtfnoGVI1XiqmSXtylAZPnnntHP_e4003a051",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_5976e36555bd49f18cc6a741",
+      "_type": "request",
+      "parentId": "fld_4835ccbb3cdb49a0bcd755c4",
+      "name": "psp-direct-events-lifecycleUpdates",
+      "method": "GET",
+      "url": "https://blue-src-itf-nexus-src-data-service.apps.stl.pcfstage00.mastercard.int/notifications/psp-direct/cards/:cardId/events/lifecycleUpdates",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "12345",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "rSVNrUnx-WxHtfnoGVI1XiqmSXtylAZPnnntHP_e4003a051",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_8fabbe7d2f8447f498b6d8ca",
+      "_type": "request",
+      "parentId": "fld_4835ccbb3cdb49a0bcd755c4",
+      "name": "get-mdes-otp",
+      "method": "GET",
+      "url": "https://blue-src-itf-nexus-src-data-service.apps.stl.pcfstage00.mastercard.int/notifications/cards/:cardId/otp/mdes",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}\n"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "12345",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "rSVNrUnx-WxHtfnoGVI1XiqmSXtylAZPnnntHP_e4003a051",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_71c8281e3aa74e5d910504b7",
+      "_type": "request",
+      "parentId": "fld_4835ccbb3cdb49a0bcd755c4",
+      "name": "pushTransactions-itf",
+      "method": "POST",
+      "url": "https://blue-src-itf-nexus-src-data-service.apps.stl.pcfstage00.mastercard.int/cards/5faf117b-d185-4d15-a31b-0748281b7cae/simulate/transactions",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"amount\": 178.21,\n    \"merchantName\": \"xidMerchant\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "12345",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "rSVNrUnx-WxHtfnoGVI1XiqmSXtylAZPnnntHP_e4003a051",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_9efa3a8ec2054871a139f0ff",
+      "_type": "request_group",
+      "parentId": "fld_408a467a4ed1420fb0c160de",
+      "name": "stage"
+    },
+    {
+      "_id": "req_3678d6adc5564476950138d1",
+      "_type": "request",
+      "parentId": "fld_9efa3a8ec2054871a139f0ff",
+      "name": "[NTU] tokenUpdate-stage",
+      "method": "POST",
+      "url": "https://blue-src-stage-nexus-src-data-service.apps.stl.pcfstage00.mastercard.int/cards/TGRAG-gYR4Odk-s0nvbxMw000000000000US/simulate/tokenUpdate",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"status\": \"SUSPENDED\",\n    \"eventReasonCode\": \"SUSPECTED_FRAUD\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "12345",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "pu1daDUgtWwvx1mwwK4xS8GVz9DQPoXDBmX8PLen5107415a",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_71a4e3ff2ea649c99fd9e2d2",
+      "_type": "request",
+      "parentId": "fld_9efa3a8ec2054871a139f0ff",
+      "name": "[E2E ASSERT EVENTS] getTransactionEvents (for assertion)",
+      "method": "GET",
+      "url": "https://blue-src-stage-nexus-src-data-service.apps.stl.pcfstage00.mastercard.int/notifications/cards/ltvSgEt6Q9CWVKB3zlLKWQ000000000000US/events/transactions",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E#01",
+          "disabled": true
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['nexus-service_$randomUUID'] }}",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "pu1daDUgtWwvx1mwwK4xS8GVz9DQPoXDBmX8PLen5107415a",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_2ae73a599efe469cbdfa0f46",
+      "_type": "request",
+      "parentId": "fld_9efa3a8ec2054871a139f0ff",
+      "name": "[TDS] pushTransaction-stage",
+      "method": "POST",
+      "url": "https://blue-src-stage-nexus-src-data-service.apps.stl.pcfstage00.mastercard.int/cards/ltvSgEt6Q9CWVKB3zlLKWQ000000000000US/simulate/transactions",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"amount\": 33.33,\n    \"merchantName\": \"Y59Merchant\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "625f2cf4-cbf5-41ab-b92a-acbeb6c2e926",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "pu1daDUgtWwvx1mwwK4xS8GVz9DQPoXDBmX8PLen5107415a",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_7ce7fad6e3b84427be7a84fc",
+      "_type": "request",
+      "parentId": "fld_9efa3a8ec2054871a139f0ff",
+      "name": "[ABU] cardUpdate-stage",
+      "method": "POST",
+      "url": "https://blue-src-stage-nexus-src-data-service.apps.stl.pcfstage00.mastercard.int/cards/67999735388433446/simulate/cardUpdateMessage",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"currentExpiry\": {\n        \"month\": 11,\n        \"year\": 31\n    },\n    \"requestedExpiry\": {\n        \"month\": 11,\n        \"year\": 34\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['nexus-service_$randomUUID'] }}",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "pu1daDUgtWwvx1mwwK4xS8GVz9DQPoXDBmX8PLen5107415a",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_528d58c2999447119e2b2110",
+      "_type": "request_group",
+      "parentId": "fld_408a467a4ed1420fb0c160de",
+      "name": "perf"
+    },
+    {
+      "_id": "req_5ba3ee5ef751445aa74de91f",
+      "_type": "request",
+      "parentId": "fld_528d58c2999447119e2b2110",
+      "name": "tokenInfoUpdate-PERF",
+      "method": "POST",
+      "url": "https://blue-src-perf-87480080-nexus-src-data-service.apps.stl.pcfstage00.mastercard.int/cards/3AT8Kl1JRfq3nrD2Mr1sdg000000000000US/simulate/tokenInfoUpdate",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"newFpan\": \"5409222054090030\",\n    \"fpanExpiry\": \"7877\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#Performancetesting#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "perf-redigi-issue-3",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "rSVNrUnx-WxHtfnoGVI1XiqmSXtylAZPnnntHP_e4003a051",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_55e619a4ad364bc79f1917db",
+      "_type": "request_group",
+      "parentId": "fld_408a467a4ed1420fb0c160de",
+      "name": "mtf"
+    },
+    {
+      "_id": "req_111ba92ecc6d44f8be598cc8",
+      "_type": "request",
+      "parentId": "fld_55e619a4ad364bc79f1917db",
+      "name": "tokenUpdate-mtf-works-based-on-x-openapi-clientid-header-which-you-can-find-in-config-repo-be",
+      "method": "POST",
+      "url": "https://blue-pre-prod-nexus-src-data-service.apps.stl.pcfprod00.mastercard.int/cards/fzZRE2zdS_mv9vdbsmKD7g000000000000US/simulate/tokenUpdate",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"status\": \"SUSPENDED\",\n    \"eventReasonCode\": \"SUSPECTED_FRAUD\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "{{ _['nexus-service_$randomUUID'] }}-ntu-test-1",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "9fYDxHpKYGIeJHAsW7-XKqYDbPKlLHBgKGoaOkEqfd0826a4",
+          "disabled": false
+        },
+        {
+          "name": "x-src-mocks-manager",
+          "value": "is-refactored-data-services-enabled=true",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_b880fc94359c4fe789d35c87",
+      "_type": "request",
+      "parentId": "fld_55e619a4ad364bc79f1917db",
+      "name": "[ABU] [IOS] cardUpdate-ios-works-based-on-x-openapi-clientid-header-which-you-can-find-in-config-repo-be",
+      "method": "POST",
+      "url": "https://blue-src-mtf-nexus-src-data-service.apps.del.trd-prod-pas.mastercard.int/cards/2223520126204944/simulate/cardUpdateMessage",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"currentExpiry\": {\n        \"month\": \"02\",\n        \"year\": 31\n    },\n    \"requestedExpiry\": {\n        \"month\": 12,\n        \"year\": 36\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "SECURE_COF_COMMERCE_PLATFORM#E2E#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "12345",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "rSVNrUnx-WxHtfnoGVI1XiqmSXtylAZPnnntHP_e4003a051",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_80d98afffae34b52b739ad39",
+      "_type": "request",
+      "parentId": "fld_55e619a4ad364bc79f1917db",
+      "name": "[ABU] [IOS][PNQ] cardUpdate-ios-works-based-on-x-openapi-clientid-header-which-you-can-find-in-config-repo-be",
+      "method": "POST",
+      "url": "https://blue-src-mtf-nexus-src-data-service.apps.pnq.trd-prod-pas.mastercard.int/cards/2223520126204944/simulate/cardUpdateMessage",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"currentExpiry\": {\n        \"month\": \"02\",\n        \"year\": 31\n    },\n    \"requestedExpiry\": {\n        \"month\": 12,\n        \"year\": 36\n    }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "program-id",
+          "value": "GUEST_CHECKOUT_TOKENIZATION#MASTERCARDS_GUEST_CHECKOUT_TOKENIZATION#01",
+          "disabled": false
+        },
+        {
+          "name": "correlation-id",
+          "value": "m4-abu-test-scof-1",
+          "disabled": false
+        },
+        {
+          "name": "x-openapi-clientid",
+          "value": "9fYDxHpKYGIeJHAsW7-XKqYDbPKlLHBgKGoaOkEqfd0826a4",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_23947c1b8678448d8e16ed3f",
+      "_type": "request_group",
+      "parentId": "wrk_b1d01e7804144abeb342b6fd",
+      "name": "Setup (Initialize Variables)"
+    },
+    {
+      "_id": "req_37a1bb41b2f44cbca6537a25",
+      "_type": "request",
+      "parentId": "fld_23947c1b8678448d8e16ed3f",
+      "name": "00 - Initialize nexus-service_* variables",
+      "method": "GET",
+      "url": "https://example.invalid/setup",
+      "headers": [],
+      "parameters": [],
+      "body": {
+        "text": ""
+      },
+      "preRequestScript": "// Run once to initialize all nexus-service_* variables\nconst keys = [\n  \"nexus-service_$randomUUID\"\n];\nfor (const k of keys) {\n  if (insomnia.environment.get(k) === undefined) {\n    insomnia.environment.set(k, '');\n  }\n}\ninsomnia.test('Variables initialized', () => {\n  insomnia.expect(keys.length >= 0).to.equal(true);\n});",
+      "afterResponseScript": ""
+    }
+  ]
+}

@@ -1,0 +1,392 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-02T14:43:52.813604Z",
+  "__export_source": "Postman->Insomnia (ChatGPT)",
+  "resources": [
+    {
+      "_id": "wrk_1275a7e0bcda47f9abc0f20a",
+      "_type": "workspace",
+      "name": "octopus (Converted)",
+      "description": "Auto-converted from Postman by ChatGPT"
+    },
+    {
+      "_id": "fld_77ff30b1aa97413cb7b4ec0f",
+      "_type": "request_group",
+      "parentId": "wrk_1275a7e0bcda47f9abc0f20a",
+      "name": "octopus"
+    },
+    {
+      "_id": "fld_53b3f4fcc92d4e43a34497fe",
+      "_type": "request_group",
+      "parentId": "fld_77ff30b1aa97413cb7b4ec0f",
+      "name": "ITF"
+    },
+    {
+      "_id": "req_6f6cbe1c678b402eb868bfc5",
+      "_type": "request",
+      "parentId": "fld_53b3f4fcc92d4e43a34497fe",
+      "name": "ITF-ALL-DEVICE-TOKENS",
+      "method": "GET",
+      "url": "https://blue-src-itf-octopus.apps.stl.pcfstage00.mastercard.int/tokens",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_e4f850db2d6f48a9a11a4e7b",
+      "_type": "request",
+      "parentId": "fld_53b3f4fcc92d4e43a34497fe",
+      "name": "ITF-GET-scenarios",
+      "method": "GET",
+      "url": "https://blue-src-itf-octopus.apps.stl.pcfstage00.mastercard.int/scenarios",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_aaa529f294bc42f5830dda4f",
+      "_type": "request",
+      "parentId": "fld_53b3f4fcc92d4e43a34497fe",
+      "name": "ITF-GET-cards/scenarios",
+      "method": "GET",
+      "url": "https://blue-src-itf-octopus.apps.stl.pcfstage00.mastercard.int/cards/scenarios",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_669ebf785227432f805194e1",
+      "_type": "request",
+      "parentId": "fld_53b3f4fcc92d4e43a34497fe",
+      "name": "ITF-GET-ALL-Cards",
+      "method": "GET",
+      "url": "https://blue-src-itf-octopus.apps.stl.pcfstage00.mastercard.int/cards",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_4ff5f0eac3db427890713dde",
+      "_type": "request",
+      "parentId": "fld_53b3f4fcc92d4e43a34497fe",
+      "name": "ITF-GET-ALL- getAllDpas",
+      "method": "GET",
+      "url": "https://blue-src-itf-octopus.apps.stl.pcfstage00.mastercard.int/dpas",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_9c7c2f8d180443c2927d3804",
+      "_type": "request",
+      "parentId": "fld_53b3f4fcc92d4e43a34497fe",
+      "name": "ITF-GET-ALL- srcis",
+      "method": "GET",
+      "url": "https://blue-src-itf-octopus.apps.stl.pcfstage00.mastercard.int/srcis",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_c0b53cc4b4934841b7571f68",
+      "_type": "request",
+      "parentId": "fld_53b3f4fcc92d4e43a34497fe",
+      "name": "ITF-getDeviceTokenByTur",
+      "method": "POST",
+      "url": "https://blue-src-itf-octopus.apps.stl.pcfstage00.mastercard.int/tokens/device/dsrp/DAPLMC000011439354be5cc97d224297a52d8bcc0551600c",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_8073d3c022e847b088027120",
+      "_type": "request",
+      "parentId": "fld_53b3f4fcc92d4e43a34497fe",
+      "name": "ITF-getRandomDeviceToken-M4S",
+      "method": "POST",
+      "url": "https://blue-src-itf-octopus.apps.stl.pcfstage00.mastercard.int/tokens/device/dsrp/random",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cardType\": \"CREDIT\",\n    \"scenario\": \"M4S\"\n}\n\n/* Available cardType in octopus. \nCardType.java in e2e code\n\nCREDIT,\nDEBIT,\nPREPAID,\nRANDOM,\nMSI,\nCOMBO,\nCOMBO_FLEX\n*/\n\n/*\nAvailable scenario in octopus. \nScenarioNames.java in e2e code\n    M4S(\"M4S\"),\n    MANITOBA(\"MANITOBA\"),\n    SAMSUNG_TPW_TOKENS(\"SAMSUNG_TPW_TOKENS\");\n*/"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_c2bd10ed8a9b4c2298f6539f",
+      "_type": "request",
+      "parentId": "fld_53b3f4fcc92d4e43a34497fe",
+      "name": "ITF-getRandomDeviceToken-MANITOBA-Apple",
+      "method": "POST",
+      "url": "https://blue-src-itf-octopus.apps.stl.pcfstage00.mastercard.int/tokens/device/dsrp/random",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cardType\": \"CREDIT\",\n    \"scenario\": \"MANITOBA\"\n}\n\n/* Available cardType in octopus. \nCardType.java in e2e code\n\nCREDIT,\nDEBIT,\nPREPAID,\nRANDOM,\nMSI,\nCOMBO,\nCOMBO_FLEX\n*/\n\n/*\nAvailable scenario in octopus. \nScenarioNames.java in e2e code\n    M4S(\"M4S\"),\n    MANITOBA(\"MANITOBA\"),\n    SAMSUNG_TPW_TOKENS(\"SAMSUNG_TPW_TOKENS\");\n*/"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_9c2e3cd0d58b45ce8dfb3c73",
+      "_type": "request",
+      "parentId": "fld_53b3f4fcc92d4e43a34497fe",
+      "name": "ITF-getRandomDeviceToken-SAMSUNG_TPW_TOKENS",
+      "method": "POST",
+      "url": "https://blue-src-itf-octopus.apps.stl.pcfstage00.mastercard.int/tokens/device/dsrp/random",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cardType\": \"CREDIT\",\n    \"scenario\": \"SAMSUNG_TPW_TOKENS\"\n}\n\n/* Available cardType in octopus. \nCardType.java in e2e code\n\nCREDIT,\nDEBIT,\nPREPAID,\nRANDOM,\nMSI,\nCOMBO,\nCOMBO_FLEX\n*/\n\n/*\nAvailable scenario in octopus. \nScenarioNames.java in e2e code\n    M4S(\"M4S\"),\n    MANITOBA(\"MANITOBA\"),\n    SAMSUNG_TPW_TOKENS(\"SAMSUNG_TPW_TOKENS\");\n*/"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_6103f40e0e22408497c2187b",
+      "_type": "request",
+      "parentId": "fld_53b3f4fcc92d4e43a34497fe",
+      "name": "ITF-getDSRP",
+      "method": "POST",
+      "url": "https://blue-src-itf-octopus.apps.stl.pcfstage00.mastercard.int/token/dsrp/generate",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"dpan\": \"5136400199997667\",\n    \"atc\": 1338\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_f78ae6fe654b4a3a82b8bfe3",
+      "_type": "request_group",
+      "parentId": "fld_77ff30b1aa97413cb7b4ec0f",
+      "name": "MTF"
+    },
+    {
+      "_id": "req_a1f8e2e65d4d44658acf8366",
+      "_type": "request",
+      "parentId": "fld_f78ae6fe654b4a3a82b8bfe3",
+      "name": "MTF-GET-ALL-Cards",
+      "method": "GET",
+      "url": "https://blue-pre-prod-octopus.apps.stl.pcfprod00.mastercard.int/cards",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_db8348cbf413424a8a13cff8",
+      "_type": "request",
+      "parentId": "fld_f78ae6fe654b4a3a82b8bfe3",
+      "name": "MTF-ALL-DEVICE-TOKENS",
+      "method": "GET",
+      "url": "https://blue-pre-prod-octopus.apps.stl.pcfprod00.mastercard.int/tokens",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_6b43be23cd97431bb6b18b69",
+      "_type": "request",
+      "parentId": "fld_f78ae6fe654b4a3a82b8bfe3",
+      "name": "MTF-getRandomDeviceToken-MANITOBA-Apple",
+      "method": "POST",
+      "url": "https://blue-pre-prod-octopus.apps.stl.pcfprod00.mastercard.int/tokens/device/dsrp/random",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cardType\": \"CREDIT\",\n    \"scenario\": \"MANITOBA\"\n}\n\n/* Available cardType in octopus. \nCardType.java in e2e code\n\nCREDIT,\nDEBIT,\nPREPAID,\nRANDOM,\nMSI,\nCOMBO,\nCOMBO_FLEX\n*/\n\n/*\nAvailable scenario in octopus. \nScenarioNames.java in e2e code\n    M4S(\"M4S\"),\n    MANITOBA(\"MANITOBA\"),\n    SAMSUNG_TPW_TOKENS(\"SAMSUNG_TPW_TOKENS\");\n*/"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_d3367884ebd64fbb877ab85b",
+      "_type": "request",
+      "parentId": "fld_f78ae6fe654b4a3a82b8bfe3",
+      "name": "MTF-getRandomDeviceToken-SAMSUNG_TPW_TOKENS",
+      "method": "POST",
+      "url": "https://blue-pre-prod-octopus.apps.stl.pcfprod00.mastercard.int/tokens/device/dsrp/random",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"cardType\": \"CREDIT\",\n    \"scenario\": \"SAMSUNG_TPW_TOKENS\"\n}\n\n/* Available cardType in octopus. \nCardType.java in e2e code\n\nCREDIT,\nDEBIT,\nPREPAID,\nRANDOM,\nMSI,\nCOMBO,\nCOMBO_FLEX\n*/\n\n/*\nAvailable scenario in octopus. \nScenarioNames.java in e2e code\n    M4S(\"M4S\"),\n    MANITOBA(\"MANITOBA\"),\n    SAMSUNG_TPW_TOKENS(\"SAMSUNG_TPW_TOKENS\");\n*/"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        },
+        {
+          "name": "Accept",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "req_d9732df90ca9474a8223298d",
+      "_type": "request",
+      "parentId": "fld_f78ae6fe654b4a3a82b8bfe3",
+      "name": "MTF /migration/checkout",
+      "method": "POST",
+      "url": "https://blue-src-mtf-octopus.apps.del.trd-prod-pas.mastercard.int/tokens/cloud/migration/checkout",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n    \"tur\": \"DM4MMC0000144136405c2e92af3343b4bf91b7132aabbc64\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "accept",
+          "value": "*/*",
+          "disabled": false
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "disabled": false
+        }
+      ],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_e95b53c0b09241dea8b205e5",
+      "_type": "request_group",
+      "parentId": "fld_77ff30b1aa97413cb7b4ec0f",
+      "name": "STAGE"
+    },
+    {
+      "_id": "req_1e6102e63a854998b00d509a",
+      "_type": "request",
+      "parentId": "fld_e95b53c0b09241dea8b205e5",
+      "name": "STAGE-APL-DEVICE-TOKENS",
+      "method": "GET",
+      "url": "https://blue-src-stage-octopus.apps.stl.pcfstage00.mastercard.int/tokens",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "preRequestScript": "",
+      "afterResponseScript": ""
+    },
+    {
+      "_id": "fld_631714156c764748a675dd12",
+      "_type": "request_group",
+      "parentId": "wrk_1275a7e0bcda47f9abc0f20a",
+      "name": "Setup (Initialize Variables)"
+    },
+    {
+      "_id": "req_85759e0e64a34cdd8d1fdf7d",
+      "_type": "request",
+      "parentId": "fld_631714156c764748a675dd12",
+      "name": "00 - Initialize octopus_* variables",
+      "method": "GET",
+      "url": "https://example.invalid/setup",
+      "headers": [],
+      "parameters": [],
+      "body": {
+        "text": ""
+      },
+      "preRequestScript": "// Run once to initialize all octopus_* variables\nconst keys = [];\nfor (const k of keys) {\n  if (insomnia.environment.get(k) === undefined) {\n    insomnia.environment.set(k, '');\n  }\n}\ninsomnia.test('Variables initialized', () => {\n  insomnia.expect(keys.length >= 0).to.equal(true);\n});",
+      "afterResponseScript": ""
+    }
+  ]
+}
