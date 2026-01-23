@@ -1,0 +1,964 @@
+diff -ruN /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/config/FeatureConfig.java /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/config/FeatureConfig.java
+--- /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/config/FeatureConfig.java	2026-01-18 18:09:42.570507800 +0000
++++ /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/config/FeatureConfig.java	2026-01-18 04:18:24.000000000 +0000
+@@ -136,6 +136,13 @@
+ 
+     @Value("${E98576.AAC.20250818.PreCheckout.C2P.multiPiiEnabled:false}")
+     private boolean enableC2PMultiPii;
++
++    /**
++     * New ISD channel rule engine (Strategy + Decision Table) kill-switch.
++     * Default OFF for safe rollout.
++     */
++    @Value("${E98576.AAC.20260118.PreCheckout.ISD.NewChannelRuleEngine:false}")
++    private boolean enableNewIsdChannelRuleEngine;
+     
+     @Value("${E82710.ADL.20251107.C2P.Checkout.AssuranceData.3DS.Loopback:false}")
+     private boolean enableAssuranceDataLoopback;
+@@ -196,6 +203,13 @@
+         return dynamicFeatureFlagService.isFeatureEnabled("traceId-rateLimiter-enabled", traceIdRateLimiterEnabled);
+     }
+ 
++    public boolean isEnableNewIsdChannelRuleEngine() {
++        return dynamicFeatureFlagService.isFeatureEnabled(
++                "E98576.AAC.20260118.PreCheckout.ISD.NewChannelRuleEngine",
++                enableNewIsdChannelRuleEngine
++        );
++    }
++
+     public boolean isEnableIssuerAuthentication() {
+         return dynamicFeatureFlagService.isFeatureEnabled("enable-issuer-authentication", enableIssuerAuthentication);
+     }
+diff -ruN /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/ISDVerificationChannelRule.java /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/ISDVerificationChannelRule.java
+--- /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/ISDVerificationChannelRule.java	2026-01-18 18:09:42.545101394 +0000
++++ /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/ISDVerificationChannelRule.java	2026-01-18 18:07:30.115057010 +0000
+@@ -23,6 +23,13 @@
+ import org.apache.commons.lang3.tuple.Pair;
+ import org.springframework.stereotype.Component;
+ 
++import com.mastercard.precheckout.emvco.proxy.engine.C2PChannelEngine;
++import com.mastercard.precheckout.emvco.proxy.engine.C2PMode;
++import com.mastercard.precheckout.emvco.proxy.engine.C2PResolution;
++import com.mastercard.precheckout.emvco.proxy.engine.ChannelContext;
++import com.mastercard.precheckout.emvco.proxy.engine.MultiPiiC2PResolver;
++import com.mastercard.precheckout.emvco.proxy.engine.SingleIdentityC2PResolver;
++
+ import java.util.Collections;
+ import java.util.List;
+ import java.util.Objects;
+@@ -388,33 +395,69 @@
+             boolean isSMSChannelRestricted
+     ) {
+         ISDVerificationChannels isd = new ISDVerificationChannels();
+-        String preferred;
++        // Feature-flag based rollout:
++        // - OFF => execute legacy code paths (no behavior changes)
++        // - ON  => execute new Strategy + Decision Table engine
++        if (!featureConfig.isEnableNewIsdChannelRuleEngine()) {
++            String preferred;
++            if (featureConfig.isEnableC2PMultiPii()) {
++                preferred = getPreferredPriorityChannelForC2P(
++                        consumer,
++                        identityTypeFromScopeData,
++                        identityValueFromScopeData,
++                        requestedIdentityValueFromScopeData,
++                        consumers,
++                        loggerMessage,
++                        isSMSChannelRestricted,
++                        isd
++                );
++            } else {
++                preferred = getPreferredChannelForC2p(
++                        consumer,
++                        identityTypeFromScopeData,
++                        consumers,
++                        loggerMessage,
++                        isSMSChannelRestricted,
++                        isd
++                );
++            }
++            isd.setPreferredChannel(preferred);
++            return isd;
++        }
+ 
+-        if (featureConfig.isEnableC2PMultiPii()) {
+-            preferred = getPreferredPriorityChannelForC2P(
+-                    consumer,
+-                    identityTypeFromScopeData,
+-                    identityValueFromScopeData,
+-                    requestedIdentityValueFromScopeData,
+-                    consumers,
+-                    loggerMessage,
+-                    isSMSChannelRestricted,
+-                    isd
+-            );
+-        } else {
+-            preferred = getPreferredChannelForC2p(
+-                    consumer,
+-                    identityTypeFromScopeData,
+-                    consumers,
+-                    loggerMessage,
+-                    isSMSChannelRestricted,
+-                    isd
+-            );
++        IdentityType type = null;
++        try {
++            if (StringUtils.isNotBlank(identityTypeFromScopeData)) {
++                type = IdentityType.valueOf(identityTypeFromScopeData);
++            }
++        } catch (IllegalArgumentException ignored) {
++            // preserve legacy behavior: treat as unknown
+         }
+ 
+-        // getPreferredChannelForC2p / getPreferredPriorityChannelForC2P already log,
+-        // but original getPreferredChannel returned isd with preferredChannel set by caller.
++        ChannelContext ctx = new ChannelContext(
++                consumer,
++                consumers,
++                type,
++                identityValueFromScopeData,
++                requestedIdentityValueFromScopeData
++        );
++
++        C2PChannelEngine engine = new C2PChannelEngine(List.of(
++                new MultiPiiC2PResolver(),
++                new SingleIdentityC2PResolver()
++        ));
++
++        C2PMode mode = featureConfig.isEnableC2PMultiPii() ? C2PMode.MULTI_PII : C2PMode.SINGLE_IDENTITY;
++        C2PResolution resolution = engine.resolve(mode, ctx, isd);
++
++        String preferred = resolution.preferredChannel();
+         isd.setPreferredChannel(preferred);
++
++        // Log here (new engine does not log internally)
++        String methodName = (mode == C2PMode.MULTI_PII)
++                ? "getPreferredPriorityChannelForC2P_refactored"
++                : "getPreferredChannelForC2p_refactored";
++        logPreferredChanel(consumer, preferred, resolution.channelRule(), methodName, loggerMessage, isSMSChannelRestricted);
+         return isd;
+     }
+ 
+@@ -572,7 +615,8 @@
+         return authChannel;
+     }
+ 
+-    private Optional<String> lookupEmailOtpValue(Consumer consumer, String requestedEmail, String fallbackHash) {
++    @Override
++    public Optional<String> lookupEmailOtpValue(Consumer consumer, String requestedEmail, String fallbackHash) {
+         return Optional.of(
+                 consumer.getIdentities().stream()
+                         .filter(identity -> EMAIL_TYPE.equals(identity.getType()))
+@@ -609,7 +653,8 @@
+         return authChannel;
+     }
+ 
+-    private Optional<String> getValidatedMobileHash(List<Consumer> consumers, Optional<String> preferredMobileHash) {
++    @Override
++    public Optional<String> getValidatedMobileHash(List<Consumer> consumers, Optional<String> preferredMobileHash) {
+         return preferredMobileHash.filter(hash -> consumers.stream()
+                 .allMatch(c -> Stream.concat(
+                         Optional.ofNullable(c.getIdentities())
+@@ -621,7 +666,8 @@
+                 ).filter(Objects::nonNull).anyMatch(hash::equals)));
+     }
+ 
+-    private Optional<String> getPreferredMobileHash(Consumer consumer) {
++    @Override
++    public Optional<String> getPreferredMobileHash(Consumer consumer) {
+         return Optional.ofNullable(consumer.getIdentities())
+                 .orElse(Collections.emptyList())
+                 .stream()
+@@ -631,7 +677,8 @@
+                 .or(() -> Optional.ofNullable(consumer.getHashedCountryCodeWithMobile()));
+     }
+ 
+-    private Optional<String> getPreferredEmailHash(Consumer consumer) {
++    @Override
++    public Optional<String> getPreferredEmailHash(Consumer consumer) {
+         return Optional.ofNullable(consumer.getIdentities())
+                 .orElse(Collections.emptyList())
+                 .stream()
+@@ -641,7 +688,8 @@
+                 .or(() -> Optional.ofNullable(consumer.getHashedEmail()));
+     }
+ 
+-    private Optional<String> getValidatedEmailHash(List<Consumer> consumers, Optional<String> preferredEmailHash) {
++    @Override
++    public Optional<String> getValidatedEmailHash(List<Consumer> consumers, Optional<String> preferredEmailHash) {
+         return preferredEmailHash.filter(hash -> consumers.stream()
+                 .allMatch(c -> Stream.concat(
+                         Optional.ofNullable(c.getIdentities())
+@@ -653,7 +701,8 @@
+                 ).filter(Objects::nonNull).anyMatch(hash::equals)));
+     }
+ 
+-    private Pair<Optional<Mobile>, Optional<String>> getMobileAndMaskedPhoneNumber(Consumer consumer, Optional<String> matchedPreferredValue) {
++    @Override
++    public Pair<Optional<Mobile>, Optional<String>> getMobileAndMaskedPhoneNumber(Consumer consumer, Optional<String> matchedPreferredValue) {
+         return Optional.ofNullable(consumer.getIdentities()).orElse(Collections.emptyList()).stream()
+                 .filter(id -> MOBILE_PHONE_NUMBER_TYPE.equals(id.getType()))
+                 .filter(id -> matchedPreferredValue.isPresent() && matchedPreferredValue.get().equals(id.getMobile().getHashedCountryCodeWithPhoneNumber()))
+@@ -663,7 +712,8 @@
+                 .orElse(Pair.of(Optional.empty(), Optional.empty()));
+     }
+ 
+-    private Pair<Optional<String>, Optional<String>> getEmailAndMaskedEmail(Consumer consumer, Optional<String> matchedPreferredValue) {
++    @Override
++    public Pair<Optional<String>, Optional<String>> getEmailAndMaskedEmail(Consumer consumer, Optional<String> matchedPreferredValue) {
+         return Optional.ofNullable(consumer.getIdentities()).orElse(Collections.emptyList()).stream()
+                 .filter(id -> EMAIL_TYPE.equals(id.getType()))
+                 .filter(id -> matchedPreferredValue.isPresent() && matchedPreferredValue.get().equals(id.getHashedEmail()))
+@@ -691,7 +741,8 @@
+                 .findFirst();
+     }
+ 
+-    private Optional<String> lookupPhoneOtpValue(Consumer consumer, String requestedIdentityValueFromScopeData, String identityValueFromScopeData
++    @Override
++    public Optional<String> lookupPhoneOtpValue(Consumer consumer, String requestedIdentityValueFromScopeData, String identityValueFromScopeData
+     ) {
+         return Optional.of(
+                 consumer.getIdentities().stream()
+diff -ruN /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PChannelEngine.java /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PChannelEngine.java
+--- /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PChannelEngine.java	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PChannelEngine.java	2026-01-18 18:04:41.257686807 +0000
+@@ -0,0 +1,35 @@
++package com.mastercard.precheckout.emvco.proxy.engine;
++
++import com.mastercard.precheckout.emvco.domain.ISDVerificationChannels;
++
++import java.util.List;
++import java.util.Map;
++import java.util.function.Function;
++import java.util.stream.Collectors;
++
++/**
++ * Entry point for the refactored C2P channel engine.
++ */
++public final class C2PChannelEngine {
++
++    private final Map<C2PMode, C2PModeResolver> resolvers;
++    private final C2PFactsBuilder factsBuilder;
++
++    public C2PChannelEngine(List<C2PModeResolver> resolvers) {
++        this(resolvers, new C2PFactsBuilder());
++    }
++
++    public C2PChannelEngine(List<C2PModeResolver> resolvers, C2PFactsBuilder factsBuilder) {
++        this.resolvers = resolvers.stream()
++                .collect(Collectors.toUnmodifiableMap(C2PModeResolver::supports, Function.identity()));
++        this.factsBuilder = factsBuilder;
++    }
++
++    public C2PResolution resolve(C2PMode mode, ChannelContext ctx, ISDVerificationChannels out) {
++        C2PModeResolver resolver = resolvers.get(mode);
++        if (resolver == null) {
++            return new C2PResolution(null, null);
++        }
++        return resolver.resolve(ctx, factsBuilder, out);
++    }
++}
+diff -ruN /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PDecisionTable.java /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PDecisionTable.java
+--- /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PDecisionTable.java	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PDecisionTable.java	2026-01-18 04:16:03.000000000 +0000
+@@ -0,0 +1,42 @@
++package com.mastercard.precheckout.emvco.proxy.engine;
++
++import com.mastercard.precheckout.emvco.domain.AuthenticationChannel;
++
++import java.util.Arrays;
++
++/**
++ * Decision table for returning C2P users.
++ */
++public enum C2PDecisionTable {
++
++    ALL_MATCHED(true, true, AuthenticationChannel.SMS, "C2P_ReturningUser_AllMatched"),
++    EMAIL_MATCHED(true, false, AuthenticationChannel.EMAIL, "C2P_ReturningUser_EmailMatched"),
++    MOBILE_MATCHED(false, true, AuthenticationChannel.SMS, "C2P_ReturningUser_MobileMatched");
++
++    private final boolean emailMatched;
++    private final boolean mobileMatched;
++    private final AuthenticationChannel preferredChannel;
++    private final String channelRule;
++
++    C2PDecisionTable(boolean emailMatched, boolean mobileMatched, AuthenticationChannel preferredChannel, String channelRule) {
++        this.emailMatched = emailMatched;
++        this.mobileMatched = mobileMatched;
++        this.preferredChannel = preferredChannel;
++        this.channelRule = channelRule;
++    }
++
++    public static C2PDecisionTable resolve(boolean emailMatched, boolean mobileMatched) {
++        return Arrays.stream(values())
++                .filter(r -> r.emailMatched == emailMatched && r.mobileMatched == mobileMatched)
++                .findFirst()
++                .orElse(null);
++    }
++
++    public AuthenticationChannel preferredChannel() {
++        return preferredChannel;
++    }
++
++    public String channelRule() {
++        return channelRule;
++    }
++}
+diff -ruN /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PFacts.java /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PFacts.java
+--- /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PFacts.java	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PFacts.java	2026-01-18 18:02:57.415970835 +0000
+@@ -0,0 +1,26 @@
++package com.mastercard.precheckout.emvco.proxy.engine;
++
++import com.mastercard.precheckout.emvco.domain.Mobile;
++
++import java.util.Optional;
++
++/**
++ * Computed facts for C2P channel selection.
++ *
++ * Keep this record stable as rules evolve; prefer changing the builder
++ * rather than downstream decision/application logic.
++ */
++public record C2PFacts(
++        boolean allEmailMatched,
++        boolean allMobileMatched,
++        Optional<String> matchedPreferredHash,
++        Optional<String> switchingHash,
++        Optional<String> maskedValue,
++        Optional<Mobile> mobile,
++        Optional<String> email
++) {
++
++    public static C2PFacts empty() {
++        return new C2PFacts(false, false, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
++    }
++}
+diff -ruN /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PFactsBuilder.java /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PFactsBuilder.java
+--- /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PFactsBuilder.java	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PFactsBuilder.java	2026-01-18 18:04:04.490878044 +0000
+@@ -0,0 +1,229 @@
++package com.mastercard.precheckout.emvco.proxy.engine;
++
++import com.mastercard.precheckout.emvco.domain.Consumer;
++import com.mastercard.precheckout.emvco.domain.Identity;
++import com.mastercard.precheckout.emvco.domain.Mobile;
++import org.apache.commons.lang3.tuple.Pair;
++
++import java.util.Collections;
++import java.util.List;
++import java.util.Objects;
++import java.util.Optional;
++import java.util.stream.Stream;
++
++/**
++ * Builds C2PFacts from the raw Consumer + scope data.
++ *
++ * This is the only place that should know how to navigate Consumer.identities and
++ * compute validated/preferred hashes.
++ */
++public final class C2PFactsBuilder {
++
++    public C2PFacts buildMultiPiiFacts(ChannelContext ctx) {
++        if (ctx == null || ctx.consumer() == null) {
++            return C2PFacts.empty();
++        }
++
++        Consumer consumer = ctx.consumer();
++        var idType = ctx.identityTypeFromScopeData();
++
++        if (idType == null) {
++            return C2PFacts.empty();
++        }
++
++        boolean isAllEmailMatched = false;
++        boolean isAllMobileMatched = false;
++        Optional<String> matchedPreferred = Optional.empty();
++        Optional<String> switchingHash = Optional.empty();
++
++        if (idType.name().equals("SMS")) {
++            Optional<String> preferredEmailHash = getPreferredEmailHash(consumer);
++            Optional<String> validatedEmailHash = getValidatedEmailHash(ctx.consumers(), preferredEmailHash);
++            isAllEmailMatched = validatedEmailHash.isPresent();
++            isAllMobileMatched = true;
++            matchedPreferred = lookupPhoneOtpValue(consumer, ctx.requestedIdentityValueFromScopeData(), ctx.identityValueFromScopeData());
++            switchingHash = matchedPreferred;
++        } else if (idType.name().equals("EMAIL")) {
++            Optional<String> preferredMobileHash = getPreferredMobileHash(consumer);
++            Optional<String> validatedMobileHash = getValidatedMobileHash(ctx.consumers(), preferredMobileHash);
++            isAllEmailMatched = true;
++            isAllMobileMatched = validatedMobileHash.isPresent();
++            switchingHash = lookupEmailOtpValue(consumer, ctx.requestedIdentityValueFromScopeData(), ctx.identityValueFromScopeData());
++            if (!isAllMobileMatched) {
++                matchedPreferred = switchingHash;
++            } else {
++                matchedPreferred = validatedMobileHash.or(() -> Optional.ofNullable(consumer.getHashedCountryCodeWithMobile()));
++            }
++        }
++
++        var mobileAndMasked = getMobileAndMaskedPhoneNumber(consumer, matchedPreferred);
++        var emailAndMasked = getEmailAndMaskedEmail(consumer, matchedPreferred);
++
++        Optional<Mobile> mobile = mobileAndMasked.getLeft();
++        Optional<String> maskedFromMobile = mobileAndMasked.getRight();
++        Optional<String> email = emailAndMasked.getLeft();
++        Optional<String> maskedFromEmail = emailAndMasked.getRight();
++
++        Optional<String> masked = maskedFromMobile.isPresent() ? maskedFromMobile : maskedFromEmail;
++
++        return new C2PFacts(
++                isAllEmailMatched,
++                isAllMobileMatched,
++                matchedPreferred,
++                switchingHash,
++                masked,
++                mobile,
++                email
++        );
++    }
++
++    /**
++     * Single-identity PII (future): match across consumers using only root hashes.
++     * This mirrors legacy getPreferredChannelForC2p behavior for match booleans.
++     */
++    public C2PFacts buildSingleIdentityFacts(ChannelContext ctx) {
++        if (ctx == null || ctx.consumer() == null) {
++            return C2PFacts.empty();
++        }
++        Consumer consumer = ctx.consumer();
++        var idType = ctx.identityTypeFromScopeData();
++        if (idType == null) {
++            return C2PFacts.empty();
++        }
++
++        boolean isAllEmailMatched = false;
++        boolean isAllMobileMatched = false;
++
++        if (idType.name().equals("EMAIL")) {
++            isAllMobileMatched = ctx.consumers().stream().allMatch(c -> Objects.equals(
++                    consumer.getHashedCountryCodeWithMobile(),
++                    c.getHashedCountryCodeWithMobile()
++            ));
++            isAllEmailMatched = true;
++        } else if (idType.name().equals("SMS")) {
++            isAllEmailMatched = ctx.consumers().stream().allMatch(c -> Objects.equals(
++                    consumer.getHashedEmail(),
++                    c.getHashedEmail()
++            ));
++            isAllMobileMatched = true;
++        }
++
++        return new C2PFacts(
++                isAllEmailMatched,
++                isAllMobileMatched,
++                Optional.empty(),
++                Optional.empty(),
++                Optional.empty(),
++                Optional.empty(),
++                Optional.empty()
++        );
++    }
++
++    // -------------------------
++    // Helper methods copied from legacy rule (to remove IdentityOps dependency)
++    // -------------------------
++
++    private Optional<String> getPreferredMobileHash(Consumer consumer) {
++        return Optional.ofNullable(consumer.getIdentities())
++                .orElse(Collections.emptyList())
++                .stream()
++                .filter(identity -> "MOBILE_PHONE_NUMBER".equals(identity.getType()) && identity.isPreferred())
++                .map(id -> id.getMobile().getHashedCountryCodeWithPhoneNumber())
++                .findFirst()
++                .or(() -> Optional.ofNullable(consumer.getHashedCountryCodeWithMobile()));
++    }
++
++    private Optional<String> getPreferredEmailHash(Consumer consumer) {
++        return Optional.ofNullable(consumer.getIdentities())
++                .orElse(Collections.emptyList())
++                .stream()
++                .filter(identity -> "EMAIL".equals(identity.getType()) && identity.isPreferred())
++                .map(Identity::getHashedEmail)
++                .findFirst()
++                .or(() -> Optional.ofNullable(consumer.getHashedEmail()));
++    }
++
++    private Optional<String> getValidatedMobileHash(List<Consumer> consumers, Optional<String> preferredMobileHash) {
++        return preferredMobileHash.filter(hash -> consumers.stream()
++                .allMatch(c -> Stream.concat(
++                        Optional.ofNullable(c.getIdentities())
++                                .orElse(Collections.emptyList())
++                                .stream()
++                                .filter(id -> "MOBILE_PHONE_NUMBER".equals(id.getType()))
++                                .map(id -> id.getMobile().getHashedCountryCodeWithPhoneNumber()),
++                        Stream.ofNullable(c.getHashedCountryCodeWithMobile())
++                ).filter(Objects::nonNull).anyMatch(hash::equals)));
++    }
++
++    private Optional<String> getValidatedEmailHash(List<Consumer> consumers, Optional<String> preferredEmailHash) {
++        return preferredEmailHash.filter(hash -> consumers.stream()
++                .allMatch(c -> Stream.concat(
++                        Optional.ofNullable(c.getIdentities())
++                                .orElse(Collections.emptyList())
++                                .stream()
++                                .filter(id -> "EMAIL".equals(id.getType()))
++                                .map(Identity::getHashedEmail),
++                        Stream.ofNullable(c.getHashedEmail())
++                ).filter(Objects::nonNull).anyMatch(hash::equals)));
++    }
++
++    private Pair<Optional<Mobile>, Optional<String>> getMobileAndMaskedPhoneNumber(Consumer consumer, Optional<String> matchedPreferredValue) {
++        return Optional.ofNullable(consumer.getIdentities()).orElse(Collections.emptyList()).stream()
++                .filter(id -> "MOBILE_PHONE_NUMBER".equals(id.getType()))
++                .filter(id -> matchedPreferredValue.isPresent() && matchedPreferredValue.get().equals(id.getMobile().getHashedCountryCodeWithPhoneNumber()))
++                .findFirst()
++                .map(id -> Pair.of(Optional.of(id.getMobile()),
++                        Optional.of("+" + id.getMobile().getCountryCode() + id.getMobile().getMaskedPhoneNumber())))
++                .orElse(Pair.of(Optional.empty(), Optional.empty()));
++    }
++
++    private Pair<Optional<String>, Optional<String>> getEmailAndMaskedEmail(Consumer consumer, Optional<String> matchedPreferredValue) {
++        return Optional.ofNullable(consumer.getIdentities()).orElse(Collections.emptyList()).stream()
++                .filter(id -> "EMAIL".equals(id.getType()))
++                .filter(id -> matchedPreferredValue.isPresent() && matchedPreferredValue.get().equals(id.getHashedEmail()))
++                .findFirst()
++                .map(id -> Pair.of(Optional.of(id.getEmail()), Optional.of(id.getMaskedEmail())))
++                .orElse(Pair.of(Optional.empty(), Optional.empty()));
++    }
++
++    private Optional<String> lookupPhoneOtpValue(Consumer consumer, String requestedIdentityValueFromScopeData, String identityValueFromScopeData) {
++        if (consumer.getIdentities() == null) {
++            return Optional.ofNullable(identityValueFromScopeData);
++        }
++        return Optional.of(
++                consumer.getIdentities().stream()
++                        .filter(identity -> "MOBILE_PHONE_NUMBER".equals(identity.getType()))
++                        .filter(identity -> {
++                            if (requestedIdentityValueFromScopeData == null || identity.getMobile() == null) {
++                                return false;
++                            }
++                            String scopedPhone = requestedIdentityValueFromScopeData;
++                            String countryCode = identity.getMobile().getCountryCode();
++                            String identityPhone = identity.getMobile().getPhoneNumber();
++
++                            String localScopePhone = (countryCode != null && scopedPhone.startsWith(countryCode))
++                                    ? scopedPhone.substring(countryCode.length())
++                                    : scopedPhone;
++
++                            return Objects.equals(localScopePhone, identityPhone);
++                        })
++                        .map(identity -> identity.getMobile().getHashedCountryCodeWithPhoneNumber())
++                        .findFirst()
++                        .orElse(identityValueFromScopeData)
++        );
++    }
++
++    private Optional<String> lookupEmailOtpValue(Consumer consumer, String requestedEmail, String fallbackHash) {
++        if (consumer.getIdentities() == null) {
++            return Optional.ofNullable(fallbackHash);
++        }
++        return Optional.of(
++                consumer.getIdentities().stream()
++                        .filter(identity -> "EMAIL".equals(identity.getType()))
++                        .filter(identity -> requestedEmail != null && identity.getEmail() != null && requestedEmail.equalsIgnoreCase(identity.getEmail()))
++                        .map(Identity::getHashedEmail)
++                        .findFirst()
++                        .orElse(fallbackHash)
++        );
++    }
++}
+diff -ruN /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PMode.java /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PMode.java
+--- /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PMode.java	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PMode.java	2026-01-18 04:16:25.000000000 +0000
+@@ -0,0 +1,6 @@
++package com.mastercard.precheckout.emvco.proxy.engine;
++
++public enum C2PMode {
++    SINGLE_IDENTITY,
++    MULTI_PII
++}
+diff -ruN /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PModeResolver.java /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PModeResolver.java
+--- /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PModeResolver.java	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PModeResolver.java	2026-01-18 18:04:26.989039219 +0000
+@@ -0,0 +1,13 @@
++package com.mastercard.precheckout.emvco.proxy.engine;
++
++import com.mastercard.precheckout.emvco.domain.ISDVerificationChannels;
++
++/**
++ * Pluggable resolver for different C2P identity modes.
++ */
++public interface C2PModeResolver {
++
++    C2PMode supports();
++
++    C2PResolution resolve(ChannelContext ctx, C2PFactsBuilder factsBuilder, ISDVerificationChannels out);
++}
+diff -ruN /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PResolution.java /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PResolution.java
+--- /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PResolution.java	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/C2PResolution.java	2026-01-18 04:16:25.000000000 +0000
+@@ -0,0 +1,8 @@
++package com.mastercard.precheckout.emvco.proxy.engine;
++
++/**
++ * Output from the new engine (preferred channel + rule name).
++ * The ISDVerificationChannels object is mutated by resolvers to preserve existing API.
++ */
++public record C2PResolution(String preferredChannel, String channelRule) {
++}
+diff -ruN /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/ChannelContext.java /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/ChannelContext.java
+--- /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/ChannelContext.java	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/ChannelContext.java	2026-01-18 04:14:06.000000000 +0000
+@@ -0,0 +1,18 @@
++package com.mastercard.precheckout.emvco.proxy.engine;
++
++import com.mastercard.precheckout.emvco.domain.Consumer;
++import com.mastercard.precheckout.generated.emvco.model.IdentityType;
++
++import java.util.List;
++
++/**
++ * Immutable request-scoped context for C2P channel resolution.
++ */
++public record ChannelContext(
++        Consumer consumer,
++        List<Consumer> consumers,
++        IdentityType identityTypeFromScopeData,
++        String identityValueFromScopeData,
++        String requestedIdentityValueFromScopeData
++) {
++}
+diff -ruN /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/MultiPiiC2PResolver.java /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/MultiPiiC2PResolver.java
+--- /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/MultiPiiC2PResolver.java	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/MultiPiiC2PResolver.java	2026-01-18 18:05:04.078614540 +0000
+@@ -0,0 +1,59 @@
++package com.mastercard.precheckout.emvco.proxy.engine;
++
++import com.mastercard.precheckout.emvco.constants.ConsumerStatus;
++import com.mastercard.precheckout.emvco.domain.AuthenticationChannel;
++import com.mastercard.precheckout.emvco.domain.ISDVerificationChannels;
++
++import java.util.Collections;
++
++/**
++ * Multi-PII C2P resolver replacing getPreferredPriorityChannelForC2P.
++ *
++ * Uses facts + decision table (no nested branching).
++ */
++public final class MultiPiiC2PResolver implements C2PModeResolver {
++
++    @Override
++    public C2PMode supports() {
++        return C2PMode.MULTI_PII;
++    }
++
++    @Override
++    public C2PResolution resolve(ChannelContext ctx, C2PFactsBuilder factsBuilder, ISDVerificationChannels out) {
++
++        // New user -> always SMS
++        if (ctx != null && ctx.consumer() != null
++                && ConsumerStatus.PENDING_VERIFICATION.getValue().equals(ctx.consumer().getStatus())) {
++            return new C2PResolution(AuthenticationChannel.SMS.name(), "C2P_NewUser");
++        }
++
++        C2PFacts facts = factsBuilder.buildMultiPiiFacts(ctx);
++        C2PDecisionTable decision = C2PDecisionTable.resolve(facts.allEmailMatched(), facts.allMobileMatched());
++
++        if (decision == null) {
++            return new C2PResolution(null, null);
++        }
++
++        switch (decision) {
++            case ALL_MATCHED -> {
++                out.setHashedValidationChannelValue(facts.matchedPreferredHash().orElse(null));
++                out.setMaskedValidationChannelValue(facts.maskedValue().orElse(null));
++                out.setMobile(facts.mobile().orElse(null));
++            }
++            case EMAIL_MATCHED -> {
++                out.setRestrictedChannelList(Collections.singleton(AuthenticationChannel.SMS));
++                out.setHashedValidationChannelValue(facts.matchedPreferredHash().orElse(null));
++                out.setMaskedValidationChannelValue(facts.maskedValue().orElse(null));
++                out.setEmail(facts.email().orElse(null));
++            }
++            case MOBILE_MATCHED -> {
++                out.setRestrictedChannelList(Collections.singleton(AuthenticationChannel.EMAIL));
++                out.setHashedValidationChannelValue(facts.matchedPreferredHash().orElse(null));
++                out.setMaskedValidationChannelValue(facts.maskedValue().orElse(null));
++                out.setMobile(facts.mobile().orElse(null));
++            }
++        }
++
++        return new C2PResolution(decision.preferredChannel().name(), decision.channelRule());
++    }
++}
+diff -ruN /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/SingleIdentityC2PResolver.java /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/SingleIdentityC2PResolver.java
+--- /mnt/data/isd_orig_tree/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/SingleIdentityC2PResolver.java	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/isd_refactor_work/src/main/java/com/mastercard/precheckout/emvco/proxy/engine/SingleIdentityC2PResolver.java	2026-01-18 18:05:52.178248040 +0000
+@@ -0,0 +1,44 @@
++package com.mastercard.precheckout.emvco.proxy.engine;
++
++import com.mastercard.precheckout.emvco.constants.ConsumerStatus;
++import com.mastercard.precheckout.emvco.domain.AuthenticationChannel;
++import com.mastercard.precheckout.emvco.domain.ISDVerificationChannels;
++
++import java.util.Collections;
++
++/**
++ * Single-identity C2P resolver equivalent to legacy getPreferredChannelForC2p.
++ * No hash/mask population beyond restrictedChannelList.
++ */
++public final class SingleIdentityC2PResolver implements C2PModeResolver {
++
++    @Override
++    public C2PMode supports() {
++        return C2PMode.SINGLE_IDENTITY;
++    }
++
++    @Override
++    public C2PResolution resolve(ChannelContext ctx, C2PFactsBuilder factsBuilder, ISDVerificationChannels out) {
++
++        if (ctx != null && ctx.consumer() != null
++                && ConsumerStatus.PENDING_VERIFICATION.getValue().equals(ctx.consumer().getStatus())) {
++            return new C2PResolution(AuthenticationChannel.SMS.name(), "C2P_NewUser");
++        }
++
++        C2PFacts facts = factsBuilder.buildSingleIdentityFacts(ctx);
++        C2PDecisionTable decision = C2PDecisionTable.resolve(facts.allEmailMatched(), facts.allMobileMatched());
++        if (decision == null) {
++            return new C2PResolution(null, null);
++        }
++
++        switch (decision) {
++            case EMAIL_MATCHED -> out.setRestrictedChannelList(Collections.singleton(AuthenticationChannel.SMS));
++            case MOBILE_MATCHED -> out.setRestrictedChannelList(Collections.singleton(AuthenticationChannel.EMAIL));
++            default -> {
++                // no restrictions
++            }
++        }
++
++        return new C2PResolution(decision.preferredChannel().name(), decision.channelRule());
++    }
++}
+diff -ruN /mnt/data/isd_orig_tree/src/test/java/com/mastercard/precheckout/emvco/proxy/engine/C2PChannelEngineTest.java /mnt/data/isd_refactor_work/src/test/java/com/mastercard/precheckout/emvco/proxy/engine/C2PChannelEngineTest.java
+--- /mnt/data/isd_orig_tree/src/test/java/com/mastercard/precheckout/emvco/proxy/engine/C2PChannelEngineTest.java	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/isd_refactor_work/src/test/java/com/mastercard/precheckout/emvco/proxy/engine/C2PChannelEngineTest.java	2026-01-18 18:08:47.857076590 +0000
+@@ -0,0 +1,65 @@
++package com.mastercard.precheckout.emvco.proxy.engine;
++
++import com.mastercard.precheckout.emvco.constants.ConsumerStatus;
++import com.mastercard.precheckout.emvco.domain.AuthenticationChannel;
++import com.mastercard.precheckout.emvco.domain.Consumer;
++import com.mastercard.precheckout.emvco.domain.ISDVerificationChannels;
++import com.mastercard.precheckout.generated.emvco.model.IdentityType;
++import org.junit.Test;
++
++import java.util.List;
++
++import static org.junit.Assert.assertEquals;
++
++public class C2PChannelEngineTest {
++
++    @Test
++    public void engine_routes_to_multiPii_resolver() {
++        C2PChannelEngine engine = new C2PChannelEngine(List.of(
++                new MultiPiiC2PResolver(),
++                new SingleIdentityC2PResolver()
++        ));
++
++        Consumer consumer = new Consumer();
++        consumer.setStatus("ACTIVE");
++
++        ChannelContext ctx = new ChannelContext(
++                consumer,
++                List.of(consumer),
++                IdentityType.EMAIL,
++                "fallback",
++                "requested"
++        );
++
++        ISDVerificationChannels out = new ISDVerificationChannels();
++        C2PResolution resolution = engine.resolve(C2PMode.MULTI_PII, ctx, out);
++
++        // With no identities, facts builder yields no match -> null preferred
++        assertEquals(null, resolution.preferredChannel());
++    }
++
++    @Test
++    public void engine_singleIdentity_newUser_always_sms() {
++        C2PChannelEngine engine = new C2PChannelEngine(List.of(
++                new MultiPiiC2PResolver(),
++                new SingleIdentityC2PResolver()
++        ));
++
++        Consumer consumer = new Consumer();
++        consumer.setStatus(ConsumerStatus.PENDING_VERIFICATION.getValue());
++
++        ChannelContext ctx = new ChannelContext(
++                consumer,
++                List.of(consumer),
++                IdentityType.EMAIL,
++                "ignored",
++                "ignored"
++        );
++
++        ISDVerificationChannels out = new ISDVerificationChannels();
++        C2PResolution resolution = engine.resolve(C2PMode.SINGLE_IDENTITY, ctx, out);
++
++        assertEquals(AuthenticationChannel.SMS.name(), resolution.preferredChannel());
++        assertEquals("C2P_NewUser", resolution.channelRule());
++    }
++}
+diff -ruN /mnt/data/isd_orig_tree/src/test/java/com/mastercard/precheckout/emvco/proxy/engine/C2PFactsBuilderTest.java /mnt/data/isd_refactor_work/src/test/java/com/mastercard/precheckout/emvco/proxy/engine/C2PFactsBuilderTest.java
+--- /mnt/data/isd_orig_tree/src/test/java/com/mastercard/precheckout/emvco/proxy/engine/C2PFactsBuilderTest.java	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/isd_refactor_work/src/test/java/com/mastercard/precheckout/emvco/proxy/engine/C2PFactsBuilderTest.java	2026-01-18 18:08:23.989847176 +0000
+@@ -0,0 +1,150 @@
++package com.mastercard.precheckout.emvco.proxy.engine;
++
++import com.mastercard.precheckout.emvco.domain.Consumer;
++import com.mastercard.precheckout.emvco.domain.Identity;
++import com.mastercard.precheckout.emvco.domain.Mobile;
++import com.mastercard.precheckout.generated.emvco.model.IdentityType;
++import org.junit.Test;
++
++import java.util.Arrays;
++import java.util.List;
++
++import static org.junit.Assert.assertEquals;
++import static org.junit.Assert.assertFalse;
++import static org.junit.Assert.assertTrue;
++
++public class C2PFactsBuilderTest {
++
++    private final C2PFactsBuilder builder = new C2PFactsBuilder();
++
++    @Test
++    public void buildMultiPiiFacts_sms_identity_validatedEmail_present_setsAllEmailMatched_true() {
++        Consumer c1 = consumerWithIdentities(
++                "c1",
++                "hashedEmail",
++                "hashedMobile",
++                emailIdentity("pref@mc.com", "hashedEmail", "p***@mc.com", true),
++                mobileIdentity("91", "1234567890", "hashedMobile", "****7890", true)
++        );
++
++        Consumer c2 = consumerWithIdentities(
++                "c2",
++                "hashedEmail",
++                "otherMobile",
++                emailIdentity("pref@mc.com", "hashedEmail", "p***@mc.com", true),
++                mobileIdentity("91", "0000000000", "otherMobile", "****0000", true)
++        );
++
++        ChannelContext ctx = new ChannelContext(
++                c1,
++                List.of(c1, c2),
++                IdentityType.SMS,
++                "fallbackHash",
++                "911234567890"
++        );
++
++        C2PFacts facts = builder.buildMultiPiiFacts(ctx);
++
++        assertTrue(facts.allEmailMatched());
++        assertTrue(facts.allMobileMatched());
++        assertEquals("hashedMobile", facts.matchedPreferredHash().orElse(null));
++        assertEquals("+91****7890", facts.maskedValue().orElse(null));
++        assertTrue(facts.mobile().isPresent());
++    }
++
++    @Test
++    public void buildMultiPiiFacts_email_identity_validatedMobile_missing_setsAllMobileMatched_false() {
++        Consumer c1 = consumerWithIdentities(
++                "c1",
++                "hashedEmail",
++                "hashedMobile",
++                emailIdentity("pref@mc.com", "hashedEmail", "p***@mc.com", true),
++                mobileIdentity("91", "1234567890", "hashedMobile", "****7890", true)
++        );
++
++        // second consumer does NOT have matching mobile hash -> validation fails
++        Consumer c2 = consumerWithIdentities(
++                "c2",
++                "hashedEmail",
++                "differentMobile",
++                emailIdentity("pref@mc.com", "hashedEmail", "p***@mc.com", true),
++                mobileIdentity("91", "9999999999", "differentMobile", "****9999", true)
++        );
++
++        ChannelContext ctx = new ChannelContext(
++                c1,
++                List.of(c1, c2),
++                IdentityType.EMAIL,
++                "fallbackHash",
++                "pref@mc.com"
++        );
++
++        C2PFacts facts = builder.buildMultiPiiFacts(ctx);
++
++        assertTrue(facts.allEmailMatched());
++        assertFalse(facts.allMobileMatched());
++        // when mobile not validated, matchedPreferred == switchingHash (lookupEmailOtp)
++        assertEquals("hashedEmail", facts.matchedPreferredHash().orElse(null));
++        assertEquals("p***@mc.com", facts.maskedValue().orElse(null));
++        assertTrue(facts.email().isPresent());
++    }
++
++    @Test
++    public void buildSingleIdentityFacts_email_setsAllMobileMatched_basedOnRootHashComparison() {
++        Consumer c1 = new Consumer();
++        c1.setHashedCountryCodeWithMobile("m1");
++        Consumer c2 = new Consumer();
++        c2.setHashedCountryCodeWithMobile("m1");
++
++        ChannelContext ctx = new ChannelContext(
++                c1,
++                List.of(c1, c2),
++                IdentityType.EMAIL,
++                "ignored",
++                "ignored"
++        );
++
++        C2PFacts facts = builder.buildSingleIdentityFacts(ctx);
++
++        assertTrue(facts.allEmailMatched());
++        assertTrue(facts.allMobileMatched());
++    }
++
++    private static Consumer consumerWithIdentities(
++            String id,
++            String rootEmailHash,
++            String rootMobileHash,
++            Identity... identities
++    ) {
++        Consumer c = new Consumer();
++        c.setConsumerId(id);
++        c.setHashedEmail(rootEmailHash);
++        c.setHashedCountryCodeWithMobile(rootMobileHash);
++        c.setIdentities(Arrays.asList(identities));
++        return c;
++    }
++
++    private static Identity emailIdentity(String email, String hash, String masked, boolean preferred) {
++        Identity i = new Identity();
++        i.setType("EMAIL");
++        i.setEmail(email);
++        i.setHashedEmail(hash);
++        i.setMaskedEmail(masked);
++        i.setPreferred(preferred);
++        return i;
++    }
++
++    private static Identity mobileIdentity(String cc, String phone, String hash, String masked, boolean preferred) {
++        Mobile m = new Mobile();
++        m.setCountryCode(cc);
++        m.setPhoneNumber(phone);
++        m.setHashedCountryCodeWithPhoneNumber(hash);
++        m.setMaskedPhoneNumber(masked);
++
++        Identity i = new Identity();
++        i.setType("MOBILE_PHONE_NUMBER");
++        i.setMobile(m);
++        i.setPreferred(preferred);
++        return i;
++    }
++}
